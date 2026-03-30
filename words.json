@@ -1,0 +1,78 @@
+{
+  "entries": [
+    {"theme": "basic-communication", "term": "greet", "type": "verb", "meaning": "say hello or welcome someone", "example": "Greet your partner before the round begins.", "tip": "Strong openings make conversations easier.", "emoji": "🤝"},
+    {"theme": "basic-communication", "term": "reply", "type": "verb", "meaning": "answer after someone speaks", "example": "Reply with a short clear sentence.", "tip": "Quick replies build confidence.", "emoji": "💬"},
+    {"theme": "basic-communication", "term": "introduce", "type": "verb", "meaning": "tell someone your name or present a person", "example": "Introduce yourself before the activity starts.", "tip": "Useful in first meetings.", "emoji": "👋"},
+    {"theme": "basic-communication", "term": "conversation", "type": "noun", "meaning": "a talk between two or more people", "example": "A good conversation starts with a simple hello.", "tip": "Think of turns, questions and replies.", "emoji": "🗣️"},
+
+    {"theme": "grammar-language", "term": "compare", "type": "verb", "meaning": "look at two things and notice differences", "example": "Compare the two words before you choose.", "tip": "Useful for adjectives and logic.", "emoji": "⚖️"},
+    {"theme": "grammar-language", "term": "sequence", "type": "noun", "meaning": "an order of steps", "example": "First, listen. Then, answer.", "tip": "Words like before and after show sequence.", "emoji": "🪜"},
+    {"theme": "grammar-language", "term": "connector", "type": "noun", "meaning": "a word that links ideas together", "example": "Because is a connector that gives a reason.", "tip": "Connectors make speaking smoother.", "emoji": "🔗"},
+    {"theme": "grammar-language", "term": "pattern", "type": "noun", "meaning": "a repeated form or structure", "example": "This sentence pattern uses subject plus verb.", "tip": "Grammar becomes easier when you notice patterns.", "emoji": "🧩"},
+
+    {"theme": "human-body-identity", "term": "identity", "type": "noun", "meaning": "who a person is", "example": "Your identity card shows your name and age.", "tip": "Useful when speaking about yourself.", "emoji": "🪪"},
+    {"theme": "human-body-identity", "term": "emotion", "type": "noun", "meaning": "a feeling like joy or anger", "example": "Happy is a positive emotion.", "tip": "Link emotions to facial expressions.", "emoji": "😊"},
+    {"theme": "human-body-identity", "term": "health", "type": "noun", "meaning": "the condition of your body and mind", "example": "Sleep and water are important for good health.", "tip": "Use it often with body and habits.", "emoji": "🩺"},
+    {"theme": "human-body-identity", "term": "personality", "type": "noun", "meaning": "the way someone usually thinks and acts", "example": "Her personality is calm and kind.", "tip": "Useful for describing people.", "emoji": "✨"},
+
+    {"theme": "personal-social-life", "term": "routine", "type": "noun", "meaning": "the usual things you do every day", "example": "Breakfast is part of my morning routine.", "tip": "Daily life words sound better in sequences.", "emoji": "🗓️"},
+    {"theme": "personal-social-life", "term": "celebrate", "type": "verb", "meaning": "do something special for an event", "example": "We celebrate birthdays with cake.", "tip": "Use it with events and achievements.", "emoji": "🎉"},
+    {"theme": "personal-social-life", "term": "neighbor", "type": "noun", "meaning": "a person who lives near you", "example": "My neighbor always says good morning.", "tip": "Useful for home and community topics.", "emoji": "🏘️"},
+    {"theme": "personal-social-life", "term": "invite", "type": "verb", "meaning": "ask someone to join you", "example": "Invite your friend to the weekend party.", "tip": "Common in social English.", "emoji": "📩"},
+
+    {"theme": "education-work", "term": "lesson", "type": "noun", "meaning": "a unit of teaching", "example": "Today's lesson is about food words.", "tip": "A lesson can be short but focused.", "emoji": "📘"},
+    {"theme": "education-work", "term": "career", "type": "noun", "meaning": "the professional path of a person", "example": "A doctor may choose a medical career.", "tip": "Use it when speaking about the future.", "emoji": "🧭"},
+    {"theme": "education-work", "term": "assignment", "type": "noun", "meaning": "a task given by a teacher or manager", "example": "Finish the assignment before tomorrow.", "tip": "Useful at school and work.", "emoji": "📄"},
+    {"theme": "education-work", "term": "training", "type": "noun", "meaning": "practice that improves skill for a job or task", "example": "Training helps new workers feel confident.", "tip": "Connect it with growth and improvement.", "emoji": "🛠️"},
+
+    {"theme": "places-environment", "term": "landscape", "type": "noun", "meaning": "the visible features of an area", "example": "The mountain landscape looks cold and high.", "tip": "Useful for nature descriptions.", "emoji": "🏔️"},
+    {"theme": "places-environment", "term": "neighborhood", "type": "noun", "meaning": "the area where people live near each other", "example": "My neighborhood has a park and a market.", "tip": "Good for talking about home and routes.", "emoji": "🏘️"},
+    {"theme": "places-environment", "term": "bridge", "type": "noun", "meaning": "a structure that goes over water or a road", "example": "The bridge connects the two sides of the town.", "tip": "Common in city and travel topics.", "emoji": "🌉"},
+    {"theme": "places-environment", "term": "valley", "type": "noun", "meaning": "low land between hills or mountains", "example": "Clouds covered the valley this morning.", "tip": "Pairs well with mountain vocabulary.", "emoji": "🏞️"},
+
+    {"theme": "movement-navigation", "term": "route", "type": "noun", "meaning": "the path from one place to another", "example": "This route takes us to the station.", "tip": "Maps and routes often appear together.", "emoji": "🗺️"},
+    {"theme": "movement-navigation", "term": "arrive", "type": "verb", "meaning": "reach a place", "example": "We arrive at school at eight.", "tip": "The opposite idea is depart or leave.", "emoji": "📍"},
+    {"theme": "movement-navigation", "term": "direction", "type": "noun", "meaning": "the way you should go", "example": "Ask for directions before you walk alone.", "tip": "Essential for navigation English.", "emoji": "🧭"},
+    {"theme": "movement-navigation", "term": "signal", "type": "noun", "meaning": "a sign or light that gives information", "example": "The traffic signal changed to green.", "tip": "Useful in transport vocabulary.", "emoji": "🚦"},
+
+    {"theme": "shopping-daily-life", "term": "receipt", "type": "noun", "meaning": "a paper that proves a purchase", "example": "Keep the receipt after you buy the book.", "tip": "Great word for real-life shopping English.", "emoji": "🧾"},
+    {"theme": "shopping-daily-life", "term": "delivery", "type": "noun", "meaning": "bringing a product to someone", "example": "The delivery arrives in the afternoon.", "tip": "Modern daily English uses this a lot.", "emoji": "📦"},
+    {"theme": "shopping-daily-life", "term": "discount", "type": "noun", "meaning": "a lower price than usual", "example": "This shirt has a twenty percent discount.", "tip": "Very useful for shopping English.", "emoji": "🏷️"},
+    {"theme": "shopping-daily-life", "term": "customer", "type": "noun", "meaning": "a person who buys something", "example": "The customer asked about the price.", "tip": "Important in market conversations.", "emoji": "🛍️"},
+
+    {"theme": "clothing-style", "term": "outfit", "type": "noun", "meaning": "a full combination of clothes", "example": "Her outfit is casual and bright.", "tip": "Useful when combining colors and style.", "emoji": "✨"},
+    {"theme": "clothing-style", "term": "texture", "type": "noun", "meaning": "how a material feels", "example": "The scarf has a soft texture.", "tip": "Helpful for more advanced description.", "emoji": "🧶"},
+    {"theme": "clothing-style", "term": "fabric", "type": "noun", "meaning": "cloth material used to make clothes", "example": "Cotton is a light fabric for hot days.", "tip": "Useful when describing clothing quality.", "emoji": "🪡"},
+    {"theme": "clothing-style", "term": "accessory", "type": "noun", "meaning": "a small extra item worn with clothes", "example": "A watch is a useful accessory.", "tip": "Adds detail to style descriptions.", "emoji": "💍"},
+
+    {"theme": "food-drinks", "term": "ingredient", "type": "noun", "meaning": "one item used to make a dish", "example": "Milk is an ingredient in the recipe.", "tip": "Recipes always depend on ingredients.", "emoji": "🥣"},
+    {"theme": "food-drinks", "term": "flavor", "type": "noun", "meaning": "the taste of something", "example": "This tea has a sweet flavor.", "tip": "Use flavor for food and drinks opinions.", "emoji": "😋"},
+    {"theme": "food-drinks", "term": "menu", "type": "noun", "meaning": "a list of food and drinks available", "example": "Look at the menu before you order.", "tip": "Very practical restaurant English.", "emoji": "📜"},
+    {"theme": "food-drinks", "term": "portion", "type": "noun", "meaning": "an amount of food for one person", "example": "That portion is large enough to share.", "tip": "Good for talking about quantity.", "emoji": "🍛"},
+
+    {"theme": "nature-weather", "term": "forecast", "type": "noun", "meaning": "a report about future weather", "example": "The forecast says rain tomorrow.", "tip": "Very useful with weather vocabulary.", "emoji": "🌦️"},
+    {"theme": "nature-weather", "term": "habitat", "type": "noun", "meaning": "the natural home of an animal", "example": "The ocean is the dolphin's habitat.", "tip": "Link animals with where they live.", "emoji": "🐾"},
+    {"theme": "nature-weather", "term": "storm", "type": "noun", "meaning": "bad weather with strong wind or rain", "example": "The storm made the sky very dark.", "tip": "Strong weather word for speaking practice.", "emoji": "⛈️"},
+    {"theme": "nature-weather", "term": "temperature", "type": "noun", "meaning": "how hot or cold something is", "example": "The temperature dropped at night.", "tip": "Essential for weather descriptions.", "emoji": "🌡️"},
+
+    {"theme": "culture-leisure", "term": "festival", "type": "noun", "meaning": "a large cultural celebration", "example": "The city hosts a music festival every year.", "tip": "Excellent word for culture topics.", "emoji": "🎪"},
+    {"theme": "culture-leisure", "term": "audience", "type": "noun", "meaning": "the people watching a performance", "example": "The audience clapped after the song.", "tip": "Pairs well with performance.", "emoji": "👏"},
+    {"theme": "culture-leisure", "term": "instrument", "type": "noun", "meaning": "a tool used to make music", "example": "The guitar is a popular instrument.", "tip": "Useful in music and arts topics.", "emoji": "🎻"},
+    {"theme": "culture-leisure", "term": "perform", "type": "verb", "meaning": "play music, act or present for people", "example": "They perform on stage every weekend.", "tip": "Connect it with audience and festival.", "emoji": "🎤"},
+
+    {"theme": "tools-objects", "term": "material", "type": "noun", "meaning": "what an object is made of", "example": "Glass is the material of the bottle.", "tip": "Use it to describe objects clearly.", "emoji": "🧱"},
+    {"theme": "tools-objects", "term": "function", "type": "noun", "meaning": "the job something is meant to do", "example": "The function of a lamp is to give light.", "tip": "Useful in technical descriptions.", "emoji": "⚙️"},
+    {"theme": "tools-objects", "term": "device", "type": "noun", "meaning": "an object made for a special purpose", "example": "This device helps measure temperature.", "tip": "Common in object descriptions.", "emoji": "🔧"},
+    {"theme": "tools-objects", "term": "repair", "type": "verb", "meaning": "fix something that is broken", "example": "We repair the lamp before using it again.", "tip": "Useful in practical English.", "emoji": "🛠️"},
+
+    {"theme": "technology", "term": "network", "type": "noun", "meaning": "a group of connected systems", "example": "The school network is offline.", "tip": "Works in internet and system topics.", "emoji": "🕸️"},
+    {"theme": "technology", "term": "innovation", "type": "noun", "meaning": "a new useful idea or invention", "example": "Robots are a sign of innovation.", "tip": "Great word for future-facing English.", "emoji": "🚀"},
+    {"theme": "technology", "term": "update", "type": "verb", "meaning": "bring software or information to a newer version", "example": "Update the app before class.", "tip": "Very common in digital life.", "emoji": "⬆️"},
+    {"theme": "technology", "term": "storage", "type": "noun", "meaning": "space where digital files are kept", "example": "The phone storage is almost full.", "tip": "Useful with devices and apps.", "emoji": "💾"},
+
+    {"theme": "concepts-academic", "term": "reason", "type": "noun", "meaning": "the cause that explains something", "example": "What is the reason for your answer?", "tip": "Good for academic speaking.", "emoji": "🧠"},
+    {"theme": "concepts-academic", "term": "result", "type": "noun", "meaning": "what happens after an action", "example": "Practice leads to a better result.", "tip": "Reason and result work well together.", "emoji": "🏁"},
+    {"theme": "concepts-academic", "term": "evidence", "type": "noun", "meaning": "facts or details that support an idea", "example": "Use evidence to explain your opinion.", "tip": "Excellent for academic responses.", "emoji": "📚"},
+    {"theme": "concepts-academic", "term": "conclusion", "type": "noun", "meaning": "the final idea reached after thinking", "example": "Your conclusion should match the evidence.", "tip": "Important in formal speaking and writing.", "emoji": "🎯"}
+  ]
+}

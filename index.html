@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everest - Climb to Fluency</title>
+    <link rel="shortcut icon" type="image/png" href="Logo - Everest.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme-mode="light">
+    <div class="loading-screen" id="loadingScreen" aria-hidden="true">
+        <div class="loading-screen__glow"></div>
+        <div class="loading-screen__content">
+            <div class="loading-screen__brand">
+                <img src="Logo - Everest.png" alt="Everest logo">
+                <div>
+                    <strong>Everest</strong>
+                    <span>Climb to Fluency</span>
+                </div>
+            </div>
+            <div class="loading-screen__meter">
+                <span></span>
+            </div>
+            <p id="loadingMessage">Preparing the ridge. Your climb is almost ready.</p>
+        </div>
+    </div>
+
+    <div class="app-shell" id="appShell">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar__top">
+                <div class="sidebar__brand">
+                    <img src="Logo - Everest.png" alt="Everest logo">
+                    <div>
+                        <strong>Everest</strong>
+                        <span>Climb to Fluency</span>
+                    </div>
+                </div>
+
+                <label class="sidebar-search" id="sidebarSearch" for="themeSearchInput">
+                    <span class="sidebar-search__icon" aria-hidden="true"></span>
+                    <input type="search" id="themeSearchInput" placeholder="Search routes, games or themes">
+                    <button class="search-clear" id="themeSearchClear" type="button" aria-label="Clear theme search" hidden>&times;</button>
+                </label>
+            </div>
+
+            <div class="sidebar__body">
+                <div class="sidebar-section">
+                    <div class="sidebar-section__head">
+                        <span class="sidebar-section__eyebrow">Routes</span>
+                        <strong>Theme mountain map</strong>
+                    </div>
+                    <nav class="theme-nav" id="themeNav" aria-label="Theme navigation"></nav>
+                </div>
+
+                <div class="sidebar-section sidebar-section--support">
+                    <div class="support-card">
+                        <span class="support-card__badge">Everest note</span>
+                        <strong id="sidebarSupportTitle">The summit likes consistency.</strong>
+                        <p id="sidebarSupportText">Choose a route, complete a stage, and watch your points rise in real time.</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="main-shell">
+            <header class="topbar">
+                <div class="topbar__left">
+                    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Toggle sidebar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <div class="topbar__title">
+                        <span class="topbar__eyebrow">Summit dashboard</span>
+                        <h1>Everest</h1>
+                    </div>
+                </div>
+
+                <div class="topbar__actions">
+                    <button class="icon-action" id="optionsButton" type="button" title="Options">
+                        <img src="assets/icons/Settings.png" alt="settings">
+                    </button>
+                    <button class="icon-action" id="leaderboardButton" type="button" title="Leaderboard">
+                        <img src="assets/icons/Leaderboard.png" alt="leaderboard">
+                    </button>
+                    <button class="icon-action" id="explorerButton" type="button" title="Explore English">
+                        <img src="assets/icons/Information.png" alt="information">
+                    </button>
+                    <button class="icon-action" id="logoutButton" type="button" title="Logout">
+                        <img src="assets/icons/Exit.png" alt="exit">
+                    </button>
+                </div>
+            </header>
+
+            <main class="dashboard-main">
+                <section class="hero-grid">
+                    <article class="panel hero-card">
+                        <div class="hero-card__copy">
+                            <span class="panel-badge">Current ascent</span>
+                            <h2 id="welcomeTitle">Welcome back to the ridge.</h2>
+                            <p id="welcomeSubtitle">Build points, clear themed stages, and keep your route moving toward fluency.</p>
+                            <div class="hero-card__actions">
+                                <button class="surface-button surface-button--primary" id="heroStartButton" type="button">Start current stage</button>
+                                <button class="surface-button" id="heroExploreButton" type="button">Open explorer</button>
+                            </div>
+                        </div>
+
+                        <div class="hero-card__status">
+                            <div class="status-pill">
+                                <span>Session</span>
+                                <strong id="sessionCountdown">60m left</strong>
+                            </div>
+                            <div class="status-pill">
+                                <span>Active route</span>
+                                <strong id="activeThemeName">Basic Communication</strong>
+                            </div>
+                            <div class="status-pill">
+                                <span>Game mode</span>
+                                <strong id="activeModeLabel">Summit Choice</strong>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="panel profile-card">
+                        <div class="profile-card__head">
+                            <span class="panel-badge">Climber profile</span>
+                            <button class="mini-theme-toggle" id="themeModeQuickToggle" type="button">Dark mode</button>
+                        </div>
+
+                        <div class="profile-card__body">
+                            <div class="profile-avatar" id="profileAvatar" aria-hidden="true">
+                                <span id="profileEmoji">&#x1F9E0;</span>
+                            </div>
+
+                            <div class="profile-copy">
+                                <strong id="profileName">Everest Climber</strong>
+                                <span id="profileCourse">Course pending</span>
+                                <div class="profile-rankline">
+                                    <span class="profile-rankline__label">Ridge rank</span>
+                                    <span class="profile-rankline__badge" id="profileRankline">Top 20 ridge pending</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-meta">
+                            <div class="meta-chip">
+                                <span>Points</span>
+                                <strong id="metaPoints">0</strong>
+                            </div>
+                            <div class="meta-chip">
+                                <span>Wins</span>
+                                <strong id="metaWins">0</strong>
+                            </div>
+                            <div class="meta-chip">
+                                <span>Loses</span>
+                                <strong id="metaLosses">0</strong>
+                            </div>
+                            <div class="meta-chip">
+                                <span>Time</span>
+                                <strong id="metaTime">00:00</strong>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="content-grid">
+                    <div class="content-main">
+                        <article class="panel stage-card">
+                            <div class="section-head">
+                                <div>
+                                    <span class="panel-badge">Stage routes</span>
+                                    <h3 id="stageSectionTitle">Basic Communication stages</h3>
+                                </div>
+                                <div class="section-head__meta">
+                                    <span id="stageThemeFocus">Vocabulary ridge</span>
+                                </div>
+                            </div>
+                            <button class="panel-toggle" id="stageToggle" type="button" aria-expanded="true" aria-controls="stageBody">
+                                <span class="panel-toggle__copy">
+                                    <strong>Stage route board</strong>
+                                    <span>Open the route list, choose one stage, then jump into the challenge.</span>
+                                </span>
+                                <span class="panel-toggle__icon" aria-hidden="true"></span>
+                            </button>
+                            <div class="panel-collapsible" id="stageBody">
+                            <div class="section-guide">
+                                <span class="section-guide__step">1. Select a stage</span>
+                                <span class="section-guide__step">2. Press play</span>
+                                <span class="section-guide__step">3. Climb for points</span>
+                            </div>
+                            <div class="stage-list" id="stageList"></div>
+                            </div>
+                        </article>
+
+                        <article class="panel game-card" id="gameCard">
+                            <div class="game-card__head">
+                                <div class="game-card__intro">
+                                    <span class="panel-badge">Theme challenge</span>
+                                    <h3 id="gameThemeTitle">Ready for the next climb?</h3>
+                                    <p id="gameThemeDescription">Pick a stage, sharpen your English, and push your score upward.</p>
+                                </div>
+                            </div>
+
+                            <div class="progress-line">
+                                <span id="progressBar"></span>
+                            </div>
+
+                            <div class="game-layout">
+                                <div class="challenge-visual" id="challengeVisual">
+                                    <span id="challengeEmoji">&#x26F0;&#xFE0F;</span>
+                                </div>
+
+                                <div class="challenge-copy">
+                                    <div class="challenge-copy__topline">
+                                        <span class="challenge-copy__eyebrow" id="challengeTypeLabel">Everest prompt</span>
+                                        <div class="game-badges" aria-label="Challenge status">
+                                            <span class="game-badge" id="questionCounter">0 / 0</span>
+                                            <span class="game-badge" id="timerBadge">15s</span>
+                                            <span class="game-badge" id="streakBadge">Streak 0</span>
+                                        </div>
+                                    </div>
+                                    <h4 id="challengePrompt">Select a route and start the stage to receive your first prompt.</h4>
+                                    <p id="challengeHint">Everest will show hints, examples, and the exact focus of your current climb here.</p>
+                                    <div class="challenge-example" id="challengeExample">The trail is quiet now, but it is ready for your first move.</div>
+                                </div>
+                            </div>
+
+                            <div class="game-feedback" id="gameFeedback" data-state="idle">
+                                <strong id="feedbackTitle">Base camp ready.</strong>
+                                <span id="feedbackText">It is cold at the top, but your next answer can warm the route.</span>
+                            </div>
+
+                            <form class="typing-shell" id="typingForm">
+                                <label class="typing-shell__field" for="typingInput">
+                                    <span>Type the English answer</span>
+                                    <div class="typing-shell__controls">
+                                        <input id="typingInput" type="text" autocomplete="off" placeholder="Type the answer in English">
+                                        <button class="surface-button surface-button--primary" id="typingSubmitButton" type="submit">Check answer</button>
+                                    </div>
+                                </label>
+                            </form>
+
+                            <div class="choice-grid" id="choiceGrid"></div>
+
+                            <div class="game-footer">
+                                <div class="game-footer__stats">
+                                    <span id="stagePointsLabel">Stage points: 0</span>
+                                    <span id="stageAccuracyLabel">Accuracy: 0%</span>
+                                </div>
+                                <div class="game-footer__actions">
+                                    <button class="surface-button surface-button--ghost" id="resetStageButton" type="button">Reset stage</button>
+                                    <button class="surface-button surface-button--primary" id="nextQuestionButton" type="button" hidden>Next challenge</button>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="panel theme-overview-card">
+                            <div class="section-head">
+                                <div>
+                                    <span class="panel-badge">Theme deck</span>
+                                    <h3>Choose the route you want to climb</h3>
+                                </div>
+                                <button class="surface-button surface-button--ghost" id="scrollThemeIntoViewButton" type="button">Focus current route</button>
+                            </div>
+                            <div class="section-guide section-guide--soft">
+                                <span class="section-guide__step">Use the sidebar for fast switching</span>
+                                <span class="section-guide__step">Open this deck only when you want the full route map</span>
+                            </div>
+                            <button class="deck-toggle" id="themeDeckToggle" type="button" aria-expanded="true" aria-controls="themeDeckBody">
+                                <span class="deck-toggle__copy">
+                                    <strong id="themeDeckToggleTitle">Open theme deck</strong>
+                                    <span id="themeDeckToggleText">Reveal every route and keep space free when you only want the game.</span>
+                                </span>
+                                <span class="deck-toggle__icon" aria-hidden="true"></span>
+                            </button>
+                            <div class="deck-collapsible" id="themeDeckBody">
+                                <div class="theme-grid" id="themeGrid"></div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <aside class="content-side">
+                        <article class="panel ridge-card">
+                            <div class="section-head">
+                                <div>
+                                    <span class="panel-badge">Ridge board</span>
+                                    <h3>Live leaderboard</h3>
+                                </div>
+                                <button class="surface-button surface-button--ghost" id="openLeaderboardInlineButton" type="button">Open top 20</button>
+                            </div>
+                            <div class="leaderboard-preview" id="leaderboardPreview"></div>
+                        </article>
+
+                        <article class="panel explorer-card">
+                            <div class="section-head">
+                                <div>
+                                    <span class="panel-badge">Explore natively</span>
+                                    <h3>English explorer</h3>
+                                </div>
+                                <button class="surface-button surface-button--ghost" id="openExplorerInlineButton" type="button">Open library</button>
+                            </div>
+                            <button class="panel-toggle panel-toggle--soft" id="explorerToggle" type="button" aria-expanded="false" aria-controls="explorerBody">
+                                <span class="panel-toggle__copy">
+                                    <strong>Explorer preview</strong>
+                                    <span>Keep this folded and open the full library from the header when you need depth.</span>
+                                </span>
+                                <span class="panel-toggle__icon" aria-hidden="true"></span>
+                            </button>
+                            <div class="panel-collapsible panel-collapsible--collapsed" id="explorerBody">
+                                <div class="explorer-featured" id="explorerFeatured"></div>
+                            </div>
+                        </article>
+
+                        <article class="panel options-card">
+                            <div class="section-head">
+                                <div>
+                                    <span class="panel-badge">Climb controls</span>
+                                    <h3>Quick options</h3>
+                                </div>
+                            </div>
+                            <button class="panel-toggle panel-toggle--soft" id="optionsToggle" type="button" aria-expanded="false" aria-controls="optionsBody">
+                                <span class="panel-toggle__copy">
+                                    <strong>Controls preview</strong>
+                                    <span>Use the header button for the full options panel or unfold this quick control strip.</span>
+                                </span>
+                                <span class="panel-toggle__icon" aria-hidden="true"></span>
+                            </button>
+                            <div class="panel-collapsible panel-collapsible--collapsed" id="optionsBody">
+                                <div class="quick-options" id="quickOptions"></div>
+                            </div>
+                        </article>
+                    </aside>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal" id="leaderboardModal" hidden>
+        <div class="modal__backdrop" data-close-modal="leaderboardModal"></div>
+        <section class="modal__panel modal__panel--wide">
+            <div class="modal__head modal__head--leaderboard">
+                <div class="modal__head-copy">
+                    <span class="panel-badge">Top 20 ridge</span>
+                    <h3>Everest leaderboard</h3>
+                    <p>Watch the summit shift in real time as climbers earn points, wins and time.</p>
+                </div>
+                <button class="modal__close" type="button" data-close-modal="leaderboardModal" aria-label="Close leaderboard">&times;</button>
+            </div>
+            <div class="leaderboard-table-shell">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Profile & Name</th>
+                            <th>Course</th>
+                            <th>Points</th>
+                            <th>Wins</th>
+                            <th>Loses</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal" id="explorerModal" hidden>
+        <div class="modal__backdrop" data-close-modal="explorerModal"></div>
+        <section class="modal__panel modal__panel--wide">
+            <div class="modal__head modal__head--explorer">
+                <div class="modal__head-copy">
+                    <span class="panel-badge">Native learning</span>
+                    <h3>Everest English explorer</h3>
+                    <p>Explore themed words, meanings and examples before jumping back into the climb.</p>
+                </div>
+                <button class="modal__close" type="button" data-close-modal="explorerModal" aria-label="Close explorer">&times;</button>
+            </div>
+            <div class="explorer-toolbar">
+                <label class="sidebar-search explorer-toolbar__search" for="explorerSearchInput">
+                    <span class="sidebar-search__icon" aria-hidden="true"></span>
+                    <input type="search" id="explorerSearchInput" placeholder="Search a term, tip or theme">
+                    <button class="search-clear" id="explorerSearchClear" type="button" aria-label="Clear explorer search" hidden>&times;</button>
+                </label>
+                <div class="course-select explorer-theme-select" id="explorerThemeSelectShell">
+                    <input type="hidden" id="explorerThemeSelect" value="all">
+                    <button type="button" class="course-select-trigger explorer-theme-trigger" id="explorerThemeTrigger" aria-expanded="false" aria-controls="explorerThemeDropdown">
+                        <span class="course-trigger-label" id="explorerThemeTriggerLabel">All themes</span>
+                        <span class="course-trigger-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" class="course-trigger-svg">
+                                <path d="M7 10l5 5 5-5"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="course-dropdown explorer-theme-dropdown" id="explorerThemeDropdown" hidden>
+                        <div class="course-search-wrap">
+                            <input type="text" id="explorerThemeSearch" class="course-search explorer-theme-search" placeholder="Search a theme..." autocomplete="off">
+                        </div>
+                        <div class="course-options explorer-theme-options" id="explorerThemeOptions" role="listbox" aria-label="Explorer theme list"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="explorer-grid" id="explorerGrid"></div>
+        </section>
+    </div>
+
+    <div class="modal" id="optionsModal" hidden>
+        <div class="modal__backdrop" data-close-modal="optionsModal"></div>
+        <section class="modal__panel">
+            <div class="modal__head modal__head--options">
+                <div class="modal__head-copy">
+                    <span class="panel-badge">Options</span>
+                    <h3>Summit controls</h3>
+                    <p>Shape the route, language, atmosphere and advanced control tools from one clear command point.</p>
+                </div>
+                <button class="modal__close" type="button" data-close-modal="optionsModal" aria-label="Close options">&times;</button>
+            </div>
+            <div class="modal__scroll-shell modal__scroll-shell--options">
+                <div class="options-sections" id="optionsSections"></div>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal" id="resultModal" hidden>
+        <div class="modal__backdrop"></div>
+        <section class="modal__panel result-panel">
+            <div class="result-panel__icon" id="resultIcon">&#x26F0;&#xFE0F;</div>
+            <span class="panel-badge" id="resultBadge">Stage clear</span>
+            <h3 id="resultTitle">The route is yours.</h3>
+            <p id="resultSubtitle">You cleared the stage and pushed your climb forward.</p>
+            <div class="result-stats" id="resultStats"></div>
+            <div class="result-actions">
+                <button class="surface-button" id="resultReplayButton" type="button">Replay stage</button>
+                <button class="surface-button surface-button--primary" id="resultContinueButton" type="button">Continue climb</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
