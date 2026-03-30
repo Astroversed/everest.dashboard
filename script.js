@@ -457,11 +457,6 @@ function saveSettings() {
     document.body.dataset.motionMode = state.settings.animationsOn ? 'full' : 'reduced';
 }
 
-function buildGuestUser() {
-    const now = Date.now();
-    return { username: 'Guest Climber', usernameNormalized: 'guest-climber', profileEmoji: '\u26F0\uFE0F', profileColor: '#4b74f0', course: 'Guest Route', createdAt: now, expiresAt: now + SESSION_MS };
-}
-
 function loadProgress() {
     const all = readAllProgress();
     state.progress = { ...getDefaultProgress(), ...(all[getUserId(state.user)] || {}) };
@@ -486,12 +481,16 @@ function syncUserRoster() {
 function bootstrapUser() {
     pruneUsers();
     const active = readStorage(STORAGE_KEYS.activeUser, null);
-    state.user = active && active.expiresAt > Date.now() ? active : buildGuestUser();
     if (!active || active.expiresAt <= Date.now()) {
-        writeStorage(STORAGE_KEYS.activeUser, state.user);
+        localStorage.removeItem(STORAGE_KEYS.activeUser);
+        window.location.href = LOGIN_FALLBACK_URL;
+        return false;
     }
+
+    state.user = active;
     loadProgress();
     syncUserRoster();
+    return true;
 }
 
 function readAllProgress() {
@@ -2088,7 +2087,9 @@ function hideLoader() {
 
 function init() {
     loadSettings();
-    bootstrapUser();
+    if (!bootstrapUser()) {
+        return;
+    }
     loadData()
         .then(() => {
             bindEvents();
