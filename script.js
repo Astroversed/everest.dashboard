@@ -1502,7 +1502,7 @@ function renderGame() {
         : (contextMode ? `${t('contextClueLabel')}: ${question.term.hint}` : `${t('hintPrefix')}: ${question.term.hint}`);
     elements.challengeExample.textContent = matchMode
         ? `${t('matchPairHelp')} ${selectedEmojiOption ? `${t('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : t('matchSelectionIdle')}`
-        : (contextMode ? '' : `${t('examplePrefix')}: ${theme.summary}`);
+        : (contextMode ? t('contextHelp') : `${t('examplePrefix')}: ${theme.summary}`);
     elements.questionCounter.textContent = `${state.questionIndex + 1} / ${state.questions.length}`;
     elements.timerBadge.textContent = `${state.secondsLeft}s`;
     elements.streakBadge.textContent = `Streak ${state.streak}`;
@@ -1552,9 +1552,6 @@ function renderGame() {
         elements.choiceGrid.classList.add('choice-grid--context');
         elements.choiceGrid.innerHTML = `
             <div class="context-trail">
-                <div class="context-trail__intro">
-                    <p class="context-trail__guide">${t('contextHelp')}</p>
-                </div>
                 <section class="context-card" aria-label="${t('summitContext')}">
                     <span class="context-card__badge">${t('contextBadge')}</span>
                     <div class="context-card__sentence">

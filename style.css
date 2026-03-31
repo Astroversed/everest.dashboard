@@ -7649,6 +7649,7 @@ body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-butt
     background: linear-gradient(135deg, rgba(255, 224, 224, 0.92), rgba(255, 201, 201, 0.96));
     border-color: rgba(214, 74, 74, 0.42);
     color: #8c2323;
+    animation: contextBlankShake 280ms ease-out;
 }
 
 .context-card__solved {
@@ -7671,6 +7672,28 @@ body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-butt
     100% {
         opacity: 1;
         transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes contextBlankShake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-3px);
+    }
+
+    50% {
+        transform: translateX(3px);
+    }
+
+    75% {
+        transform: translateX(-2px);
+    }
+
+    100% {
+        transform: translateX(0);
     }
 }
 
