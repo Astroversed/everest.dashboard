@@ -642,6 +642,19 @@ function normalizeWord(value) {
     return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
 }
 
+function repairPotentialMojibake(value) {
+    const text = String(value || '');
+    if (!text || !/[ÃÂâð]/.test(text)) return text;
+
+    try {
+        const bytes = Uint8Array.from(Array.from(text), (character) => character.charCodeAt(0) & 0xff);
+        const decoded = new TextDecoder('utf-8').decode(bytes);
+        return decoded && !decoded.includes('\uFFFD') ? decoded : text;
+    } catch (error) {
+        return text;
+    }
+}
+
 function randomFrom(list) { return list[Math.floor(Math.random() * list.length)]; }
 function shuffle(list) {
     const copy = [...list];
@@ -861,14 +874,23 @@ function refreshLibraryFromStorage() {
         const id = getExplorerWordId(entry);
         if (hiddenWords.has(id)) return null;
         const patch = wordEdits[id] || {};
-        return {
+        const mergedEntry = {
             ...entry,
-            ...patch,
+            ...patch
+        };
+        return {
+            ...mergedEntry,
+            theme: repairPotentialMojibake(mergedEntry.theme),
+            term: repairPotentialMojibake(mergedEntry.term),
+            type: repairPotentialMojibake(mergedEntry.type),
+            meaning: repairPotentialMojibake(mergedEntry.meaning),
+            example: repairPotentialMojibake(mergedEntry.example),
+            tip: repairPotentialMojibake(mergedEntry.tip),
+            emoji: repairPotentialMojibake(mergedEntry.emoji),
             id,
             __origin: origin
         };
     };
-
     state.library = [
         ...state.baseLibrary.map((entry) => decorateEntry(entry, 'base')).filter(Boolean),
         ...customWords.map((entry) => decorateEntry(entry, 'custom')).filter(Boolean)
@@ -1122,7 +1144,7 @@ function applyThemePalette() {
 }
 
 function convertTerm(raw) {
-    return { en: raw[0], es: raw[1], emoji: raw[2], hint: raw[3] };
+    return { en: repairPotentialMojibake(raw[0]), es: repairPotentialMojibake(raw[1]), emoji: repairPotentialMojibake(raw[2]), hint: repairPotentialMojibake(raw[3]) };
 }
 
 function buildChoices(answerTerm, pool) {
