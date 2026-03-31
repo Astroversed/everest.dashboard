@@ -7632,7 +7632,7 @@ body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-butt
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 0 0.18rem;
+    margin: 0 0.22rem;
     padding: 0.28rem 0.78rem;
     border-radius: 999px;
     background: linear-gradient(135deg, rgba(var(--theme-accent-rgb), 0.14), rgba(var(--theme-soft-rgb), 0.18));
@@ -7652,11 +7652,26 @@ body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-butt
 }
 
 .context-card__solved {
+    display: inline-block;
+    margin: 0 0.2rem;
     color: inherit;
     font-size: inherit;
     font-weight: inherit;
     letter-spacing: inherit;
     text-transform: none;
+    animation: contextSolvedIn 220ms ease-out;
+}
+
+@keyframes contextSolvedIn {
+    0% {
+        opacity: 0;
+        transform: translateY(4px) scale(0.96);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .context-card__meta {

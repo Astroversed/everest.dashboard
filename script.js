@@ -1552,6 +1552,9 @@ function renderGame() {
         elements.choiceGrid.classList.add('choice-grid--context');
         elements.choiceGrid.innerHTML = `
             <div class="context-trail">
+                <div class="context-trail__intro">
+                    <p class="context-trail__guide">${t('contextHelp')}</p>
+                </div>
                 <section class="context-card" aria-label="${t('summitContext')}">
                     <span class="context-card__badge">${t('contextBadge')}</span>
                     <div class="context-card__sentence">
