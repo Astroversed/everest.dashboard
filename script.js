@@ -1390,7 +1390,7 @@ function renderGame() {
                     <section class="match-lane match-lane--emoji" aria-label="${t('matchEmojiLabel')}">
                         <span class="match-lane__label">${t('matchEmojiStep')}</span>
                         <div class="match-column__list">
-                            ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button"><span class="choice-button__kicker">${option.laneLabel}</span><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__title">${option.es}</span><span class="choice-button__detail">${option.hint}</span></button>`).join('')}
+                            ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button"><span class="choice-button__media"><span class="choice-button__kicker">${option.laneLabel}</span><span class="choice-button__emoji">${option.emoji}</span></span><span class="choice-button__copy"><span class="choice-button__title">${option.es}</span><span class="choice-button__detail">${option.hint}</span></span></button>`).join('')}
                         </div>
                     </section>
                 </div>
