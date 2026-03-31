@@ -297,7 +297,7 @@ const ui = {
         welcome: 'Bienvenido, {name}.',
         subtitle: 'Acumula puntos, supera etapas tem\u00E1ticas y sigue subiendo hacia la fluidez.',
         points: 'Puntos', wins: 'Victorias', losses: 'Derrotas', time: 'Tiempo',
-        summitChoice: 'Respuesta de opci\u00F3n m\u00FAltiple', summitTyping: 'Respuesta escrita', summitMatch: 'Emparejar palabras', summitContext: 'Ruta en contexto',
+        summitChoice: 'Respuesta de opci\u00F3n m\u00FAltiple', summitTyping: 'Respuesta escrita', summitMatch: 'Emparejar palabras', summitContext: 'Completar contexto',
         chooseEnglish: 'Elige la palabra en ingl\u00E9s para "{word}".',
         typeEnglish: 'Escribe la palabra en ingl\u00E9s para "{word}".',
         matchPairPrompt: 'Elige el emoji que mejor representa "{word}".',
