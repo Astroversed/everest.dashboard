@@ -229,10 +229,10 @@ const ui = {
         summitChoice: 'Summit Choice', summitTyping: 'Summit Typing', summitMatch: 'Word Match',
         chooseEnglish: 'Choose the English word for "{word}".',
         typeEnglish: 'Type the English word for "{word}".',
-        matchPairPrompt: 'Match the English word and the meaning for "{word}".',
-        matchPairHelp: 'Choose one English card and one Spanish card to build the correct pair.',
-        matchEnglishLabel: 'English side',
-        matchSpanishLabel: 'Meaning side',
+        matchPairPrompt: 'Build the best emoji path for "{word}".',
+        matchPairHelp: 'Pick one route clue and one final emoji so the center word becomes easy to understand.',
+        matchSignalLabel: 'Route clue',
+        matchEmojiLabel: 'Final emoji',
         hintPrefix: 'Clue', examplePrefix: 'Trail use',
         idleTitle: 'Base camp ready.',
         idleText: 'It is cold at the top, but your next answer can warm the route.',
@@ -286,10 +286,10 @@ const ui = {
         summitChoice: 'Respuesta con opciones', summitTyping: 'Respuesta escrita', summitMatch: 'Emparejar palabras',
         chooseEnglish: 'Elige la palabra en ingles para "{word}".',
         typeEnglish: 'Escribe la palabra en ingles para "{word}".',
-        matchPairPrompt: 'Empareja la palabra en ingles y el significado de "{word}".',
-        matchPairHelp: 'Elige una tarjeta en ingles y una en espanol para formar la pareja correcta.',
-        matchEnglishLabel: 'Lado en ingles',
-        matchSpanishLabel: 'Lado del significado',
+        matchPairPrompt: 'Construye la mejor ruta de emojis para "{word}".',
+        matchPairHelp: 'Elige una pista de ruta y un emoji final para que la palabra del centro sea facil de entender.',
+        matchSignalLabel: 'Pista de ruta',
+        matchEmojiLabel: 'Emoji final',
         hintPrefix: 'Pista', examplePrefix: 'Uso en ruta',
         idleTitle: 'Campamento base listo.',
         idleText: 'Hace frio en la cima, pero tu siguiente respuesta puede calentar la ruta.',
@@ -343,7 +343,7 @@ const state = {
     activeThemeId: null, activeStageId: 1, searchTerm: '', explorerSearch: '', explorerTheme: 'all',
     stageLive: false, questions: [], questionIndex: 0, currentQuestion: null, questionResolved: false,
     secondsLeft: 15, timerId: null, stageStartedAt: 0, stagePoints: 0, stageCorrect: 0, stageWrong: 0,
-    streak: 0, bestStreak: 0, latestAccuracy: 0, matchSelection: { english: '', spanish: '' }, controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
+    streak: 0, bestStreak: 0, latestAccuracy: 0, matchSelection: { signal: '', emoji: '' }, controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
     sharedLeaderboard: [], firestore: null, firestoreReady: false, firestoreListener: null, firestoreCleanupBusy: false
 };
 
@@ -357,7 +357,7 @@ const elements = {
     profileEmoji: document.getElementById('profileEmoji'), profileName: document.getElementById('profileName'), profileCourse: document.getElementById('profileCourse'),
     profileRankline: document.getElementById('profileRankline'), metaPoints: document.getElementById('metaPoints'), metaWins: document.getElementById('metaWins'),
     metaLosses: document.getElementById('metaLosses'), metaTime: document.getElementById('metaTime'),
-    stageSectionTitle: document.getElementById('stageSectionTitle'), stageThemeFocus: document.getElementById('stageThemeFocus'), gameThemeTitle: document.getElementById('gameThemeTitle'),
+    stageSectionTitle: document.getElementById('stageSectionTitle'), stageThemeFocus: document.getElementById('stageThemeFocus'), gameCard: document.getElementById('gameCard'), gameThemeTitle: document.getElementById('gameThemeTitle'),
     gameThemeDescription: document.getElementById('gameThemeDescription'), questionCounter: document.getElementById('questionCounter'), timerBadge: document.getElementById('timerBadge'),
     streakBadge: document.getElementById('streakBadge'), progressBar: document.getElementById('progressBar'), challengeVisual: document.getElementById('challengeVisual'), challengeEmoji: document.getElementById('challengeEmoji'),
     challengeTypeLabel: document.getElementById('challengeTypeLabel'), challengePrompt: document.getElementById('challengePrompt'), challengeHint: document.getElementById('challengeHint'),
@@ -658,6 +658,10 @@ function getGameModeLabel(mode = state.settings?.gameMode) {
     return t('summitChoice');
 }
 
+function getThemeMatchSignalEmoji(themeId = state.activeThemeId) {
+    return THEME_MATCH_SIGNAL_EMOJIS[themeId] || '🧭';
+}
+
 function getOptionStatusMarkup(label, isActive) {
     return `${label} <span class="toggle-pill__status">${getStatusLabel(isActive)}</span>`;
 }
@@ -679,6 +683,24 @@ function formatSession(ms) {
 function getUserId(user) { return user?.usernameNormalized || normalizeWord(user?.username || 'guest'); }
 function getDefaultSettings() { return { language: 'en', gameMode: 'multiple', soundOn: true, voiceOn: false, animationsOn: true, themeMode: 'light' }; }
 function getDefaultProgress() { return { points: 0, wins: 0, losses: 0, totalPlayMs: 0, lastPlayedTheme: null, stageResults: {} }; }
+
+const THEME_MATCH_SIGNAL_EMOJIS = {
+    'basic-communication': '💬',
+    'grammar-language': '🧩',
+    'human-body-identity': '🧍',
+    'personal-social-life': '👥',
+    'education-work': '🎓',
+    'places-environment': '📍',
+    'movement-navigation': '🧭',
+    'shopping-daily-life': '🛍️',
+    'clothing-style': '👗',
+    'food-drinks': '🍽️',
+    'nature-weather': '🌦️',
+    'culture-leisure': '🎭',
+    'tools-objects': '🧰',
+    technology: '💻',
+    'concepts-academic': '📘'
+};
 
 function pruneUsers() {
     const now = Date.now();
@@ -1092,12 +1114,21 @@ function buildChoices(answerTerm, pool) {
     return shuffle([answerTerm, ...distractors]);
 }
 
-function buildMatchChoices(answerTerm, pool) {
-    const distractors = shuffle(pool.filter((term) => normalizeWord(term.en) !== normalizeWord(answerTerm.en))).slice(0, 3);
-    const boardTerms = shuffle([answerTerm, ...distractors]).slice(0, 4);
+function buildMatchChoices(answerTerm, pool, themeId) {
+    const distractors = shuffle(pool.filter((term) => normalizeWord(term.en) !== normalizeWord(answerTerm.en))).slice(0, 2);
+    const emojiChoices = shuffle([answerTerm, ...distractors]).slice(0, 3);
+    const signalChoices = shuffle([
+        { emoji: getThemeMatchSignalEmoji(themeId), id: themeId },
+        ...shuffle(
+            Object.entries(THEME_MATCH_SIGNAL_EMOJIS)
+                .filter(([id]) => id !== themeId)
+                .map(([id, emoji]) => ({ emoji, id }))
+        ).slice(0, 2)
+    ]);
+
     return {
-        englishChoices: shuffle(boardTerms),
-        spanishChoices: shuffle(boardTerms)
+        signalChoices,
+        emojiChoices
     };
 }
 
@@ -1106,7 +1137,7 @@ function buildQuestions(stage) {
     const pool = theme.stages.flatMap((bucket) => bucket.terms.map(convertTerm));
     return shuffle(stage.terms.map(convertTerm)).slice(0, 5).map((term) => {
         if (state.settings.gameMode === 'match') {
-            return { term, ...buildMatchChoices(term, pool) };
+            return { term, ...buildMatchChoices(term, pool, theme.id) };
         }
         return { term, options: buildChoices(term, pool) };
     });
@@ -1233,28 +1264,8 @@ function renderChallengeVisual(theme, question, matchMode) {
         return;
     }
 
-    if (!matchMode) {
-        elements.challengeVisual.classList.remove('challenge-visual--match');
-        elements.challengeVisual.innerHTML = `<span>${question.term.emoji}</span>`;
-        return;
-    }
-
-    elements.challengeVisual.classList.add('challenge-visual--match');
-    elements.challengeVisual.innerHTML = `
-        <div class="match-visual">
-            <div class="match-visual__orbit match-visual__orbit--left">
-                <span>${question.englishChoices[0]?.emoji || question.term.emoji}</span>
-            </div>
-            <div class="match-visual__core">
-                <strong class="match-visual__emoji">${question.term.emoji}</strong>
-                <span class="match-visual__label">${t('summitMatch')}</span>
-                <strong class="match-visual__word">${question.term.es}</strong>
-            </div>
-            <div class="match-visual__orbit match-visual__orbit--right">
-                <span>${question.spanishChoices[1]?.emoji || question.term.emoji}</span>
-            </div>
-        </div>
-    `;
+    elements.challengeVisual.classList.remove('challenge-visual--match');
+    elements.challengeVisual.innerHTML = `<span>${question.term.emoji}</span>`;
 }
 
 function resetActiveChallenge() {
@@ -1270,7 +1281,7 @@ function resetActiveChallenge() {
     state.bestStreak = 0;
     state.latestAccuracy = 0;
     state.questionResolved = false;
-    state.matchSelection = { english: '', spanish: '' };
+    state.matchSelection = { signal: '', emoji: '' };
 }
 
 function toggleGameModeVisibility() {
@@ -1286,6 +1297,8 @@ function renderGame() {
     const matchMode = state.settings.gameMode === 'match';
     const typingMode = state.settings.gameMode === 'typing';
     state.progress.lastPlayedTheme = theme.id;
+    elements.gameCard?.classList.toggle('is-match-mode', matchMode);
+    elements.challengeVisual.classList.toggle('is-hidden-for-mode', matchMode);
     elements.gameThemeTitle.textContent = `${theme.title} - ${stage.name}`;
     elements.gameThemeDescription.textContent = stage.focus;
     elements.stagePointsLabel.textContent = `${t('stagePoints')}: ${state.stagePoints}`;
@@ -1315,7 +1328,9 @@ function renderGame() {
     }
 
     const question = state.currentQuestion;
-    renderChallengeVisual(theme, question, matchMode);
+    if (!matchMode) {
+        renderChallengeVisual(theme, question, false);
+    }
     elements.challengeTypeLabel.textContent = getGameModeLabel();
     elements.challengePrompt.textContent = matchMode
         ? t('matchPairPrompt', { word: question.term.es })
@@ -1336,16 +1351,22 @@ function renderGame() {
         elements.choiceGrid.classList.add('choice-grid--match');
         elements.choiceGrid.innerHTML = `
             <div class="match-board">
-                <section class="match-column" aria-label="${t('matchEnglishLabel')}">
-                    <span class="match-column__label">${question.term.emoji} ${t('matchEnglishLabel')}</span>
+                <section class="match-lane" aria-label="${t('matchSignalLabel')}">
+                    <span class="match-lane__label">${t('matchSignalLabel')}</span>
                     <div class="match-column__list">
-                        ${question.englishChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.english ? 'is-selected' : ''}" data-match-side="english" data-match-value="${option.en}" type="button"><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__text">${option.en}</span></button>`).join('')}
+                        ${question.signalChoices.map((option) => `<button class="choice-button choice-button--match choice-button--signal ${option.id === state.matchSelection.signal ? 'is-selected' : ''}" data-match-side="signal" data-match-value="${option.id}" type="button"><span class="choice-button__emoji">${option.emoji}</span></button>`).join('')}
                     </div>
                 </section>
-                <section class="match-column" aria-label="${t('matchSpanishLabel')}">
-                    <span class="match-column__label">${question.term.emoji} ${t('matchSpanishLabel')}</span>
+                <section class="match-center" aria-label="${question.term.en}">
+                    <span class="match-center__badge">${t('summitMatch')}</span>
+                    <strong class="match-center__word">${question.term.en}</strong>
+                    <span class="match-center__meaning">${question.term.es}</span>
+                    <div class="match-center__emoji">${question.term.emoji}</div>
+                </section>
+                <section class="match-lane" aria-label="${t('matchEmojiLabel')}">
+                    <span class="match-lane__label">${t('matchEmojiLabel')}</span>
                     <div class="match-column__list">
-                        ${question.spanishChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.es) === state.matchSelection.spanish ? 'is-selected' : ''}" data-match-side="spanish" data-match-value="${option.es}" type="button"><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__text">${option.es}</span></button>`).join('')}
+                        ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button"><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__text">${option.en}</span></button>`).join('')}
                     </div>
                 </section>
             </div>
@@ -1382,7 +1403,7 @@ function stopTimer() {
 function maybeSpeakPrompt() {
     if (!state.settings.voiceOn || !window.speechSynthesis || !state.currentQuestion) return;
     const utteranceText = state.settings.gameMode === 'match'
-        ? `Match the pair for ${state.currentQuestion.term.es}`
+        ? `Match the route clue and emoji for ${state.currentQuestion.term.en}`
         : `Find the English word for ${state.currentQuestion.term.es}`;
     const utterance = new SpeechSynthesisUtterance(utteranceText);
     utterance.lang = 'en-US';
@@ -1432,7 +1453,7 @@ function loadQuestion() {
     state.currentQuestion = state.questions[state.questionIndex] || null;
     state.questionResolved = false;
     state.secondsLeft = 15;
-    state.matchSelection = { english: '', spanish: '' };
+    state.matchSelection = { signal: '', emoji: '' };
     renderGame();
     if (state.currentQuestion) {
         startTimer();
@@ -1443,24 +1464,23 @@ function loadQuestion() {
 function handleMatchChoice(side, value) {
     if (state.questionResolved || !state.currentQuestion || state.settings.gameMode !== 'match') return;
 
-    if (side === 'english') {
-        state.matchSelection.english = normalizeWord(value);
+    if (side === 'signal') {
+        state.matchSelection.signal = String(value || '');
     }
 
-    if (side === 'spanish') {
-        state.matchSelection.spanish = normalizeWord(value);
+    if (side === 'emoji') {
+        state.matchSelection.emoji = normalizeWord(value);
     }
 
     renderGame();
 
-    if (!state.matchSelection.english || !state.matchSelection.spanish) return;
+    if (!state.matchSelection.signal || !state.matchSelection.emoji) return;
 
-    const englishOption = state.currentQuestion.englishChoices.find((entry) => normalizeWord(entry.en) === state.matchSelection.english);
-    const spanishOption = state.currentQuestion.spanishChoices.find((entry) => normalizeWord(entry.es) === state.matchSelection.spanish);
-    const matchedCorrectPair = englishOption && spanishOption && normalizeWord(englishOption.en) === normalizeWord(spanishOption.en);
-    const matchedTargetPair = matchedCorrectPair && normalizeWord(englishOption.en) === normalizeWord(state.currentQuestion.term.en);
+    const matchedSignal = state.matchSelection.signal === state.activeThemeId;
+    const matchedEmoji = state.matchSelection.emoji === normalizeWord(state.currentQuestion.term.en);
+    const matchedTargetPair = matchedSignal && matchedEmoji;
 
-    resolveAnswer(matchedTargetPair ? state.currentQuestion.term.en : `${englishOption?.en || ''} :: ${spanishOption?.es || ''}`, false);
+    resolveAnswer(matchedTargetPair ? state.currentQuestion.term.en : `${state.matchSelection.signal} :: ${state.matchSelection.emoji}`, false);
 }
 
 function submitAnswer(answer) {
@@ -1513,9 +1533,9 @@ function resolveAnswer(answer, timedOut) {
             button.disabled = true;
             const side = button.dataset.matchSide;
             const value = button.dataset.matchValue || '';
-            const normalizedValue = normalizeWord(value);
-            const targetValue = side === 'english' ? normalizeWord(state.currentQuestion.term.en) : normalizeWord(state.currentQuestion.term.es);
-            const selectedValue = side === 'english' ? state.matchSelection.english : state.matchSelection.spanish;
+            const normalizedValue = side === 'signal' ? value : normalizeWord(value);
+            const targetValue = side === 'signal' ? state.activeThemeId : normalizeWord(state.currentQuestion.term.en);
+            const selectedValue = side === 'signal' ? state.matchSelection.signal : state.matchSelection.emoji;
 
             if (normalizedValue === targetValue) {
                 button.classList.add('is-correct');
