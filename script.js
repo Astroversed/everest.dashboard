@@ -1552,9 +1552,6 @@ function renderGame() {
         elements.choiceGrid.classList.add('choice-grid--context');
         elements.choiceGrid.innerHTML = `
             <div class="context-trail">
-                <div class="context-trail__intro">
-                    <span class="context-trail__eyebrow">${t('summitContext')}</span>
-                </div>
                 <section class="context-card" aria-label="${t('summitContext')}">
                     <span class="context-card__badge">${t('contextBadge')}</span>
                     <div class="context-card__sentence">
@@ -1787,6 +1784,24 @@ function resolveAnswer(answer, timedOut) {
                 applyMatchResultState(button, 'correct');
             } else if (side === 'emoji' && !correct && normalizedValue === selectedValue) {
                 applyMatchResultState(button, 'wrong');
+            }
+        });
+    } else if (state.settings.gameMode === 'context') {
+        const sentence = elements.choiceGrid.querySelector('.context-card__sentence');
+        const blankMarkup = correct
+            ? `<span class="context-card__solved">${state.currentQuestion.term.en}</span>`
+            : `<span class="context-card__blank is-wrong">${t('contextBlank')}</span>`;
+        if (sentence) {
+            sentence.innerHTML = state.currentQuestion.sentence.replace('____', blankMarkup);
+        }
+
+        elements.choiceGrid.querySelectorAll('[data-choice]').forEach((button) => {
+            button.disabled = true;
+            const value = button.dataset.choice;
+            if (normalizeWord(value) === normalizeWord(state.currentQuestion.term.en)) {
+                button.classList.add('is-correct');
+            } else if (!correct && normalizeWord(value) === normalizeWord(answer)) {
+                button.classList.add('is-wrong');
             }
         });
     }
