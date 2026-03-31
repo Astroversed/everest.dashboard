@@ -7109,7 +7109,7 @@ body:not([data-theme-mode="dark"]) .leaderboard-preview__row:not(.is-top-1):not(
 
 .game-card.is-match-mode .match-board {
     display: grid !important;
-    grid-template-columns: minmax(0, 0.88fr) minmax(260px, 1.15fr) minmax(0, 0.88fr) !important;
+    grid-template-columns: minmax(260px, 1fr) minmax(0, 1.05fr) !important;
     gap: 0.9rem !important;
     align-items: stretch !important;
     padding: 1rem !important;
@@ -7119,6 +7119,10 @@ body:not([data-theme-mode="dark"]) .leaderboard-preview__row:not(.is-top-1):not(
         linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(238, 246, 255, 0.96)) !important;
     border: 1px solid rgba(var(--theme-accent-rgb), 0.14) !important;
     box-shadow: 0 22px 48px rgba(14, 32, 63, 0.11) !important;
+}
+
+.game-card.is-match-mode .match-center--left {
+    min-height: 100% !important;
 }
 
 .game-card.is-match-mode .match-lane {
@@ -7151,13 +7155,17 @@ body:not([data-theme-mode="dark"]) .leaderboard-preview__row:not(.is-top-1):not(
     gap: 0.68rem !important;
 }
 
+.game-card.is-match-mode .match-lane--emoji .match-column__list {
+    align-content: center !important;
+}
+
 .game-card.is-match-mode .choice-button.choice-button--match {
-    min-height: 5rem !important;
+    min-height: 6.2rem !important;
     display: grid !important;
     justify-items: center !important;
     align-content: center !important;
-    gap: 0.26rem !important;
-    padding: 0.6rem 0.55rem !important;
+    gap: 0.18rem !important;
+    padding: 0.72rem 0.68rem !important;
     border-radius: 1.12rem !important;
     background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(238,246,255,0.94)) !important;
     border: 1px solid rgba(var(--theme-accent-rgb), 0.14) !important;
@@ -7196,15 +7204,25 @@ body:not([data-theme-mode="dark"]) .leaderboard-preview__row:not(.is-top-1):not(
 }
 
 .game-card.is-match-mode .choice-button__emoji {
-    font-size: 2rem !important;
+    font-size: 2.1rem !important;
     line-height: 1 !important;
 }
 
-.game-card.is-match-mode .choice-button__hint {
-    font-size: 0.74rem !important;
+.game-card.is-match-mode .choice-button__title {
+    text-align: center !important;
+    color: var(--text) !important;
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    line-height: 1.18 !important;
+}
+
+.game-card.is-match-mode .choice-button__detail {
+    text-align: center !important;
     color: var(--muted) !important;
+    font-size: 0.76rem !important;
     font-weight: 700 !important;
-    letter-spacing: 0.02em !important;
+    line-height: 1.35 !important;
+    max-width: 20ch !important;
 }
 
 .game-card.is-match-mode .match-center {
@@ -7289,7 +7307,7 @@ body:not([data-theme-mode="dark"]) .leaderboard-preview__row:not(.is-top-1):not(
     z-index: 1 !important;
     width: 100% !important;
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     align-items: center !important;
     gap: 0.5rem !important;
 }
@@ -7304,15 +7322,7 @@ body:not([data-theme-mode="dark"]) .leaderboard-preview__row:not(.is-top-1):not(
 }
 
 .game-card.is-match-mode .match-center__connector {
-    width: 2.2rem !important;
-    height: 0.26rem !important;
-    border-radius: 999px !important;
-    background: rgba(var(--theme-accent-rgb), 0.18) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5) !important;
-}
-
-.game-card.is-match-mode .match-center__connector.is-complete {
-    background: linear-gradient(90deg, rgba(var(--theme-accent-rgb), 0.72), rgba(var(--theme-soft-rgb), 0.8)) !important;
+    display: none !important;
 }
 
 body[data-theme-mode="dark"] .game-card.is-match-mode .match-summit__intro {
@@ -7324,11 +7334,15 @@ body[data-theme-mode="dark"] .game-card.is-match-mode .match-summit__intro {
 }
 
 body[data-theme-mode="dark"] .game-card.is-match-mode .match-summit__guide,
-body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button__hint,
+body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button__detail,
 body[data-theme-mode="dark"] .game-card.is-match-mode .match-center__mini,
 body[data-theme-mode="dark"] .game-card.is-match-mode .match-center__hint-line,
 body[data-theme-mode="dark"] .game-card.is-match-mode .match-center__word-label {
     color: #a9bfdc !important;
+}
+
+body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button__title {
+    color: #f1f6ff !important;
 }
 
 body[data-theme-mode="dark"] .game-card.is-match-mode .match-board {
@@ -7366,12 +7380,5 @@ body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-butt
 
     .game-card.is-match-mode .match-center__status {
         grid-template-columns: 1fr !important;
-    }
-
-    .game-card.is-match-mode .match-center__connector {
-        width: 0.28rem !important;
-        height: 1.8rem !important;
-        justify-self: center !important;
-        background: rgba(var(--theme-accent-rgb), 0.18) !important;
     }
 }

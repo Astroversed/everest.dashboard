@@ -229,16 +229,18 @@ const ui = {
         summitChoice: 'Summit Choice', summitTyping: 'Summit Typing', summitMatch: 'Word Match',
         chooseEnglish: 'Choose the English word for "{word}".',
         typeEnglish: 'Type the English word for "{word}".',
-        matchPairPrompt: 'Build the best emoji path for "{word}".',
-        matchPairHelp: 'Pick one route clue and one final emoji so the center word becomes easy to understand.',
-        matchSignalLabel: 'Route clue',
-        matchEmojiLabel: 'Final emoji',
+        matchPairPrompt: 'Choose the emoji that best represents "{word}".',
+        matchPairHelp: 'Read the word card on the left, then choose the emoji path on the right that matches it best.',
+        matchSignalLabel: 'Word card',
+        matchEmojiLabel: 'Emoji route',
         challengeWord: 'Target word',
-        matchSignalStep: '1. Pick the route clue',
-        matchEmojiStep: '2. Pick the final emoji',
-        matchSelectionIdle: 'Choose both sides to complete the route.',
-        matchSelectionSignal: 'Clue selected',
-        matchSelectionEmoji: 'Emoji selected',
+        matchSignalStep: 'Word focus',
+        matchEmojiStep: 'Choose the best emoji',
+        matchSelectionIdle: 'Choose one emoji route to answer.',
+        matchSelectionSignal: 'Card ready',
+        matchSelectionEmoji: 'Meaning selected',
+        matchSignalPending: 'Word ready',
+        matchMeaningPending: 'Emoji pending',
         hintPrefix: 'Clue', examplePrefix: 'Trail use',
         idleTitle: 'Base camp ready.',
         idleText: 'It is cold at the top, but your next answer can warm the route.',
@@ -292,16 +294,18 @@ const ui = {
         summitChoice: 'Respuesta con opciones', summitTyping: 'Respuesta escrita', summitMatch: 'Emparejar palabras',
         chooseEnglish: 'Elige la palabra en ingles para "{word}".',
         typeEnglish: 'Escribe la palabra en ingles para "{word}".',
-        matchPairPrompt: 'Construye la mejor ruta de emojis para "{word}".',
-        matchPairHelp: 'Elige una pista de ruta y un emoji final para que la palabra del centro sea facil de entender.',
-        matchSignalLabel: 'Pista de ruta',
-        matchEmojiLabel: 'Emoji final',
+        matchPairPrompt: 'Elige el emoji que mejor representa "{word}".',
+        matchPairHelp: 'Lee la tarjeta de la palabra a la izquierda y luego elige a la derecha la ruta de emoji que mejor la representa.',
+        matchSignalLabel: 'Tarjeta de palabra',
+        matchEmojiLabel: 'Ruta de emoji',
         challengeWord: 'Palabra objetivo',
-        matchSignalStep: '1. Elige la pista de ruta',
-        matchEmojiStep: '2. Elige el emoji final',
-        matchSelectionIdle: 'Elige ambos lados para completar la ruta.',
-        matchSelectionSignal: 'Pista elegida',
+        matchSignalStep: 'Palabra guía',
+        matchEmojiStep: 'Elige el mejor emoji',
+        matchSelectionIdle: 'Elige una sola ruta de emoji para responder.',
+        matchSelectionSignal: 'Tarjeta lista',
         matchSelectionEmoji: 'Emoji elegido',
+        matchSignalPending: 'Palabra lista',
+        matchMeaningPending: 'Emoji pendiente',
         hintPrefix: 'Pista', examplePrefix: 'Uso en ruta',
         idleTitle: 'Campamento base listo.',
         idleText: 'Hace frio en la cima, pero tu siguiente respuesta puede calentar la ruta.',
@@ -1127,20 +1131,15 @@ function buildChoices(answerTerm, pool) {
 }
 
 function buildMatchChoices(answerTerm, pool, themeId) {
-    const distractors = shuffle(pool.filter((term) => normalizeWord(term.en) !== normalizeWord(answerTerm.en))).slice(0, 2);
-    const emojiChoices = shuffle([answerTerm, ...distractors]).slice(0, 3);
-    const signalChoices = shuffle([
-        { emoji: getThemeMatchSignalEmoji(themeId), id: themeId },
-        ...shuffle(
-            Object.entries(THEME_MATCH_SIGNAL_EMOJIS)
-                .filter(([id]) => id !== themeId)
-                .map(([id, emoji]) => ({ emoji, id }))
-        ).slice(0, 2)
-    ]);
+    const distractors = shuffle(pool.filter((term) => normalizeWord(term.en) !== normalizeWord(answerTerm.en))).slice(0, 3);
+    const emojiChoices = shuffle([answerTerm, ...distractors]).slice(0, 4).map((term, index) => ({
+        ...term,
+        laneLabel: `${index + 1}`
+    }));
 
     return {
-        signalChoices,
-        emojiChoices
+        emojiChoices,
+        themeId
     };
 }
 
@@ -1343,7 +1342,6 @@ function renderGame() {
     if (!matchMode) {
         renderChallengeVisual(theme, question, false);
     }
-    const selectedSignalOption = matchMode ? question.signalChoices.find((option) => option.id === state.matchSelection.signal) : null;
     const selectedEmojiOption = matchMode ? question.emojiChoices.find((option) => normalizeWord(option.en) === state.matchSelection.emoji) : null;
     elements.challengeTypeLabel.textContent = getGameModeLabel();
     elements.challengePrompt.textContent = matchMode
@@ -1353,7 +1351,7 @@ function renderGame() {
         ? `${t('hintPrefix')}: ${question.term.es} · ${question.term.hint}`
         : `${t('hintPrefix')}: ${question.term.hint}`;
     elements.challengeExample.textContent = matchMode
-        ? `${t('matchPairHelp')} ${selectedSignalOption || selectedEmojiOption ? `${t('matchSelectionSignal')}: ${selectedSignalOption ? selectedSignalOption.emoji : '—'} · ${t('matchSelectionEmoji')}: ${selectedEmojiOption ? selectedEmojiOption.emoji : '—'}` : t('matchSelectionIdle')}`
+        ? `${t('matchPairHelp')} ${selectedEmojiOption ? `${t('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : t('matchSelectionIdle')}`
         : `${t('examplePrefix')}: ${theme.summary}`;
     elements.questionCounter.textContent = `${state.questionIndex + 1} / ${state.questions.length}`;
     elements.timerBadge.textContent = `${state.secondsLeft}s`;
@@ -1374,13 +1372,7 @@ function renderGame() {
                     <p class="match-summit__guide">${t('matchPairHelp')}</p>
                 </div>
                 <div class="match-board">
-                    <section class="match-lane match-lane--signal" aria-label="${t('matchSignalLabel')}">
-                        <span class="match-lane__label">${t('matchSignalStep')}</span>
-                        <div class="match-column__list">
-                            ${question.signalChoices.map((option, index) => `<button class="choice-button choice-button--match choice-button--signal ${option.id === state.matchSelection.signal ? 'is-selected' : ''}" data-match-side="signal" data-match-value="${option.id}" type="button"><span class="choice-button__kicker">L${index + 1}</span><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__hint">${t('matchSignalLabel')}</span></button>`).join('')}
-                        </div>
-                    </section>
-                    <section class="match-center" aria-label="${question.term.en}">
+                    <section class="match-center match-center--left" aria-label="${question.term.en}">
                         <div class="match-center__pulse"></div>
                         <span class="match-center__badge">${t('summitMatch')}</span>
                         <span class="match-center__mini">${t('matchSelectionIdle')}</span>
@@ -1391,15 +1383,14 @@ function renderGame() {
                             <span class="match-center__hint-line">${question.term.hint}</span>
                         </div>
                         <div class="match-center__status">
-                            <span class="match-center__status-pill ${selectedSignalOption ? 'is-filled' : ''}">${selectedSignalOption ? `${selectedSignalOption.emoji} ${t('matchSelectionSignal')}` : t('matchSignalLabel')}</span>
-                            <span class="match-center__connector ${selectedSignalOption && selectedEmojiOption ? 'is-complete' : ''}"></span>
-                            <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${t('matchSelectionEmoji')}` : t('matchEmojiLabel')}</span>
+                            <span class="match-center__status-pill is-filled">${getThemeMatchSignalEmoji(question.themeId)} ${getTheme(question.themeId)?.title || t('matchSignalLabel')}</span>
+                            <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : t('matchMeaningPending')}</span>
                         </div>
                     </section>
                     <section class="match-lane match-lane--emoji" aria-label="${t('matchEmojiLabel')}">
                         <span class="match-lane__label">${t('matchEmojiStep')}</span>
                         <div class="match-column__list">
-                            ${question.emojiChoices.map((option, index) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button"><span class="choice-button__kicker">R${index + 1}</span><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__hint">${t('matchEmojiLabel')}</span></button>`).join('')}
+                            ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button"><span class="choice-button__kicker">${option.laneLabel}</span><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__title">${option.es}</span><span class="choice-button__detail">${option.hint}</span></button>`).join('')}
                         </div>
                     </section>
                 </div>
@@ -1498,23 +1489,16 @@ function loadQuestion() {
 function handleMatchChoice(side, value) {
     if (state.questionResolved || !state.currentQuestion || state.settings.gameMode !== 'match') return;
 
-    if (side === 'signal') {
-        state.matchSelection.signal = String(value || '');
-    }
-
     if (side === 'emoji') {
         state.matchSelection.emoji = normalizeWord(value);
     }
 
     renderGame();
 
-    if (!state.matchSelection.signal || !state.matchSelection.emoji) return;
+    if (!state.matchSelection.emoji) return;
 
-    const matchedSignal = state.matchSelection.signal === state.activeThemeId;
     const matchedEmoji = state.matchSelection.emoji === normalizeWord(state.currentQuestion.term.en);
-    const matchedTargetPair = matchedSignal && matchedEmoji;
-
-    resolveAnswer(matchedTargetPair ? state.currentQuestion.term.en : `${state.matchSelection.signal} :: ${state.matchSelection.emoji}`, false);
+    resolveAnswer(matchedEmoji ? state.currentQuestion.term.en : state.matchSelection.emoji, false);
 }
 
 function submitAnswer(answer) {
@@ -1567,13 +1551,13 @@ function resolveAnswer(answer, timedOut) {
             button.disabled = true;
             const side = button.dataset.matchSide;
             const value = button.dataset.matchValue || '';
-            const normalizedValue = side === 'signal' ? value : normalizeWord(value);
-            const targetValue = side === 'signal' ? state.activeThemeId : normalizeWord(state.currentQuestion.term.en);
-            const selectedValue = side === 'signal' ? state.matchSelection.signal : state.matchSelection.emoji;
+            const normalizedValue = normalizeWord(value);
+            const targetValue = normalizeWord(state.currentQuestion.term.en);
+            const selectedValue = state.matchSelection.emoji;
 
-            if (normalizedValue === targetValue) {
+            if (side === 'emoji' && normalizedValue === targetValue) {
                 button.classList.add('is-correct');
-            } else if (!correct && normalizedValue === selectedValue) {
+            } else if (side === 'emoji' && !correct && normalizedValue === selectedValue) {
                 button.classList.add('is-wrong');
             }
         });
