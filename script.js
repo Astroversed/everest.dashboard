@@ -1528,6 +1528,52 @@ function submitAnswer(answer) {
     resolveAnswer(answer, false);
 }
 
+function applyMatchResultState(button, resultType) {
+    if (!button) return;
+
+    const darkMode = document.body?.dataset.themeMode === 'dark';
+    const kicker = button.querySelector('.choice-button__kicker');
+    const title = button.querySelector('.choice-button__title');
+    const detail = button.querySelector('.choice-button__detail');
+    const emoji = button.querySelector('.choice-button__emoji');
+
+    button.classList.remove('is-selected');
+    button.style.setProperty('transform', 'translateY(-3px) scale(1.01)', 'important');
+
+    if (resultType === 'correct') {
+        button.classList.add('is-correct');
+        button.classList.remove('is-wrong');
+        button.style.setProperty('background', darkMode
+            ? 'linear-gradient(180deg, rgba(23, 61, 39, 0.99), rgba(15, 46, 30, 0.99))'
+            : 'linear-gradient(180deg, rgba(231, 255, 238, 0.99), rgba(205, 245, 216, 0.97))', 'important');
+        button.style.setProperty('border-color', darkMode ? 'rgba(108, 216, 140, 0.4)' : 'rgba(61, 168, 92, 0.52)', 'important');
+        button.style.setProperty('box-shadow', darkMode ? '0 18px 32px rgba(23, 61, 39, 0.34)' : '0 18px 32px rgba(61, 168, 92, 0.2)', 'important');
+        button.style.setProperty('color', darkMode ? '#dcffe5' : '#1d5b2d', 'important');
+        if (kicker) {
+            kicker.style.setProperty('background', darkMode ? 'rgba(108, 216, 140, 0.16)' : 'rgba(61, 168, 92, 0.14)', 'important');
+            kicker.style.setProperty('color', darkMode ? '#d5ffdf' : '#23723a', 'important');
+        }
+        [title, detail, emoji].forEach((node) => node?.style.setProperty('color', darkMode ? '#e7ffed' : '#1f5f31', 'important'));
+        return;
+    }
+
+    if (resultType === 'wrong') {
+        button.classList.add('is-wrong');
+        button.classList.remove('is-correct');
+        button.style.setProperty('background', darkMode
+            ? 'linear-gradient(180deg, rgba(76, 29, 33, 0.99), rgba(54, 18, 21, 0.99))'
+            : 'linear-gradient(180deg, rgba(255, 240, 240, 0.99), rgba(255, 220, 220, 0.97))', 'important');
+        button.style.setProperty('border-color', darkMode ? 'rgba(255, 132, 132, 0.36)' : 'rgba(214, 74, 74, 0.48)', 'important');
+        button.style.setProperty('box-shadow', darkMode ? '0 18px 32px rgba(76, 29, 33, 0.3)' : '0 18px 32px rgba(214, 74, 74, 0.18)', 'important');
+        button.style.setProperty('color', darkMode ? '#ffe1e1' : '#7a2020', 'important');
+        if (kicker) {
+            kicker.style.setProperty('background', darkMode ? 'rgba(255, 132, 132, 0.14)' : 'rgba(214, 74, 74, 0.14)', 'important');
+            kicker.style.setProperty('color', darkMode ? '#ffe1e1' : '#992f2f', 'important');
+        }
+        [title, detail, emoji].forEach((node) => node?.style.setProperty('color', darkMode ? '#ffe8e8' : '#7a2424', 'important'));
+    }
+}
+
 function resolveAnswer(answer, timedOut) {
     if (state.questionResolved || !state.currentQuestion) return;
     stopTimer();
@@ -1578,9 +1624,9 @@ function resolveAnswer(answer, timedOut) {
             const selectedValue = state.matchSelection.emoji;
 
             if (side === 'emoji' && normalizedValue === targetValue) {
-                button.classList.add('is-correct');
+                applyMatchResultState(button, 'correct');
             } else if (side === 'emoji' && !correct && normalizedValue === selectedValue) {
-                button.classList.add('is-wrong');
+                applyMatchResultState(button, 'wrong');
             }
         });
     }
