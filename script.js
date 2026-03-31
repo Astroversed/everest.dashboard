@@ -415,6 +415,21 @@ function normalizeLeaderboardEntry(entry = {}) {
     };
 }
 
+function hasRecordedResults(entry = {}) {
+    return Number(entry.points || 0) > 0
+        || Number(entry.wins || 0) > 0
+        || Number(entry.losses || 0) > 0
+        || Number(entry.totalPlayMs || 0) > 0;
+}
+
+function isLeaderboardVisible(entry = {}) {
+    if (typeof entry.leaderboardVisible === 'boolean') {
+        return entry.leaderboardVisible;
+    }
+
+    return hasRecordedResults(entry);
+}
+
 function getSharedLeaderboardCollection() {
     return state.firestore ? state.firestore.collection(FIRESTORE_LEADERBOARD_COLLECTION) : null;
 }
@@ -432,6 +447,7 @@ function buildSharedLeaderboardPayload(user) {
         losses: source.losses,
         totalPlayMs: source.totalPlayMs,
         lastPlayedTheme: source.lastPlayedTheme || null,
+        leaderboardVisible: isLeaderboardVisible(source),
         createdAt: source.createdAt || Date.now(),
         expiresAt: source.expiresAt || (Date.now() + SESSION_MS),
         hiddenFromLeaderboard: Boolean(source.hiddenFromLeaderboard),
@@ -491,7 +507,7 @@ function refreshSharedUi() {
     renderLeaderboard();
     renderProfile();
     if (!elements.optionsModal.hidden) {
-        renderOptions();
+        refreshManagedUserPanel();
     }
 }
 
@@ -924,7 +940,7 @@ function addExplorerWord(payload) {
 
 function getLocalLeaderboard() {
     return pruneUsers()
-        .filter((user) => !user.hiddenFromLeaderboard)
+        .filter((user) => !user.hiddenFromLeaderboard && isLeaderboardVisible(user))
         .map((user) => normalizeLeaderboardEntry(user))
         .sort(sortLeaderboardEntries)
         .slice(0, 20);
@@ -932,7 +948,7 @@ function getLocalLeaderboard() {
 
 function getRemoteLeaderboard() {
     return state.sharedLeaderboard
-        .filter((user) => user && user.expiresAt > Date.now() && !user.hiddenFromLeaderboard)
+        .filter((user) => user && user.expiresAt > Date.now() && !user.hiddenFromLeaderboard && isLeaderboardVisible(user))
         .map((user) => normalizeLeaderboardEntry(user))
         .sort(sortLeaderboardEntries)
         .slice(0, 20);
@@ -2253,6 +2269,55 @@ function updateRecurringUi() {
     renderLeaderboard();
     renderProfile();
     void cleanupExpiredSharedLeaderboard();
+}
+
+function refreshManagedUserPanel() {
+    if (elements.optionsModal.hidden || !state.controlModeUnlocked) return;
+
+    const managedUsers = getManagedUsers();
+    const hiddenInput = document.getElementById('controlManagedUserSelect');
+    const triggerLabel = document.getElementById('controlManagedUserTriggerLabel');
+    const optionsRoot = document.getElementById('controlManagedUserOptions');
+    const pointsInput = document.getElementById('controlPointsInput');
+    const winsInput = document.getElementById('controlWinsInput');
+    const lossesInput = document.getElementById('controlLossesInput');
+    const sessionMinutesInput = document.getElementById('controlSessionMinutesInput');
+
+    if (!hiddenInput || !triggerLabel || !optionsRoot || !pointsInput || !winsInput || !lossesInput || !sessionMinutesInput) {
+        return;
+    }
+
+    if (!state.controlManagedUserId || !managedUsers.some((user) => getUserId(user) === state.controlManagedUserId)) {
+        state.controlManagedUserId = managedUsers[0] ? getUserId(managedUsers[0]) : '';
+    }
+
+    const selectedUser = getManagedUserById(state.controlManagedUserId);
+    hiddenInput.value = state.controlManagedUserId || '';
+    triggerLabel.textContent = selectedUser ? `${selectedUser.profileEmoji || '\uD83E\uDDE0'} ${selectedUser.username}` : tc('userSelect');
+
+    const searchInput = document.getElementById('controlManagedUserSearch');
+    const normalizedQuery = (searchInput?.value || '').trim().toLowerCase();
+    optionsRoot.innerHTML = managedUsers.map((user) => {
+        const value = getUserId(user);
+        const search = `${user.username} ${user.course || t('routePending')}`.toLowerCase();
+        const hidden = normalizedQuery && !search.includes(normalizedQuery);
+        return `<button type="button" class="course-option control-select-option ${value === state.controlManagedUserId ? 'active' : ''} ${hidden ? 'hidden' : ''}" data-value="${value}" data-search="${search}"><span class="course-option-main">${user.profileEmoji || '\uD83E\uDDE0'} ${user.username}</span><span class="course-option-alt">${user.course || t('routePending')}</span></button>`;
+    }).join('');
+
+    optionsRoot.querySelectorAll('[data-value]').forEach((button) => {
+        button.addEventListener('click', () => {
+            persistControlModeChanges();
+            state.controlManagedUserId = button.dataset.value || '';
+            renderOptionsModal();
+        });
+    });
+
+    if (selectedUser) {
+        pointsInput.value = Number(selectedUser.points || 0);
+        winsInput.value = Number(selectedUser.wins || 0);
+        lossesInput.value = Number(selectedUser.losses || 0);
+        sessionMinutesInput.value = Math.max(1, Math.ceil(Math.max(0, (selectedUser.expiresAt || Date.now()) - Date.now()) / 60000));
+    }
 }
 
 function getThemeDeckCard() {
