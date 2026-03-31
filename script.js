@@ -1222,7 +1222,7 @@ function renderHero() {
     elements.heroExploreButton.textContent = t('openLibrary');
     elements.scrollThemeIntoViewButton.textContent = t('focusRoute');
     const nextThemeLabel = state.settings.themeMode === 'light' ? t('darkMode') : t('lightMode');
-    const nextThemeSymbol = state.settings.themeMode === 'light' ? '??' : '??';
+    const nextThemeSymbol = state.settings.themeMode === 'light' ? '\uD83C\uDF19' : '\u2600\uFE0F';
     elements.themeModeQuickToggle.innerHTML = `<span class="mini-theme-toggle__symbol" aria-hidden="true">${nextThemeSymbol}</span>`;
     elements.themeModeQuickToggle.setAttribute('aria-label', nextThemeLabel);
     elements.themeModeQuickToggle.setAttribute('title', nextThemeLabel);
@@ -1390,7 +1390,7 @@ function renderGame() {
                     <section class="match-lane match-lane--emoji" aria-label="${t('matchEmojiLabel')}">
                         <span class="match-lane__label">${t('matchEmojiStep')}</span>
                         <div class="match-column__list">
-                            ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button" style="display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:1.14rem;padding:.68rem .82rem;"><span class="choice-button__media" style="display:grid;justify-items:center;align-content:center;gap:.1rem;"><span class="choice-button__kicker" style="display:inline-flex;align-items:center;justify-content:center;min-width:2rem;min-height:1.18rem;padding:0 .35rem;">${option.laneLabel}</span><span class="choice-button__emoji" style="font-size:1.86rem;line-height:1;">${option.emoji}</span></span><span class="choice-button__copy" style="display:grid;align-content:center;gap:.42rem;min-width:0;"><span class="choice-button__title" style="font-size:1.36rem;line-height:1.2;font-weight:800;">${option.es}</span><span class="choice-button__detail" style="font-size:1.08rem;line-height:1.5;font-weight:700;">${option.hint}</span></span></button>`).join('')}
+                            ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button" style="display:grid !important;grid-template-columns:auto minmax(0,1fr) !important;align-items:center !important;column-gap:1.2rem !important;padding:.72rem .86rem !important;"><span class="choice-button__media" style="display:grid !important;justify-items:center !important;align-content:center !important;gap:.12rem !important;"><span class="choice-button__kicker" style="display:inline-flex !important;align-items:center !important;justify-content:center !important;min-width:2rem !important;min-height:1.18rem !important;padding:0 .35rem !important;">${option.laneLabel}</span><span class="choice-button__emoji" style="font-size:1.9rem !important;line-height:1 !important;">${option.emoji}</span></span><span class="choice-button__copy" style="display:grid !important;align-content:center !important;gap:.5rem !important;min-width:0 !important;"><span class="choice-button__title" style="font-size:1.52rem !important;line-height:1.22 !important;font-weight:800 !important;">${option.es}</span><span class="choice-button__detail" style="font-size:1.14rem !important;line-height:1.56 !important;font-weight:700 !important;">${option.hint}</span></span></button>`).join('')}
                         </div>
                     </section>
                 </div>
@@ -1616,7 +1616,7 @@ function renderLeaderboard() {
         return;
     }
 
-    const previewAwards = ['??', '??', '??'];
+    const previewAwards = ['\uD83E\uDD47', '\uD83E\uDD48', '\uD83E\uDD49'];
     elements.leaderboardPreview.innerHTML = leaderboard.slice(0, 7).map((entry, index) => {
         const award = previewAwards[index] || '';
         return `<div class="leaderboard-preview__row is-top-${index + 1}">
