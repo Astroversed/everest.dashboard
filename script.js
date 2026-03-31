@@ -359,7 +359,7 @@ const elements = {
     metaLosses: document.getElementById('metaLosses'), metaTime: document.getElementById('metaTime'),
     stageSectionTitle: document.getElementById('stageSectionTitle'), stageThemeFocus: document.getElementById('stageThemeFocus'), gameThemeTitle: document.getElementById('gameThemeTitle'),
     gameThemeDescription: document.getElementById('gameThemeDescription'), questionCounter: document.getElementById('questionCounter'), timerBadge: document.getElementById('timerBadge'),
-    streakBadge: document.getElementById('streakBadge'), progressBar: document.getElementById('progressBar'), challengeEmoji: document.getElementById('challengeEmoji'),
+    streakBadge: document.getElementById('streakBadge'), progressBar: document.getElementById('progressBar'), challengeVisual: document.getElementById('challengeVisual'), challengeEmoji: document.getElementById('challengeEmoji'),
     challengeTypeLabel: document.getElementById('challengeTypeLabel'), challengePrompt: document.getElementById('challengePrompt'), challengeHint: document.getElementById('challengeHint'),
     challengeExample: document.getElementById('challengeExample'), gameFeedback: document.getElementById('gameFeedback'), feedbackTitle: document.getElementById('feedbackTitle'),
     feedbackText: document.getElementById('feedbackText'), typingForm: document.getElementById('typingForm'), typingInput: document.getElementById('typingInput'),
