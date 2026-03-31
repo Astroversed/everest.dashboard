@@ -1,4 +1,4 @@
-﻿const STORAGE_KEYS = {
+const STORAGE_KEYS = {
     activeUser: 'everest_active_user',
     users: 'everest_temp_users',
     progress: 'everest_dashboard_progress',
@@ -299,7 +299,7 @@ const ui = {
         matchSignalLabel: 'Tarjeta de palabra',
         matchEmojiLabel: 'Ruta de emoji',
         challengeWord: 'Palabra objetivo',
-        matchSignalStep: 'Palabra guía',
+        matchSignalStep: 'Palabra gu�a',
         matchEmojiStep: 'Elige el mejor emoji',
         matchSelectionIdle: 'Elige una sola ruta de emoji para responder.',
         matchSelectionSignal: 'Tarjeta lista',
@@ -675,7 +675,7 @@ function getGameModeLabel(mode = state.settings?.gameMode) {
 }
 
 function getThemeMatchSignalEmoji(themeId = state.activeThemeId) {
-    return THEME_MATCH_SIGNAL_EMOJIS[themeId] || '🧭';
+    return THEME_MATCH_SIGNAL_EMOJIS[themeId] || '??';
 }
 
 function getOptionStatusMarkup(label, isActive) {
@@ -701,21 +701,21 @@ function getDefaultSettings() { return { language: 'en', gameMode: 'multiple', s
 function getDefaultProgress() { return { points: 0, wins: 0, losses: 0, totalPlayMs: 0, lastPlayedTheme: null, stageResults: {} }; }
 
 const THEME_MATCH_SIGNAL_EMOJIS = {
-    'basic-communication': '💬',
-    'grammar-language': '🧩',
-    'human-body-identity': '🧍',
-    'personal-social-life': '👥',
-    'education-work': '🎓',
-    'places-environment': '📍',
-    'movement-navigation': '🧭',
-    'shopping-daily-life': '🛍️',
-    'clothing-style': '👗',
-    'food-drinks': '🍽️',
-    'nature-weather': '🌦️',
-    'culture-leisure': '🎭',
-    'tools-objects': '🧰',
-    technology: '💻',
-    'concepts-academic': '📘'
+    'basic-communication': '??',
+    'grammar-language': '??',
+    'human-body-identity': '??',
+    'personal-social-life': '??',
+    'education-work': '??',
+    'places-environment': '??',
+    'movement-navigation': '??',
+    'shopping-daily-life': '???',
+    'clothing-style': '??',
+    'food-drinks': '???',
+    'nature-weather': '???',
+    'culture-leisure': '??',
+    'tools-objects': '??',
+    technology: '??',
+    'concepts-academic': '??'
 };
 
 function pruneUsers() {
@@ -1222,7 +1222,7 @@ function renderHero() {
     elements.heroExploreButton.textContent = t('openLibrary');
     elements.scrollThemeIntoViewButton.textContent = t('focusRoute');
     const nextThemeLabel = state.settings.themeMode === 'light' ? t('darkMode') : t('lightMode');
-    const nextThemeSymbol = state.settings.themeMode === 'light' ? '🌙' : '☀️';
+    const nextThemeSymbol = state.settings.themeMode === 'light' ? '??' : '??';
     elements.themeModeQuickToggle.innerHTML = `<span class="mini-theme-toggle__symbol" aria-hidden="true">${nextThemeSymbol}</span>`;
     elements.themeModeQuickToggle.setAttribute('aria-label', nextThemeLabel);
     elements.themeModeQuickToggle.setAttribute('title', nextThemeLabel);
@@ -1348,7 +1348,7 @@ function renderGame() {
         ? t('matchPairPrompt', { word: question.term.en })
         : (typingMode ? t('typeEnglish', { word: question.term.es }) : t('chooseEnglish', { word: question.term.es }));
     elements.challengeHint.textContent = matchMode
-        ? `${t('hintPrefix')}: ${question.term.es} · ${question.term.hint}`
+        ? `${t('hintPrefix')}: ${question.term.es} � ${question.term.hint}`
         : `${t('hintPrefix')}: ${question.term.hint}`;
     elements.challengeExample.textContent = matchMode
         ? `${t('matchPairHelp')} ${selectedEmojiOption ? `${t('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : t('matchSelectionIdle')}`
@@ -1390,7 +1390,7 @@ function renderGame() {
                     <section class="match-lane match-lane--emoji" aria-label="${t('matchEmojiLabel')}">
                         <span class="match-lane__label">${t('matchEmojiStep')}</span>
                         <div class="match-column__list">
-                            ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button" style="display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:.58rem;padding:.56rem .68rem;"><span class="choice-button__media" style="display:grid;justify-items:center;align-content:center;gap:.06rem;"><span class="choice-button__kicker" style="display:inline-flex;align-items:center;justify-content:center;min-width:2rem;min-height:1.18rem;padding:0 .35rem;">${option.laneLabel}</span><span class="choice-button__emoji" style="font-size:1.8rem;line-height:1;">${option.emoji}</span></span><span class="choice-button__copy" style="display:grid;align-content:center;gap:.03rem;min-width:0;"><span class="choice-button__title" style="line-height:1.06;">${option.es}</span><span class="choice-button__detail" style="line-height:1.14;">${option.hint}</span></span></button>`).join('')}
+                            ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button" style="display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:.6rem;padding:.6rem .72rem;"><span class="choice-button__media" style="display:grid;justify-items:center;align-content:center;gap:.06rem;"><span class="choice-button__kicker" style="display:inline-flex;align-items:center;justify-content:center;min-width:2rem;min-height:1.18rem;padding:0 .35rem;">${option.laneLabel}</span><span class="choice-button__emoji" style="font-size:1.8rem;line-height:1;">${option.emoji}</span></span><span class="choice-button__copy" style="display:grid;align-content:center;gap:.16rem;min-width:0;"><span class="choice-button__title" style="font-size:1rem;line-height:1.14;">${option.es}</span><span class="choice-button__detail" style="font-size:.8rem;line-height:1.28;">${option.hint}</span></span></button>`).join('')}
                         </div>
                     </section>
                 </div>
@@ -1616,7 +1616,7 @@ function renderLeaderboard() {
         return;
     }
 
-    const previewAwards = ['🥇', '🥈', '🥉'];
+    const previewAwards = ['??', '??', '??'];
     elements.leaderboardPreview.innerHTML = leaderboard.slice(0, 7).map((entry, index) => {
         const award = previewAwards[index] || '';
         return `<div class="leaderboard-preview__row is-top-${index + 1}">
