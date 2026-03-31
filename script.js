@@ -725,6 +725,16 @@ function bootstrapUser() {
     pruneUsers();
     const active = readStorage(STORAGE_KEYS.activeUser, null);
     if (!active || active.expiresAt <= Date.now()) {
+        if (active) {
+            const expiredUserId = getUserId(active);
+            const users = pruneUsers().filter((user) => getUserId(user) !== expiredUserId);
+            writeStorage(STORAGE_KEYS.users, users);
+            const allProgress = readAllProgress();
+            delete allProgress[expiredUserId];
+            writeAllProgress(allProgress);
+            state.sharedLeaderboard = state.sharedLeaderboard.filter((user) => getUserId(user) !== expiredUserId);
+            void deleteSharedLeaderboardUser(expiredUserId);
+        }
         localStorage.removeItem(STORAGE_KEYS.activeUser);
         window.location.href = LOGIN_FALLBACK_URL;
         return false;
@@ -934,7 +944,8 @@ function closeManagedSession(userId) {
         sessionStorage.removeItem(CONTROL_SESSION_KEY);
         state.controlModeUnlocked = false;
         localStorage.removeItem(STORAGE_KEYS.activeUser);
-        void expireSharedLeaderboardUser(userId);
+        state.sharedLeaderboard = state.sharedLeaderboard.filter((user) => getUserId(user) !== userId);
+        void deleteSharedLeaderboardUser(userId);
         pushToast(randomFrom(EVEREST_LINES.info), tc('selfClosed'), 'info');
         window.setTimeout(() => { window.location.href = LOGIN_FALLBACK_URL; }, 420);
         return true;
@@ -944,7 +955,8 @@ function closeManagedSession(userId) {
         state.controlManagedUserId = '';
     }
 
-    void expireSharedLeaderboardUser(userId);
+    state.sharedLeaderboard = state.sharedLeaderboard.filter((user) => getUserId(user) !== userId);
+    void deleteSharedLeaderboardUser(userId);
     return false;
 }
 
