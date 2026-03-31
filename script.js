@@ -13,6 +13,16 @@ const SESSION_MS = 60 * 60 * 1000;
 const CONTROL_MODE_HASH = '7797e2a91f350ba257658afea4fd03a5ff63793c7abdb4ac01efb422debc6b15';
 const CONTROL_SESSION_KEY = 'everest_control_mode_unlocked';
 const LOGIN_FALLBACK_URL = 'https://astroversed.github.io/everest.start/';
+const FIRESTORE_LEADERBOARD_COLLECTION = 'leaderboard';
+const FIREBASE_CONFIG = {
+    apiKey: 'AIzaSyCVb6UZ48mcD8tAW67LMMVPi2SMNiemcUY',
+    authDomain: 'everest-dashboard-e58a5.firebaseapp.com',
+    projectId: 'everest-dashboard-e58a5',
+    storageBucket: 'everest-dashboard-e58a5.firebasestorage.app',
+    messagingSenderId: '36464478604',
+    appId: '1:36464478604:web:b8dfacd61af6c80aa3eea9',
+    measurementId: 'G-EBP09MWQRD'
+};
 const THEME_ICONS = {
     'basic-communication': 'assets/icons/Communication.png',
     'grammar-language': 'assets/icons/Grammar.png',
@@ -325,7 +335,8 @@ const state = {
     activeThemeId: null, activeStageId: 1, searchTerm: '', explorerSearch: '', explorerTheme: 'all',
     stageLive: false, questions: [], questionIndex: 0, currentQuestion: null, questionResolved: false,
     secondsLeft: 15, timerId: null, stageStartedAt: 0, stagePoints: 0, stageCorrect: 0, stageWrong: 0,
-    streak: 0, bestStreak: 0, latestAccuracy: 0, controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null
+    streak: 0, bestStreak: 0, latestAccuracy: 0, controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
+    sharedLeaderboard: [], firestore: null, firestoreReady: false, firestoreListener: null, firestoreCleanupBusy: false
 };
 
 const elements = {
@@ -383,6 +394,172 @@ function writeStorage(key, value) {
         localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
         console.error(`Failed to write ${key}`, error);
+    }
+}
+
+function sortLeaderboardEntries(a, b) {
+    return b.points - a.points || b.wins - a.wins || a.losses - b.losses || a.createdAt - b.createdAt;
+}
+
+function normalizeLeaderboardEntry(entry = {}) {
+    return {
+        ...entry,
+        points: Number(entry.points || 0),
+        wins: Number(entry.wins || 0),
+        losses: Number(entry.losses || 0),
+        totalPlayMs: Number(entry.totalPlayMs || 0),
+        createdAt: Number(entry.createdAt || 0),
+        updatedAt: Number(entry.updatedAt || 0),
+        expiresAt: Number(entry.expiresAt || 0),
+        hiddenFromLeaderboard: Boolean(entry.hiddenFromLeaderboard)
+    };
+}
+
+function getSharedLeaderboardCollection() {
+    return state.firestore ? state.firestore.collection(FIRESTORE_LEADERBOARD_COLLECTION) : null;
+}
+
+function buildSharedLeaderboardPayload(user) {
+    const source = normalizeLeaderboardEntry(user);
+    return {
+        username: source.username || '',
+        usernameNormalized: source.usernameNormalized || getUserId(source),
+        profileEmoji: source.profileEmoji || '\uD83E\uDDE0',
+        profileColor: source.profileColor || '#4b74f0',
+        course: source.course || '',
+        points: source.points,
+        wins: source.wins,
+        losses: source.losses,
+        totalPlayMs: source.totalPlayMs,
+        lastPlayedTheme: source.lastPlayedTheme || null,
+        createdAt: source.createdAt || Date.now(),
+        expiresAt: source.expiresAt || (Date.now() + SESSION_MS),
+        hiddenFromLeaderboard: Boolean(source.hiddenFromLeaderboard),
+        updatedAt: Date.now()
+    };
+}
+
+function syncCurrentUserFromSharedRecord(record) {
+    if (!state.user || !record || getUserId(record) !== getUserId(state.user)) return;
+
+    if (record.expiresAt <= Date.now()) {
+        localStorage.removeItem(STORAGE_KEYS.activeUser);
+        window.location.href = LOGIN_FALLBACK_URL;
+        return;
+    }
+
+    state.user = { ...state.user, ...record };
+    writeStorage(STORAGE_KEYS.activeUser, state.user);
+
+    if (state.progress) {
+        state.progress = {
+            ...state.progress,
+            points: record.points,
+            wins: record.wins,
+            losses: record.losses,
+            totalPlayMs: record.totalPlayMs,
+            lastPlayedTheme: record.lastPlayedTheme || state.progress.lastPlayedTheme
+        };
+
+        const allProgress = readAllProgress();
+        allProgress[getUserId(state.user)] = {
+            ...getDefaultProgress(),
+            ...(allProgress[getUserId(state.user)] || {}),
+            ...state.progress
+        };
+        writeAllProgress(allProgress);
+    }
+}
+
+async function cleanupExpiredSharedLeaderboard() {
+    if (!state.firestoreReady || state.firestoreCleanupBusy) return;
+
+    const expired = state.sharedLeaderboard.filter((entry) => entry.expiresAt > 0 && entry.expiresAt <= Date.now());
+    if (!expired.length) return;
+
+    state.firestoreCleanupBusy = true;
+    try {
+        await Promise.allSettled(expired.map((entry) => getSharedLeaderboardCollection()?.doc(getUserId(entry)).delete()));
+    } catch (error) {
+        console.error('Failed to clean expired leaderboard entries', error);
+    } finally {
+        state.firestoreCleanupBusy = false;
+    }
+}
+
+function refreshSharedUi() {
+    renderLeaderboard();
+    renderProfile();
+    if (!elements.optionsModal.hidden) {
+        renderOptions();
+    }
+}
+
+function subscribeToSharedLeaderboard() {
+    const collection = getSharedLeaderboardCollection();
+    if (!collection) return;
+
+    if (typeof state.firestoreListener === 'function') {
+        state.firestoreListener();
+    }
+
+    state.firestoreListener = collection.onSnapshot((snapshot) => {
+        state.sharedLeaderboard = snapshot.docs.map((doc) => normalizeLeaderboardEntry({ id: doc.id, ...doc.data() }));
+        const currentRemoteUser = state.sharedLeaderboard.find((entry) => getUserId(entry) === getUserId(state.user));
+        if (currentRemoteUser) {
+            syncCurrentUserFromSharedRecord(currentRemoteUser);
+        }
+        void cleanupExpiredSharedLeaderboard();
+        refreshSharedUi();
+    }, (error) => {
+        console.error('Failed to subscribe to shared leaderboard', error);
+    });
+}
+
+function setupSharedLeaderboard() {
+    if (!window.firebase || typeof window.firebase.initializeApp !== 'function' || typeof window.firebase.firestore !== 'function') {
+        console.warn('Firebase Firestore is unavailable. Everest will keep using local leaderboard sync.');
+        return;
+    }
+
+    try {
+        if (!window.firebase.apps.length) {
+            window.firebase.initializeApp(FIREBASE_CONFIG);
+        }
+        state.firestore = window.firebase.firestore();
+        state.firestoreReady = true;
+        subscribeToSharedLeaderboard();
+    } catch (error) {
+        console.error('Failed to initialize Firebase Firestore', error);
+        state.firestoreReady = false;
+        state.firestore = null;
+    }
+}
+
+async function syncSharedLeaderboardUser(user) {
+    const collection = getSharedLeaderboardCollection();
+    if (!collection || !user) return;
+
+    try {
+        await collection.doc(getUserId(user)).set(buildSharedLeaderboardPayload(user), { merge: true });
+    } catch (error) {
+        console.error('Failed to sync leaderboard user', error);
+    }
+}
+
+async function expireSharedLeaderboardUser(userId, overrides = {}) {
+    const collection = getSharedLeaderboardCollection();
+    if (!collection || !userId) return;
+
+    try {
+        await collection.doc(userId).set({
+            expiresAt: Date.now() - 1000,
+            hiddenFromLeaderboard: true,
+            updatedAt: Date.now(),
+            ...overrides
+        }, { merge: true });
+    } catch (error) {
+        console.error('Failed to expire leaderboard user', error);
     }
 }
 
@@ -466,7 +643,7 @@ function saveProgress() {
     const all = readAllProgress();
     all[getUserId(state.user)] = state.progress;
     writeAllProgress(all);
-    syncUserRoster();
+    void syncUserRoster();
 }
 
 function syncUserRoster() {
@@ -476,6 +653,7 @@ function syncUserRoster() {
     if (index >= 0) users[index] = { ...users[index], ...merged }; else users.push(merged);
     writeStorage(STORAGE_KEYS.users, users);
     syncActiveUserRecord(merged);
+    return syncSharedLeaderboardUser(merged);
 }
 
 function bootstrapUser() {
@@ -489,7 +667,7 @@ function bootstrapUser() {
 
     state.user = active;
     loadProgress();
-    syncUserRoster();
+    void syncUserRoster();
     return true;
 }
 
@@ -617,17 +795,24 @@ function deleteExplorerWord(wordId) {
 }
 
 function getManagedUsers() {
+    if (state.firestoreReady && state.sharedLeaderboard.length) {
+        return state.sharedLeaderboard
+            .filter((user) => user && user.expiresAt > Date.now())
+            .map((user) => normalizeLeaderboardEntry(user))
+            .sort((a, b) => a.username.localeCompare(b.username));
+    }
+
     const allProgress = readAllProgress();
     return pruneUsers().map((user) => {
         const progress = { ...getDefaultProgress(), ...(allProgress[getUserId(user)] || {}) };
-        return {
+        return normalizeLeaderboardEntry({
             ...user,
             points: Number(user.points ?? progress.points ?? 0),
             wins: Number(user.wins ?? progress.wins ?? 0),
             losses: Number(user.losses ?? progress.losses ?? 0),
             totalPlayMs: Number(user.totalPlayMs ?? progress.totalPlayMs ?? 0),
             hiddenFromLeaderboard: Boolean(user.hiddenFromLeaderboard)
-        };
+        });
     }).sort((a, b) => a.username.localeCompare(b.username));
 }
 
@@ -658,8 +843,9 @@ async function unlockControlMode(rawKey) {
 function removeUserFromRanking(userId) {
     const users = pruneUsers().map((user) => getUserId(user) === userId ? { ...user, hiddenFromLeaderboard: true, updatedAt: Date.now() } : user);
     writeStorage(STORAGE_KEYS.users, users);
-    const target = users.find((user) => getUserId(user) === userId);
+    const target = users.find((user) => getUserId(user) === userId) || getManagedUserById(userId);
     if (target) syncActiveUserRecord(target);
+    void syncSharedLeaderboardUser(target || { usernameNormalized: userId, hiddenFromLeaderboard: true });
 }
 
 function closeManagedSession(userId) {
@@ -673,6 +859,7 @@ function closeManagedSession(userId) {
         sessionStorage.removeItem(CONTROL_SESSION_KEY);
         state.controlModeUnlocked = false;
         localStorage.removeItem(STORAGE_KEYS.activeUser);
+        void expireSharedLeaderboardUser(userId);
         pushToast(randomFrom(EVEREST_LINES.info), tc('selfClosed'), 'info');
         window.setTimeout(() => { window.location.href = LOGIN_FALLBACK_URL; }, 420);
         return true;
@@ -682,6 +869,7 @@ function closeManagedSession(userId) {
         state.controlManagedUserId = '';
     }
 
+    void expireSharedLeaderboardUser(userId);
     return false;
 }
 
@@ -693,10 +881,11 @@ function applyControlStats(userId, values) {
     const expiresAt = Date.now() + (sessionMinutes * 60000);
     const users = pruneUsers();
     const userIndex = users.findIndex((user) => getUserId(user) === userId);
-    if (userIndex < 0) return;
+    const baseUser = userIndex >= 0 ? users[userIndex] : getManagedUserById(userId);
+    if (!baseUser) return;
 
-    users[userIndex] = {
-        ...users[userIndex],
+    const nextUser = {
+        ...baseUser,
         points,
         wins,
         losses,
@@ -704,6 +893,11 @@ function applyControlStats(userId, values) {
         hiddenFromLeaderboard: false,
         updatedAt: Date.now()
     };
+    if (userIndex >= 0) {
+        users[userIndex] = nextUser;
+    } else {
+        users.push(nextUser);
+    }
     writeStorage(STORAGE_KEYS.users, users);
 
     const allProgress = readAllProgress();
@@ -713,9 +907,11 @@ function applyControlStats(userId, values) {
 
     if (userId === getUserId(state.user)) {
         state.progress = { ...state.progress, points, wins, losses };
-        state.user = { ...state.user, ...users[userIndex], expiresAt };
+        state.user = { ...state.user, ...nextUser, expiresAt };
         writeStorage(STORAGE_KEYS.activeUser, state.user);
     }
+
+    void syncSharedLeaderboardUser(nextUser);
 }
 
 function addExplorerWord(payload) {
@@ -726,10 +922,29 @@ function addExplorerWord(payload) {
     refreshLibraryFromStorage();
 }
 
-function getLeaderboard() {
-    return pruneUsers().filter((user) => !user.hiddenFromLeaderboard).map((user) => ({ ...user, points: Number(user.points || 0), wins: Number(user.wins || 0), losses: Number(user.losses || 0), totalPlayMs: Number(user.totalPlayMs || 0) }))
-        .sort((a, b) => b.points - a.points || b.wins - a.wins || a.losses - b.losses || a.createdAt - b.createdAt)
+function getLocalLeaderboard() {
+    return pruneUsers()
+        .filter((user) => !user.hiddenFromLeaderboard)
+        .map((user) => normalizeLeaderboardEntry(user))
+        .sort(sortLeaderboardEntries)
         .slice(0, 20);
+}
+
+function getRemoteLeaderboard() {
+    return state.sharedLeaderboard
+        .filter((user) => user && user.expiresAt > Date.now() && !user.hiddenFromLeaderboard)
+        .map((user) => normalizeLeaderboardEntry(user))
+        .sort(sortLeaderboardEntries)
+        .slice(0, 20);
+}
+
+function getLeaderboard() {
+    const remote = getRemoteLeaderboard();
+    if (state.firestoreReady && remote.length) {
+        return remote;
+    }
+
+    return getLocalLeaderboard();
 }
 
 function getLeaderboardDisplayEntries() {
@@ -1901,6 +2116,7 @@ function loadData() {
 }
 
 function logoutUser(shouldRedirect) {
+    void expireSharedLeaderboardUser(getUserId(state.user));
     localStorage.removeItem(STORAGE_KEYS.activeUser);
     pushToast(randomFrom(EVEREST_LINES.info), t('logoutDone'), 'info');
     if (shouldRedirect) {
@@ -2036,6 +2252,7 @@ function updateRecurringUi() {
     updateCountdown();
     renderLeaderboard();
     renderProfile();
+    void cleanupExpiredSharedLeaderboard();
 }
 
 function getThemeDeckCard() {
@@ -2090,6 +2307,7 @@ function init() {
     if (!bootstrapUser()) {
         return;
     }
+    setupSharedLeaderboard();
     loadData()
         .then(() => {
             bindEvents();
