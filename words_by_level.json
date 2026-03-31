@@ -1,13 +1,13 @@
-{
+﻿{
   "themes": [
     {
       "id": "basic-communication",
       "title": "Basic Communication",
       "summary": "Greetings, quick replies and confident social starts.",
       "stages": [
-        {"id": 1, "name": "Trail Talk", "focus": "Greetings and polite basics", "points": 120, "terms": [["hello", "hola", "👋", "A friendly greeting"], ["goodbye", "adios", "🌤️", "Used when leaving"], ["please", "por favor", "🙏", "Polite request word"], ["thanks", "gracias", "✨", "Used after help"], ["sorry", "lo siento", "💬", "Used to apologize"]]},
-        {"id": 2, "name": "Quick Replies", "focus": "Fast answers and support words", "points": 160, "terms": [["yes", "si", "👍", "Positive answer"], ["no", "no", "👎", "Negative answer"], ["question", "pregunta", "❓", "Something you ask"], ["answer", "respuesta", "💡", "Something you give back"], ["help", "ayuda", "🛟", "Support for someone"]]},
-        {"id": 3, "name": "Social Spark", "focus": "Friends, speaking and listening", "points": 220, "terms": [["friend", "amigo", "🤝", "A person close to you"], ["invite", "invitar", "📩", "Ask someone to join"], ["listen", "escuchar", "👂", "Pay attention with your ears"], ["speak", "hablar", "🗣️", "Use your voice"], ["repeat", "repetir", "🔁", "Say it again"]]}
+        {"id": 1, "name": "Trail Talk", "focus": "Greetings and polite basics", "points": 120, "terms": [["hello", "hola", "ðŸ‘‹", "A friendly greeting"], ["goodbye", "adios", "ðŸŒ¤ï¸", "Used when leaving"], ["please", "por favor", "ðŸ™", "Polite request word"], ["thanks", "gracias", "âœ¨", "Used after help"], ["sorry", "lo siento", "ðŸ’¬", "Used to apologize"]]},
+        {"id": 2, "name": "Quick Replies", "focus": "Fast answers and support words", "points": 160, "terms": [["yes", "si", "ðŸ‘", "Positive answer"], ["no", "no", "ðŸ‘Ž", "Negative answer"], ["question", "pregunta", "â“", "Something you ask"], ["answer", "respuesta", "ðŸ’¡", "Something you give back"], ["help", "ayuda", "ðŸ›Ÿ", "Support for someone"]]},
+        {"id": 3, "name": "Social Spark", "focus": "Friends, speaking and listening", "points": 220, "terms": [["friend", "amigo", "ðŸ¤", "A person close to you"], ["invite", "invitar", "ðŸ“©", "Ask someone to join"], ["listen", "escuchar", "ðŸ‘‚", "Pay attention with your ears"], ["speak", "hablar", "ðŸ—£ï¸", "Use your voice"], ["repeat", "repetir", "ðŸ”", "Say it again"]]}
       ]
     },
     {
@@ -15,9 +15,9 @@
       "title": "Grammar & Language",
       "summary": "Action words, describing words and logic connectors.",
       "stages": [
-        {"id": 1, "name": "Action Ridge", "focus": "Core verbs", "points": 120, "terms": [["run", "correr", "🏃", "Move quickly"], ["walk", "caminar", "🚶", "Move step by step"], ["eat", "comer", "🍽️", "Have food"], ["read", "leer", "📖", "Look at words"], ["write", "escribir", "✍️", "Make words on paper"]]},
-        {"id": 2, "name": "Describe the View", "focus": "Adjectives and qualities", "points": 160, "terms": [["big", "grande", "📦", "Large in size"], ["small", "pequeno", "🔹", "Little in size"], ["fast", "rapido", "⚡", "High speed"], ["slow", "lento", "🐌", "Low speed"], ["happy", "feliz", "😄", "Feeling good"]]},
-        {"id": 3, "name": "Logic Steps", "focus": "Connecting ideas", "points": 220, "terms": [["before", "antes", "⏮️", "Earlier in time"], ["after", "despues", "⏭️", "Later in time"], ["more", "mas", "➕", "A greater amount"], ["less", "menos", "➖", "A smaller amount"], ["same", "igual", "🪞", "Not different"]]}
+        {"id": 1, "name": "Action Ridge", "focus": "Core verbs", "points": 120, "terms": [["run", "correr", "ðŸƒ", "Move quickly"], ["walk", "caminar", "ðŸš¶", "Move step by step"], ["eat", "comer", "ðŸ½ï¸", "Have food"], ["read", "leer", "ðŸ“–", "Look at words"], ["write", "escribir", "âœï¸", "Make words on paper"]]},
+        {"id": 2, "name": "Describe the View", "focus": "Adjectives and qualities", "points": 160, "terms": [["big", "grande", "ðŸ“¦", "Large in size"], ["small", "pequeño", "ðŸ”¹", "Little in size"], ["fast", "rápido", "âš¡", "High speed"], ["slow", "lento", "ðŸŒ", "Low speed"], ["happy", "feliz", "ðŸ˜„", "Feeling good"]]},
+        {"id": 3, "name": "Logic Steps", "focus": "Connecting ideas", "points": 220, "terms": [["before", "antes", "â®ï¸", "Earlier in time"], ["after", "despues", "â­ï¸", "Later in time"], ["more", "mas", "âž•", "A greater amount"], ["less", "menos", "âž–", "A smaller amount"], ["same", "igual", "ðŸªž", "Not different"]]}
       ]
     },
     {
@@ -25,9 +25,9 @@
       "title": "Human Body & Identity",
       "summary": "Body basics, feelings and personal identity.",
       "stages": [
-        {"id": 1, "name": "Body Basics", "focus": "Visible body words", "points": 120, "terms": [["hand", "mano", "✋", "Used to hold things"], ["eye", "ojo", "👁️", "Used to see"], ["face", "cara", "🙂", "Front part of the head"], ["mouth", "boca", "👄", "Used to speak and eat"], ["hair", "cabello", "💇", "It grows on your head"]]},
-        {"id": 2, "name": "Feeling Weather", "focus": "Emotions and states", "points": 160, "terms": [["happy", "feliz", "😊", "Full of joy"], ["sad", "triste", "😢", "Feeling low"], ["angry", "enojado", "😠", "Feeling mad"], ["tired", "cansado", "😴", "Without energy"], ["hungry", "hambriento", "🍽️", "You need food"]]},
-        {"id": 3, "name": "Who You Are", "focus": "Identity vocabulary", "points": 220, "terms": [["name", "nombre", "🪪", "How people call you"], ["age", "edad", "🎂", "How old you are"], ["family", "familia", "🏡", "Your close people"], ["dream", "sueno", "🌠", "A future wish"], ["strong", "fuerte", "💪", "Having power"]]}
+        {"id": 1, "name": "Body Basics", "focus": "Visible body words", "points": 120, "terms": [["hand", "mano", "âœ‹", "Used to hold things"], ["eye", "ojo", "ðŸ‘ï¸", "Used to see"], ["face", "cara", "ðŸ™‚", "Front part of the head"], ["mouth", "boca", "ðŸ‘„", "Used to speak and eat"], ["hair", "cabello", "ðŸ’‡", "It grows on your head"]]},
+        {"id": 2, "name": "Feeling Weather", "focus": "Emotions and states", "points": 160, "terms": [["happy", "feliz", "ðŸ˜Š", "Full of joy"], ["sad", "triste", "ðŸ˜¢", "Feeling low"], ["angry", "enojado", "ðŸ˜ ", "Feeling mad"], ["tired", "cansado", "ðŸ˜´", "Without energy"], ["hungry", "hambriento", "ðŸ½ï¸", "You need food"]]},
+        {"id": 3, "name": "Who You Are", "focus": "Identity vocabulary", "points": 220, "terms": [["name", "nombre", "ðŸªª", "How people call you"], ["age", "edad", "ðŸŽ‚", "How old you are"], ["family", "familia", "ðŸ¡", "Your close people"], ["dream", "sueño", "ðŸŒ ", "A future wish"], ["strong", "fuerte", "ðŸ’ª", "Having power"]]}
       ]
     },
     {
@@ -35,9 +35,9 @@
       "title": "Personal & Social Life",
       "summary": "Home rhythm, celebrations and daily connections.",
       "stages": [
-        {"id": 1, "name": "Home Rhythm", "focus": "Objects around everyday life", "points": 120, "terms": [["bed", "cama", "🛏️", "You sleep here"], ["house", "casa", "🏠", "Place where you live"], ["door", "puerta", "🚪", "Entry to a room"], ["chair", "silla", "🪑", "You sit on it"], ["table", "mesa", "🪑", "You place things on it"]]},
-        {"id": 2, "name": "Social Moments", "focus": "People and events", "points": 160, "terms": [["birthday", "cumpleanos", "🎉", "Celebration for age"], ["party", "fiesta", "🥳", "A social event"], ["laugh", "reir", "😂", "Sound of joy"], ["share", "compartir", "🤲", "Give part to others"], ["weekend", "fin de semana", "🗓️", "Saturday and Sunday"]]},
-        {"id": 3, "name": "Daily Loop", "focus": "Routine and neighborhood", "points": 220, "terms": [["breakfast", "desayuno", "🍳", "Morning meal"], ["dinner", "cena", "🍲", "Evening meal"], ["visit", "visitar", "🏡", "Go to see someone"], ["hobby", "pasatiempo", "🎨", "Fun activity"], ["neighbor", "vecino", "🏘️", "Person living nearby"]]}
+        {"id": 1, "name": "Home Rhythm", "focus": "Objects around everyday life", "points": 120, "terms": [["bed", "cama", "ðŸ›ï¸", "You sleep here"], ["house", "casa", "ðŸ ", "Place where you live"], ["door", "puerta", "ðŸšª", "Entry to a room"], ["chair", "silla", "ðŸª‘", "You sit on it"], ["table", "mesa", "ðŸª‘", "You place things on it"]]},
+        {"id": 2, "name": "Social Moments", "focus": "People and events", "points": 160, "terms": [["birthday", "cumpleaños", "ðŸŽ‰", "Celebration for age"], ["party", "fiesta", "ðŸ¥³", "A social event"], ["laugh", "reír", "ðŸ˜‚", "Sound of joy"], ["share", "compartir", "ðŸ¤²", "Give part to others"], ["weekend", "fin de semana", "ðŸ—“ï¸", "Saturday and Sunday"]]},
+        {"id": 3, "name": "Daily Loop", "focus": "Routine and neighborhood", "points": 220, "terms": [["breakfast", "desayuno", "ðŸ³", "Morning meal"], ["dinner", "cena", "ðŸ²", "Evening meal"], ["visit", "visitar", "ðŸ¡", "Go to see someone"], ["hobby", "pasatiempo", "ðŸŽ¨", "Fun activity"], ["neighbor", "vecino", "ðŸ˜ï¸", "Person living nearby"]]}
       ]
     },
     {
@@ -45,9 +45,9 @@
       "title": "Education & Work",
       "summary": "Classroom tools, jobs and skill growth.",
       "stages": [
-        {"id": 1, "name": "Classroom Camp", "focus": "School basics", "points": 120, "terms": [["book", "libro", "📚", "You read it"], ["pencil", "lapiz", "✏️", "Used to write"], ["ruler", "regla", "📏", "Used to measure"], ["school", "escuela", "🏫", "Place to learn"], ["student", "estudiante", "🧑‍🎓", "Person who studies"]]},
-        {"id": 2, "name": "Career Ridge", "focus": "Common jobs", "points": 160, "terms": [["teacher", "maestro", "👩‍🏫", "Teaches students"], ["doctor", "doctor", "🩺", "Treats people"], ["nurse", "enfermera", "💉", "Cares for patients"], ["chef", "chef", "👨‍🍳", "Cooks professionally"], ["pilot", "piloto", "✈️", "Flies planes"]]},
-        {"id": 3, "name": "Skill Summit", "focus": "Projects and growth", "points": 220, "terms": [["project", "proyecto", "📂", "A planned task"], ["office", "oficina", "🏢", "Place for work"], ["leader", "lider", "🧭", "Guides a team"], ["report", "reporte", "📝", "Formal information text"], ["skill", "habilidad", "🛠️", "Ability you develop"]]}
+        {"id": 1, "name": "Classroom Camp", "focus": "School basics", "points": 120, "terms": [["book", "libro", "ðŸ“š", "You read it"], ["pencil", "lapiz", "âœï¸", "Used to write"], ["ruler", "regla", "ðŸ“", "Used to measure"], ["school", "escuela", "ðŸ«", "Place to learn"], ["student", "estudiante", "ðŸ§‘â€ðŸŽ“", "Person who studies"]]},
+        {"id": 2, "name": "Career Ridge", "focus": "Common jobs", "points": 160, "terms": [["teacher", "maestro", "ðŸ‘©â€ðŸ«", "Teaches students"], ["doctor", "doctor", "ðŸ©º", "Treats people"], ["nurse", "enfermera", "ðŸ’‰", "Cares for patients"], ["chef", "chef", "ðŸ‘¨â€ðŸ³", "Cooks professionally"], ["pilot", "piloto", "âœˆï¸", "Flies planes"]]},
+        {"id": 3, "name": "Skill Summit", "focus": "Projects and growth", "points": 220, "terms": [["project", "proyecto", "ðŸ“‚", "A planned task"], ["office", "oficina", "ðŸ¢", "Place for work"], ["leader", "lider", "ðŸ§­", "Guides a team"], ["report", "reporte", "ðŸ“", "Formal information text"], ["skill", "habilidad", "ðŸ› ï¸", "Ability you develop"]]}
       ]
     },
     {
@@ -55,9 +55,9 @@
       "title": "Places & Environment",
       "summary": "Familiar places, landscapes and the wider world.",
       "stages": [
-        {"id": 1, "name": "Nearby Places", "focus": "Places you visit often", "points": 120, "terms": [["house", "casa", "🏠", "Your living place"], ["school", "escuela", "🏫", "Learning place"], ["hospital", "hospital", "🏥", "Medical building"], ["park", "parque", "🌳", "Open green place"], ["store", "tienda", "🏪", "Place to buy things"]]},
-        {"id": 2, "name": "Landscape Trail", "focus": "Nature around you", "points": 160, "terms": [["river", "rio", "🏞️", "Long moving water"], ["beach", "playa", "🏖️", "Sand by the sea"], ["mountain", "montana", "⛰️", "Very high land"], ["forest", "bosque", "🌲", "Many trees together"], ["lake", "lago", "🌊", "Large still water"]]},
-        {"id": 3, "name": "World View", "focus": "Settlements and routes", "points": 220, "terms": [["country", "pais", "🌍", "A nation"], ["city", "ciudad", "🏙️", "Large urban place"], ["village", "pueblo", "🏘️", "Small community"], ["market", "mercado", "🛒", "Place to trade goods"], ["station", "estacion", "🚉", "Transport stop"]]}
+        {"id": 1, "name": "Nearby Places", "focus": "Places you visit often", "points": 120, "terms": [["house", "casa", "ðŸ ", "Your living place"], ["school", "escuela", "ðŸ«", "Learning place"], ["hospital", "hospital", "ðŸ¥", "Medical building"], ["park", "parque", "ðŸŒ³", "Open green place"], ["store", "tienda", "ðŸª", "Place to buy things"]]},
+        {"id": 2, "name": "Landscape Trail", "focus": "Nature around you", "points": 160, "terms": [["river", "río", "ðŸžï¸", "Long moving water"], ["beach", "playa", "ðŸ–ï¸", "Sand by the sea"], ["mountain", "montaña", "â›°ï¸", "Very high land"], ["forest", "bosque", "ðŸŒ²", "Many trees together"], ["lake", "lago", "ðŸŒŠ", "Large still water"]]},
+        {"id": 3, "name": "World View", "focus": "Settlements and routes", "points": 220, "terms": [["country", "pais", "ðŸŒ", "A nation"], ["city", "ciudad", "ðŸ™ï¸", "Large urban place"], ["village", "pueblo", "ðŸ˜ï¸", "Small community"], ["market", "mercado", "ðŸ›’", "Place to trade goods"], ["station", "estacion", "ðŸš‰", "Transport stop"]]}
       ]
     },
     {
@@ -65,9 +65,9 @@
       "title": "Movement & Navigation",
       "summary": "Motion, transport and route control.",
       "stages": [
-        {"id": 1, "name": "Move Now", "focus": "Basic movement words", "points": 120, "terms": [["run", "correr", "🏃", "Move fast"], ["climb", "subir", "🧗", "Go upward"], ["jump", "saltar", "🦘", "Push off the ground"], ["turn", "girar", "↩️", "Change direction"], ["stop", "parar", "🛑", "Do not continue"]]},
-        {"id": 2, "name": "Transport Line", "focus": "Vehicles and travel", "points": 160, "terms": [["car", "carro", "🚗", "Road vehicle"], ["bus", "autobus", "🚌", "Carries many people"], ["train", "tren", "🚆", "Runs on rails"], ["bicycle", "bicicleta", "🚲", "Two wheels"], ["airplane", "avion", "✈️", "Flies in the sky"]]},
-        {"id": 3, "name": "Route Sense", "focus": "Direction and travel tools", "points": 220, "terms": [["map", "mapa", "🗺️", "Shows a route"], ["ticket", "boleto", "🎫", "Needed to travel"], ["driver", "conductor", "🧑‍✈️", "Controls a vehicle"], ["travel", "viajar", "🧳", "Go to another place"], ["destination", "destino", "📍", "Where you are going"]]}
+        {"id": 1, "name": "Move Now", "focus": "Basic movement words", "points": 120, "terms": [["run", "correr", "ðŸƒ", "Move fast"], ["climb", "subir", "ðŸ§—", "Go upward"], ["jump", "saltar", "ðŸ¦˜", "Push off the ground"], ["turn", "girar", "â†©ï¸", "Change direction"], ["stop", "parar", "ðŸ›‘", "Do not continue"]]},
+        {"id": 2, "name": "Transport Line", "focus": "Vehicles and travel", "points": 160, "terms": [["car", "carro", "ðŸš—", "Road vehicle"], ["bus", "autobus", "ðŸšŒ", "Carries many people"], ["train", "tren", "ðŸš†", "Runs on rails"], ["bicycle", "bicicleta", "ðŸš²", "Two wheels"], ["airplane", "avion", "âœˆï¸", "Flies in the sky"]]},
+        {"id": 3, "name": "Route Sense", "focus": "Direction and travel tools", "points": 220, "terms": [["map", "mapa", "ðŸ—ºï¸", "Shows a route"], ["ticket", "boleto", "ðŸŽ«", "Needed to travel"], ["driver", "conductor", "ðŸ§‘â€âœˆï¸", "Controls a vehicle"], ["travel", "viajar", "ðŸ§³", "Go to another place"], ["destination", "destino", "ðŸ“", "Where you are going"]]}
       ]
     },
     {
@@ -75,9 +75,9 @@
       "title": "Shopping & Daily Life",
       "summary": "Useful items, market words and routine needs.",
       "stages": [
-        {"id": 1, "name": "Handy Pack", "focus": "Daily objects", "points": 120, "terms": [["bag", "bolso", "👜", "Carries things"], ["key", "llave", "🔑", "Opens a lock"], ["bottle", "botella", "🫙", "Holds liquids"], ["basket", "canasta", "🧺", "Open container"], ["soap", "jabon", "🧼", "Used to wash"]]},
-        {"id": 2, "name": "Market Words", "focus": "Buying and paying", "points": 160, "terms": [["money", "dinero", "💵", "Used to pay"], ["price", "precio", "🏷️", "Cost of something"], ["buy", "comprar", "🛍️", "Get by paying"], ["sell", "vender", "💼", "Offer for money"], ["receipt", "recibo", "🧾", "Paper after payment"]]},
-        {"id": 3, "name": "Routine Shelf", "focus": "Everyday needs", "points": 220, "terms": [["towel", "toalla", "🧻", "Used to dry"], ["clock", "reloj", "🕒", "Shows time"], ["package", "paquete", "📦", "Wrapped item"], ["breakfast", "desayuno", "🥐", "Morning meal"], ["snack", "merienda", "🍪", "Small food between meals"]]}
+        {"id": 1, "name": "Handy Pack", "focus": "Daily objects", "points": 120, "terms": [["bag", "bolso", "ðŸ‘œ", "Carries things"], ["key", "llave", "ðŸ”‘", "Opens a lock"], ["bottle", "botella", "ðŸ«™", "Holds liquids"], ["basket", "canasta", "ðŸ§º", "Open container"], ["soap", "jabon", "ðŸ§¼", "Used to wash"]]},
+        {"id": 2, "name": "Market Words", "focus": "Buying and paying", "points": 160, "terms": [["money", "dinero", "ðŸ’µ", "Used to pay"], ["price", "precio", "ðŸ·ï¸", "Cost of something"], ["buy", "comprar", "ðŸ›ï¸", "Get by paying"], ["sell", "vender", "ðŸ’¼", "Offer for money"], ["receipt", "recibo", "ðŸ§¾", "Paper after payment"]]},
+        {"id": 3, "name": "Routine Shelf", "focus": "Everyday needs", "points": 220, "terms": [["towel", "toalla", "ðŸ§»", "Used to dry"], ["clock", "reloj", "ðŸ•’", "Shows time"], ["package", "paquete", "ðŸ“¦", "Wrapped item"], ["breakfast", "desayuno", "ðŸ¥", "Morning meal"], ["snack", "merienda", "ðŸª", "Small food between meals"]]}
       ]
     },
     {
@@ -85,9 +85,9 @@
       "title": "Clothing & Style",
       "summary": "Clothes, accessories and visual identity.",
       "stages": [
-        {"id": 1, "name": "Closet Base", "focus": "Main clothing pieces", "points": 120, "terms": [["shirt", "camisa", "👕", "Upper body clothing"], ["pants", "pantalones", "👖", "Clothing for legs"], ["hat", "sombrero", "🎩", "Worn on the head"], ["shoes", "zapatos", "👟", "Worn on feet"], ["dress", "vestido", "👗", "One-piece clothing"]]},
-        {"id": 2, "name": "Style Notes", "focus": "Visual qualities", "points": 160, "terms": [["color", "color", "🎨", "Visual tone"], ["pattern", "patron", "🌀", "Repeated design"], ["soft", "suave", "🧶", "Not rough"], ["elegant", "elegante", "💎", "Stylish and refined"], ["casual", "casual", "🧢", "Relaxed style"]]},
-        {"id": 3, "name": "Outfit Finish", "focus": "Accessories and final look", "points": 220, "terms": [["jacket", "chaqueta", "🧥", "Outer clothing layer"], ["scarf", "bufanda", "🧣", "Worn around the neck"], ["belt", "cinturon", "🪢", "Holds clothes in place"], ["outfit", "atuendo", "✨", "Complete set of clothes"], ["favorite", "favorito", "⭐", "The one you like most"]]}
+        {"id": 1, "name": "Closet Base", "focus": "Main clothing pieces", "points": 120, "terms": [["shirt", "camisa", "ðŸ‘•", "Upper body clothing"], ["pants", "pantalones", "ðŸ‘–", "Clothing for legs"], ["hat", "sombrero", "ðŸŽ©", "Worn on the head"], ["shoes", "zapatos", "ðŸ‘Ÿ", "Worn on feet"], ["dress", "vestido", "ðŸ‘—", "One-piece clothing"]]},
+        {"id": 2, "name": "Style Notes", "focus": "Visual qualities", "points": 160, "terms": [["color", "color", "ðŸŽ¨", "Visual tone"], ["pattern", "patron", "ðŸŒ€", "Repeated design"], ["soft", "suave", "ðŸ§¶", "Not rough"], ["elegant", "elegante", "ðŸ’Ž", "Stylish and refined"], ["casual", "casual", "ðŸ§¢", "Relaxed style"]]},
+        {"id": 3, "name": "Outfit Finish", "focus": "Accessories and final look", "points": 220, "terms": [["jacket", "chaqueta", "ðŸ§¥", "Outer clothing layer"], ["scarf", "bufanda", "ðŸ§£", "Worn around the neck"], ["belt", "cinturon", "ðŸª¢", "Holds clothes in place"], ["outfit", "atuendo", "âœ¨", "Complete set of clothes"], ["favorite", "favorito", "â­", "The one you like most"]]}
       ]
     },
     {
@@ -95,9 +95,9 @@
       "title": "Food & Drinks",
       "summary": "Daily food, favorite meals and kitchen words.",
       "stages": [
-        {"id": 1, "name": "Kitchen Base", "focus": "Simple food words", "points": 120, "terms": [["apple", "manzana", "🍎", "Red or green fruit"], ["bread", "pan", "🍞", "Baked food"], ["milk", "leche", "🥛", "White drink"], ["water", "agua", "💧", "Basic drink"], ["egg", "huevo", "🥚", "Comes from a chicken"]]},
-        {"id": 2, "name": "Favorite Meals", "focus": "Common dishes", "points": 160, "terms": [["pizza", "pizza", "🍕", "Round baked meal"], ["soup", "sopa", "🥣", "Liquid food"], ["salad", "ensalada", "🥗", "Mixed vegetables"], ["sandwich", "sandwich", "🥪", "Food between bread"], ["tea", "te", "🍵", "Warm drink"]]},
-        {"id": 3, "name": "Menu Peak", "focus": "Cooking and menu ideas", "points": 220, "terms": [["dessert", "postre", "🍰", "Sweet final dish"], ["recipe", "receta", "📜", "Instructions for cooking"], ["cook", "cocinar", "👨‍🍳", "Prepare food"], ["delicious", "delicioso", "😋", "Very tasty"], ["breakfast", "desayuno", "🍳", "First meal of the day"]]}
+        {"id": 1, "name": "Kitchen Base", "focus": "Simple food words", "points": 120, "terms": [["apple", "manzana", "ðŸŽ", "Red or green fruit"], ["bread", "pan", "ðŸž", "Baked food"], ["milk", "leche", "ðŸ¥›", "White drink"], ["water", "agua", "ðŸ’§", "Basic drink"], ["egg", "huevo", "ðŸ¥š", "Comes from a chicken"]]},
+        {"id": 2, "name": "Favorite Meals", "focus": "Common dishes", "points": 160, "terms": [["pizza", "pizza", "ðŸ•", "Round baked meal"], ["soup", "sopa", "ðŸ¥£", "Liquid food"], ["salad", "ensalada", "ðŸ¥—", "Mixed vegetables"], ["sandwich", "sandwich", "ðŸ¥ª", "Food between bread"], ["tea", "te", "ðŸµ", "Warm drink"]]},
+        {"id": 3, "name": "Menu Peak", "focus": "Cooking and menu ideas", "points": 220, "terms": [["dessert", "postre", "ðŸ°", "Sweet final dish"], ["recipe", "receta", "ðŸ“œ", "Instructions for cooking"], ["cook", "cocinar", "ðŸ‘¨â€ðŸ³", "Prepare food"], ["delicious", "delicioso", "ðŸ˜‹", "Very tasty"], ["breakfast", "desayuno", "ðŸ³", "First meal of the day"]]}
       ]
     },
     {
@@ -105,9 +105,9 @@
       "title": "Nature & Weather",
       "summary": "Sky words, animals and earth scenes.",
       "stages": [
-        {"id": 1, "name": "Sky Signals", "focus": "Weather basics", "points": 120, "terms": [["sun", "sol", "☀️", "Daylight star"], ["moon", "luna", "🌙", "Seen at night"], ["cloud", "nube", "☁️", "Floating in the sky"], ["rain", "lluvia", "🌧️", "Water from the sky"], ["wind", "viento", "💨", "Moving air"]]},
-        {"id": 2, "name": "Wild Friends", "focus": "Animals and creatures", "points": 160, "terms": [["lion", "leon", "🦁", "King of the jungle"], ["turtle", "tortuga", "🐢", "Animal with a shell"], ["bee", "abeja", "🐝", "Makes honey"], ["fox", "zorro", "🦊", "Orange wild animal"], ["dolphin", "delfin", "🐬", "Smart sea animal"]]},
-        {"id": 3, "name": "Earth Scale", "focus": "Land and seasonal change", "points": 220, "terms": [["season", "estacion", "🍂", "Part of the year"], ["flower", "flor", "🌸", "Colorful plant"], ["tree", "arbol", "🌳", "Tall plant with trunk"], ["ocean", "oceano", "🌊", "Huge salt water"], ["volcano", "volcan", "🌋", "Mountain with fire inside"]]}
+        {"id": 1, "name": "Sky Signals", "focus": "Weather basics", "points": 120, "terms": [["sun", "sol", "â˜€ï¸", "Daylight star"], ["moon", "luna", "ðŸŒ™", "Seen at night"], ["cloud", "nube", "â˜ï¸", "Floating in the sky"], ["rain", "lluvia", "ðŸŒ§ï¸", "Water from the sky"], ["wind", "viento", "ðŸ’¨", "Moving air"]]},
+        {"id": 2, "name": "Wild Friends", "focus": "Animals and creatures", "points": 160, "terms": [["lion", "leon", "ðŸ¦", "King of the jungle"], ["turtle", "tortuga", "ðŸ¢", "Animal with a shell"], ["bee", "abeja", "ðŸ", "Makes honey"], ["fox", "zorro", "ðŸ¦Š", "Orange wild animal"], ["dolphin", "delfin", "ðŸ¬", "Smart sea animal"]]},
+        {"id": 3, "name": "Earth Scale", "focus": "Land and seasonal change", "points": 220, "terms": [["season", "estacion", "ðŸ‚", "Part of the year"], ["flower", "flor", "ðŸŒ¸", "Colorful plant"], ["tree", "arbol", "ðŸŒ³", "Tall plant with trunk"], ["ocean", "oceano", "ðŸŒŠ", "Huge salt water"], ["volcano", "volcan", "ðŸŒ‹", "Mountain with fire inside"]]}
       ]
     },
     {
@@ -115,9 +115,9 @@
       "title": "Culture & Leisure",
       "summary": "Fun, sports and creative expression.",
       "stages": [
-        {"id": 1, "name": "Free Time", "focus": "Leisure starters", "points": 120, "terms": [["game", "juego", "🎮", "Activity with rules"], ["music", "musica", "🎵", "Organized sound"], ["dance", "bailar", "💃", "Move to music"], ["movie", "pelicula", "🎬", "Story on screen"], ["art", "arte", "🖼️", "Creative expression"]]},
-        {"id": 2, "name": "Sport Pulse", "focus": "Play and competition", "points": 160, "terms": [["soccer", "futbol", "⚽", "Popular field sport"], ["basketball", "baloncesto", "🏀", "Sport with hoops"], ["tennis", "tenis", "🎾", "Sport with rackets"], ["team", "equipo", "🤜🤛", "People working together"], ["score", "marcador", "📊", "Points in a game"]]},
-        {"id": 3, "name": "Creative Peak", "focus": "Performance and events", "points": 220, "terms": [["guitar", "guitarra", "🎸", "String instrument"], ["camera", "camara", "📷", "Takes pictures"], ["story", "historia", "📚", "Tells events"], ["festival", "festival", "🎪", "Big cultural event"], ["performance", "presentacion", "🎤", "Live artistic act"]]}
+        {"id": 1, "name": "Free Time", "focus": "Leisure starters", "points": 120, "terms": [["game", "juego", "ðŸŽ®", "Activity with rules"], ["music", "musica", "ðŸŽµ", "Organized sound"], ["dance", "bailar", "ðŸ’ƒ", "Move to music"], ["movie", "pelicula", "ðŸŽ¬", "Story on screen"], ["art", "arte", "ðŸ–¼ï¸", "Creative expression"]]},
+        {"id": 2, "name": "Sport Pulse", "focus": "Play and competition", "points": 160, "terms": [["soccer", "futbol", "âš½", "Popular field sport"], ["basketball", "baloncesto", "ðŸ€", "Sport with hoops"], ["tennis", "tenis", "ðŸŽ¾", "Sport with rackets"], ["team", "equipo", "ðŸ¤œðŸ¤›", "People working together"], ["score", "marcador", "ðŸ“Š", "Points in a game"]]},
+        {"id": 3, "name": "Creative Peak", "focus": "Performance and events", "points": 220, "terms": [["guitar", "guitarra", "ðŸŽ¸", "String instrument"], ["camera", "camara", "ðŸ“·", "Takes pictures"], ["story", "historia", "ðŸ“š", "Tells events"], ["festival", "festival", "ðŸŽª", "Big cultural event"], ["performance", "presentacion", "ðŸŽ¤", "Live artistic act"]]}
       ]
     },
     {
@@ -125,9 +125,9 @@
       "title": "Tools & Objects",
       "summary": "Useful tools, home objects and material words.",
       "stages": [
-        {"id": 1, "name": "Useful Basics", "focus": "Simple objects", "points": 120, "terms": [["cup", "taza", "☕", "Used for drinking"], ["plate", "plato", "🍽️", "Used for food"], ["map", "mapa", "🗺️", "Shows places"], ["clock", "reloj", "⏰", "Shows time"], ["lamp", "lampara", "💡", "Gives light"]]},
-        {"id": 2, "name": "Tool Bench", "focus": "Practical tools", "points": 160, "terms": [["hammer", "martillo", "🔨", "Hits nails"], ["rope", "cuerda", "🪢", "Long thick string"], ["ladder", "escalera", "🪜", "Used to go up"], ["shovel", "pala", "⛏️", "Used to dig"], ["brush", "cepillo", "🖌️", "Used to paint or clean"]]},
-        {"id": 3, "name": "Material Lab", "focus": "Object language", "points": 220, "terms": [["metal", "metal", "⚙️", "Hard shiny material"], ["wood", "madera", "🪵", "Material from trees"], ["glass", "vidrio", "🥛", "Transparent material"], ["button", "boton", "🔘", "Small press control"], ["machine", "maquina", "🛠️", "Mechanical device"]]}
+        {"id": 1, "name": "Useful Basics", "focus": "Simple objects", "points": 120, "terms": [["cup", "taza", "â˜•", "Used for drinking"], ["plate", "plato", "ðŸ½ï¸", "Used for food"], ["map", "mapa", "ðŸ—ºï¸", "Shows places"], ["clock", "reloj", "â°", "Shows time"], ["lamp", "lampara", "ðŸ’¡", "Gives light"]]},
+        {"id": 2, "name": "Tool Bench", "focus": "Practical tools", "points": 160, "terms": [["hammer", "martillo", "ðŸ”¨", "Hits nails"], ["rope", "cuerda", "ðŸª¢", "Long thick string"], ["ladder", "escalera", "ðŸªœ", "Used to go up"], ["shovel", "pala", "â›ï¸", "Used to dig"], ["brush", "cepillo", "ðŸ–Œï¸", "Used to paint or clean"]]},
+        {"id": 3, "name": "Material Lab", "focus": "Object language", "points": 220, "terms": [["metal", "metal", "âš™ï¸", "Hard shiny material"], ["wood", "madera", "ðŸªµ", "Material from trees"], ["glass", "vidrio", "ðŸ¥›", "Transparent material"], ["button", "botón", "ðŸ”˜", "Small press control"], ["machine", "máquina", "ðŸ› ï¸", "Mechanical device"]]}
       ]
     },
     {
@@ -135,9 +135,9 @@
       "title": "Technology",
       "summary": "Devices, digital tools and future-facing vocabulary.",
       "stages": [
-        {"id": 1, "name": "Device Deck", "focus": "Modern hardware", "points": 120, "terms": [["phone", "telefono", "📱", "Portable communication device"], ["laptop", "portatil", "💻", "Foldable computer"], ["screen", "pantalla", "🖥️", "Visual display"], ["speaker", "altavoz", "🔊", "Makes sound"], ["keyboard", "teclado", "⌨️", "Type on it"]]},
-        {"id": 2, "name": "Digital Trail", "focus": "Online words", "points": 160, "terms": [["internet", "internet", "🌐", "Global digital network"], ["message", "mensaje", "💬", "Digital text or note"], ["video", "video", "🎥", "Moving images"], ["battery", "bateria", "🔋", "Stores energy"], ["charger", "cargador", "🔌", "Gives power to devices"]]},
-        {"id": 3, "name": "Future Lab", "focus": "Advanced tech concepts", "points": 220, "terms": [["robot", "robot", "🤖", "Programmable machine"], ["data", "datos", "📡", "Digital information"], ["network", "red", "🕸️", "Connected system"], ["digital", "digital", "🧠", "Based on electronics"], ["innovation", "innovacion", "🚀", "New useful idea"]]}
+        {"id": 1, "name": "Device Deck", "focus": "Modern hardware", "points": 120, "terms": [["phone", "telefono", "ðŸ“±", "Portable communication device"], ["laptop", "portatil", "ðŸ’»", "Foldable computer"], ["screen", "pantalla", "ðŸ–¥ï¸", "Visual display"], ["speaker", "altavoz", "ðŸ”Š", "Makes sound"], ["keyboard", "teclado", "âŒ¨ï¸", "Type on it"]]},
+        {"id": 2, "name": "Digital Trail", "focus": "Online words", "points": 160, "terms": [["internet", "internet", "ðŸŒ", "Global digital network"], ["message", "mensaje", "ðŸ’¬", "Digital text or note"], ["video", "video", "ðŸŽ¥", "Moving images"], ["battery", "bateria", "ðŸ”‹", "Stores energy"], ["charger", "cargador", "ðŸ”Œ", "Gives power to devices"]]},
+        {"id": 3, "name": "Future Lab", "focus": "Advanced tech concepts", "points": 220, "terms": [["robot", "robot", "ðŸ¤–", "Programmable machine"], ["data", "datos", "ðŸ“¡", "Digital information"], ["network", "red", "ðŸ•¸ï¸", "Connected system"], ["digital", "digital", "ðŸ§ ", "Based on electronics"], ["innovation", "innovacion", "ðŸš€", "New useful idea"]]}
       ]
     },
     {
@@ -145,9 +145,9 @@
       "title": "Concepts & Academic",
       "summary": "Qualities, comparisons and reasoning vocabulary.",
       "stages": [
-        {"id": 1, "name": "Size and Time", "focus": "Core comparison words", "points": 120, "terms": [["big", "grande", "📦", "Large size"], ["small", "pequeno", "🔹", "Little size"], ["long", "largo", "📏", "Great length"], ["short", "corto", "📎", "Small length"], ["early", "temprano", "🌅", "Before expected time"]]},
-        {"id": 2, "name": "Quality Markers", "focus": "Descriptive ideas", "points": 160, "terms": [["clean", "limpio", "🧼", "Not dirty"], ["dirty", "sucio", "🫧", "Not clean"], ["bright", "brillante", "💡", "Full of light"], ["dark", "oscuro", "🌑", "Without much light"], ["quiet", "silencioso", "🤫", "Low sound"]]},
-        {"id": 3, "name": "Reason Path", "focus": "Logic and relation", "points": 220, "terms": [["compare", "comparar", "⚖️", "Look at differences and similarities"], ["reason", "razon", "🧠", "Cause or explanation"], ["result", "resultado", "🏁", "What comes after an action"], ["inside", "dentro", "📥", "In the interior"], ["outside", "fuera", "📤", "In the exterior"]]}
+        {"id": 1, "name": "Size and Time", "focus": "Core comparison words", "points": 120, "terms": [["big", "grande", "ðŸ“¦", "Large size"], ["small", "pequeño", "ðŸ”¹", "Little size"], ["long", "largo", "ðŸ“", "Great length"], ["short", "corto", "ðŸ“Ž", "Small length"], ["early", "temprano", "ðŸŒ…", "Before expected time"]]},
+        {"id": 2, "name": "Quality Markers", "focus": "Descriptive ideas", "points": 160, "terms": [["clean", "limpio", "ðŸ§¼", "Not dirty"], ["dirty", "sucio", "ðŸ«§", "Not clean"], ["bright", "brillante", "ðŸ’¡", "Full of light"], ["dark", "oscuro", "ðŸŒ‘", "Without much light"], ["quiet", "silencioso", "ðŸ¤«", "Low sound"]]},
+        {"id": 3, "name": "Reason Path", "focus": "Logic and relation", "points": 220, "terms": [["compare", "comparar", "âš–ï¸", "Look at differences and similarities"], ["reason", "razón", "ðŸ§ ", "Cause or explanation"], ["result", "resultado", "ðŸ", "What comes after an action"], ["inside", "dentro", "ðŸ“¥", "In the interior"], ["outside", "fuera", "ðŸ“¤", "In the exterior"]]}
       ]
     }
   ]
