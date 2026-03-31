@@ -223,7 +223,7 @@ const controlUi = {
 
 const ui = {
     en: {
-        welcome: 'Welcome back, {name}.',
+        welcome: 'Welcome, {name}.',
         subtitle: 'Build points, clear themed stages, and keep your route moving toward fluency.',
         points: 'Points', wins: 'Wins', losses: 'Loses', time: 'Time',
         summitChoice: 'Summit Choice', summitTyping: 'Summit Typing',
@@ -276,7 +276,7 @@ const ui = {
         wordTipPlaceholder: 'Use it for ice landscapes and cold nature topics.'
     },
     es: {
-        welcome: 'Bienvenido de nuevo, {name}.',
+        welcome: 'Bienvenido, {name}.',
         subtitle: 'Acumula puntos, supera etapas tematicas y sigue subiendo hacia la fluidez.',
         points: 'Puntos', wins: 'Victorias', losses: 'Derrotas', time: 'Tiempo',
         summitChoice: 'Respuesta con opciones', summitTyping: 'Respuesta escrita',

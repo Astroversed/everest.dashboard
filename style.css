@@ -3281,6 +3281,27 @@ body[data-theme-mode="dark"] .quick-option__value {
     color: #8a4e2a;
 }
 
+body[data-theme-mode="dark"] .leaderboard-row.is-top-1 .leaderboard-profile__copy strong,
+body[data-theme-mode="dark"] .leaderboard-row.is-top-1 .leaderboard-course-cell,
+body[data-theme-mode="dark"] .leaderboard-row.is-top-1 .leaderboard-metric-cell,
+body[data-theme-mode="dark"] .leaderboard-row.is-top-1 .leaderboard-time-cell {
+    color: #ffe9a6;
+}
+
+body[data-theme-mode="dark"] .leaderboard-row.is-top-2 .leaderboard-profile__copy strong,
+body[data-theme-mode="dark"] .leaderboard-row.is-top-2 .leaderboard-course-cell,
+body[data-theme-mode="dark"] .leaderboard-row.is-top-2 .leaderboard-metric-cell,
+body[data-theme-mode="dark"] .leaderboard-row.is-top-2 .leaderboard-time-cell {
+    color: #edf5ff;
+}
+
+body[data-theme-mode="dark"] .leaderboard-row.is-top-3 .leaderboard-profile__copy strong,
+body[data-theme-mode="dark"] .leaderboard-row.is-top-3 .leaderboard-course-cell,
+body[data-theme-mode="dark"] .leaderboard-row.is-top-3 .leaderboard-metric-cell,
+body[data-theme-mode="dark"] .leaderboard-row.is-top-3 .leaderboard-time-cell {
+    color: #ffe3cf;
+}
+
 .leaderboard-course-cell,
 .leaderboard-metric-cell,
 .leaderboard-time-cell {
