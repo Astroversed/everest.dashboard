@@ -233,6 +233,7 @@ const ui = {
         matchPairHelp: 'Pick one route clue and one final emoji so the center word becomes easy to understand.',
         matchSignalLabel: 'Route clue',
         matchEmojiLabel: 'Final emoji',
+        challengeWord: 'Target word',
         matchSignalStep: '1. Pick the route clue',
         matchEmojiStep: '2. Pick the final emoji',
         matchSelectionIdle: 'Choose both sides to complete the route.',
@@ -295,6 +296,7 @@ const ui = {
         matchPairHelp: 'Elige una pista de ruta y un emoji final para que la palabra del centro sea facil de entender.',
         matchSignalLabel: 'Pista de ruta',
         matchEmojiLabel: 'Emoji final',
+        challengeWord: 'Palabra objetivo',
         matchSignalStep: '1. Elige la pista de ruta',
         matchEmojiStep: '2. Elige el emoji final',
         matchSelectionIdle: 'Elige ambos lados para completar la ruta.',
@@ -1345,9 +1347,11 @@ function renderGame() {
     const selectedEmojiOption = matchMode ? question.emojiChoices.find((option) => normalizeWord(option.en) === state.matchSelection.emoji) : null;
     elements.challengeTypeLabel.textContent = getGameModeLabel();
     elements.challengePrompt.textContent = matchMode
-        ? t('matchPairPrompt', { word: question.term.es })
+        ? t('matchPairPrompt', { word: question.term.en })
         : (typingMode ? t('typeEnglish', { word: question.term.es }) : t('chooseEnglish', { word: question.term.es }));
-    elements.challengeHint.textContent = `${t('hintPrefix')}: ${question.term.hint}`;
+    elements.challengeHint.textContent = matchMode
+        ? `${t('hintPrefix')}: ${question.term.es} · ${question.term.hint}`
+        : `${t('hintPrefix')}: ${question.term.hint}`;
     elements.challengeExample.textContent = matchMode
         ? `${t('matchPairHelp')} ${selectedSignalOption || selectedEmojiOption ? `${t('matchSelectionSignal')}: ${selectedSignalOption ? selectedSignalOption.emoji : '—'} · ${t('matchSelectionEmoji')}: ${selectedEmojiOption ? selectedEmojiOption.emoji : '—'}` : t('matchSelectionIdle')}`
         : `${t('examplePrefix')}: ${theme.summary}`;
@@ -1364,29 +1368,41 @@ function renderGame() {
     if (matchMode) {
         elements.choiceGrid.classList.add('choice-grid--match');
         elements.choiceGrid.innerHTML = `
-            <div class="match-board">
-                <section class="match-lane" aria-label="${t('matchSignalLabel')}">
-                    <span class="match-lane__label">${t('matchSignalStep')}</span>
-                    <div class="match-column__list">
-                        ${question.signalChoices.map((option) => `<button class="choice-button choice-button--match choice-button--signal ${option.id === state.matchSelection.signal ? 'is-selected' : ''}" data-match-side="signal" data-match-value="${option.id}" type="button"><span class="choice-button__emoji">${option.emoji}</span></button>`).join('')}
-                    </div>
-                </section>
-                <section class="match-center" aria-label="${question.term.en}">
-                    <span class="match-center__badge">${t('summitMatch')}</span>
-                    <strong class="match-center__word">${question.term.en}</strong>
-                    <span class="match-center__meaning">${question.term.es}</span>
-                    <div class="match-center__emoji">${question.term.emoji}</div>
-                    <div class="match-center__status">
-                        <span class="match-center__status-pill ${selectedSignalOption ? 'is-filled' : ''}">${selectedSignalOption ? `${selectedSignalOption.emoji} ${t('matchSelectionSignal')}` : t('matchSignalLabel')}</span>
-                        <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${t('matchSelectionEmoji')}` : t('matchEmojiLabel')}</span>
-                    </div>
-                </section>
-                <section class="match-lane" aria-label="${t('matchEmojiLabel')}">
-                    <span class="match-lane__label">${t('matchEmojiStep')}</span>
-                    <div class="match-column__list">
-                        ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button"><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__text">${option.en}</span></button>`).join('')}
-                    </div>
-                </section>
+            <div class="match-summit">
+                <div class="match-summit__intro">
+                    <span class="match-summit__eyebrow">${t('summitMatch')}</span>
+                    <p class="match-summit__guide">${t('matchPairHelp')}</p>
+                </div>
+                <div class="match-board">
+                    <section class="match-lane match-lane--signal" aria-label="${t('matchSignalLabel')}">
+                        <span class="match-lane__label">${t('matchSignalStep')}</span>
+                        <div class="match-column__list">
+                            ${question.signalChoices.map((option, index) => `<button class="choice-button choice-button--match choice-button--signal ${option.id === state.matchSelection.signal ? 'is-selected' : ''}" data-match-side="signal" data-match-value="${option.id}" type="button"><span class="choice-button__kicker">L${index + 1}</span><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__hint">${t('matchSignalLabel')}</span></button>`).join('')}
+                        </div>
+                    </section>
+                    <section class="match-center" aria-label="${question.term.en}">
+                        <div class="match-center__pulse"></div>
+                        <span class="match-center__badge">${t('summitMatch')}</span>
+                        <span class="match-center__mini">${t('matchSelectionIdle')}</span>
+                        <div class="match-center__core">
+                            <span class="match-center__word-label">${t('challengeWord')}</span>
+                            <strong class="match-center__word">${question.term.en}</strong>
+                            <span class="match-center__meaning">${question.term.es}</span>
+                            <span class="match-center__hint-line">${question.term.hint}</span>
+                        </div>
+                        <div class="match-center__status">
+                            <span class="match-center__status-pill ${selectedSignalOption ? 'is-filled' : ''}">${selectedSignalOption ? `${selectedSignalOption.emoji} ${t('matchSelectionSignal')}` : t('matchSignalLabel')}</span>
+                            <span class="match-center__connector ${selectedSignalOption && selectedEmojiOption ? 'is-complete' : ''}"></span>
+                            <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${t('matchSelectionEmoji')}` : t('matchEmojiLabel')}</span>
+                        </div>
+                    </section>
+                    <section class="match-lane match-lane--emoji" aria-label="${t('matchEmojiLabel')}">
+                        <span class="match-lane__label">${t('matchEmojiStep')}</span>
+                        <div class="match-column__list">
+                            ${question.emojiChoices.map((option, index) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button"><span class="choice-button__kicker">R${index + 1}</span><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__hint">${t('matchEmojiLabel')}</span></button>`).join('')}
+                        </div>
+                    </section>
+                </div>
             </div>
         `;
         elements.choiceGrid.querySelectorAll('[data-match-side]').forEach((button) => button.addEventListener('click', () => handleMatchChoice(button.dataset.matchSide, button.dataset.matchValue)));
