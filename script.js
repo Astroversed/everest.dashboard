@@ -226,9 +226,13 @@ const ui = {
         welcome: 'Welcome, {name}.',
         subtitle: 'Build points, clear themed stages, and keep your route moving toward fluency.',
         points: 'Points', wins: 'Wins', losses: 'Loses', time: 'Time',
-        summitChoice: 'Summit Choice', summitTyping: 'Summit Typing',
+        summitChoice: 'Summit Choice', summitTyping: 'Summit Typing', summitMatch: 'Word Match',
         chooseEnglish: 'Choose the English word for "{word}".',
         typeEnglish: 'Type the English word for "{word}".',
+        matchPairPrompt: 'Match the English word and the meaning for "{word}".',
+        matchPairHelp: 'Choose one English card and one Spanish card to build the correct pair.',
+        matchEnglishLabel: 'English side',
+        matchSpanishLabel: 'Meaning side',
         hintPrefix: 'Clue', examplePrefix: 'Trail use',
         idleTitle: 'Base camp ready.',
         idleText: 'It is cold at the top, but your next answer can warm the route.',
@@ -279,9 +283,13 @@ const ui = {
         welcome: 'Bienvenido, {name}.',
         subtitle: 'Acumula puntos, supera etapas tematicas y sigue subiendo hacia la fluidez.',
         points: 'Puntos', wins: 'Victorias', losses: 'Derrotas', time: 'Tiempo',
-        summitChoice: 'Respuesta con opciones', summitTyping: 'Respuesta escrita',
+        summitChoice: 'Respuesta con opciones', summitTyping: 'Respuesta escrita', summitMatch: 'Emparejar palabras',
         chooseEnglish: 'Elige la palabra en ingles para "{word}".',
         typeEnglish: 'Escribe la palabra en ingles para "{word}".',
+        matchPairPrompt: 'Empareja la palabra en ingles y el significado de "{word}".',
+        matchPairHelp: 'Elige una tarjeta en ingles y una en espanol para formar la pareja correcta.',
+        matchEnglishLabel: 'Lado en ingles',
+        matchSpanishLabel: 'Lado del significado',
         hintPrefix: 'Pista', examplePrefix: 'Uso en ruta',
         idleTitle: 'Campamento base listo.',
         idleText: 'Hace frio en la cima, pero tu siguiente respuesta puede calentar la ruta.',
@@ -335,7 +343,7 @@ const state = {
     activeThemeId: null, activeStageId: 1, searchTerm: '', explorerSearch: '', explorerTheme: 'all',
     stageLive: false, questions: [], questionIndex: 0, currentQuestion: null, questionResolved: false,
     secondsLeft: 15, timerId: null, stageStartedAt: 0, stagePoints: 0, stageCorrect: 0, stageWrong: 0,
-    streak: 0, bestStreak: 0, latestAccuracy: 0, controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
+    streak: 0, bestStreak: 0, latestAccuracy: 0, matchSelection: { english: '', spanish: '' }, controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
     sharedLeaderboard: [], firestore: null, firestoreReady: false, firestoreListener: null, firestoreCleanupBusy: false
 };
 
@@ -642,6 +650,12 @@ function tc(key) {
 
 function getStatusLabel(isActive) {
     return isActive ? t('statusOn') : t('statusOff');
+}
+
+function getGameModeLabel(mode = state.settings?.gameMode) {
+    if (mode === 'typing') return t('summitTyping');
+    if (mode === 'match') return t('summitMatch');
+    return t('summitChoice');
 }
 
 function getOptionStatusMarkup(label, isActive) {
@@ -1078,10 +1092,24 @@ function buildChoices(answerTerm, pool) {
     return shuffle([answerTerm, ...distractors]);
 }
 
+function buildMatchChoices(answerTerm, pool) {
+    const distractors = shuffle(pool.filter((term) => normalizeWord(term.en) !== normalizeWord(answerTerm.en))).slice(0, 3);
+    const boardTerms = shuffle([answerTerm, ...distractors]).slice(0, 4);
+    return {
+        englishChoices: shuffle(boardTerms),
+        spanishChoices: shuffle(boardTerms)
+    };
+}
+
 function buildQuestions(stage) {
     const theme = getTheme();
     const pool = theme.stages.flatMap((bucket) => bucket.terms.map(convertTerm));
-    return shuffle(stage.terms.map(convertTerm)).slice(0, 5).map((term) => ({ term, options: buildChoices(term, pool) }));
+    return shuffle(stage.terms.map(convertTerm)).slice(0, 5).map((term) => {
+        if (state.settings.gameMode === 'match') {
+            return { term, ...buildMatchChoices(term, pool) };
+        }
+        return { term, options: buildChoices(term, pool) };
+    });
 }
 
 function updateSidebarSupport() {
@@ -1147,7 +1175,7 @@ function renderHero() {
     elements.welcomeTitle.textContent = t('welcome', { name: state.user.username });
     elements.welcomeSubtitle.textContent = t('subtitle');
     elements.activeThemeName.textContent = theme ? theme.title : 'Everest';
-    elements.activeModeLabel.textContent = state.settings.gameMode === 'multiple' ? t('summitChoice') : t('summitTyping');
+    elements.activeModeLabel.textContent = getGameModeLabel();
     elements.heroStartButton.textContent = t('startStage');
     elements.heroExploreButton.textContent = t('openLibrary');
     elements.scrollThemeIntoViewButton.textContent = t('focusRoute');
@@ -1191,16 +1219,34 @@ function setFeedback(stateName, title, text) {
     elements.feedbackText.textContent = text;
 }
 
+function resetActiveChallenge() {
+    stopTimer();
+    state.stageLive = false;
+    state.currentQuestion = null;
+    state.questions = [];
+    state.questionIndex = 0;
+    state.stagePoints = 0;
+    state.stageCorrect = 0;
+    state.stageWrong = 0;
+    state.streak = 0;
+    state.bestStreak = 0;
+    state.latestAccuracy = 0;
+    state.questionResolved = false;
+    state.matchSelection = { english: '', spanish: '' };
+}
+
 function toggleGameModeVisibility() {
     const typingMode = state.settings.gameMode === 'typing';
     elements.typingForm.classList.toggle('is-hidden-for-mode', !typingMode);
-    elements.choiceGrid.classList.toggle('is-hidden-for-mode', typingMode);
+    elements.choiceGrid.classList.toggle('is-hidden-for-mode', false);
 }
 
 function renderGame() {
     const theme = getTheme();
     const stage = getStage();
     if (!theme || !stage) return;
+    const matchMode = state.settings.gameMode === 'match';
+    const typingMode = state.settings.gameMode === 'typing';
     state.progress.lastPlayedTheme = theme.id;
     elements.gameThemeTitle.textContent = `${theme.title} - ${stage.name}`;
     elements.gameThemeDescription.textContent = stage.focus;
@@ -1216,6 +1262,7 @@ function renderGame() {
         elements.challengeHint.textContent = t('noChallenge');
         elements.challengeExample.textContent = `${theme.summary} ${randomFrom(EVEREST_LINES.info)}`;
         elements.choiceGrid.innerHTML = '';
+        elements.choiceGrid.classList.remove('choice-grid--match');
         elements.typingInput.value = '';
         elements.typingInput.disabled = true;
         elements.typingSubmitButton.disabled = true;
@@ -1231,24 +1278,47 @@ function renderGame() {
 
     const question = state.currentQuestion;
     elements.challengeEmoji.textContent = question.term.emoji;
-    elements.challengeTypeLabel.textContent = state.settings.gameMode === 'multiple' ? t('summitChoice') : t('summitTyping');
-    elements.challengePrompt.textContent = state.settings.gameMode === 'multiple' ? t('chooseEnglish', { word: question.term.es }) : t('typeEnglish', { word: question.term.es });
+    elements.challengeTypeLabel.textContent = getGameModeLabel();
+    elements.challengePrompt.textContent = matchMode
+        ? t('matchPairPrompt', { word: question.term.es })
+        : (typingMode ? t('typeEnglish', { word: question.term.es }) : t('chooseEnglish', { word: question.term.es }));
     elements.challengeHint.textContent = `${t('hintPrefix')}: ${question.term.hint}`;
-    elements.challengeExample.textContent = `${t('examplePrefix')}: ${theme.summary}`;
+    elements.challengeExample.textContent = matchMode ? t('matchPairHelp') : `${t('examplePrefix')}: ${theme.summary}`;
     elements.questionCounter.textContent = `${state.questionIndex + 1} / ${state.questions.length}`;
     elements.timerBadge.textContent = `${state.secondsLeft}s`;
     elements.streakBadge.textContent = `Streak ${state.streak}`;
     elements.progressBar.style.width = `${(state.questionIndex / state.questions.length) * 100}%`;
-    elements.typingInput.disabled = state.settings.gameMode !== 'typing' || state.questionResolved;
-    elements.typingSubmitButton.disabled = state.settings.gameMode !== 'typing' || state.questionResolved;
+    elements.typingInput.disabled = !typingMode || state.questionResolved;
+    elements.typingSubmitButton.disabled = !typingMode || state.questionResolved;
     elements.typingInput.value = '';
     elements.nextQuestionButton.hidden = !state.questionResolved;
     toggleGameModeVisibility();
 
-    if (state.settings.gameMode === 'multiple') {
+    if (matchMode) {
+        elements.choiceGrid.classList.add('choice-grid--match');
+        elements.choiceGrid.innerHTML = `
+            <div class="match-board">
+                <section class="match-column" aria-label="${t('matchEnglishLabel')}">
+                    <span class="match-column__label">${t('matchEnglishLabel')}</span>
+                    <div class="match-column__list">
+                        ${question.englishChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.english ? 'is-selected' : ''}" data-match-side="english" data-match-value="${option.en}" type="button">${option.en}</button>`).join('')}
+                    </div>
+                </section>
+                <section class="match-column" aria-label="${t('matchSpanishLabel')}">
+                    <span class="match-column__label">${t('matchSpanishLabel')}</span>
+                    <div class="match-column__list">
+                        ${question.spanishChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.es) === state.matchSelection.spanish ? 'is-selected' : ''}" data-match-side="spanish" data-match-value="${option.es}" type="button">${option.es}</button>`).join('')}
+                    </div>
+                </section>
+            </div>
+        `;
+        elements.choiceGrid.querySelectorAll('[data-match-side]').forEach((button) => button.addEventListener('click', () => handleMatchChoice(button.dataset.matchSide, button.dataset.matchValue)));
+    } else if (!typingMode) {
+        elements.choiceGrid.classList.remove('choice-grid--match');
         elements.choiceGrid.innerHTML = question.options.map((option) => `<button class="choice-button" data-choice="${option.en}" type="button">${option.en}</button>`).join('');
         elements.choiceGrid.querySelectorAll('[data-choice]').forEach((button) => button.addEventListener('click', () => submitAnswer(button.dataset.choice)));
     } else {
+        elements.choiceGrid.classList.remove('choice-grid--match');
         elements.choiceGrid.innerHTML = '';
         setTimeout(() => elements.typingInput.focus(), 30);
     }
@@ -1273,7 +1343,10 @@ function stopTimer() {
 
 function maybeSpeakPrompt() {
     if (!state.settings.voiceOn || !window.speechSynthesis || !state.currentQuestion) return;
-    const utterance = new SpeechSynthesisUtterance(`Find the English word for ${state.currentQuestion.term.es}`);
+    const utteranceText = state.settings.gameMode === 'match'
+        ? `Match the pair for ${state.currentQuestion.term.es}`
+        : `Find the English word for ${state.currentQuestion.term.es}`;
+    const utterance = new SpeechSynthesisUtterance(utteranceText);
     utterance.lang = 'en-US';
     utterance.rate = 0.95;
     window.speechSynthesis.cancel();
@@ -1321,11 +1394,35 @@ function loadQuestion() {
     state.currentQuestion = state.questions[state.questionIndex] || null;
     state.questionResolved = false;
     state.secondsLeft = 15;
+    state.matchSelection = { english: '', spanish: '' };
     renderGame();
     if (state.currentQuestion) {
         startTimer();
         maybeSpeakPrompt();
     }
+}
+
+function handleMatchChoice(side, value) {
+    if (state.questionResolved || !state.currentQuestion || state.settings.gameMode !== 'match') return;
+
+    if (side === 'english') {
+        state.matchSelection.english = normalizeWord(value);
+    }
+
+    if (side === 'spanish') {
+        state.matchSelection.spanish = normalizeWord(value);
+    }
+
+    renderGame();
+
+    if (!state.matchSelection.english || !state.matchSelection.spanish) return;
+
+    const englishOption = state.currentQuestion.englishChoices.find((entry) => normalizeWord(entry.en) === state.matchSelection.english);
+    const spanishOption = state.currentQuestion.spanishChoices.find((entry) => normalizeWord(entry.es) === state.matchSelection.spanish);
+    const matchedCorrectPair = englishOption && spanishOption && normalizeWord(englishOption.en) === normalizeWord(spanishOption.en);
+    const matchedTargetPair = matchedCorrectPair && normalizeWord(englishOption.en) === normalizeWord(state.currentQuestion.term.en);
+
+    resolveAnswer(matchedTargetPair ? state.currentQuestion.term.en : `${englishOption?.en || ''} :: ${spanishOption?.es || ''}`, false);
 }
 
 function submitAnswer(answer) {
@@ -1370,6 +1467,21 @@ function resolveAnswer(answer, timedOut) {
             if (normalizeWord(value) === normalizeWord(state.currentQuestion.term.en)) {
                 button.classList.add('is-correct');
             } else if (!correct && normalizeWord(value) === normalizeWord(answer)) {
+                button.classList.add('is-wrong');
+            }
+        });
+    } else if (state.settings.gameMode === 'match') {
+        elements.choiceGrid.querySelectorAll('[data-match-side]').forEach((button) => {
+            button.disabled = true;
+            const side = button.dataset.matchSide;
+            const value = button.dataset.matchValue || '';
+            const normalizedValue = normalizeWord(value);
+            const targetValue = side === 'english' ? normalizeWord(state.currentQuestion.term.en) : normalizeWord(state.currentQuestion.term.es);
+            const selectedValue = side === 'english' ? state.matchSelection.english : state.matchSelection.spanish;
+
+            if (normalizedValue === targetValue) {
+                button.classList.add('is-correct');
+            } else if (!correct && normalizedValue === selectedValue) {
                 button.classList.add('is-wrong');
             }
         });
@@ -1751,7 +1863,7 @@ function renderExplorer() {
 
 function renderQuickOptions() {
     const items = [
-        { label: t('gameMode'), value: state.settings.gameMode === 'multiple' ? t('summitChoice') : t('summitTyping') },
+        { label: t('gameMode'), value: getGameModeLabel() },
         { label: t('language'), value: state.settings.language.toUpperCase() },
         { label: t('animations'), value: state.settings.animationsOn ? t('statusOn') : t('statusOff') },
         { label: t('sound'), value: state.settings.soundOn ? t('statusOn') : t('statusOff') },
@@ -1764,7 +1876,7 @@ function renderQuickOptions() {
 
 function renderOptionsModal() {
     const blocks = [
-        { title: t('modeBlockTitle'), text: t('modeBlockText'), buttons: [{ value: 'multiple', label: t('summitChoice'), active: state.settings.gameMode === 'multiple', action: 'mode' }, { value: 'typing', label: t('summitTyping'), active: state.settings.gameMode === 'typing', action: 'mode' }] },
+        { title: t('modeBlockTitle'), text: t('modeBlockText'), buttons: [{ value: 'multiple', label: t('summitChoice'), active: state.settings.gameMode === 'multiple', action: 'mode' }, { value: 'typing', label: t('summitTyping'), active: state.settings.gameMode === 'typing', action: 'mode' }, { value: 'match', label: t('summitMatch'), active: state.settings.gameMode === 'match', action: 'mode' }] },
         { title: t('language'), text: t('languageHelp'), buttons: [{ value: 'en', label: 'English', active: state.settings.language === 'en', action: 'language' }, { value: 'es', label: 'Espa\u00F1ol', active: state.settings.language === 'es', action: 'language' }] },
         { title: t('animationBlockTitle'), text: t('animationBlockText'), buttons: [{ value: 'on', label: getOptionStatusMarkup(t('animations'), true), active: state.settings.animationsOn, action: 'motion' }, { value: 'off', label: getOptionStatusMarkup(t('animations'), false), active: !state.settings.animationsOn, action: 'motion' }] },
         { title: t('themeBlockTitle'), text: t('themeBlockText'), buttons: [{ value: 'light', label: t('lightMode'), active: state.settings.themeMode === 'light', action: 'theme' }, { value: 'dark', label: t('darkMode'), active: state.settings.themeMode === 'dark', action: 'theme' }] },
@@ -2091,7 +2203,12 @@ function handleOptionChange
     if (state.optionPulseTimer) {
         window.clearTimeout(state.optionPulseTimer);
     }
-    if (action === 'mode') state.settings.gameMode = value;
+    if (action === 'mode') {
+        if (state.settings.gameMode !== value) {
+            state.settings.gameMode = value;
+            resetActiveChallenge();
+        }
+    }
     if (action === 'language') state.settings.language = value;
     if (action === 'motion') state.settings.animationsOn = value === 'on';
     if (action === 'theme') state.settings.themeMode = value;
@@ -2137,11 +2254,7 @@ function setActiveTheme(themeId) {
     state.progress.lastPlayedTheme = themeId;
     saveProgress();
     state.activeStageId = 1;
-    state.stageLive = false;
-    state.currentQuestion = null;
-    state.questions = [];
-    state.questionIndex = 0;
-    stopTimer();
+    resetActiveChallenge();
     applyThemePalette();
     renderAll();
     document.querySelector('.stage-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2274,16 +2387,7 @@ function bindEvents() {
 
     elements.nextQuestionButton.addEventListener('click', advanceQuestion);
     elements.resetStageButton.addEventListener('click', () => {
-        stopTimer();
-        state.stageLive = false;
-        state.currentQuestion = null;
-        state.questions = [];
-        state.questionIndex = 0;
-        state.stagePoints = 0;
-        state.stageCorrect = 0;
-        state.stageWrong = 0;
-        state.streak = 0;
-        state.latestAccuracy = 0;
+        resetActiveChallenge();
         renderGame();
     });
 

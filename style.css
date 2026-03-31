@@ -2128,6 +2128,79 @@ body[data-theme-mode="dark"] .game-card {
     border-color: rgba(255, 107, 107, 0.28);
 }
 
+.choice-button.is-selected {
+    border-color: rgba(var(--theme-accent-rgb), 0.34);
+    background: linear-gradient(135deg, rgba(var(--theme-accent-rgb), 0.12) 0%, rgba(var(--theme-soft-rgb), 0.18) 100%);
+    box-shadow: 0 16px 24px rgba(var(--theme-accent-rgb), 0.14);
+}
+
+.choice-grid--match {
+    grid-template-columns: 1fr;
+}
+
+.match-board {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.match-column {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background:
+        radial-gradient(circle at top right, rgba(var(--theme-soft-rgb), 0.14) 0%, transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 250, 255, 0.98) 100%);
+    box-shadow: var(--shadow-sm);
+}
+
+body[data-theme-mode="dark"] .match-column {
+    background:
+        radial-gradient(circle at top right, rgba(var(--theme-soft-rgb), 0.12) 0%, transparent 26%),
+        linear-gradient(180deg, rgba(18, 27, 46, 0.98) 0%, rgba(13, 20, 35, 0.98) 100%);
+    border-color: rgba(var(--theme-soft-rgb), 0.16);
+}
+
+.match-column__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: rgba(var(--theme-accent-rgb), 0.1);
+    color: var(--theme-strong);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+body[data-theme-mode="dark"] .match-column__label {
+    background: rgba(var(--theme-soft-rgb), 0.12);
+    color: #eef8ff;
+}
+
+.match-column__list {
+    display: grid;
+    gap: 10px;
+}
+
+.choice-button--match {
+    min-height: 64px;
+    border-radius: 16px;
+    text-align: center;
+    justify-content: center;
+}
+
+body[data-theme-mode="dark"] .choice-button.is-selected {
+    background: linear-gradient(135deg, rgba(var(--theme-accent-rgb), 0.18) 0%, rgba(var(--theme-soft-rgb), 0.2) 100%);
+    border-color: rgba(var(--theme-soft-rgb), 0.3);
+    box-shadow: 0 18px 30px rgba(var(--theme-strong-rgb), 0.3);
+}
+
 .game-footer {
     display: flex;
     justify-content: space-between;
@@ -2147,6 +2220,12 @@ body[data-theme-mode="dark"] .game-card {
 .game-footer__actions {
     display: flex;
     gap: 10px;
+}
+
+@media (max-width: 780px) {
+    .match-board {
+        grid-template-columns: 1fr;
+    }
 }
 
 .leaderboard-preview,
