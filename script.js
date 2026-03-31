@@ -664,7 +664,21 @@ function saveProgress() {
 
 function syncUserRoster() {
     const users = pruneUsers();
-    const merged = { ...state.user, points: state.progress.points, wins: state.progress.wins, losses: state.progress.losses, totalPlayMs: state.progress.totalPlayMs, lastPlayedTheme: state.progress.lastPlayedTheme, updatedAt: Date.now() };
+    const merged = {
+        ...state.user,
+        points: state.progress.points,
+        wins: state.progress.wins,
+        losses: state.progress.losses,
+        totalPlayMs: state.progress.totalPlayMs,
+        lastPlayedTheme: state.progress.lastPlayedTheme,
+        leaderboardVisible: hasRecordedResults({
+            points: state.progress.points,
+            wins: state.progress.wins,
+            losses: state.progress.losses,
+            totalPlayMs: state.progress.totalPlayMs
+        }),
+        updatedAt: Date.now()
+    };
     const index = users.findIndex((entry) => getUserId(entry) === getUserId(state.user));
     if (index >= 0) users[index] = { ...users[index], ...merged }; else users.push(merged);
     writeStorage(STORAGE_KEYS.users, users);
@@ -905,6 +919,7 @@ function applyControlStats(userId, values) {
         points,
         wins,
         losses,
+        leaderboardVisible: hasRecordedResults({ points, wins, losses, totalPlayMs: Number(baseUser.totalPlayMs || 0) }),
         expiresAt,
         hiddenFromLeaderboard: false,
         updatedAt: Date.now()
