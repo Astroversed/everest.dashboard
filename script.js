@@ -603,6 +603,17 @@ async function expireSharedLeaderboardUser(userId, overrides = {}) {
     }
 }
 
+async function deleteSharedLeaderboardUser(userId) {
+    const collection = getSharedLeaderboardCollection();
+    if (!collection || !userId) return;
+
+    try {
+        await collection.doc(userId).delete();
+    } catch (error) {
+        console.error('Failed to delete leaderboard user', error);
+    }
+}
+
 function normalizeWord(value) {
     return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
 }
@@ -2163,7 +2174,16 @@ function loadData() {
 }
 
 function logoutUser(shouldRedirect) {
-    void expireSharedLeaderboardUser(getUserId(state.user));
+    const userId = getUserId(state.user);
+    const users = pruneUsers().filter((user) => getUserId(user) !== userId);
+    writeStorage(STORAGE_KEYS.users, users);
+
+    const allProgress = readAllProgress();
+    delete allProgress[userId];
+    writeAllProgress(allProgress);
+
+    state.sharedLeaderboard = state.sharedLeaderboard.filter((user) => getUserId(user) !== userId);
+    void deleteSharedLeaderboardUser(userId);
     localStorage.removeItem(STORAGE_KEYS.activeUser);
     pushToast(randomFrom(EVEREST_LINES.info), t('logoutDone'), 'info');
     if (shouldRedirect) {
