@@ -1219,6 +1219,44 @@ function setFeedback(stateName, title, text) {
     elements.feedbackText.textContent = text;
 }
 
+function getThemeVisualEmoji(theme) {
+    if (!theme) return '\uD83E\uDDED';
+    if (theme.title.includes('Nature')) return '\u26F0\uFE0F';
+    if (theme.title.includes('Food')) return '\uD83C\uDF7D\uFE0F';
+    return '\uD83E\uDDED';
+}
+
+function renderChallengeVisual(theme, question, matchMode) {
+    if (!question) {
+        elements.challengeVisual.classList.remove('challenge-visual--match');
+        elements.challengeVisual.innerHTML = `<span>${getThemeVisualEmoji(theme)}</span>`;
+        return;
+    }
+
+    if (!matchMode) {
+        elements.challengeVisual.classList.remove('challenge-visual--match');
+        elements.challengeVisual.innerHTML = `<span>${question.term.emoji}</span>`;
+        return;
+    }
+
+    elements.challengeVisual.classList.add('challenge-visual--match');
+    elements.challengeVisual.innerHTML = `
+        <div class="match-visual">
+            <div class="match-visual__orbit match-visual__orbit--left">
+                <span>${question.englishChoices[0]?.emoji || question.term.emoji}</span>
+            </div>
+            <div class="match-visual__core">
+                <strong class="match-visual__emoji">${question.term.emoji}</strong>
+                <span class="match-visual__label">${t('summitMatch')}</span>
+                <strong class="match-visual__word">${question.term.es}</strong>
+            </div>
+            <div class="match-visual__orbit match-visual__orbit--right">
+                <span>${question.spanishChoices[1]?.emoji || question.term.emoji}</span>
+            </div>
+        </div>
+    `;
+}
+
 function resetActiveChallenge() {
     stopTimer();
     state.stageLive = false;
@@ -1256,7 +1294,7 @@ function renderGame() {
     elements.typingInput.placeholder = t('typePlaceholder');
 
     if (!state.stageLive || !state.currentQuestion) {
-        elements.challengeEmoji.textContent = theme.title.includes('Nature') ? '\u26F0\uFE0F' : (theme.title.includes('Food') ? '\uD83C\uDF7D\uFE0F' : '\uD83E\uDDED');
+        renderChallengeVisual(theme, null, false);
         elements.challengeTypeLabel.textContent = t('routeFocus');
         elements.challengePrompt.textContent = stage.focus;
         elements.challengeHint.textContent = t('noChallenge');
@@ -1277,7 +1315,7 @@ function renderGame() {
     }
 
     const question = state.currentQuestion;
-    elements.challengeEmoji.textContent = question.term.emoji;
+    renderChallengeVisual(theme, question, matchMode);
     elements.challengeTypeLabel.textContent = getGameModeLabel();
     elements.challengePrompt.textContent = matchMode
         ? t('matchPairPrompt', { word: question.term.es })
@@ -1299,15 +1337,15 @@ function renderGame() {
         elements.choiceGrid.innerHTML = `
             <div class="match-board">
                 <section class="match-column" aria-label="${t('matchEnglishLabel')}">
-                    <span class="match-column__label">${t('matchEnglishLabel')}</span>
+                    <span class="match-column__label">${question.term.emoji} ${t('matchEnglishLabel')}</span>
                     <div class="match-column__list">
-                        ${question.englishChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.english ? 'is-selected' : ''}" data-match-side="english" data-match-value="${option.en}" type="button">${option.en}</button>`).join('')}
+                        ${question.englishChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.english ? 'is-selected' : ''}" data-match-side="english" data-match-value="${option.en}" type="button"><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__text">${option.en}</span></button>`).join('')}
                     </div>
                 </section>
                 <section class="match-column" aria-label="${t('matchSpanishLabel')}">
-                    <span class="match-column__label">${t('matchSpanishLabel')}</span>
+                    <span class="match-column__label">${question.term.emoji} ${t('matchSpanishLabel')}</span>
                     <div class="match-column__list">
-                        ${question.spanishChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.es) === state.matchSelection.spanish ? 'is-selected' : ''}" data-match-side="spanish" data-match-value="${option.es}" type="button">${option.es}</button>`).join('')}
+                        ${question.spanishChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.es) === state.matchSelection.spanish ? 'is-selected' : ''}" data-match-side="spanish" data-match-value="${option.es}" type="button"><span class="choice-button__emoji">${option.emoji}</span><span class="choice-button__text">${option.es}</span></button>`).join('')}
                     </div>
                 </section>
             </div>
