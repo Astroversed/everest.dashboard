@@ -1180,79 +1180,142 @@ function buildMatchChoices(answerTerm, pool, themeId) {
 
 const CONTEXT_TRAIL_TEMPLATES = {
     'basic-communication': [
-        'In this conversation, I say ____ first.',
-        'To answer politely on the route, I use ____.',
-        'During the greeting, ____ fits the moment best.'
+        'The silence breaks at base camp, and ____ is the first word that feels natural to say.',
+        'A quick reply keeps the conversation warm, so ____ fits this moment best.',
+        'The social trail starts smoothly when ____ lands in the sentence at the right time.'
     ],
     'grammar-language': [
-        'In this language note, ____ completes the idea best.',
-        'To make the sentence clearer, the right word is ____.',
-        'This grammar step sounds correct with ____.'
+        'The structure sounds precise only when ____ settles into the sentence.',
+        'This language pattern stops wobbling once ____ takes the missing place.',
+        'To keep the grammar trail firm and clear, ____ is the word that belongs here.'
     ],
     'human-body-identity': [
-        'In this description, ____ is the word that fits the person.',
-        'For this body clue, ____ completes the line.',
-        'The identity trail points to ____ here.'
+        'The description sharpens when ____ fills the missing part of the identity clue.',
+        'This body-and-self trail makes sense only after ____ completes the line.',
+        'To describe the person clearly and naturally, ____ belongs in the blank.'
     ],
     'personal-social-life': [
-        'In this social moment, ____ fits the situation best.',
-        'For this personal scene, ____ completes the sentence.',
-        'On this people trail, ____ is the right choice.'
+        'The personal scene becomes clear when ____ steps into the blank at the right moment.',
+        'This social route sounds more real and human with ____ in the sentence.',
+        'To make this everyday relationship clue feel complete, the missing word is ____.'
     ],
     'education-work': [
-        'At school or work, ____ completes the line best.',
-        'In this class or task, the right word is ____.',
-        'This study route sounds right with ____.'
+        'The classroom and work trail both point to ____ as the word that completes this line.',
+        'This task becomes easier to understand once ____ is placed in the sentence.',
+        'To keep the study route focused and accurate, ____ fits the blank best.'
     ],
     'places-environment': [
-        'In this place, ____ is the word that fits the scene.',
-        'Looking around the route, ____ completes the context.',
-        'For this environment clue, the best word is ____.'
+        'The scene around the route comes into focus when ____ completes the sentence.',
+        'This place clue feels grounded and specific once ____ takes the empty spot.',
+        'To describe the environment with the right sense of place, choose ____.'
     ],
     'movement-navigation': [
-        'To keep moving on the route, ____ completes the direction.',
-        'This travel clue makes sense with ____.',
-        'For the next step and direction, choose ____.'
+        'The route keeps moving in the right direction only when ____ fills the gap.',
+        'This navigation clue becomes clear and usable once ____ completes the line.',
+        'To guide the next step without losing the trail, the missing word is ____.'
     ],
     'shopping-daily-life': [
-        'In this daily routine, ____ is the best word to use.',
-        'For this errand or home task, ____ fits the sentence.',
-        'On this daily-life trail, ____ completes the context.'
+        'The daily routine sounds complete and familiar when ____ slips into the sentence.',
+        'This errand-and-home clue works naturally only after ____ fills the blank.',
+        'To make this everyday trail feel real and useful, the best word is ____.'
     ],
     'clothing-style': [
-        'For this outfit idea, ____ completes the line.',
-        'In this clothing clue, the best word is ____.',
-        'This style route sounds right with ____.'
+        'The outfit finally makes sense when ____ takes the missing place in the line.',
+        'This style clue feels complete and wearable once ____ appears in the sentence.',
+        'To finish the clothing route with the right detail, choose ____.'
     ],
     'food-drinks': [
-        'At the table, ____ is the word that fits this moment.',
-        'For this meal clue, ____ completes the sentence.',
-        'In this food route, the best choice is ____.'
+        'The table scene becomes vivid and familiar when ____ fills the blank.',
+        'This meal clue tastes right only after ____ completes the sentence.',
+        'To finish this food-and-drink route naturally, the best word is ____.'
     ],
     'nature-weather': [
-        'Looking at the weather, ____ completes the scene.',
-        'On this nature trail, ____ fits the context best.',
-        'For this sky and climate clue, choose ____.'
+        'The weather scene opens clearly once ____ settles into the sentence.',
+        'This nature trail feels alive and precise when ____ completes the context.',
+        'To describe the sky, climate, or landscape naturally, the missing word is ____.'
     ],
     'culture-leisure': [
-        'In this free-time plan, ____ fits the context best.',
-        'For this leisure clue, ____ completes the sentence.',
-        'This culture route sounds right with ____.'
+        'The free-time plan feels more vivid when ____ takes its place in the sentence.',
+        'This culture-and-leisure clue sounds right only after ____ fills the gap.',
+        'To complete the fun side of the route with the right word, choose ____.'
     ],
     'tools-objects': [
-        'For this object clue, ____ is the right word.',
-        'In this practical task, ____ completes the line.',
-        'This tools route makes more sense with ____.'
+        'The practical task becomes clearer once ____ completes the missing part.',
+        'This object clue locks into place naturally when ____ fills the sentence.',
+        'To make this tools route feel useful and concrete, the best word is ____.'
     ],
     technology: [
-        'On this tech trail, ____ completes the line.',
-        'For this digital clue, the best word is ____.',
-        'In this technology context, choose ____.'
+        'The digital scene becomes sharper and more exact when ____ fills the blank.',
+        'This tech clue works properly only after ____ completes the sentence.',
+        'To keep the technology route precise and modern, the missing word is ____.'
     ],
     'concepts-academic': [
-        'In this academic idea, ____ is the precise word.',
-        'For this concept clue, ____ completes the sentence.',
-        'This study concept sounds right with ____.'
+        'The academic idea sounds more precise when ____ takes the missing space.',
+        'This concept trail becomes clearer and more exact after ____ completes the line.',
+        'To finish the study thought with the right concept, choose ____.'
+    ]
+};
+
+const CONTEXT_TRAIL_CLUE_TEMPLATES = {
+    'basic-communication': [
+        'Think about a word you would use to open, answer, repeat, or keep a conversation moving: {hint}.',
+        'The route clue points to something spoken naturally between people: {hint}.'
+    ],
+    'grammar-language': [
+        'Focus on the word that keeps the sentence accurate and well formed: {hint}.',
+        'This clue is about language structure and correctness more than speed: {hint}.'
+    ],
+    'human-body-identity': [
+        'Picture a detail that helps describe the body, identity, or personal appearance: {hint}.',
+        'The answer should fit something connected to how a person looks or is described: {hint}.'
+    ],
+    'personal-social-life': [
+        'Follow the clue toward relationships, feelings, routines, or personal moments: {hint}.',
+        'This word belongs in a scene that feels social, close, and part of everyday life: {hint}.'
+    ],
+    'education-work': [
+        'Stay near study, class, effort, or work life while reading this clue: {hint}.',
+        'The blank needs a word that would sound natural in school or on a task route: {hint}.'
+    ],
+    'places-environment': [
+        'Look for a word that helps place the scene around you more clearly: {hint}.',
+        'This clue points to location, surroundings, or the environment itself: {hint}.'
+    ],
+    'movement-navigation': [
+        'The answer should feel like a step, direction, or movement across the route: {hint}.',
+        'Think of motion, travel, or guidance while following this clue: {hint}.'
+    ],
+    'shopping-daily-life': [
+        'Stay with errands, home actions, or ordinary routine while following the clue: {hint}.',
+        'This word belongs in a moment that feels practical, daily, and familiar: {hint}.'
+    ],
+    'clothing-style': [
+        'The clue points to something worn, styled, or chosen as part of an outfit: {hint}.',
+        'Look for the word that would complete a clothing or appearance scene naturally: {hint}.'
+    ],
+    'food-drinks': [
+        'Think about meals, taste, drinks, or something you would find at the table: {hint}.',
+        'The route clue belongs to food, drink, or the act of eating: {hint}.'
+    ],
+    'nature-weather': [
+        'Keep the sky, climate, land, or natural scene in mind here: {hint}.',
+        'The blank should point to something you would notice outdoors in nature or weather: {hint}.'
+    ],
+    'culture-leisure': [
+        'Follow the clue toward fun, hobbies, culture, or time off the serious trail: {hint}.',
+        'This word should feel at home in leisure, entertainment, or creative moments: {hint}.'
+    ],
+    'tools-objects': [
+        'Think of something practical you could hold, use, or rely on: {hint}.',
+        'The clue leads to an object or tool with a clear, useful purpose: {hint}.'
+    ],
+    technology: [
+        'Stay close to screens, systems, devices, or the digital world: {hint}.',
+        'The answer belongs to a modern, connected, or technology-driven scene: {hint}.'
+    ],
+    'concepts-academic': [
+        'This clue points to an idea, concept, or study term rather than a simple object: {hint}.',
+        'Think of a word you would meet in learning, theory, or academic discussion: {hint}.'
     ]
 };
 
@@ -1265,12 +1328,18 @@ function buildContextSentence(themeId, term) {
     };
 }
 
+function buildContextClue(themeId, term) {
+    const templates = CONTEXT_TRAIL_CLUE_TEMPLATES[themeId] || CONTEXT_TRAIL_CLUE_TEMPLATES['basic-communication'];
+    return randomFrom(templates).replace('{hint}', term.hint);
+}
+
 function buildContextQuestion(answerTerm, pool, themeId) {
     const distractors = shuffle(pool.filter((term) => normalizeWord(term.en) !== normalizeWord(answerTerm.en))).slice(0, 3);
     const options = shuffle([answerTerm, ...distractors]);
     return {
         options,
         themeId,
+        contextClue: buildContextClue(themeId, answerTerm),
         ...buildContextSentence(themeId, answerTerm)
     };
 }
@@ -1499,7 +1568,7 @@ function renderGame() {
         : (contextMode ? t('contextPrompt') : (typingMode ? t('typeEnglish', { word: question.term.es }) : t('chooseEnglish', { word: question.term.es })));
     elements.challengeHint.textContent = matchMode
         ? `${t('hintPrefix')}: ${question.term.es} · ${question.term.hint}`
-        : (contextMode ? `${t('contextClueLabel')}: ${question.term.hint}` : `${t('hintPrefix')}: ${question.term.hint}`);
+        : (contextMode ? `${t('contextClueLabel')}: ${question.contextClue}` : `${t('hintPrefix')}: ${question.term.hint}`);
     elements.challengeExample.textContent = matchMode
         ? `${t('matchPairHelp')} ${selectedEmojiOption ? `${t('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : t('matchSelectionIdle')}`
         : (contextMode ? t('contextHelp') : `${t('examplePrefix')}: ${theme.summary}`);
@@ -1558,7 +1627,7 @@ function renderGame() {
                         ${contextSentenceHtml}
                     </div>
                     <div class="context-card__meta">
-                        <span class="context-card__hint">${question.term.hint}</span>
+                        <span class="context-card__hint">${question.contextClue}</span>
                     </div>
                 </section>
                 <section class="context-options" aria-label="${t('contextChoiceStep')}">
