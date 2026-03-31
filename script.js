@@ -371,7 +371,7 @@ const state = {
     activeThemeId: null, activeStageId: 1, searchTerm: '', explorerSearch: '', explorerTheme: 'all',
     stageLive: false, questions: [], questionIndex: 0, currentQuestion: null, questionResolved: false,
     secondsLeft: 15, timerId: null, stageStartedAt: 0, stagePoints: 0, stageCorrect: 0, stageWrong: 0,
-    streak: 0, bestStreak: 0, latestAccuracy: 0, matchSelection: { signal: '', emoji: '' }, controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
+    streak: 0, bestStreak: 0, latestAccuracy: 0, matchSelection: { signal: '', emoji: '' }, lastResolvedAnswer: '', controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
     sharedLeaderboard: [], firestore: null, firestoreReady: false, firestoreListener: null, firestoreCleanupBusy: false
 };
 
@@ -1428,6 +1428,7 @@ function resetActiveChallenge() {
     state.latestAccuracy = 0;
     state.questionResolved = false;
     state.matchSelection = { signal: '', emoji: '' };
+    state.lastResolvedAnswer = '';
 }
 
 function toggleGameModeVisibility() {
@@ -1476,6 +1477,18 @@ function renderGame() {
     }
 
     const question = state.currentQuestion;
+    const resolvedNormalized = normalizeWord(state.lastResolvedAnswer || '');
+    const targetNormalized = normalizeWord(question.term.en);
+    const contextAnsweredCorrect = contextMode && state.questionResolved && resolvedNormalized === targetNormalized;
+    const contextAnsweredWrong = contextMode && state.questionResolved && resolvedNormalized !== targetNormalized;
+    const contextSentenceHtml = contextMode
+        ? question.sentence.replace(
+            '____',
+            contextAnsweredCorrect
+                ? `<span class="context-card__solved">${question.term.en}</span>`
+                : `<span class="context-card__blank ${contextAnsweredWrong ? 'is-wrong' : ''}">${t('contextBlank')}</span>`
+        )
+        : '';
     if (!matchMode) {
         renderChallengeVisual(theme, question, false);
     }
@@ -1486,10 +1499,10 @@ function renderGame() {
         : (contextMode ? t('contextPrompt') : (typingMode ? t('typeEnglish', { word: question.term.es }) : t('chooseEnglish', { word: question.term.es })));
     elements.challengeHint.textContent = matchMode
         ? `${t('hintPrefix')}: ${question.term.es} · ${question.term.hint}`
-        : (contextMode ? `${t('contextClueLabel')}: ${question.term.es} · ${question.term.hint}` : `${t('hintPrefix')}: ${question.term.hint}`);
+        : (contextMode ? `${t('contextClueLabel')}: ${question.term.hint}` : `${t('hintPrefix')}: ${question.term.hint}`);
     elements.challengeExample.textContent = matchMode
         ? `${t('matchPairHelp')} ${selectedEmojiOption ? `${t('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : t('matchSelectionIdle')}`
-        : (contextMode ? t('contextHelp') : `${t('examplePrefix')}: ${theme.summary}`);
+        : (contextMode ? '' : `${t('examplePrefix')}: ${theme.summary}`);
     elements.questionCounter.textContent = `${state.questionIndex + 1} / ${state.questions.length}`;
     elements.timerBadge.textContent = `${state.secondsLeft}s`;
     elements.streakBadge.textContent = `Streak ${state.streak}`;
@@ -1541,15 +1554,13 @@ function renderGame() {
             <div class="context-trail">
                 <div class="context-trail__intro">
                     <span class="context-trail__eyebrow">${t('summitContext')}</span>
-                    <p class="context-trail__guide">${t('contextHelp')}</p>
                 </div>
                 <section class="context-card" aria-label="${t('summitContext')}">
                     <span class="context-card__badge">${t('contextBadge')}</span>
                     <div class="context-card__sentence">
-                        ${question.sentence.replace('____', `<span class="context-card__blank">${t('contextBlank')}</span>`)}
+                        ${contextSentenceHtml}
                     </div>
                     <div class="context-card__meta">
-                        <span class="context-card__clue">${t('contextClueLabel')}: ${question.term.es}</span>
                         <span class="context-card__hint">${question.term.hint}</span>
                     </div>
                 </section>
@@ -1648,6 +1659,7 @@ function loadQuestion() {
     state.questionResolved = false;
     state.secondsLeft = 15;
     state.matchSelection = { signal: '', emoji: '' };
+    state.lastResolvedAnswer = '';
     renderGame();
     if (state.currentQuestion) {
         startTimer();
@@ -1725,6 +1737,7 @@ function resolveAnswer(answer, timedOut) {
     if (state.questionResolved || !state.currentQuestion) return;
     stopTimer();
     state.questionResolved = true;
+    state.lastResolvedAnswer = answer ? normalizeWord(answer) : '';
     const correct = !timedOut && normalizeWord(answer) === normalizeWord(state.currentQuestion.term.en);
 
     if (correct) {
