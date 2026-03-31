@@ -226,7 +226,7 @@ const ui = {
         welcome: 'Welcome, {name}.',
         subtitle: 'Build points, clear themed stages, and keep your route moving toward fluency.',
         points: 'Points', wins: 'Wins', losses: 'Loses', time: 'Time',
-        summitChoice: 'Summit Choice', summitTyping: 'Summit Typing', summitMatch: 'Word Match',
+        summitChoice: 'Summit Choice', summitTyping: 'Summit Typing', summitMatch: 'Word Match', summitContext: 'Context Trail',
         chooseEnglish: 'Choose the English word for "{word}".',
         typeEnglish: 'Type the English word for "{word}".',
         matchPairPrompt: 'Choose the emoji that best represents "{word}".',
@@ -241,6 +241,12 @@ const ui = {
         matchSelectionEmoji: 'Meaning selected',
         matchSignalPending: 'Word ready',
         matchMeaningPending: 'Emoji pending',
+        contextPrompt: 'Complete the trail sentence with the word that fits best.',
+        contextHelp: 'Read the sentence, follow the clue, and choose the English word that completes the context.',
+        contextBadge: 'Context sentence',
+        contextBlank: 'Missing word',
+        contextChoiceStep: 'Choose the best word',
+        contextClueLabel: 'Trail clue',
         hintPrefix: 'Clue', examplePrefix: 'Trail use',
         idleTitle: 'Base camp ready.',
         idleText: 'It is cold at the top, but your next answer can warm the route.',
@@ -291,7 +297,7 @@ const ui = {
         welcome: 'Bienvenido, {name}.',
         subtitle: 'Acumula puntos, supera etapas tem\u00E1ticas y sigue subiendo hacia la fluidez.',
         points: 'Puntos', wins: 'Victorias', losses: 'Derrotas', time: 'Tiempo',
-        summitChoice: 'Respuesta de opci\u00F3n m\u00FAltiple', summitTyping: 'Respuesta escrita', summitMatch: 'Emparejar palabras',
+        summitChoice: 'Respuesta de opci\u00F3n m\u00FAltiple', summitTyping: 'Respuesta escrita', summitMatch: 'Emparejar palabras', summitContext: 'Ruta en contexto',
         chooseEnglish: 'Elige la palabra en ingl\u00E9s para "{word}".',
         typeEnglish: 'Escribe la palabra en ingl\u00E9s para "{word}".',
         matchPairPrompt: 'Elige el emoji que mejor representa "{word}".',
@@ -306,6 +312,12 @@ const ui = {
         matchSelectionEmoji: 'Emoji elegido',
         matchSignalPending: 'Palabra lista',
         matchMeaningPending: 'Emoji pendiente',
+        contextPrompt: 'Completa la oraci\u00F3n de la ruta con la palabra que mejor encaja.',
+        contextHelp: 'Lee la oraci\u00F3n, sigue la pista y elige la palabra en ingl\u00E9s que completa mejor el contexto.',
+        contextBadge: 'Oraci\u00F3n en contexto',
+        contextBlank: 'Palabra faltante',
+        contextChoiceStep: 'Elige la mejor palabra',
+        contextClueLabel: 'Pista de ruta',
         hintPrefix: 'Pista', examplePrefix: 'Uso en ruta',
         idleTitle: 'Campamento base listo.',
         idleText: 'Hace fr\u00EDo en la cima, pero tu siguiente respuesta puede calentar la ruta.',
@@ -684,6 +696,7 @@ function getStatusLabel(isActive) {
 function getGameModeLabel(mode = state.settings?.gameMode) {
     if (mode === 'typing') return t('summitTyping');
     if (mode === 'match') return t('summitMatch');
+    if (mode === 'context') return t('summitContext');
     return t('summitChoice');
 }
 
@@ -1165,12 +1178,112 @@ function buildMatchChoices(answerTerm, pool, themeId) {
     };
 }
 
+const CONTEXT_TRAIL_TEMPLATES = {
+    'basic-communication': [
+        'In this conversation, I say ____ first.',
+        'To answer politely on the route, I use ____.',
+        'During the greeting, ____ fits the moment best.'
+    ],
+    'grammar-language': [
+        'In this language note, ____ completes the idea best.',
+        'To make the sentence clearer, the right word is ____.',
+        'This grammar step sounds correct with ____.'
+    ],
+    'human-body-identity': [
+        'In this description, ____ is the word that fits the person.',
+        'For this body clue, ____ completes the line.',
+        'The identity trail points to ____ here.'
+    ],
+    'personal-social-life': [
+        'In this social moment, ____ fits the situation best.',
+        'For this personal scene, ____ completes the sentence.',
+        'On this people trail, ____ is the right choice.'
+    ],
+    'education-work': [
+        'At school or work, ____ completes the line best.',
+        'In this class or task, the right word is ____.',
+        'This study route sounds right with ____.'
+    ],
+    'places-environment': [
+        'In this place, ____ is the word that fits the scene.',
+        'Looking around the route, ____ completes the context.',
+        'For this environment clue, the best word is ____.'
+    ],
+    'movement-navigation': [
+        'To keep moving on the route, ____ completes the direction.',
+        'This travel clue makes sense with ____.',
+        'For the next step and direction, choose ____.'
+    ],
+    'shopping-daily-life': [
+        'In this daily routine, ____ is the best word to use.',
+        'For this errand or home task, ____ fits the sentence.',
+        'On this daily-life trail, ____ completes the context.'
+    ],
+    'clothing-style': [
+        'For this outfit idea, ____ completes the line.',
+        'In this clothing clue, the best word is ____.',
+        'This style route sounds right with ____.'
+    ],
+    'food-drinks': [
+        'At the table, ____ is the word that fits this moment.',
+        'For this meal clue, ____ completes the sentence.',
+        'In this food route, the best choice is ____.'
+    ],
+    'nature-weather': [
+        'Looking at the weather, ____ completes the scene.',
+        'On this nature trail, ____ fits the context best.',
+        'For this sky and climate clue, choose ____.'
+    ],
+    'culture-leisure': [
+        'In this free-time plan, ____ fits the context best.',
+        'For this leisure clue, ____ completes the sentence.',
+        'This culture route sounds right with ____.'
+    ],
+    'tools-objects': [
+        'For this object clue, ____ is the right word.',
+        'In this practical task, ____ completes the line.',
+        'This tools route makes more sense with ____.'
+    ],
+    technology: [
+        'On this tech trail, ____ completes the line.',
+        'For this digital clue, the best word is ____.',
+        'In this technology context, choose ____.'
+    ],
+    'concepts-academic': [
+        'In this academic idea, ____ is the precise word.',
+        'For this concept clue, ____ completes the sentence.',
+        'This study concept sounds right with ____.'
+    ]
+};
+
+function buildContextSentence(themeId, term) {
+    const templates = CONTEXT_TRAIL_TEMPLATES[themeId] || CONTEXT_TRAIL_TEMPLATES['basic-communication'];
+    const sentence = randomFrom(templates);
+    return {
+        sentence,
+        solvedSentence: sentence.replace('____', term.en)
+    };
+}
+
+function buildContextQuestion(answerTerm, pool, themeId) {
+    const distractors = shuffle(pool.filter((term) => normalizeWord(term.en) !== normalizeWord(answerTerm.en))).slice(0, 3);
+    const options = shuffle([answerTerm, ...distractors]);
+    return {
+        options,
+        themeId,
+        ...buildContextSentence(themeId, answerTerm)
+    };
+}
+
 function buildQuestions(stage) {
     const theme = getTheme();
     const pool = theme.stages.flatMap((bucket) => bucket.terms.map(convertTerm));
     return shuffle(stage.terms.map(convertTerm)).slice(0, 5).map((term) => {
         if (state.settings.gameMode === 'match') {
             return { term, ...buildMatchChoices(term, pool, theme.id) };
+        }
+        if (state.settings.gameMode === 'context') {
+            return { term, ...buildContextQuestion(term, pool, theme.id) };
         }
         return { term, options: buildChoices(term, pool) };
     });
@@ -1328,9 +1441,11 @@ function renderGame() {
     const stage = getStage();
     if (!theme || !stage) return;
     const matchMode = state.settings.gameMode === 'match';
+    const contextMode = state.settings.gameMode === 'context';
     const typingMode = state.settings.gameMode === 'typing';
     state.progress.lastPlayedTheme = theme.id;
     elements.gameCard?.classList.toggle('is-match-mode', matchMode);
+    elements.gameCard?.classList.toggle('is-context-mode', contextMode);
     elements.challengeVisual.classList.toggle('is-hidden-for-mode', matchMode);
     elements.gameThemeTitle.textContent = `${theme.title} - ${stage.name}`;
     elements.gameThemeDescription.textContent = stage.focus;
@@ -1368,13 +1483,13 @@ function renderGame() {
     elements.challengeTypeLabel.textContent = getGameModeLabel();
     elements.challengePrompt.textContent = matchMode
         ? t('matchPairPrompt', { word: question.term.en })
-        : (typingMode ? t('typeEnglish', { word: question.term.es }) : t('chooseEnglish', { word: question.term.es }));
+        : (contextMode ? t('contextPrompt') : (typingMode ? t('typeEnglish', { word: question.term.es }) : t('chooseEnglish', { word: question.term.es })));
     elements.challengeHint.textContent = matchMode
         ? `${t('hintPrefix')}: ${question.term.es} · ${question.term.hint}`
-        : `${t('hintPrefix')}: ${question.term.hint}`;
+        : (contextMode ? `${t('contextClueLabel')}: ${question.term.es} · ${question.term.hint}` : `${t('hintPrefix')}: ${question.term.hint}`);
     elements.challengeExample.textContent = matchMode
         ? `${t('matchPairHelp')} ${selectedEmojiOption ? `${t('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : t('matchSelectionIdle')}`
-        : `${t('examplePrefix')}: ${theme.summary}`;
+        : (contextMode ? t('contextHelp') : `${t('examplePrefix')}: ${theme.summary}`);
     elements.questionCounter.textContent = `${state.questionIndex + 1} / ${state.questions.length}`;
     elements.timerBadge.textContent = `${state.secondsLeft}s`;
     elements.streakBadge.textContent = `Streak ${state.streak}`;
@@ -1419,12 +1534,42 @@ function renderGame() {
             </div>
         `;
         elements.choiceGrid.querySelectorAll('[data-match-side]').forEach((button) => button.addEventListener('click', () => handleMatchChoice(button.dataset.matchSide, button.dataset.matchValue)));
+    } else if (contextMode) {
+        elements.choiceGrid.classList.remove('choice-grid--match');
+        elements.choiceGrid.classList.add('choice-grid--context');
+        elements.choiceGrid.innerHTML = `
+            <div class="context-trail">
+                <div class="context-trail__intro">
+                    <span class="context-trail__eyebrow">${t('summitContext')}</span>
+                    <p class="context-trail__guide">${t('contextHelp')}</p>
+                </div>
+                <section class="context-card" aria-label="${t('summitContext')}">
+                    <span class="context-card__badge">${t('contextBadge')}</span>
+                    <div class="context-card__sentence">
+                        ${question.sentence.replace('____', `<span class="context-card__blank">${t('contextBlank')}</span>`)}
+                    </div>
+                    <div class="context-card__meta">
+                        <span class="context-card__clue">${t('contextClueLabel')}: ${question.term.es}</span>
+                        <span class="context-card__hint">${question.term.hint}</span>
+                    </div>
+                </section>
+                <section class="context-options" aria-label="${t('contextChoiceStep')}">
+                    <span class="context-options__label">${t('contextChoiceStep')}</span>
+                    <div class="context-options__grid">
+                        ${question.options.map((option, index) => `<button class="choice-button choice-button--context" data-choice="${option.en}" type="button"><span class="choice-button__kicker">${index + 1}</span><span class="choice-button__copy"><span class="choice-button__title">${option.en}</span><span class="choice-button__detail">${option.es}</span></span></button>`).join('')}
+                    </div>
+                </section>
+            </div>
+        `;
+        elements.choiceGrid.querySelectorAll('[data-choice]').forEach((button) => button.addEventListener('click', () => submitAnswer(button.dataset.choice)));
     } else if (!typingMode) {
         elements.choiceGrid.classList.remove('choice-grid--match');
+        elements.choiceGrid.classList.remove('choice-grid--context');
         elements.choiceGrid.innerHTML = question.options.map((option) => `<button class="choice-button" data-choice="${option.en}" type="button">${option.en}</button>`).join('');
         elements.choiceGrid.querySelectorAll('[data-choice]').forEach((button) => button.addEventListener('click', () => submitAnswer(button.dataset.choice)));
     } else {
         elements.choiceGrid.classList.remove('choice-grid--match');
+        elements.choiceGrid.classList.remove('choice-grid--context');
         elements.choiceGrid.innerHTML = '';
         setTimeout(() => elements.typingInput.focus(), 30);
     }
@@ -1451,6 +1596,8 @@ function maybeSpeakPrompt() {
     if (!state.settings.voiceOn || !window.speechSynthesis || !state.currentQuestion) return;
     const utteranceText = state.settings.gameMode === 'match'
         ? `Match the route clue and emoji for ${state.currentQuestion.term.en}`
+        : state.settings.gameMode === 'context'
+            ? `Choose the word that completes the sentence for ${state.currentQuestion.term.en}`
         : `Find the English word for ${state.currentQuestion.term.es}`;
     const utterance = new SpeechSynthesisUtterance(utteranceText);
     utterance.lang = 'en-US';
@@ -2020,7 +2167,7 @@ function renderQuickOptions() {
 
 function renderOptionsModal() {
     const blocks = [
-        { title: t('modeBlockTitle'), text: t('modeBlockText'), buttons: [{ value: 'multiple', label: t('summitChoice'), active: state.settings.gameMode === 'multiple', action: 'mode' }, { value: 'typing', label: t('summitTyping'), active: state.settings.gameMode === 'typing', action: 'mode' }, { value: 'match', label: t('summitMatch'), active: state.settings.gameMode === 'match', action: 'mode' }] },
+        { title: t('modeBlockTitle'), text: t('modeBlockText'), buttons: [{ value: 'multiple', label: t('summitChoice'), active: state.settings.gameMode === 'multiple', action: 'mode' }, { value: 'typing', label: t('summitTyping'), active: state.settings.gameMode === 'typing', action: 'mode' }, { value: 'match', label: t('summitMatch'), active: state.settings.gameMode === 'match', action: 'mode' }, { value: 'context', label: t('summitContext'), active: state.settings.gameMode === 'context', action: 'mode' }] },
         { title: t('language'), text: t('languageHelp'), buttons: [{ value: 'en', label: 'English', active: state.settings.language === 'en', action: 'language' }, { value: 'es', label: 'Espa\u00F1ol', active: state.settings.language === 'es', action: 'language' }] },
         { title: t('animationBlockTitle'), text: t('animationBlockText'), buttons: [{ value: 'on', label: getOptionStatusMarkup(t('animations'), true), active: state.settings.animationsOn, action: 'motion' }, { value: 'off', label: getOptionStatusMarkup(t('animations'), false), active: !state.settings.animationsOn, action: 'motion' }] },
         { title: t('themeBlockTitle'), text: t('themeBlockText'), buttons: [{ value: 'light', label: t('lightMode'), active: state.settings.themeMode === 'light', action: 'theme' }, { value: 'dark', label: t('darkMode'), active: state.settings.themeMode === 'dark', action: 'theme' }] },
