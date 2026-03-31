@@ -415,6 +415,26 @@ function normalizeLeaderboardEntry(entry = {}) {
     };
 }
 
+function getCurrentUserLeaderboardEntry() {
+    if (!state.user || !state.progress) return null;
+
+    return normalizeLeaderboardEntry({
+        ...state.user,
+        points: state.progress.points,
+        wins: state.progress.wins,
+        losses: state.progress.losses,
+        totalPlayMs: state.progress.totalPlayMs,
+        lastPlayedTheme: state.progress.lastPlayedTheme,
+        leaderboardVisible: hasRecordedResults({
+            points: state.progress.points,
+            wins: state.progress.wins,
+            losses: state.progress.losses,
+            totalPlayMs: state.progress.totalPlayMs
+        }),
+        updatedAt: Number(state.user.updatedAt || Date.now())
+    });
+}
+
 function hasRecordedResults(entry = {}) {
     return Number(entry.points || 0) > 0
         || Number(entry.wins || 0) > 0
@@ -457,6 +477,10 @@ function buildSharedLeaderboardPayload(user) {
 
 function syncCurrentUserFromSharedRecord(record) {
     if (!state.user || !record || getUserId(record) !== getUserId(state.user)) return;
+    const localCurrent = getCurrentUserLeaderboardEntry();
+    if (localCurrent && Number(record.updatedAt || 0) < Number(localCurrent.updatedAt || 0)) {
+        return;
+    }
 
     if (record.expiresAt <= Date.now()) {
         localStorage.removeItem(STORAGE_KEYS.activeUser);
@@ -825,17 +849,22 @@ function deleteExplorerWord(wordId) {
 }
 
 function getManagedUsers() {
-    if (state.firestoreReady && state.sharedLeaderboard.length) {
-        return state.sharedLeaderboard
-            .filter((user) => user && user.expiresAt > Date.now())
-            .map((user) => normalizeLeaderboardEntry(user))
-            .sort((a, b) => a.username.localeCompare(b.username));
-    }
-
     const allProgress = readAllProgress();
-    return pruneUsers().map((user) => {
+    const mergedUsers = new Map();
+    const applyEntry = (entry) => {
+        if (!entry) return;
+        const normalized = normalizeLeaderboardEntry(entry);
+        const id = getUserId(normalized);
+        if (!id || normalized.expiresAt <= Date.now()) return;
+        const existing = mergedUsers.get(id);
+        if (!existing || Number(normalized.updatedAt || 0) >= Number(existing.updatedAt || 0)) {
+            mergedUsers.set(id, normalized);
+        }
+    };
+
+    pruneUsers().forEach((user) => {
         const progress = { ...getDefaultProgress(), ...(allProgress[getUserId(user)] || {}) };
-        return normalizeLeaderboardEntry({
+        applyEntry({
             ...user,
             points: Number(user.points ?? progress.points ?? 0),
             wins: Number(user.wins ?? progress.wins ?? 0),
@@ -843,7 +872,12 @@ function getManagedUsers() {
             totalPlayMs: Number(user.totalPlayMs ?? progress.totalPlayMs ?? 0),
             hiddenFromLeaderboard: Boolean(user.hiddenFromLeaderboard)
         });
-    }).sort((a, b) => a.username.localeCompare(b.username));
+    });
+
+    state.sharedLeaderboard.forEach((user) => applyEntry(user));
+    applyEntry(getCurrentUserLeaderboardEntry());
+
+    return Array.from(mergedUsers.values()).sort((a, b) => a.username.localeCompare(b.username));
 }
 
 function getManagedUserById(userId) {
@@ -953,29 +987,11 @@ function addExplorerWord(payload) {
     refreshLibraryFromStorage();
 }
 
-function getLocalLeaderboard() {
-    return pruneUsers()
-        .filter((user) => !user.hiddenFromLeaderboard && isLeaderboardVisible(user))
-        .map((user) => normalizeLeaderboardEntry(user))
-        .sort(sortLeaderboardEntries)
-        .slice(0, 20);
-}
-
-function getRemoteLeaderboard() {
-    return state.sharedLeaderboard
-        .filter((user) => user && user.expiresAt > Date.now() && !user.hiddenFromLeaderboard && isLeaderboardVisible(user))
-        .map((user) => normalizeLeaderboardEntry(user))
-        .sort(sortLeaderboardEntries)
-        .slice(0, 20);
-}
-
 function getLeaderboard() {
-    const remote = getRemoteLeaderboard();
-    if (state.firestoreReady && remote.length) {
-        return remote;
-    }
-
-    return getLocalLeaderboard();
+    return getManagedUsers()
+        .filter((user) => !user.hiddenFromLeaderboard && isLeaderboardVisible(user))
+        .sort(sortLeaderboardEntries)
+        .slice(0, 20);
 }
 
 function getLeaderboardDisplayEntries() {
