@@ -1,4 +1,4 @@
-const STORAGE_KEYS = {
+ï»¿const STORAGE_KEYS = {
     activeUser: 'everest_active_user',
     users: 'everest_temp_users',
     progress: 'everest_dashboard_progress',
@@ -299,7 +299,7 @@ const ui = {
         matchSignalLabel: 'Tarjeta de palabra',
         matchEmojiLabel: 'Ruta de emoji',
         challengeWord: 'Palabra objetivo',
-        matchSignalStep: 'Palabra guía',
+        matchSignalStep: 'Palabra guÃ­a',
         matchEmojiStep: 'Elige el mejor emoji',
         matchSelectionIdle: 'Elige una sola ruta de emoji para responder.',
         matchSelectionSignal: 'Tarjeta lista',
@@ -675,7 +675,7 @@ function getGameModeLabel(mode = state.settings?.gameMode) {
 }
 
 function getThemeMatchSignalEmoji(themeId = state.activeThemeId) {
-    return THEME_MATCH_SIGNAL_EMOJIS[themeId] || '??';
+    return THEME_MATCH_SIGNAL_EMOJIS[themeId] || '\uD83E\uDDED';
 }
 
 function getOptionStatusMarkup(label, isActive) {
@@ -701,21 +701,21 @@ function getDefaultSettings() { return { language: 'en', gameMode: 'multiple', s
 function getDefaultProgress() { return { points: 0, wins: 0, losses: 0, totalPlayMs: 0, lastPlayedTheme: null, stageResults: {} }; }
 
 const THEME_MATCH_SIGNAL_EMOJIS = {
-    'basic-communication': '??',
-    'grammar-language': '??',
-    'human-body-identity': '??',
-    'personal-social-life': '??',
-    'education-work': '??',
-    'places-environment': '??',
-    'movement-navigation': '??',
-    'shopping-daily-life': '???',
-    'clothing-style': '??',
-    'food-drinks': '???',
-    'nature-weather': '???',
-    'culture-leisure': '??',
-    'tools-objects': '??',
-    technology: '??',
-    'concepts-academic': '??'
+    'basic-communication': '\uD83D\uDCAC',
+    'grammar-language': '\uD83E\uDDE9',
+    'human-body-identity': '\uD83E\uDDD1',
+    'personal-social-life': '\uD83D\uDC65',
+    'education-work': '\uD83C\uDF93',
+    'places-environment': '\uD83D\uDCCD',
+    'movement-navigation': '\uD83E\uDDED',
+    'shopping-daily-life': '\uD83D\uDECD\uFE0F',
+    'clothing-style': '\uD83D\uDC57',
+    'food-drinks': '\uD83C\uDF7D\uFE0F',
+    'nature-weather': '\uD83C\uDF26\uFE0F',
+    'culture-leisure': '\uD83C\uDFAD',
+    'tools-objects': '\uD83E\uDDF0',
+    technology: '\uD83D\uDCBB',
+    'concepts-academic': '\uD83D\uDCD8'
 };
 
 function pruneUsers() {
@@ -1348,7 +1348,7 @@ function renderGame() {
         ? t('matchPairPrompt', { word: question.term.en })
         : (typingMode ? t('typeEnglish', { word: question.term.es }) : t('chooseEnglish', { word: question.term.es }));
     elements.challengeHint.textContent = matchMode
-        ? `${t('hintPrefix')}: ${question.term.es} · ${question.term.hint}`
+        ? `${t('hintPrefix')}: ${question.term.es} Â· ${question.term.hint}`
         : `${t('hintPrefix')}: ${question.term.hint}`;
     elements.challengeExample.textContent = matchMode
         ? `${t('matchPairHelp')} ${selectedEmojiOption ? `${t('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : t('matchSelectionIdle')}`
@@ -1390,7 +1390,7 @@ function renderGame() {
                     <section class="match-lane match-lane--emoji" aria-label="${t('matchEmojiLabel')}">
                         <span class="match-lane__label">${t('matchEmojiStep')}</span>
                         <div class="match-column__list">
-                            ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button" style="display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:.82rem;padding:.62rem .74rem;"><span class="choice-button__media" style="display:grid;justify-items:center;align-content:center;gap:.06rem;"><span class="choice-button__kicker" style="display:inline-flex;align-items:center;justify-content:center;min-width:2rem;min-height:1.18rem;padding:0 .35rem;">${option.laneLabel}</span><span class="choice-button__emoji" style="font-size:1.8rem;line-height:1;">${option.emoji}</span></span><span class="choice-button__copy" style="display:grid;align-content:center;gap:.22rem;min-width:0;"><span class="choice-button__title" style="font-size:1.12rem;line-height:1.16;">${option.es}</span><span class="choice-button__detail" style="font-size:.9rem;line-height:1.34;">${option.hint}</span></span></button>`).join('')}
+                            ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button" style="display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:1rem;padding:.64rem .78rem;"><span class="choice-button__media" style="display:grid;justify-items:center;align-content:center;gap:.08rem;"><span class="choice-button__kicker" style="display:inline-flex;align-items:center;justify-content:center;min-width:2rem;min-height:1.18rem;padding:0 .35rem;">${option.laneLabel}</span><span class="choice-button__emoji" style="font-size:1.8rem;line-height:1;">${option.emoji}</span></span><span class="choice-button__copy" style="display:grid;align-content:center;gap:.3rem;min-width:0;"><span class="choice-button__title" style="font-size:1.22rem;line-height:1.18;">${option.es}</span><span class="choice-button__detail" style="font-size:1rem;line-height:1.42;">${option.hint}</span></span></button>`).join('')}
                         </div>
                     </section>
                 </div>
