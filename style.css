@@ -7032,6 +7032,75 @@ body:not([data-theme-mode="dark"]) .leaderboard-preview__row:not(.is-top-1):not(
     color: #effff4 !important;
 }
 
+/* Final Word Match answer-state override */
+.game-card.is-match-mode .choice-button.choice-button--match.is-correct {
+    background: linear-gradient(180deg, rgba(231, 255, 238, 0.98), rgba(205, 245, 216, 0.96)) !important;
+    border-color: rgba(61, 168, 92, 0.48) !important;
+    box-shadow: 0 18px 32px rgba(61, 168, 92, 0.18) !important;
+    color: #1d5b2d !important;
+}
+
+.game-card.is-match-mode .choice-button.choice-button--match.is-wrong {
+    background: linear-gradient(180deg, rgba(255, 240, 240, 0.98), rgba(255, 220, 220, 0.96)) !important;
+    border-color: rgba(214, 74, 74, 0.45) !important;
+    box-shadow: 0 18px 32px rgba(214, 74, 74, 0.16) !important;
+    color: #7a2020 !important;
+}
+
+.game-card.is-match-mode .choice-button.choice-button--match.is-correct .choice-button__kicker {
+    background: rgba(61, 168, 92, 0.14) !important;
+    color: #23723a !important;
+}
+
+.game-card.is-match-mode .choice-button.choice-button--match.is-wrong .choice-button__kicker {
+    background: rgba(214, 74, 74, 0.14) !important;
+    color: #992f2f !important;
+}
+
+.game-card.is-match-mode .choice-button.choice-button--match.is-correct .choice-button__title,
+.game-card.is-match-mode .choice-button.choice-button--match.is-correct .choice-button__detail {
+    color: #1f5f31 !important;
+}
+
+.game-card.is-match-mode .choice-button.choice-button--match.is-wrong .choice-button__title,
+.game-card.is-match-mode .choice-button.choice-button--match.is-wrong .choice-button__detail {
+    color: #7a2424 !important;
+}
+
+body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-button--match.is-correct {
+    background: linear-gradient(180deg, rgba(23, 61, 39, 0.98), rgba(15, 46, 30, 0.98)) !important;
+    border-color: rgba(108, 216, 140, 0.38) !important;
+    box-shadow: 0 18px 32px rgba(23, 61, 39, 0.32) !important;
+    color: #dcffe5 !important;
+}
+
+body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-button--match.is-wrong {
+    background: linear-gradient(180deg, rgba(76, 29, 33, 0.98), rgba(54, 18, 21, 0.98)) !important;
+    border-color: rgba(255, 132, 132, 0.34) !important;
+    box-shadow: 0 18px 32px rgba(76, 29, 33, 0.28) !important;
+    color: #ffe1e1 !important;
+}
+
+body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-button--match.is-correct .choice-button__kicker {
+    background: rgba(108, 216, 140, 0.16) !important;
+    color: #d5ffdf !important;
+}
+
+body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-button--match.is-wrong .choice-button__kicker {
+    background: rgba(255, 132, 132, 0.14) !important;
+    color: #ffe1e1 !important;
+}
+
+body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-button--match.is-correct .choice-button__title,
+body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-button--match.is-correct .choice-button__detail {
+    color: #e7ffed !important;
+}
+
+body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-button--match.is-wrong .choice-button__title,
+body[data-theme-mode="dark"] .game-card.is-match-mode .choice-button.choice-button--match.is-wrong .choice-button__detail {
+    color: #ffe8e8 !important;
+}
+
 /* Final Word Match rebuild override */
 .game-card.is-match-mode .challenge-visual,
 .game-card.is-match-mode #challengeVisual {
