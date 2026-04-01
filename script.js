@@ -257,7 +257,7 @@ const ui = {
         startStage: 'Start current stage', replay: 'Replay stage', continue: 'Continue climb',
         openLibrary: 'Open library', focusRoute: 'Focus current route', searchThemes: 'Search routes, games or themes',
         searchLibrary: 'Search a term, tip or theme', topRidge: 'Top 20 ridge', quickOptions: 'Quick options',
-        darkMode: 'Dark mode', lightMode: 'Light mode', language: 'Language', sound: 'Sound', voice: 'Voice', animations: 'Animations',
+        darkMode: 'Dark mode', lightMode: 'Light mode', language: 'Language', sound: 'Sound', voice: 'Voice', animations: 'Animations', options: 'Options', logout: 'Logout',
         statusOn: 'On', statusOff: 'Off',
         gameMode: 'Game mode',
         play: 'Play', select: 'Select', edit: 'Edit', allThemes: 'All themes', activeClimber: 'Active climber',
@@ -291,7 +291,59 @@ const ui = {
         wordTypePlaceholder: 'noun',
         wordMeaningPlaceholder: 'glaciar',
         wordExamplePlaceholder: 'The glacier is melting slowly.',
-        wordTipPlaceholder: 'Use it for ice landscapes and cold nature topics.'
+        wordTipPlaceholder: 'Use it for ice landscapes and cold nature topics.',
+        appTitle: 'Everest - Climb to Fluency',
+        brandSubtitle: 'Climb to Fluency',
+        loadingPreparing: 'Preparing the ridge. Your climb is almost ready.',
+        routesLabel: 'Routes',
+        themeMountainMap: 'Theme mountain map',
+        everestNote: 'Everest note',
+        summitDashboard: 'Summit dashboard',
+        currentAscent: 'Current ascent',
+        sessionLabel: 'Session',
+        activeRouteLabel: 'Active route',
+        climberProfile: 'Climber profile',
+        ridgeRankLabel: 'Ridge rank',
+        top20Pending: 'Top 20 ridge pending',
+        stageRoutes: 'Stage routes',
+        stageRouteBoard: 'Stage route board',
+        stageRouteBoardText: 'Open the route list, choose one stage, then jump into the challenge.',
+        stageStep1: '1. Select a stage',
+        stageStep2: '2. Press play',
+        stageStep3: '3. Climb for points',
+        themeDeck: 'Theme deck',
+        chooseRouteDeck: 'Choose the route you want to climb',
+        deckGuide1: 'Use the sidebar for fast switching',
+        deckGuide2: 'Open this deck only when you want the full route map',
+        ridgeBoard: 'Ridge board',
+        liveLeaderboard: 'Live leaderboard',
+        openTop20: 'Open top 20',
+        exploreNatively: 'Explore natively',
+        englishExplorer: 'English explorer',
+        explorerPreview: 'Explorer preview',
+        explorerPreviewText: 'Keep this folded and open the full library from the header when you need depth.',
+        climbControls: 'Climb controls',
+        controlsPreview: 'Controls preview',
+        controlsPreviewText: 'Use the header button for the full options panel or unfold this quick control strip.',
+        leaderboardModalTitle: 'Everest leaderboard',
+        leaderboardModalText: 'Watch the summit shift in real time as climbers earn points, wins and time.',
+        rankHeader: 'Rank',
+        courseHeader: 'Course',
+        profileNameHeader: 'Profile & Name',
+        nativeLearning: 'Native learning',
+        explorerModalTitle: 'Everest English explorer',
+        explorerModalText: 'Explore themed words, meanings and examples before jumping back into the climb.',
+        searchThemePlaceholder: 'Search a theme...',
+        explorerThemeList: 'Explorer theme list',
+        summitControls: 'Summit controls',
+        summitControlsText: 'Shape the route, language, atmosphere and advanced control tools from one clear command point.',
+        closeLeaderboard: 'Close leaderboard',
+        closeExplorer: 'Close explorer',
+        closeOptions: 'Close options',
+        clearThemeSearch: 'Clear theme search',
+        clearExplorerSearch: 'Clear explorer search',
+        toggleSidebar: 'Toggle sidebar',
+        refreshEverest: 'Refresh Everest'
     },
     es: {
         welcome: 'Bienvenido, {name}.',
@@ -328,7 +380,7 @@ const ui = {
         startStage: 'Iniciar etapa actual', replay: 'Repetir etapa', continue: 'Seguir la escalada',
         openLibrary: 'Abrir biblioteca', focusRoute: 'Enfocar ruta actual', searchThemes: 'Buscar rutas, juegos o temas',
         searchLibrary: 'Buscar un t\u00E9rmino, pista o tema', topRidge: 'Top 20 de la cresta', quickOptions: 'Ajustes r\u00E1pidos',
-        darkMode: 'Modo oscuro', lightMode: 'Modo claro', language: 'Idioma', sound: 'Sonido', voice: 'Voz', animations: 'Animaciones',
+        darkMode: 'Modo oscuro', lightMode: 'Modo claro', language: 'Idioma', sound: 'Sonido', voice: 'Voz', animations: 'Animaciones', options: 'Opciones', logout: 'Cerrar sesión',
         statusOn: 'Activado', statusOff: 'Desactivado',
         gameMode: 'Modo de juego',
         play: 'Jugar', select: 'Seleccionar', edit: 'Editar', allThemes: 'Todos los temas', activeClimber: 'Escalador activo',
@@ -362,7 +414,59 @@ const ui = {
         wordTypePlaceholder: 'sustantivo',
         wordMeaningPlaceholder: 'glaciar',
         wordExamplePlaceholder: 'The glacier is melting slowly.',
-        wordTipPlaceholder: '\u00DAsala para paisajes helados y temas de naturaleza fr\u00EDa.'
+        wordTipPlaceholder: '\u00DAsala para paisajes helados y temas de naturaleza fr\u00EDa.',
+        appTitle: 'Everest - Escala hacia la fluidez',
+        brandSubtitle: 'Escala hacia la fluidez',
+        loadingPreparing: 'Preparando la cresta. Tu ascenso casi est\u00E1 listo.',
+        routesLabel: 'Rutas',
+        themeMountainMap: 'Mapa tem\u00E1tico de la monta\u00F1a',
+        everestNote: 'Nota de Everest',
+        summitDashboard: 'Panel de la cima',
+        currentAscent: 'Ascenso actual',
+        sessionLabel: 'Sesi\u00F3n',
+        activeRouteLabel: 'Ruta activa',
+        climberProfile: 'Perfil del escalador',
+        ridgeRankLabel: 'Rango en la cresta',
+        top20Pending: 'Top 20 de la cresta pendiente',
+        stageRoutes: 'Rutas de etapa',
+        stageRouteBoard: 'Panel de rutas de etapa',
+        stageRouteBoardText: 'Abre la lista de rutas, elige una etapa y salta directo al desaf\u00EDo.',
+        stageStep1: '1. Elige una etapa',
+        stageStep2: '2. Pulsa jugar',
+        stageStep3: '3. Escala por puntos',
+        themeDeck: 'Panel de temas',
+        chooseRouteDeck: 'Elige la ruta que quieres escalar',
+        deckGuide1: 'Usa la barra lateral para cambiar r\u00E1pido',
+        deckGuide2: 'Abre este panel solo cuando quieras el mapa completo',
+        ridgeBoard: 'Tabla de cresta',
+        liveLeaderboard: 'Tabla en vivo',
+        openTop20: 'Abrir top 20',
+        exploreNatively: 'Explora de forma nativa',
+        englishExplorer: 'Explorador de ingl\u00E9s',
+        explorerPreview: 'Vista previa del explorador',
+        explorerPreviewText: 'Mantenlo cerrado y abre la biblioteca completa desde el encabezado cuando necesites m\u00E1s profundidad.',
+        climbControls: 'Controles de escalada',
+        controlsPreview: 'Vista previa de controles',
+        controlsPreviewText: 'Usa el bot\u00F3n del encabezado para el panel completo o despliega esta franja r\u00E1pida.',
+        leaderboardModalTitle: 'Tabla de Everest',
+        leaderboardModalText: 'Observa c\u00F3mo cambia la cima en tiempo real mientras los escaladores ganan puntos, victorias y tiempo.',
+        rankHeader: 'Rango',
+        courseHeader: 'Curso',
+        profileNameHeader: 'Perfil y nombre',
+        nativeLearning: 'Aprendizaje nativo',
+        explorerModalTitle: 'Explorador de ingl\u00E9s Everest',
+        explorerModalText: 'Explora palabras, significados y ejemplos tem\u00E1ticos antes de volver al ascenso.',
+        searchThemePlaceholder: 'Buscar un tema...',
+        explorerThemeList: 'Lista de temas del explorador',
+        summitControls: 'Controles de la cima',
+        summitControlsText: 'Moldea la ruta, el idioma, la atm\u00F3sfera y las herramientas avanzadas desde un punto claro de mando.',
+        closeLeaderboard: 'Cerrar tabla',
+        closeExplorer: 'Cerrar explorador',
+        closeOptions: 'Cerrar opciones',
+        clearThemeSearch: 'Borrar b\u00FAsqueda de rutas',
+        clearExplorerSearch: 'Borrar b\u00FAsqueda del explorador',
+        toggleSidebar: 'Alternar barra lateral',
+        refreshEverest: 'Recargar Everest'
     }
 };
 
@@ -684,6 +788,12 @@ function t(key, replacements = {}) {
     return text;
 }
 
+function tg(key, replacements = {}) {
+    let text = ui.en[key] || key;
+    Object.entries(replacements).forEach(([token, value]) => { text = text.replace(`{${token}}`, value); });
+    return text;
+}
+
 function tc(key) {
     const language = state.settings?.language || 'en';
     return (controlUi[language] && controlUi[language][key]) || controlUi.en[key] || key;
@@ -698,6 +808,13 @@ function getGameModeLabel(mode = state.settings?.gameMode) {
     if (mode === 'match') return t('summitMatch');
     if (mode === 'context') return t('summitContext');
     return t('summitChoice');
+}
+
+function getGameModeLabelEnglish(mode = state.settings?.gameMode) {
+    if (mode === 'typing') return tg('summitTyping');
+    if (mode === 'match') return tg('summitMatch');
+    if (mode === 'context') return tg('summitContext');
+    return tg('summitChoice');
 }
 
 function getThemeMatchSignalEmoji(themeId = state.activeThemeId) {
@@ -1365,6 +1482,83 @@ function updateSidebarSupport() {
     elements.sidebarSupportText.textContent = theme.summary;
 }
 
+function applyStaticTranslations() {
+    document.title = t('appTitle');
+    document.querySelectorAll('.loading-screen__brand span, .sidebar__brand span').forEach((node) => {
+        node.textContent = t('brandSubtitle');
+    });
+    elements.loadingMessage.textContent = t('loadingPreparing');
+    elements.sidebarSearch.querySelector('input')?.setAttribute('placeholder', t('searchThemes'));
+    elements.themeSearchClear?.setAttribute('aria-label', t('clearThemeSearch'));
+    document.querySelector('.sidebar-section__head .sidebar-section__eyebrow')?.replaceChildren(t('routesLabel'));
+    document.querySelector('.sidebar-section__head strong')?.replaceChildren(t('themeMountainMap'));
+    document.querySelector('.support-card__badge')?.replaceChildren(t('everestNote'));
+    document.querySelector('.topbar__eyebrow')?.replaceChildren(t('summitDashboard'));
+    elements.sidebarToggle?.setAttribute('aria-label', t('toggleSidebar'));
+    elements.optionsButton?.setAttribute('title', t('options'));
+    elements.leaderboardButton?.setAttribute('title', t('leaderboardModalTitle'));
+    elements.explorerButton?.setAttribute('title', t('englishExplorer'));
+    elements.logoutButton?.setAttribute('title', t('logout'));
+    document.querySelector('.hero-card .panel-badge')?.replaceChildren(t('currentAscent'));
+    document.querySelector('.hero-card__status .status-pill:nth-child(1) span')?.replaceChildren(t('sessionLabel'));
+    document.querySelector('.hero-card__status .status-pill:nth-child(2) span')?.replaceChildren(t('activeRouteLabel'));
+    document.querySelector('.hero-card__status .status-pill:nth-child(3) span')?.replaceChildren(t('gameMode'));
+    document.querySelector('.profile-card .panel-badge')?.replaceChildren(t('climberProfile'));
+    document.querySelector('.profile-rankline__label')?.replaceChildren(t('ridgeRankLabel'));
+    if (!getRankForUser()) elements.profileRankline.textContent = t('top20Pending');
+    document.querySelector('.profile-meta .meta-chip:nth-child(1) span')?.replaceChildren(t('points'));
+    document.querySelector('.profile-meta .meta-chip:nth-child(2) span')?.replaceChildren(t('wins'));
+    document.querySelector('.profile-meta .meta-chip:nth-child(3) span')?.replaceChildren(t('losses'));
+    document.querySelector('.profile-meta .meta-chip:nth-child(4) span')?.replaceChildren(t('time'));
+    document.querySelector('.stage-card .panel-badge')?.replaceChildren(t('stageRoutes'));
+    document.querySelector('#stageToggle strong')?.replaceChildren(t('stageRouteBoard'));
+    document.querySelector('#stageToggle .panel-toggle__copy span')?.replaceChildren(t('stageRouteBoardText'));
+    const stageGuideSteps = document.querySelectorAll('.stage-card .section-guide .section-guide__step');
+    if (stageGuideSteps[0]) stageGuideSteps[0].textContent = t('stageStep1');
+    if (stageGuideSteps[1]) stageGuideSteps[1].textContent = t('stageStep2');
+    if (stageGuideSteps[2]) stageGuideSteps[2].textContent = t('stageStep3');
+    document.querySelector('.theme-overview-card .panel-badge')?.replaceChildren(t('themeDeck'));
+    document.querySelector('.theme-overview-card .section-head h3')?.replaceChildren(t('chooseRouteDeck'));
+    const deckGuideSteps = document.querySelectorAll('.theme-overview-card .section-guide__step');
+    if (deckGuideSteps[0]) deckGuideSteps[0].textContent = t('deckGuide1');
+    if (deckGuideSteps[1]) deckGuideSteps[1].textContent = t('deckGuide2');
+    document.querySelector('.ridge-card .panel-badge')?.replaceChildren(t('ridgeBoard'));
+    document.querySelector('.ridge-card .section-head h3')?.replaceChildren(t('liveLeaderboard'));
+    document.querySelector('#openLeaderboardInlineButton')?.replaceChildren(t('openTop20'));
+    document.querySelector('.explorer-card .panel-badge')?.replaceChildren(t('exploreNatively'));
+    document.querySelector('.explorer-card .section-head h3')?.replaceChildren(t('englishExplorer'));
+    document.querySelector('#openExplorerInlineButton')?.replaceChildren(t('openLibrary'));
+    document.querySelector('#explorerToggle strong')?.replaceChildren(t('explorerPreview'));
+    document.querySelector('#explorerToggle .panel-toggle__copy span')?.replaceChildren(t('explorerPreviewText'));
+    document.querySelector('.options-card .panel-badge')?.replaceChildren(t('climbControls'));
+    document.querySelector('.options-card .section-head h3')?.replaceChildren(t('quickOptions'));
+    document.querySelector('#optionsToggle strong')?.replaceChildren(t('controlsPreview'));
+    document.querySelector('#optionsToggle .panel-toggle__copy span')?.replaceChildren(t('controlsPreviewText'));
+    document.querySelector('#leaderboardModal .panel-badge')?.replaceChildren(t('topRidge'));
+    document.querySelector('#leaderboardModal h3')?.replaceChildren(t('leaderboardModalTitle'));
+    document.querySelector('#leaderboardModal p')?.replaceChildren(t('leaderboardModalText'));
+    document.querySelector('#leaderboardModal [data-close-modal="leaderboardModal"]')?.setAttribute('aria-label', t('closeLeaderboard'));
+    const leaderboardHeaders = document.querySelectorAll('.leaderboard-table thead th');
+    if (leaderboardHeaders[0]) leaderboardHeaders[0].textContent = t('rankHeader');
+    if (leaderboardHeaders[1]) leaderboardHeaders[1].textContent = t('profileNameHeader');
+    if (leaderboardHeaders[2]) leaderboardHeaders[2].textContent = t('courseHeader');
+    if (leaderboardHeaders[3]) leaderboardHeaders[3].textContent = t('points');
+    if (leaderboardHeaders[4]) leaderboardHeaders[4].textContent = t('wins');
+    if (leaderboardHeaders[5]) leaderboardHeaders[5].textContent = t('losses');
+    if (leaderboardHeaders[6]) leaderboardHeaders[6].textContent = t('time');
+    document.querySelector('#explorerModal .panel-badge')?.replaceChildren(t('nativeLearning'));
+    document.querySelector('#explorerModal h3')?.replaceChildren(t('explorerModalTitle'));
+    document.querySelector('#explorerModal p')?.replaceChildren(t('explorerModalText'));
+    document.querySelector('#explorerModal [data-close-modal="explorerModal"]')?.setAttribute('aria-label', t('closeExplorer'));
+    elements.explorerSearchClear?.setAttribute('aria-label', t('clearExplorerSearch'));
+    document.querySelector('#explorerThemeSearch')?.setAttribute('placeholder', t('searchThemePlaceholder'));
+    document.querySelector('#explorerThemeOptions')?.setAttribute('aria-label', t('explorerThemeList'));
+    document.querySelector('#optionsModal .panel-badge')?.replaceChildren(t('options'));
+    document.querySelector('#optionsModal h3')?.replaceChildren(t('summitControls'));
+    document.querySelector('#optionsModal p')?.replaceChildren(t('summitControlsText'));
+    document.querySelector('#optionsModal [data-close-modal="optionsModal"]')?.setAttribute('aria-label', t('closeOptions'));
+}
+
 function renderSidebar() {
     const filtered = state.themes.filter((theme) => !state.searchTerm || normalizeWord(`${theme.title} ${theme.summary}`).includes(normalizeWord(state.searchTerm)));
     elements.themeNav.innerHTML = state.themes.map((theme) => {
@@ -1513,22 +1707,23 @@ function renderGame() {
     const matchMode = state.settings.gameMode === 'match';
     const contextMode = state.settings.gameMode === 'context';
     const typingMode = state.settings.gameMode === 'typing';
+    const gameText = tg;
     state.progress.lastPlayedTheme = theme.id;
     elements.gameCard?.classList.toggle('is-match-mode', matchMode);
     elements.gameCard?.classList.toggle('is-context-mode', contextMode);
     elements.challengeVisual.classList.toggle('is-hidden-for-mode', matchMode);
     elements.gameThemeTitle.textContent = `${theme.title} - ${stage.name}`;
     elements.gameThemeDescription.textContent = stage.focus;
-    elements.stagePointsLabel.textContent = `${t('stagePoints')}: ${state.stagePoints}`;
-    elements.stageAccuracyLabel.textContent = `${t('accuracy')}: ${state.latestAccuracy}%`;
-    elements.typingSubmitButton.textContent = t('checkAnswer');
-    elements.typingInput.placeholder = t('typePlaceholder');
+    elements.stagePointsLabel.textContent = `${gameText('stagePoints')}: ${state.stagePoints}`;
+    elements.stageAccuracyLabel.textContent = `${gameText('accuracy')}: ${state.latestAccuracy}%`;
+    elements.typingSubmitButton.textContent = gameText('checkAnswer');
+    elements.typingInput.placeholder = gameText('typePlaceholder');
 
     if (!state.stageLive || !state.currentQuestion) {
         renderChallengeVisual(theme, null, false);
-        elements.challengeTypeLabel.textContent = t('routeFocus');
+        elements.challengeTypeLabel.textContent = gameText('routeFocus');
         elements.challengePrompt.textContent = stage.focus;
-        elements.challengeHint.textContent = t('noChallenge');
+        elements.challengeHint.textContent = gameText('noChallenge');
         elements.challengeExample.textContent = `${theme.summary} ${randomFrom(EVEREST_LINES.info)}`;
         elements.choiceGrid.innerHTML = '';
         elements.choiceGrid.classList.remove('choice-grid--match');
@@ -1540,7 +1735,7 @@ function renderGame() {
         elements.timerBadge.textContent = '15s';
         elements.streakBadge.textContent = 'Streak 0';
         elements.progressBar.style.width = '0%';
-        setFeedback('idle', t('idleTitle'), t('idleText'));
+        setFeedback('idle', gameText('idleTitle'), gameText('idleText'));
         toggleGameModeVisibility();
         return;
     }
@@ -1555,23 +1750,23 @@ function renderGame() {
             '____',
             contextAnsweredCorrect
                 ? `<span class="context-card__solved">${question.term.en}</span>`
-                : `<span class="context-card__blank ${contextAnsweredWrong ? 'is-wrong' : ''}">${t('contextBlank')}</span>`
+                : `<span class="context-card__blank ${contextAnsweredWrong ? 'is-wrong' : ''}">${gameText('contextBlank')}</span>`
         )
         : '';
     if (!matchMode) {
         renderChallengeVisual(theme, question, false);
     }
     const selectedEmojiOption = matchMode ? question.emojiChoices.find((option) => normalizeWord(option.en) === state.matchSelection.emoji) : null;
-    elements.challengeTypeLabel.textContent = getGameModeLabel();
+    elements.challengeTypeLabel.textContent = getGameModeLabelEnglish();
     elements.challengePrompt.textContent = matchMode
-        ? t('matchPairPrompt', { word: question.term.en })
-        : (contextMode ? t('contextPrompt') : (typingMode ? t('typeEnglish', { word: question.term.es }) : t('chooseEnglish', { word: question.term.es })));
+        ? gameText('matchPairPrompt', { word: question.term.en })
+        : (contextMode ? gameText('contextPrompt') : (typingMode ? gameText('typeEnglish', { word: question.term.es }) : gameText('chooseEnglish', { word: question.term.es })));
     elements.challengeHint.textContent = matchMode
-        ? `${t('hintPrefix')}: ${question.term.es} · ${question.term.hint}`
-        : (contextMode ? `${t('contextClueLabel')}: ${question.contextClue}` : `${t('hintPrefix')}: ${question.term.hint}`);
+        ? `${gameText('hintPrefix')}: ${question.term.es} · ${question.term.hint}`
+        : (contextMode ? `${gameText('contextClueLabel')}: ${question.contextClue}` : `${gameText('hintPrefix')}: ${question.term.hint}`);
     elements.challengeExample.textContent = matchMode
-        ? `${t('matchPairHelp')} ${selectedEmojiOption ? `${t('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : t('matchSelectionIdle')}`
-        : (contextMode ? t('contextHelp') : `${t('examplePrefix')}: ${theme.summary}`);
+        ? `${gameText('matchPairHelp')} ${selectedEmojiOption ? `${gameText('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : gameText('matchSelectionIdle')}`
+        : (contextMode ? gameText('contextHelp') : `${gameText('examplePrefix')}: ${theme.summary}`);
     elements.questionCounter.textContent = `${state.questionIndex + 1} / ${state.questions.length}`;
     elements.timerBadge.textContent = `${state.secondsLeft}s`;
     elements.streakBadge.textContent = `Streak ${state.streak}`;
@@ -1587,27 +1782,27 @@ function renderGame() {
         elements.choiceGrid.innerHTML = `
             <div class="match-summit">
                 <div class="match-summit__intro">
-                    <span class="match-summit__eyebrow">${t('summitMatch')}</span>
-                    <p class="match-summit__guide">${t('matchPairHelp')}</p>
+                    <span class="match-summit__eyebrow">${gameText('summitMatch')}</span>
+                    <p class="match-summit__guide">${gameText('matchPairHelp')}</p>
                 </div>
                 <div class="match-board">
                     <section class="match-center match-center--left" aria-label="${question.term.en}">
                         <div class="match-center__pulse"></div>
-                        <span class="match-center__badge">${t('summitMatch')}</span>
-                        <span class="match-center__mini">${t('matchSelectionIdle')}</span>
+                        <span class="match-center__badge">${gameText('summitMatch')}</span>
+                        <span class="match-center__mini">${gameText('matchSelectionIdle')}</span>
                         <div class="match-center__core">
-                            <span class="match-center__word-label">${t('challengeWord')}</span>
+                            <span class="match-center__word-label">${gameText('challengeWord')}</span>
                             <strong class="match-center__word">${question.term.en}</strong>
                             <span class="match-center__meaning">${question.term.es}</span>
                             <span class="match-center__hint-line">${question.term.hint}</span>
                         </div>
                         <div class="match-center__status">
-                            <span class="match-center__status-pill is-filled">${getThemeMatchSignalEmoji(question.themeId)} ${getTheme(question.themeId)?.title || t('matchSignalLabel')}</span>
-                            <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : t('matchMeaningPending')}</span>
+                            <span class="match-center__status-pill is-filled">${getThemeMatchSignalEmoji(question.themeId)} ${getTheme(question.themeId)?.title || gameText('matchSignalLabel')}</span>
+                            <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : gameText('matchMeaningPending')}</span>
                         </div>
                     </section>
-                    <section class="match-lane match-lane--emoji" aria-label="${t('matchEmojiLabel')}">
-                        <span class="match-lane__label">${t('matchEmojiStep')}</span>
+                    <section class="match-lane match-lane--emoji" aria-label="${gameText('matchEmojiLabel')}">
+                        <span class="match-lane__label">${gameText('matchEmojiStep')}</span>
                         <div class="match-column__list">
                             ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button" style="display:grid !important;grid-template-columns:auto minmax(0,1fr) !important;align-items:center !important;column-gap:1.04rem !important;padding:.7rem .84rem !important;"><span class="choice-button__media" style="display:grid !important;justify-items:center !important;align-content:center !important;gap:.1rem !important;"><span class="choice-button__kicker" style="display:inline-flex !important;align-items:center !important;justify-content:center !important;min-width:2rem !important;min-height:1.18rem !important;padding:0 .35rem !important;">${option.laneLabel}</span><span class="choice-button__emoji" style="font-size:1.58rem !important;line-height:1 !important;">${option.emoji}</span></span><span class="choice-button__copy" style="display:flex !important;flex-direction:column !important;justify-content:center !important;align-items:flex-start !important;min-width:0 !important;"><span class="choice-button__title" style="display:block !important;font-size:1.3rem !important;line-height:1.14 !important;font-weight:800 !important;">${option.es}</span><span class="choice-button__detail" style="display:block !important;margin-top:.08rem !important;font-size:.82rem !important;line-height:1.16 !important;font-weight:700 !important;">${option.hint}</span></span></button>`).join('')}
                         </div>
@@ -1621,8 +1816,8 @@ function renderGame() {
         elements.choiceGrid.classList.add('choice-grid--context');
         elements.choiceGrid.innerHTML = `
             <div class="context-trail">
-                <section class="context-card" aria-label="${t('summitContext')}">
-                    <span class="context-card__badge">${t('contextBadge')}</span>
+                <section class="context-card" aria-label="${gameText('summitContext')}">
+                    <span class="context-card__badge">${gameText('contextBadge')}</span>
                     <div class="context-card__sentence">
                         ${contextSentenceHtml}
                     </div>
@@ -1630,8 +1825,8 @@ function renderGame() {
                         <span class="context-card__hint">${question.contextClue}</span>
                     </div>
                 </section>
-                <section class="context-options" aria-label="${t('contextChoiceStep')}">
-                    <span class="context-options__label">${t('contextChoiceStep')}</span>
+                <section class="context-options" aria-label="${gameText('contextChoiceStep')}">
+                    <span class="context-options__label">${gameText('contextChoiceStep')}</span>
                     <div class="context-options__grid">
                         ${question.options.map((option, index) => `<button class="choice-button choice-button--context" data-choice="${option.en}" type="button"><span class="choice-button__kicker">${index + 1}</span><span class="choice-button__copy"><span class="choice-button__title">${option.en}</span><span class="choice-button__detail">${option.es}</span></span></button>`).join('')}
                     </div>
@@ -1824,8 +2019,8 @@ function resolveAnswer(answer, timedOut) {
     }
 
     state.latestAccuracy = Math.round((state.stageCorrect / (state.stageCorrect + state.stageWrong)) * 100);
-    elements.stagePointsLabel.textContent = `${t('stagePoints')}: ${state.stagePoints}`;
-    elements.stageAccuracyLabel.textContent = `${t('accuracy')}: ${state.latestAccuracy}%`;
+    elements.stagePointsLabel.textContent = `${tg('stagePoints')}: ${state.stagePoints}`;
+    elements.stageAccuracyLabel.textContent = `${tg('accuracy')}: ${state.latestAccuracy}%`;
     elements.nextQuestionButton.hidden = false;
     elements.typingInput.disabled = true;
     elements.typingSubmitButton.disabled = true;
@@ -1859,7 +2054,7 @@ function resolveAnswer(answer, timedOut) {
         const sentence = elements.choiceGrid.querySelector('.context-card__sentence');
         const blankMarkup = correct
             ? `<span class="context-card__solved">${state.currentQuestion.term.en}</span>`
-            : `<span class="context-card__blank is-wrong">${t('contextBlank')}</span>`;
+            : `<span class="context-card__blank is-wrong">${tg('contextBlank')}</span>`;
         if (sentence) {
             sentence.innerHTML = state.currentQuestion.sentence.replace('____', blankMarkup);
         }
@@ -2650,6 +2845,7 @@ function setActiveTheme(themeId) {
 
 function renderAll() {
     applyThemePalette();
+    applyStaticTranslations();
     elements.themeSearchInput.placeholder = t('searchThemes');
     elements.explorerSearchInput.placeholder = t('searchLibrary');
     renderHero();
