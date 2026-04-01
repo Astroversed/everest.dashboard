@@ -164,17 +164,17 @@ const controlUi = {
     },
     es: {
         title: 'Modo de control',
-        subtitle: 'Desbloquea herramientas de administraci\u00F3n de Everest solo para esta sesi\u00F3n del dashboard.',
+        subtitle: 'Activa las herramientas de administraci\u00F3n de Everest solo para esta sesi\u00F3n del panel.',
         unlockLabel: 'Clave de control',
         unlockPlaceholder: 'Introduce la clave de control',
         unlockButton: 'Desbloquear modo de control',
         unlockedBadge: 'Modo de control activo',
-        lockedHint: 'Solo el \u00FAltimo bloque de opciones puede abrir esta ruta.',
+        lockedHint: 'Este acceso solo se habilita desde el \u00FAltimo bloque de opciones.',
         managedUser: 'Usuario administrado',
         managedUserText: 'Elige el escalador que quieres gestionar.',
         userSelect: 'Selecciona un escalador',
-        rankTools: 'Acciones de ranking y sesi\u00F3n',
-        rankToolsText: 'Quita a un escalador del ranking o cierra su sesi\u00F3n por completo.',
+        rankTools: 'Acciones sobre ranking y sesi\u00F3n',
+        rankToolsText: 'Quita a un escalador de la tabla o cierra su sesi\u00F3n por completo.',
         removeRanking: 'Eliminar del ranking',
         closeSession: 'Cerrar sesi\u00F3n',
         statTools: 'Puntos, victorias, derrotas y tiempo de sesi\u00F3n',
@@ -182,7 +182,7 @@ const controlUi = {
         sessionMinutes: 'Minutos restantes',
         applyStats: 'Aplicar cambios',
         explorerTools: 'Editor de palabras del Explorer',
-        explorerToolsText: 'Crea, edita o elimina palabras de aprendizaje natural directamente dentro del Explorer.',
+        explorerToolsText: 'Crea, edita o elimina palabras del aprendizaje natural directamente desde el Explorer.',
         wordTheme: 'Tema',
         wordTerm: 'T\u00E9rmino en ingl\u00E9s',
         wordType: 'Tipo',
@@ -198,22 +198,22 @@ const controlUi = {
         saveWord: 'Guardar palabra del Explorer',
         deleteWord: 'Eliminar palabra del Explorer',
         clearWord: 'Nueva palabra',
-        unlockSuccess: 'Modo de control desbloqueado. La cresta ahora responde a tus comandos.',
-        unlockFail: 'Esa clave no pudo abrir el Modo de control.',
-        userRemoved: 'El escalador fue retirado del ranking en vivo.',
-        sessionClosed: 'La sesi\u00F3n seleccionada fue cerrada desde la cresta.',
+        unlockSuccess: 'Modo de control activado. Ya puedes administrar Everest.',
+        unlockFail: 'Esa clave no pudo activar el modo de control.',
+        userRemoved: 'El escalador fue retirado de la tabla en vivo.',
+        sessionClosed: 'La sesi\u00F3n seleccionada se cerr\u00F3 correctamente.',
         statsApplied: 'Los datos del usuario y su tiempo de sesi\u00F3n fueron actualizados.',
         wordAdded: 'La nueva palabra del Explorer se agreg\u00F3 a la ruta.',
         wordUpdated: 'La palabra del Explorer fue actualizada correctamente.',
         wordDeleted: 'La palabra del Explorer fue eliminada de la ruta.',
         wordLoaded: 'La palabra del Explorer ya est\u00E1 lista en el editor.',
-        noManagedUser: 'Elige un escalador antes de usar el Modo de control.',
-        selfClosed: 'Tu sesi\u00F3n fue cerrada desde el Modo de control.',
+        noManagedUser: 'Elige un escalador antes de usar el modo de control.',
+        selfClosed: 'Tu sesi\u00F3n fue cerrada desde el modo de control.',
         wordIncomplete: 'Completa todos los campos del Explorer antes de guardar la palabra.',
         wordNeedSelection: 'Elige primero una palabra existente del Explorer antes de intentar eliminarla.',
-        currentStageTag: 'Ruta actual',
-        deactivateButton: 'Desactivar modo control',
-        deactivateSuccess: 'El Modo de control se cerr\u00F3 y tus cambios pendientes fueron guardados.',
+        currentStageTag: 'Ruta activa',
+        deactivateButton: 'Desactivar modo de control',
+        deactivateSuccess: 'El modo de control se cerr\u00F3 y tus cambios pendientes quedaron guardados.',
         managedSearchPlaceholder: 'Buscar un escalador...',
         themeSearchPlaceholder: 'Buscar un tema...',
         wordThemePlaceholder: 'Elige una ruta',
@@ -347,7 +347,7 @@ const ui = {
     },
     es: {
         welcome: 'Bienvenido, {name}.',
-        subtitle: 'Acumula puntos, supera etapas tem\u00E1ticas y sigue subiendo hacia la fluidez.',
+        subtitle: 'Suma puntos, supera etapas tem\u00E1ticas y sigue avanzando hacia la fluidez.',
         points: 'Puntos', wins: 'Victorias', losses: 'Derrotas', time: 'Tiempo',
         summitChoice: 'Respuesta de opci\u00F3n m\u00FAltiple', summitTyping: 'Respuesta escrita', summitMatch: 'Emparejar palabras', summitContext: 'Completar contexto',
         chooseEnglish: 'Elige la palabra en ingl\u00E9s para "{word}".',
@@ -373,41 +373,41 @@ const ui = {
         hintPrefix: 'Pista', examplePrefix: 'Uso en ruta',
         idleTitle: 'Campamento base listo.',
         idleText: 'Hace fr\u00EDo en la cima, pero tu siguiente respuesta puede calentar la ruta.',
-        correctTitle: 'Paso limpio.', wrongTitle: 'Hay otro paso esperando.', timeoutTitle: 'El tiempo se congel\u00F3 en la cresta.',
+        correctTitle: 'Paso limpio.', wrongTitle: 'Hay otro paso esperando.', timeoutTitle: 'El tiempo se acab\u00F3.',
         stageClear: 'Etapa completada', stageRetry: 'La etapa necesita un intento m\u00E1s',
         nextChallenge: 'Siguiente desaf\u00EDo', checkAnswer: 'Verificar respuesta', typePlaceholder: 'Escribe la respuesta en ingl\u00E9s',
         stagePoints: 'Puntos de la etapa', accuracy: 'Precisi\u00F3n', routeFocus: 'Objetivo de la ruta',
         startStage: 'Iniciar etapa actual', replay: 'Repetir etapa', continue: 'Seguir la escalada',
-        openLibrary: 'Abrir biblioteca', focusRoute: 'Enfocar ruta actual', searchThemes: 'Buscar rutas, juegos o temas',
-        searchLibrary: 'Buscar un t\u00E9rmino, pista o tema', topRidge: 'Top 20 de la cresta', quickOptions: 'Ajustes r\u00E1pidos',
+        openLibrary: 'Abrir biblioteca', focusRoute: 'Ir a la ruta activa', searchThemes: 'Buscar rutas, modos o temas',
+        searchLibrary: 'Buscar un t\u00E9rmino, pista o tema', topRidge: 'Top 20', quickOptions: 'Ajustes r\u00E1pidos',
         darkMode: 'Modo oscuro', lightMode: 'Modo claro', language: 'Idioma', sound: 'Sonido', voice: 'Voz', animations: 'Animaciones', options: 'Opciones', logout: 'Cerrar sesión',
         statusOn: 'Activado', statusOff: 'Desactivado',
         gameMode: 'Modo de juego',
         play: 'Jugar', select: 'Seleccionar', edit: 'Editar', allThemes: 'Todos los temas', activeClimber: 'Escalador activo',
         coursePending: 'Curso pendiente', routePending: 'Ruta pendiente',
-        themeClearedLabel: '{count}/3 completadas',
+        themeClearedLabel: '{count}/3 superadas',
         openDeckTitle: 'Abrir panel de {theme}',
         hideDeckTitle: 'Ocultar panel de {theme}',
         openDeckText: 'Ruta actual: {theme}. Abre este panel cuando quieras ver el mapa completo.',
-        hideDeckText: 'La barra lateral ya deja listo el cambio r\u00E1pido de ruta. Cierra este panel para reducir carga visual.',
+        hideDeckText: 'La barra lateral ya te deja cambiar de ruta r\u00E1pidamente. Cierra este panel para aligerar la vista.',
         themeStagesTitle: 'Etapas de {theme}',
-        stageBest: '{value}% mejor resultado',
+        stageBest: '{value}% mejor marca',
         stageClears: '{value} completadas',
         youHere: 'Est\u00E1s escalando aqu\u00ED', languageHelp: 'Cambia el idioma de la interfaz de Everest entre ingl\u00E9s y espa\u00F1ol.',
-        noLeaderboard: 'Solo los escaladores activos aparecen aqu\u00ED durante este pase de 1 hora.',
-        noExplorer: 'Abre una ruta y Everest te mostrar\u00E1 aqu\u00ED vocabulario tem\u00E1tico.',
+        noLeaderboard: 'Aqu\u00ED solo aparecen los escaladores que siguen activos durante este pase de 1 hora.',
+        noExplorer: 'Abre una ruta y Everest te mostrar\u00E1 aqu\u00ED vocabulario relacionado con ese tema.',
         noThemeResults: 'Ninguna ruta coincide con esa b\u00FAsqueda.',
         noChallenge: 'Elige una etapa y empieza la subida para recibir tu primer desaf\u00EDo.',
-        noUser: 'No se encontr\u00F3 un pase activo. Everest cre\u00F3 una cresta temporal de invitado.',
-        logoutDone: 'Tu pase de escalada se cerr\u00F3. Nos vemos en la siguiente ascensi\u00F3n.',
+        noUser: 'No se encontr\u00F3 una sesi\u00F3n activa. Everest abri\u00F3 un acceso temporal de invitado.',
+        logoutDone: 'Tu pase de escalada se cerr\u00F3. Nos vemos en la pr\u00F3xima subida.',
         timeoutText: 'La ruta se qued\u00F3 sin tiempo, pero a\u00FAn puedes subir el siguiente paso.',
-        rankLine: 'Puesto actual en la cresta: #{rank}', rankUnknown: 'El puesto aparecer\u00E1 cuando el ranking se estabilice.',
+        rankLine: 'Posici\u00F3n actual: #{rank}', rankUnknown: 'La posici\u00F3n aparecer\u00E1 cuando la tabla se actualice.',
         topRoute: 'Ruta actual', stageBadge: 'Etapa {stage}', pointsBadge: '{points} puntos extra',
         clearBonus: 'Bono por completar',
-        modeBlockTitle: 'Modo de juego', modeBlockText: 'Mantiene la esencia original de Everest, pero te permite elegir c\u00F3mo responder.',
-        animationBlockTitle: 'Movimiento del panel', animationBlockText: 'Mant\u00E9n Everest con sus animaciones normales o reduce el movimiento si el dispositivo necesita una experiencia m\u00E1s ligera.',
-        themeBlockTitle: 'Apariencia', themeBlockText: 'Cambia entre modo claro y modo oscuro sin perder claridad.',
-        audioBlockTitle: 'Ayuda de ruta', audioBlockText: 'Activa sonido y voz si quieres m\u00E1s apoyo durante la ruta.',
+        modeBlockTitle: 'Modo de juego', modeBlockText: 'Conserva la esencia de Everest, pero te deja elegir c\u00F3mo quieres responder.',
+        animationBlockTitle: 'Animaciones del panel', animationBlockText: 'Mant\u00E9n las animaciones normales de Everest o reduce el movimiento si el dispositivo necesita una experiencia m\u00E1s ligera.',
+        themeBlockTitle: 'Apariencia', themeBlockText: 'Cambia entre el modo claro y el modo oscuro sin perder claridad.',
+        audioBlockTitle: 'Apoyo durante la ruta', audioBlockText: 'Activa sonido y voz si quieres una ayuda extra durante la ruta.',
         resultWinText: 'Superaste la etapa y seguiste avanzando en tu ascenso.',
         resultLoseText: 'Esta vez la ruta se resisti\u00F3, pero ahora el camino est\u00E1 m\u00E1s claro.',
         wordTermPlaceholder: 'glacier',
@@ -417,20 +417,20 @@ const ui = {
         wordTipPlaceholder: '\u00DAsala para paisajes helados y temas de naturaleza fr\u00EDa.',
         appTitle: 'Everest - Escala hacia la fluidez',
         brandSubtitle: 'Escala hacia la fluidez',
-        loadingPreparing: 'Preparando la cresta. Tu ascenso casi est\u00E1 listo.',
+        loadingPreparing: 'Preparando Everest. Tu ascenso casi est\u00E1 listo.',
         routesLabel: 'Rutas',
-        themeMountainMap: 'Mapa tem\u00E1tico de la monta\u00F1a',
+        themeMountainMap: 'Mapa de temas',
         everestNote: 'Nota de Everest',
-        summitDashboard: 'Panel de la cima',
+        summitDashboard: 'Panel principal',
         currentAscent: 'Ascenso actual',
         sessionLabel: 'Sesi\u00F3n',
         activeRouteLabel: 'Ruta activa',
         climberProfile: 'Perfil del escalador',
-        ridgeRankLabel: 'Rango en la cresta',
-        top20Pending: 'Top 20 de la cresta pendiente',
+        ridgeRankLabel: 'Posici\u00F3n actual',
+        top20Pending: 'A\u00FAn sin puesto en el Top 20',
         stageRoutes: 'Rutas de etapa',
-        stageRouteBoard: 'Panel de rutas de etapa',
-        stageRouteBoardText: 'Abre la lista de rutas, elige una etapa y salta directo al desaf\u00EDo.',
+        stageRouteBoard: 'Panel de etapas',
+        stageRouteBoardText: 'Abre la lista, elige una etapa y entra directo al desaf\u00EDo.',
         stageStep1: '1. Elige una etapa',
         stageStep2: '2. Pulsa jugar',
         stageStep3: '3. Escala por puntos',
@@ -438,18 +438,18 @@ const ui = {
         chooseRouteDeck: 'Elige la ruta que quieres escalar',
         deckGuide1: 'Usa la barra lateral para cambiar r\u00E1pido',
         deckGuide2: 'Abre este panel solo cuando quieras el mapa completo',
-        ridgeBoard: 'Tabla de cresta',
-        liveLeaderboard: 'Tabla en vivo',
+        ridgeBoard: 'Tabla de posiciones',
+        liveLeaderboard: 'Clasificaci\u00F3n en vivo',
         openTop20: 'Abrir top 20',
-        exploreNatively: 'Explora de forma nativa',
+        exploreNatively: 'Aprende de forma natural',
         englishExplorer: 'Explorador de ingl\u00E9s',
         explorerPreview: 'Vista previa del explorador',
         explorerPreviewText: 'Mantenlo cerrado y abre la biblioteca completa desde el encabezado cuando necesites m\u00E1s profundidad.',
         climbControls: 'Controles de escalada',
         controlsPreview: 'Vista previa de controles',
-        controlsPreviewText: 'Usa el bot\u00F3n del encabezado para el panel completo o despliega esta franja r\u00E1pida.',
-        leaderboardModalTitle: 'Tabla de Everest',
-        leaderboardModalText: 'Observa c\u00F3mo cambia la cima en tiempo real mientras los escaladores ganan puntos, victorias y tiempo.',
+        controlsPreviewText: 'Usa el bot\u00F3n del encabezado para abrir el panel completo o despliega esta vista r\u00E1pida.',
+        leaderboardModalTitle: 'Clasificaci\u00F3n de Everest',
+        leaderboardModalText: 'Observa c\u00F3mo cambia la tabla en tiempo real mientras los escaladores suman puntos, victorias y tiempo.',
         rankHeader: 'Rango',
         courseHeader: 'Curso',
         profileNameHeader: 'Perfil y nombre',
@@ -458,8 +458,8 @@ const ui = {
         explorerModalText: 'Explora palabras, significados y ejemplos tem\u00E1ticos antes de volver al ascenso.',
         searchThemePlaceholder: 'Buscar un tema...',
         explorerThemeList: 'Lista de temas del explorador',
-        summitControls: 'Controles de la cima',
-        summitControlsText: 'Moldea la ruta, el idioma, la atm\u00F3sfera y las herramientas avanzadas desde un punto claro de mando.',
+        summitControls: 'Controles de Everest',
+        summitControlsText: 'Ajusta la ruta, el idioma, la apariencia y las herramientas avanzadas desde un solo panel claro.',
         closeLeaderboard: 'Cerrar tabla',
         closeExplorer: 'Cerrar explorador',
         closeOptions: 'Cerrar opciones',
@@ -1238,6 +1238,165 @@ function getStage(themeId = state.activeThemeId, stageId = state.activeStageId) 
     return theme ? theme.stages.find((stage) => stage.id === stageId) || null : null;
 }
 
+const THEME_UI_ES = {
+    'basic-communication': {
+        title: 'Comunicación básica',
+        summary: 'Saludos, respuestas rápidas y comienzos sociales con seguridad.',
+        stages: {
+            1: { name: 'Hablar en ruta', focus: 'Saludos y cortesía básica' },
+            2: { name: 'Respuestas rápidas', focus: 'Respuestas breves y palabras de apoyo' },
+            3: { name: 'Chispa social', focus: 'Amistad, expresión oral y escucha' }
+        }
+    },
+    'grammar-language': {
+        title: 'Gramática y lenguaje',
+        summary: 'Acciones, descripciones y conectores para expresar ideas con lógica.',
+        stages: {
+            1: { name: 'Acciones clave', focus: 'Verbos esenciales' },
+            2: { name: 'Describe el panorama', focus: 'Adjetivos y cualidades' },
+            3: { name: 'Pasos lógicos', focus: 'Conectar ideas' }
+        }
+    },
+    'human-body-identity': {
+        title: 'Cuerpo humano e identidad',
+        summary: 'Partes del cuerpo, emociones e identidad personal.',
+        stages: {
+            1: { name: 'Bases del cuerpo', focus: 'Vocabulario visible del cuerpo' },
+            2: { name: 'Clima emocional', focus: 'Emociones y estados' },
+            3: { name: 'Quién eres', focus: 'Vocabulario de identidad' }
+        }
+    },
+    'personal-social-life': {
+        title: 'Vida personal y social',
+        summary: 'Rutina del hogar, celebraciones y conexiones del día a día.',
+        stages: {
+            1: { name: 'Ritmo del hogar', focus: 'Objetos de la vida cotidiana' },
+            2: { name: 'Momentos sociales', focus: 'Personas y eventos' },
+            3: { name: 'Rutina diaria', focus: 'Rutina y entorno cercano' }
+        }
+    },
+    'education-work': {
+        title: 'Educación y trabajo',
+        summary: 'Herramientas de estudio, profesiones y crecimiento de habilidades.',
+        stages: {
+            1: { name: 'Base del aula', focus: 'Fundamentos escolares' },
+            2: { name: 'Camino profesional', focus: 'Trabajos comunes' },
+            3: { name: 'Cima de habilidades', focus: 'Proyectos y crecimiento' }
+        }
+    },
+    'places-environment': {
+        title: 'Lugares y entorno',
+        summary: 'Lugares familiares, paisajes y el mundo que te rodea.',
+        stages: {
+            1: { name: 'Lugares cercanos', focus: 'Sitios que visitas con frecuencia' },
+            2: { name: 'Ruta del paisaje', focus: 'Naturaleza a tu alrededor' },
+            3: { name: 'Visión del mundo', focus: 'Asentamientos y rutas' }
+        }
+    },
+    'movement-navigation': {
+        title: 'Movimiento y orientación',
+        summary: 'Movimiento, transporte y control del recorrido.',
+        stages: {
+            1: { name: 'Muévete ya', focus: 'Palabras básicas de movimiento' },
+            2: { name: 'Línea de transporte', focus: 'Vehículos y viajes' },
+            3: { name: 'Sentido de ruta', focus: 'Dirección y herramientas de viaje' }
+        }
+    },
+    'shopping-daily-life': {
+        title: 'Compras y vida diaria',
+        summary: 'Objetos útiles, palabras de mercado y necesidades cotidianas.',
+        stages: {
+            1: { name: 'Kit útil', focus: 'Objetos del día a día' },
+            2: { name: 'Palabras de mercado', focus: 'Comprar y pagar' },
+            3: { name: 'Estante diario', focus: 'Necesidades cotidianas' }
+        }
+    },
+    'clothing-style': {
+        title: 'Ropa y estilo',
+        summary: 'Prendas, accesorios e identidad visual.',
+        stages: {
+            1: { name: 'Base del clóset', focus: 'Prendas principales' },
+            2: { name: 'Notas de estilo', focus: 'Cualidades visuales' },
+            3: { name: 'Toque final', focus: 'Accesorios y acabado del atuendo' }
+        }
+    },
+    'food-drinks': {
+        title: 'Comida y bebidas',
+        summary: 'Alimentos diarios, comidas favoritas y vocabulario de cocina.',
+        stages: {
+            1: { name: 'Base de cocina', focus: 'Palabras simples de comida' },
+            2: { name: 'Comidas favoritas', focus: 'Platos comunes' },
+            3: { name: 'Cima del menú', focus: 'Cocina e ideas de menú' }
+        }
+    },
+    'nature-weather': {
+        title: 'Naturaleza y clima',
+        summary: 'Cielo, animales y escenas de la tierra.',
+        stages: {
+            1: { name: 'Señales del cielo', focus: 'Clima básico' },
+            2: { name: 'Amigos salvajes', focus: 'Animales y criaturas' },
+            3: { name: 'Escala terrestre', focus: 'Terreno y cambios estacionales' }
+        }
+    },
+    'culture-leisure': {
+        title: 'Cultura y ocio',
+        summary: 'Diversión, deportes y expresión creativa.',
+        stages: {
+            1: { name: 'Tiempo libre', focus: 'Inicio del ocio' },
+            2: { name: 'Pulso deportivo', focus: 'Juego y competencia' },
+            3: { name: 'Cima creativa', focus: 'Presentaciones y eventos' }
+        }
+    },
+    'tools-objects': {
+        title: 'Herramientas y objetos',
+        summary: 'Herramientas útiles, objetos del hogar y palabras de materiales.',
+        stages: {
+            1: { name: 'Básicos útiles', focus: 'Objetos simples' },
+            2: { name: 'Banco de herramientas', focus: 'Herramientas prácticas' },
+            3: { name: 'Laboratorio de materiales', focus: 'Lenguaje de objetos' }
+        }
+    },
+    technology: {
+        title: 'Tecnología',
+        summary: 'Dispositivos, herramientas digitales y vocabulario orientado al futuro.',
+        stages: {
+            1: { name: 'Base de dispositivos', focus: 'Hardware moderno' },
+            2: { name: 'Ruta digital', focus: 'Palabras del mundo en línea' },
+            3: { name: 'Laboratorio del futuro', focus: 'Conceptos avanzados de tecnología' }
+        }
+    },
+    'concepts-academic': {
+        title: 'Conceptos y academia',
+        summary: 'Cualidades, comparaciones y vocabulario de razonamiento.',
+        stages: {
+            1: { name: 'Tamaño y tiempo', focus: 'Comparaciones esenciales' },
+            2: { name: 'Indicadores de calidad', focus: 'Ideas descriptivas' },
+            3: { name: 'Ruta de la razón', focus: 'Lógica y relación' }
+        }
+    }
+};
+
+function localizeTheme(theme) {
+    if (!theme || state.settings?.language !== 'es') return theme;
+    const locale = THEME_UI_ES[theme.id];
+    if (!locale) return theme;
+    return {
+        ...theme,
+        title: locale.title || theme.title,
+        summary: locale.summary || theme.summary,
+        stages: theme.stages.map((stage) => {
+            const stageLocale = locale.stages?.[stage.id];
+            return stageLocale ? { ...stage, name: stageLocale.name, focus: stageLocale.focus } : stage;
+        })
+    };
+}
+
+function localizeStage(themeId, stage) {
+    if (!stage || state.settings?.language !== 'es') return stage;
+    const stageLocale = THEME_UI_ES[themeId]?.stages?.[stage.id];
+    return stageLocale ? { ...stage, name: stageLocale.name, focus: stageLocale.focus } : stage;
+}
+
 function getThemePalette(themeId) {
     const palettes = {
         'basic-communication': { accent: '#4b74f0', soft: '#7fd9f7', strong: '#1c2358', accentRgb: '75, 116, 240', softRgb: '127, 217, 247', strongRgb: '28, 35, 88' },
@@ -1476,7 +1635,7 @@ function buildQuestions(stage) {
 }
 
 function updateSidebarSupport() {
-    const theme = getTheme();
+    const theme = localizeTheme(getTheme());
     if (!theme) return;
     elements.sidebarSupportTitle.textContent = theme.title;
     elements.sidebarSupportText.textContent = theme.summary;
@@ -1495,6 +1654,7 @@ function applyStaticTranslations() {
     document.querySelector('.support-card__badge')?.replaceChildren(t('everestNote'));
     document.querySelector('.topbar__eyebrow')?.replaceChildren(t('summitDashboard'));
     elements.sidebarToggle?.setAttribute('aria-label', t('toggleSidebar'));
+    elements.sidebarBrand?.setAttribute('title', t('refreshEverest'));
     elements.optionsButton?.setAttribute('title', t('options'));
     elements.leaderboardButton?.setAttribute('title', t('leaderboardModalTitle'));
     elements.explorerButton?.setAttribute('title', t('englishExplorer'));
@@ -1560,8 +1720,9 @@ function applyStaticTranslations() {
 }
 
 function renderSidebar() {
-    const filtered = state.themes.filter((theme) => !state.searchTerm || normalizeWord(`${theme.title} ${theme.summary}`).includes(normalizeWord(state.searchTerm)));
-    elements.themeNav.innerHTML = state.themes.map((theme) => {
+    const localizedThemes = state.themes.map((theme) => localizeTheme(theme));
+    const filtered = localizedThemes.filter((theme) => !state.searchTerm || normalizeWord(`${theme.title} ${theme.summary}`).includes(normalizeWord(state.searchTerm)));
+    elements.themeNav.innerHTML = localizedThemes.map((theme) => {
         const visible = filtered.some((item) => item.id === theme.id);
         return `<button class="theme-nav__item ${theme.id === state.activeThemeId ? 'is-active' : ''} ${visible ? '' : 'is-hidden'}" data-theme-id="${theme.id}" type="button" title="${theme.title} - ${theme.summary}"><span class="theme-nav__icon"><img src="${THEME_ICONS[theme.id]}" alt=""></span><span class="theme-nav__copy"><strong>${theme.title}</strong><span>${theme.summary}</span></span></button>`;
     }).join('');
@@ -1570,11 +1731,12 @@ function renderSidebar() {
 }
 
 function renderThemeGrid() {
-    const activeTheme = getTheme();
+    const activeTheme = localizeTheme(getTheme());
     const deckCard = getThemeDeckCard();
     const isCollapsed = deckCard?.classList.contains('compact-collapsed');
 
-    elements.themeGrid.innerHTML = state.themes.map((theme) => {
+    elements.themeGrid.innerHTML = state.themes.map((rawTheme) => {
+        const theme = localizeTheme(rawTheme);
         const progress = state.progress.stageResults[theme.id] || {};
         const cleared = Object.values(progress).filter((item) => item.clears > 0).length;
         return `<button class="theme-card ${theme.id === state.activeThemeId ? 'is-active' : ''}" data-theme-card="${theme.id}" type="button"><div class="theme-card__head"><span class="theme-card__icon"><img src="${THEME_ICONS[theme.id]}" alt=""></span><span class="theme-card__eyebrow">${t('themeClearedLabel', { count: cleared })}</span></div><h4>${theme.title}</h4><p>${theme.summary}</p><div class="theme-card__footer"><span class="theme-card__route">${t('topRoute')}</span><span class="theme-card__stage">${theme.stages[0].name}</span></div></button>`;
@@ -1596,7 +1758,7 @@ function renderThemeGrid() {
 }
 
 function renderStageList() {
-    const theme = getTheme();
+    const theme = localizeTheme(getTheme());
     if (!theme) return;
     const results = state.progress.stageResults[theme.id] || {};
     elements.stageSectionTitle.textContent = t('themeStagesTitle', { theme: theme.title });
@@ -1611,7 +1773,7 @@ function renderStageList() {
 }
 
 function renderHero() {
-    const theme = getTheme();
+    const theme = localizeTheme(getTheme());
     elements.welcomeTitle.textContent = t('welcome', { name: state.user.username });
     elements.welcomeSubtitle.textContent = t('subtitle');
     elements.activeThemeName.textContent = theme ? theme.title : 'Everest';
@@ -1661,8 +1823,8 @@ function setFeedback(stateName, title, text) {
 
 function getThemeVisualEmoji(theme) {
     if (!theme) return '\uD83E\uDDED';
-    if (theme.title.includes('Nature')) return '\u26F0\uFE0F';
-    if (theme.title.includes('Food')) return '\uD83C\uDF7D\uFE0F';
+    if (theme.id === 'nature-weather') return '\u26F0\uFE0F';
+    if (theme.id === 'food-drinks') return '\uD83C\uDF7D\uFE0F';
     return '\uD83E\uDDED';
 }
 
@@ -1701,13 +1863,13 @@ function toggleGameModeVisibility() {
 }
 
 function renderGame() {
-    const theme = getTheme();
-    const stage = getStage();
+    const theme = localizeTheme(getTheme());
+    const stage = localizeStage(state.activeThemeId, getStage());
     if (!theme || !stage) return;
     const matchMode = state.settings.gameMode === 'match';
     const contextMode = state.settings.gameMode === 'context';
     const typingMode = state.settings.gameMode === 'typing';
-    const gameText = tg;
+    const gameText = t;
     state.progress.lastPlayedTheme = theme.id;
     elements.gameCard?.classList.toggle('is-match-mode', matchMode);
     elements.gameCard?.classList.toggle('is-context-mode', contextMode);
@@ -1797,7 +1959,7 @@ function renderGame() {
                             <span class="match-center__hint-line">${question.term.hint}</span>
                         </div>
                         <div class="match-center__status">
-                            <span class="match-center__status-pill is-filled">${getThemeMatchSignalEmoji(question.themeId)} ${getTheme(question.themeId)?.title || gameText('matchSignalLabel')}</span>
+                            <span class="match-center__status-pill is-filled">${getThemeMatchSignalEmoji(question.themeId)} ${localizeTheme(getTheme(question.themeId))?.title || gameText('matchSignalLabel')}</span>
                             <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : gameText('matchMeaningPending')}</span>
                         </div>
                     </section>
@@ -2149,9 +2311,10 @@ function renderLeaderboard() {
 
 function renderExplorerThemeSelect() {
     const countForTheme = (themeId) => state.library.filter((entry) => entry.theme === themeId).length;
+    const localizedThemes = state.themes.map((theme) => localizeTheme(theme));
     const options = [
         { id: 'all', title: t('allThemes'), meta: `${state.library.length} terms`, search: `${t('allThemes')} all explorer` },
-        ...state.themes.map((theme) => ({ id: theme.id, title: theme.title, meta: `${countForTheme(theme.id)} terms`, search: `${theme.title} ${theme.summary}` }))
+        ...localizedThemes.map((theme) => ({ id: theme.id, title: theme.title, meta: `${countForTheme(theme.id)} terms`, search: `${theme.title} ${theme.summary}` }))
     ];
 
     elements.explorerThemeSelect.value = state.explorerTheme;
@@ -2512,8 +2675,8 @@ function renderOptionsModal() {
         options: state.library.slice().sort((a, b) => a.term.localeCompare(b.term)).map((entry) => ({
             value: getExplorerWordId(entry),
             main: `${entry.emoji || '\uD83D\uDCD8'} ${entry.term}`,
-            alt: getTheme(entry.theme)?.title || entry.theme,
-            search: `${entry.term} ${entry.meaning} ${entry.example} ${entry.tip} ${getTheme(entry.theme)?.title || entry.theme}`
+            alt: localizeTheme(getTheme(entry.theme))?.title || entry.theme,
+            search: `${entry.term} ${entry.meaning} ${entry.example} ${entry.tip} ${localizeTheme(getTheme(entry.theme))?.title || entry.theme}`
         }))
     });
 
@@ -2528,7 +2691,7 @@ function renderOptionsModal() {
         value: draft.theme,
         placeholder: tc('wordThemePlaceholder'),
         searchPlaceholder: tc('themeSearchPlaceholder'),
-        options: state.themes.map((theme) => ({
+        options: state.themes.map((theme) => localizeTheme(theme)).map((theme) => ({
             value: theme.id,
             main: theme.title,
             alt: theme.id === state.activeThemeId ? tc('currentStageTag') : '',
