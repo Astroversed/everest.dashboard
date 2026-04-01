@@ -6668,8 +6668,9 @@ body[data-theme-mode="dark"] .control-emoji-category__summary::after {
 
 .control-selection-tag:hover {
     transform: translateY(-1px);
-    background: rgba(var(--theme-accent-rgb), 0.12);
-    border-color: rgba(var(--theme-accent-rgb), 0.22);
+    background: rgba(214, 74, 74, 0.12);
+    border-color: rgba(214, 74, 74, 0.24);
+    color: #8f232a;
 }
 
 .control-selection-tag--all {
@@ -6711,8 +6712,9 @@ body[data-theme-mode="dark"] .control-selection-empty {
 }
 
 body[data-theme-mode="dark"] .control-selection-tag:hover {
-    background: rgba(var(--theme-soft-rgb), 0.18);
-    border-color: rgba(var(--theme-soft-rgb), 0.24);
+    background: rgba(130, 38, 45, 0.32);
+    border-color: rgba(255, 132, 132, 0.28);
+    color: #ffdede;
 }
 
 body[data-theme-mode="dark"] .control-selection-empty {

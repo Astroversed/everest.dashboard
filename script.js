@@ -810,9 +810,11 @@ function tg(key, replacements = {}) {
     return text;
 }
 
-function tc(key) {
+function tc(key, replacements = {}) {
     const language = state.settings?.language || 'en';
-    return (controlUi[language] && controlUi[language][key]) || controlUi.en[key] || key;
+    let text = (controlUi[language] && controlUi[language][key]) || controlUi.en[key] || key;
+    Object.entries(replacements).forEach(([token, value]) => { text = text.replace(`{${token}}`, value); });
+    return text;
 }
 
 function getStatusLabel(isActive) {
@@ -1215,7 +1217,7 @@ function removeUserFromRanking(userId) {
     void syncSharedLeaderboardUser(target || { usernameNormalized: userId, hiddenFromLeaderboard: true });
 }
 
-function closeManagedSession(userId) {
+async function closeManagedSession(userId) {
     const users = pruneUsers().filter((user) => getUserId(user) !== userId);
     writeStorage(STORAGE_KEYS.users, users);
     const allProgress = readAllProgress();
@@ -1227,7 +1229,7 @@ function closeManagedSession(userId) {
         state.controlModeUnlocked = false;
         localStorage.removeItem(STORAGE_KEYS.activeUser);
         state.sharedLeaderboard = state.sharedLeaderboard.filter((user) => getUserId(user) !== userId);
-        void deleteSharedLeaderboardUser(userId);
+        await deleteSharedLeaderboardUser(userId);
         pushToast(randomFrom(EVEREST_LINES.info), tc('selfClosed'), 'info');
         window.setTimeout(() => { window.location.href = LOGIN_FALLBACK_URL; }, 420);
         return true;
@@ -1239,7 +1241,10 @@ function closeManagedSession(userId) {
     }
 
     state.sharedLeaderboard = state.sharedLeaderboard.filter((user) => getUserId(user) !== userId);
-    void deleteSharedLeaderboardUser(userId);
+    await deleteSharedLeaderboardUser(userId);
+    if (!state.controlManagedUserIds.length) {
+        state.controlManageAllUsers = false;
+    }
     return false;
 }
 
@@ -2929,7 +2934,7 @@ function renderOptionsModal() {
         renderAll();
     });
 
-    closeSessionButton?.addEventListener('click', () => {
+    closeSessionButton?.addEventListener('click', async () => {
         const targetIds = getControlTargetUserIds();
         if (!targetIds.length) {
             pushToast(randomFrom(EVEREST_LINES.error), tc('noManagedUser'), 'danger');
@@ -2938,9 +2943,9 @@ function renderOptionsModal() {
         const selfId = getUserId(state.user);
         const sortedIds = targetIds.slice().sort((a, b) => (a === selfId ? 1 : 0) - (b === selfId ? 1 : 0));
         let closedSelf = false;
-        sortedIds.forEach((userId) => {
-            closedSelf = closeManagedSession(userId) || closedSelf;
-        });
+        for (const userId of sortedIds) {
+            closedSelf = (await closeManagedSession(userId)) || closedSelf;
+        }
         if (closedSelf) return;
         pushToast(randomFrom(EVEREST_LINES.info), targetIds.length > 1 ? tc('sessionsClosed') : tc('sessionClosed'), 'info');
         bootstrapUser();
