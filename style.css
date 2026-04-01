@@ -7830,6 +7830,17 @@ body[data-theme-mode="dark"] .choice-button--context .choice-button__title {
     color: #f1f6ff;
 }
 
+body[data-theme-mode="dark"] .context-card__badge {
+    background: rgba(var(--theme-soft-rgb), 0.18);
+    color: #e7f1ff;
+}
+
+body[data-theme-mode="dark"] .context-card__blank {
+    background: linear-gradient(135deg, rgba(var(--theme-soft-rgb), 0.18), rgba(var(--theme-accent-rgb), 0.16));
+    border-color: rgba(var(--theme-soft-rgb), 0.32);
+    color: #eaf3ff;
+}
+
 body[data-theme-mode="dark"] .context-card__clue,
 body[data-theme-mode="dark"] .context-card__hint,
 body[data-theme-mode="dark"] .choice-button--context .choice-button__kicker {

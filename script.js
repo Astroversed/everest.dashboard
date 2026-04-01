@@ -292,6 +292,7 @@ const ui = {
         wordMeaningPlaceholder: 'glaciar',
         wordExamplePlaceholder: 'The glacier is melting slowly.',
         wordTipPlaceholder: 'Use it for ice landscapes and cold nature topics.',
+        themeChallenge: 'Theme challenge',
         appTitle: 'Everest - Climb to Fluency',
         brandSubtitle: 'Climb to Fluency',
         loadingPreparing: 'Preparing the ridge. Your climb is almost ready.',
@@ -415,6 +416,7 @@ const ui = {
         wordMeaningPlaceholder: 'glaciar',
         wordExamplePlaceholder: 'The glacier is melting slowly.',
         wordTipPlaceholder: '\u00DAsala para paisajes helados y temas de naturaleza fr\u00EDa.',
+        themeChallenge: 'Desafío temático',
         appTitle: 'Everest - Escala hacia la fluidez',
         brandSubtitle: 'Escala hacia la fluidez',
         loadingPreparing: 'Preparando Everest. Tu ascenso casi est\u00E1 listo.',
@@ -1671,6 +1673,7 @@ function applyStaticTranslations() {
     document.querySelector('.profile-meta .meta-chip:nth-child(3) span')?.replaceChildren(t('losses'));
     document.querySelector('.profile-meta .meta-chip:nth-child(4) span')?.replaceChildren(t('time'));
     document.querySelector('.stage-card .panel-badge')?.replaceChildren(t('stageRoutes'));
+    document.querySelector('.game-card .panel-badge')?.replaceChildren(t('themeChallenge'));
     document.querySelector('#stageToggle strong')?.replaceChildren(t('stageRouteBoard'));
     document.querySelector('#stageToggle .panel-toggle__copy span')?.replaceChildren(t('stageRouteBoardText'));
     const stageGuideSteps = document.querySelectorAll('.stage-card .section-guide .section-guide__step');
@@ -1880,6 +1883,8 @@ function renderGame() {
     elements.stageAccuracyLabel.textContent = `${gameText('accuracy')}: ${state.latestAccuracy}%`;
     elements.typingSubmitButton.textContent = gameText('checkAnswer');
     elements.typingInput.placeholder = gameText('typePlaceholder');
+    elements.nextQuestionButton.textContent = gameText('nextChallenge');
+    elements.resetStageButton.textContent = gameText('replay');
 
     if (!state.stageLive || !state.currentQuestion) {
         renderChallengeVisual(theme, null, false);
@@ -1919,7 +1924,7 @@ function renderGame() {
         renderChallengeVisual(theme, question, false);
     }
     const selectedEmojiOption = matchMode ? question.emojiChoices.find((option) => normalizeWord(option.en) === state.matchSelection.emoji) : null;
-    elements.challengeTypeLabel.textContent = getGameModeLabelEnglish();
+    elements.challengeTypeLabel.textContent = getGameModeLabel();
     elements.challengePrompt.textContent = matchMode
         ? gameText('matchPairPrompt', { word: question.term.en })
         : (contextMode ? gameText('contextPrompt') : (typingMode ? gameText('typeEnglish', { word: question.term.es }) : gameText('chooseEnglish', { word: question.term.es })));
