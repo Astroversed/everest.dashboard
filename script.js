@@ -115,6 +115,13 @@ const controlUi = {
         lockedHint: 'Only the final options block can open this route.',
         managedUser: 'Managed user',
         managedUserText: 'Choose the climber you want to manage.',
+        allManagedUsers: 'All active climbers',
+        selectedUsersCount: '{count} climbers selected',
+        selectedUsersEmpty: 'No climbers selected',
+        selectedUsersLabel: 'Selected climbers',
+        usersRemoved: 'The selected climbers were removed from the live ranking.',
+        sessionsClosed: 'The selected sessions were closed successfully.',
+        statsAppliedMany: 'The selected climbers were updated successfully.',
         userSelect: 'Select a climber',
         rankTools: 'Ranking and session actions',
         rankToolsText: 'Remove a climber from the ridge or close the session completely.',
@@ -172,6 +179,13 @@ const controlUi = {
         lockedHint: 'Este acceso solo se habilita desde el \u00FAltimo bloque de opciones.',
         managedUser: 'Usuario administrado',
         managedUserText: 'Elige el escalador que quieres gestionar.',
+        allManagedUsers: 'Todos los escaladores activos',
+        selectedUsersCount: '{count} escaladores seleccionados',
+        selectedUsersEmpty: 'Ningún escalador seleccionado',
+        selectedUsersLabel: 'Escaladores seleccionados',
+        usersRemoved: 'Los escaladores seleccionados fueron retirados de la tabla en vivo.',
+        sessionsClosed: 'Las sesiones seleccionadas se cerraron correctamente.',
+        statsAppliedMany: 'Los escaladores seleccionados fueron actualizados correctamente.',
         userSelect: 'Selecciona un escalador',
         rankTools: 'Acciones sobre ranking y sesi\u00F3n',
         rankToolsText: 'Quita a un escalador de la tabla o cierra su sesi\u00F3n por completo.',
@@ -477,7 +491,7 @@ const state = {
     activeThemeId: null, activeStageId: 1, searchTerm: '', explorerSearch: '', explorerTheme: 'all',
     stageLive: false, questions: [], questionIndex: 0, currentQuestion: null, questionResolved: false,
     secondsLeft: 15, timerId: null, stageStartedAt: 0, stagePoints: 0, stageCorrect: 0, stageWrong: 0,
-    streak: 0, bestStreak: 0, latestAccuracy: 0, matchSelection: { signal: '', emoji: '' }, lastResolvedAnswer: '', controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
+    streak: 0, bestStreak: 0, latestAccuracy: 0, matchSelection: { signal: '', emoji: '' }, lastResolvedAnswer: '', controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlManagedUserIds: [], controlManageAllUsers: false, controlManagedSelectionTouched: false, controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
     sharedLeaderboard: [], firestore: null, firestoreReady: false, firestoreListener: null, firestoreCleanupBusy: false
 };
 
@@ -1111,6 +1125,68 @@ function getManagedUserById(userId) {
     return getManagedUsers().find((user) => getUserId(user) === userId) || null;
 }
 
+function syncControlManagedSelectionState() {
+    const managedUsers = getManagedUsers();
+    const validIds = new Set(managedUsers.map((user) => getUserId(user)));
+    state.controlManagedUserIds = Array.from(new Set((state.controlManagedUserIds || []).filter((userId) => validIds.has(userId))));
+    if (state.controlManageAllUsers && !managedUsers.length) {
+        state.controlManageAllUsers = false;
+    }
+    state.controlManagedUserId = state.controlManagedUserIds[0] || '';
+    return managedUsers;
+}
+
+function getControlTargetUserIds() {
+    const managedUsers = syncControlManagedSelectionState();
+    if (state.controlManageAllUsers) {
+        return managedUsers.map((user) => getUserId(user));
+    }
+    return [...state.controlManagedUserIds];
+}
+
+function getControlSelectedUsers() {
+    const targetIds = new Set(getControlTargetUserIds());
+    return getManagedUsers().filter((user) => targetIds.has(getUserId(user)));
+}
+
+function getControlManagedReferenceUser() {
+    const selectedUsers = getControlSelectedUsers();
+    if (selectedUsers.length) return selectedUsers[0];
+    return state.user || getManagedUsers()[0] || null;
+}
+
+function getControlManagedSelectionLabel() {
+    const managedUsers = syncControlManagedSelectionState();
+    if (state.controlManageAllUsers && managedUsers.length) {
+        return tc('allManagedUsers');
+    }
+    if (state.controlManagedUserIds.length === 1) {
+        const selectedUser = getManagedUserById(state.controlManagedUserIds[0]);
+        return selectedUser ? `${selectedUser.profileEmoji || '\uD83E\uDDE0'} ${selectedUser.username}` : tc('userSelect');
+    }
+    if (state.controlManagedUserIds.length > 1) {
+        return tc('selectedUsersCount', { count: state.controlManagedUserIds.length });
+    }
+    return tc('userSelect');
+}
+
+function setControlManagedSelection(userIds = [], { selectAll = false, touched = true } = {}) {
+    state.controlManageAllUsers = selectAll;
+    state.controlManagedUserIds = Array.from(new Set((userIds || []).filter(Boolean)));
+    state.controlManagedSelectionTouched = touched || state.controlManagedSelectionTouched;
+    syncControlManagedSelectionState();
+}
+
+function toggleControlManagedUser(userId) {
+    const currentIds = new Set(state.controlManagedUserIds || []);
+    if (currentIds.has(userId)) {
+        currentIds.delete(userId);
+    } else {
+        currentIds.add(userId);
+    }
+    setControlManagedSelection(Array.from(currentIds), { selectAll: false, touched: true });
+}
+
 function cleanControlText(value, maxLength = 140) {
     return String(value || '').replace(/[<>]/g, '').trim().slice(0, maxLength);
 }
@@ -1157,8 +1233,9 @@ function closeManagedSession(userId) {
         return true;
     }
 
+    state.controlManagedUserIds = (state.controlManagedUserIds || []).filter((id) => id !== userId);
     if (state.controlManagedUserId === userId) {
-        state.controlManagedUserId = '';
+        state.controlManagedUserId = state.controlManagedUserIds[0] || '';
     }
 
     state.sharedLeaderboard = state.sharedLeaderboard.filter((user) => getUserId(user) !== userId);
@@ -2455,14 +2532,14 @@ function getControlWordPayloadFromInputs() {
 }
 
 function persistControlModeChanges({ lockMode = false } = {}) {
-    const selectedUserId = document.getElementById('controlManagedUserSelect')?.value || state.controlManagedUserId;
-    if (selectedUserId) {
-        applyControlStats(selectedUserId, {
+    const selectedUserIds = getControlTargetUserIds();
+    if (selectedUserIds.length) {
+        selectedUserIds.forEach((userId) => applyControlStats(userId, {
             points: document.getElementById('controlPointsInput')?.value,
             wins: document.getElementById('controlWinsInput')?.value,
             losses: document.getElementById('controlLossesInput')?.value,
             sessionMinutes: document.getElementById('controlSessionMinutesInput')?.value
-        });
+        }));
     }
 
     const payload = getControlWordPayloadFromInputs();
@@ -2634,14 +2711,20 @@ function renderOptionsModal() {
         { title: t('audioBlockTitle'), text: t('audioBlockText'), buttons: [{ value: 'sound', label: getOptionStatusMarkup(t('sound'), state.settings.soundOn), active: state.settings.soundOn, action: 'sound' }, { value: 'voice', label: getOptionStatusMarkup(t('voice'), state.settings.voiceOn), active: state.settings.voiceOn, action: 'voice' }] }
     ];
 
-    const managedUsers = getManagedUsers();
-    if (!state.controlManagedUserId || !managedUsers.some((user) => getUserId(user) === state.controlManagedUserId)) {
-        state.controlManagedUserId = managedUsers[0] ? getUserId(managedUsers[0]) : getUserId(state.user);
+    const managedUsers = syncControlManagedSelectionState();
+    if (!state.controlManagedSelectionTouched && !state.controlManageAllUsers && !state.controlManagedUserIds.length && managedUsers[0]) {
+        setControlManagedSelection([getUserId(managedUsers[0])], { touched: false });
     }
 
-    const managedUser = getManagedUserById(state.controlManagedUserId) || state.user;
+    const managedUser = getControlManagedReferenceUser() || state.user;
     const currentMinutes = Math.max(1, Math.ceil(Math.max(0, (managedUser.expiresAt || Date.now()) - Date.now()) / 60000));
     const draft = getControlWordDraft();
+    const selectedUsers = getControlSelectedUsers();
+    const managedSelectionTags = state.controlManageAllUsers
+        ? `<button type="button" class="control-selection-tag control-selection-tag--all" data-control-remove-all="true">${tc('allManagedUsers')}</button>`
+        : (selectedUsers.length
+            ? selectedUsers.map((user) => `<button type="button" class="control-selection-tag" data-control-remove-user="${getUserId(user)}">${user.profileEmoji || '\uD83E\uDDE0'} ${user.username}</button>`).join('')
+            : `<span class="control-selection-empty">${tc('selectedUsersEmpty')}</span>`);
     const blockHtml = blocks.map((block) => `<article class="option-block"><h4>${block.title}</h4><p>${block.text}</p><div class="option-block__actions">${block.buttons.map((button) => {
         const pulseKey = `${button.action}:${button.value}`;
         return `<button class="toggle-pill ${button.active ? 'is-active' : ''} ${state.optionPulseKey === pulseKey ? 'is-pulsing' : ''}" type="button" data-option-action="${button.action}" data-option-value="${button.value}">${button.label}</button>`;
@@ -2655,15 +2738,23 @@ function renderOptionsModal() {
         dropdownId: 'controlManagedUserDropdown',
         searchId: 'controlManagedUserSearch',
         optionsId: 'controlManagedUserOptions',
-        value: state.controlManagedUserId,
+        value: state.controlManageAllUsers ? '__all__' : (state.controlManagedUserIds[0] || ''),
         placeholder: tc('userSelect'),
         searchPlaceholder: tc('managedSearchPlaceholder'),
-        options: managedUsers.map((user) => ({
-            value: getUserId(user),
-            main: `${user.profileEmoji || '\uD83E\uDDE0'} ${user.username}`,
-            alt: user.course || t('routePending'),
-            search: `${user.username} ${user.course || t('routePending')}`
-        }))
+        options: [
+            {
+                value: '__all__',
+                main: tc('allManagedUsers'),
+                alt: `${managedUsers.length} ${t('activeClimber').toLowerCase()}`,
+                search: `${tc('allManagedUsers')} ${managedUsers.map((user) => `${user.username} ${user.course || ''}`).join(' ')}`
+            },
+            ...managedUsers.map((user) => ({
+                value: getUserId(user),
+                main: `${user.profileEmoji || '\uD83E\uDDE0'} ${user.username}`,
+                alt: user.course || t('routePending'),
+                search: `${user.username} ${user.course || t('routePending')}`
+            }))
+        ]
     });
 
     const wordPickerSelect = createControlSelectMarkup({
@@ -2712,7 +2803,7 @@ function renderOptionsModal() {
 
     const controlHtml = !state.controlModeUnlocked
         ? `<article class="option-block option-block--control"><div class="control-heading"><div><h4>${tc('title')}</h4><p>${tc('subtitle')}</p></div><span class="control-note">${tc('lockedHint')}</span></div><div class="control-key-row"><label class="custom-field custom-field--full"><span>${tc('unlockLabel')}</span><input id="controlKeyInput" type="password" placeholder="${tc('unlockPlaceholder')}" autocomplete="off"></label><button class="surface-button surface-button--primary" id="controlUnlockButton" type="button">${tc('unlockButton')}</button></div></article>`
-        : `<article class="option-block option-block--control"><div class="control-heading"><div><h4>${tc('title')}</h4><p>${tc('subtitle')}</p></div><div class="control-heading__actions"><span class="control-badge">${tc('unlockedBadge')}</span><button class="surface-button surface-button--ghost control-lock-button control-button--danger" id="controlDeactivateButton" type="button">${tc('deactivateButton')}</button></div></div><div class="control-section"><button class="panel-toggle panel-toggle--soft is-open" id="controlUserToggle" type="button" aria-expanded="true"><span class="panel-toggle__copy"><strong>${tc('managedUser')}</strong><span>${tc('managedUserText')}</span></span><span class="panel-toggle__icon" aria-hidden="true"></span></button><div class="panel-collapsible" id="controlUserBody"><div class="control-grid"><label class="custom-field custom-field--full"><span>${tc('managedUser')}</span>${managedUserSelect}</label>${buildControlStepperField('controlPointsInput', t('points'), 0, Number(managedUser.points || 0))}${buildControlStepperField('controlWinsInput', t('wins'), 0, Number(managedUser.wins || 0))}${buildControlStepperField('controlLossesInput', t('losses'), 0, Number(managedUser.losses || 0))}${buildControlStepperField('controlSessionMinutesInput', tc('sessionMinutes'), 1, currentMinutes)}</div><div class="control-actions"><button class="surface-button surface-button--ghost control-button--danger" id="controlRemoveRankingButton" type="button">${tc('removeRanking')}</button><button class="surface-button surface-button--ghost control-button--danger" id="controlCloseSessionButton" type="button">${tc('closeSession')}</button><button class="surface-button surface-button--primary" id="controlApplyStatsButton" type="button">${tc('applyStats')}</button></div></div></div><div class="control-section"><button class="panel-toggle panel-toggle--soft ${state.controlWordPanelOpen ? 'is-open' : ''}" id="controlWordToggle" type="button" aria-expanded="${state.controlWordPanelOpen ? 'true' : 'false'}"><span class="panel-toggle__copy"><strong>${tc('explorerTools')}</strong><span>${tc('explorerToolsText')}</span></span><span class="panel-toggle__icon" aria-hidden="true"></span></button><div class="panel-collapsible ${state.controlWordPanelOpen ? '' : 'panel-collapsible--collapsed'}" id="controlWordBody"><div class="control-grid"><label class="custom-field custom-field--full"><span>${tc('wordPicker')}</span>${wordPickerSelect}</label><div class="control-helper custom-field--full">${tc('wordPickerText')}</div><label class="custom-field custom-field--full"><span>${tc('wordTheme')}</span>${wordThemeSelect}</label><label class="custom-field custom-field--full"><span>${tc('wordEmoji')}</span><input id="controlWordEmojiInput" type="hidden" value="${draft.emoji}"><details class="control-emoji-master ${state.controlEmojiPanelOpen ? 'is-open' : ''}" id="controlEmojiMaster" ${state.controlEmojiPanelOpen ? 'open' : ''}><summary class="control-emoji-master__summary"><span class="control-emoji-master__copy"><strong>${tc('wordEmoji')}</strong><span>${tc('emojiGridHint')}</span></span><strong class="control-emoji-master__preview" id="controlWordEmojiPreview">${draft.emoji}</strong><span class="control-emoji-master__arrow" aria-hidden="true"></span></summary><div class="control-emoji-picker"><div class="control-emoji-groups">${emojiGrid}</div></div></details></label><label class="custom-field"><span>${tc('wordTerm')}</span><input id="controlWordTermInput" type="text" maxlength="80" placeholder="${t('wordTermPlaceholder')}" value="${draft.term || ''}"></label><label class="custom-field"><span>${tc('wordType')}</span><input id="controlWordTypeInput" type="text" maxlength="40" placeholder="${t('wordTypePlaceholder')}" value="${draft.type || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordMeaning')}</span><input id="controlWordMeaningInput" type="text" maxlength="140" placeholder="${t('wordMeaningPlaceholder')}" value="${draft.meaning || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordExample')}</span><input id="controlWordExampleInput" type="text" maxlength="180" placeholder="${t('wordExamplePlaceholder')}" value="${draft.example || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordTip')}</span><input id="controlWordTipInput" type="text" maxlength="120" placeholder="${t('wordTipPlaceholder')}" value="${draft.tip || ''}"></label></div><div class="control-actions"><button class="surface-button surface-button--ghost" id="controlClearWordButton" type="button">${tc('clearWord')}</button><button class="surface-button surface-button--ghost control-button--danger" id="controlDeleteWordButton" type="button"${deleteButtonDisabled}>${tc('deleteWord')}</button><button class="surface-button surface-button--primary" id="controlSaveWordButton" type="button">${saveButtonLabel}</button></div></div></div></article>`;
+        : `<article class="option-block option-block--control"><div class="control-heading"><div><h4>${tc('title')}</h4><p>${tc('subtitle')}</p></div><div class="control-heading__actions"><span class="control-badge">${tc('unlockedBadge')}</span><button class="surface-button surface-button--ghost control-lock-button control-button--danger" id="controlDeactivateButton" type="button">${tc('deactivateButton')}</button></div></div><div class="control-section"><button class="panel-toggle panel-toggle--soft is-open" id="controlUserToggle" type="button" aria-expanded="true"><span class="panel-toggle__copy"><strong>${tc('managedUser')}</strong><span>${tc('managedUserText')}</span></span><span class="panel-toggle__icon" aria-hidden="true"></span></button><div class="panel-collapsible" id="controlUserBody"><div class="control-grid"><label class="custom-field custom-field--full"><span>${tc('managedUser')}</span>${managedUserSelect}<div class="control-selection-summary"><span class="control-selection-summary__label">${tc('selectedUsersLabel')}</span><div class="control-selection-tags" id="controlManagedUserTags">${managedSelectionTags}</div></div></label>${buildControlStepperField('controlPointsInput', t('points'), 0, Number(managedUser.points || 0))}${buildControlStepperField('controlWinsInput', t('wins'), 0, Number(managedUser.wins || 0))}${buildControlStepperField('controlLossesInput', t('losses'), 0, Number(managedUser.losses || 0))}${buildControlStepperField('controlSessionMinutesInput', tc('sessionMinutes'), 1, currentMinutes)}</div><div class="control-actions"><button class="surface-button surface-button--ghost control-button--danger" id="controlRemoveRankingButton" type="button">${tc('removeRanking')}</button><button class="surface-button surface-button--ghost control-button--danger" id="controlCloseSessionButton" type="button">${tc('closeSession')}</button><button class="surface-button surface-button--primary" id="controlApplyStatsButton" type="button">${tc('applyStats')}</button></div></div></div><div class="control-section"><button class="panel-toggle panel-toggle--soft ${state.controlWordPanelOpen ? 'is-open' : ''}" id="controlWordToggle" type="button" aria-expanded="${state.controlWordPanelOpen ? 'true' : 'false'}"><span class="panel-toggle__copy"><strong>${tc('explorerTools')}</strong><span>${tc('explorerToolsText')}</span></span><span class="panel-toggle__icon" aria-hidden="true"></span></button><div class="panel-collapsible ${state.controlWordPanelOpen ? '' : 'panel-collapsible--collapsed'}" id="controlWordBody"><div class="control-grid"><label class="custom-field custom-field--full"><span>${tc('wordPicker')}</span>${wordPickerSelect}</label><div class="control-helper custom-field--full">${tc('wordPickerText')}</div><label class="custom-field custom-field--full"><span>${tc('wordTheme')}</span>${wordThemeSelect}</label><label class="custom-field custom-field--full"><span>${tc('wordEmoji')}</span><input id="controlWordEmojiInput" type="hidden" value="${draft.emoji}"><details class="control-emoji-master ${state.controlEmojiPanelOpen ? 'is-open' : ''}" id="controlEmojiMaster" ${state.controlEmojiPanelOpen ? 'open' : ''}><summary class="control-emoji-master__summary"><span class="control-emoji-master__copy"><strong>${tc('wordEmoji')}</strong><span>${tc('emojiGridHint')}</span></span><strong class="control-emoji-master__preview" id="controlWordEmojiPreview">${draft.emoji}</strong><span class="control-emoji-master__arrow" aria-hidden="true"></span></summary><div class="control-emoji-picker"><div class="control-emoji-groups">${emojiGrid}</div></div></details></label><label class="custom-field"><span>${tc('wordTerm')}</span><input id="controlWordTermInput" type="text" maxlength="80" placeholder="${t('wordTermPlaceholder')}" value="${draft.term || ''}"></label><label class="custom-field"><span>${tc('wordType')}</span><input id="controlWordTypeInput" type="text" maxlength="40" placeholder="${t('wordTypePlaceholder')}" value="${draft.type || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordMeaning')}</span><input id="controlWordMeaningInput" type="text" maxlength="140" placeholder="${t('wordMeaningPlaceholder')}" value="${draft.meaning || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordExample')}</span><input id="controlWordExampleInput" type="text" maxlength="180" placeholder="${t('wordExamplePlaceholder')}" value="${draft.example || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordTip')}</span><input id="controlWordTipInput" type="text" maxlength="120" placeholder="${t('wordTipPlaceholder')}" value="${draft.tip || ''}"></label></div><div class="control-actions"><button class="surface-button surface-button--ghost" id="controlClearWordButton" type="button">${tc('clearWord')}</button><button class="surface-button surface-button--ghost control-button--danger" id="controlDeleteWordButton" type="button"${deleteButtonDisabled}>${tc('deleteWord')}</button><button class="surface-button surface-button--primary" id="controlSaveWordButton" type="button">${saveButtonLabel}</button></div></div></div></article>`;
 
     elements.optionsSections.innerHTML = `${blockHtml}${controlHtml}`;
     elements.optionsSections.querySelectorAll('[data-option-action]').forEach((button) => button.addEventListener('click', () => handleOptionChange(button.dataset.optionAction, button.dataset.optionValue)));
@@ -2747,20 +2838,8 @@ function renderOptionsModal() {
     const deactivateButton = document.getElementById('controlDeactivateButton');
     const emojiPreview = document.getElementById('controlWordEmojiPreview');
 
-    setupControlSelect({
-        shellId: 'controlManagedUserShell',
-        inputId: 'controlManagedUserSelect',
-        triggerId: 'controlManagedUserTrigger',
-        labelId: 'controlManagedUserTriggerLabel',
-        dropdownId: 'controlManagedUserDropdown',
-        searchId: 'controlManagedUserSearch',
-        optionsId: 'controlManagedUserOptions',
-        onSelect: (value) => {
-            persistControlModeChanges();
-            state.controlManagedUserId = value;
-            renderOptionsModal();
-        }
-    });
+    setupManagedUserMultiSelect();
+    refreshManagedUserPanel();
 
     setupControlSelect({
         shellId: 'controlWordPickerShell',
@@ -2840,39 +2919,47 @@ function renderOptionsModal() {
     });
 
     removeRankingButton?.addEventListener('click', () => {
-        if (!state.controlManagedUserId) {
+        const targetIds = getControlTargetUserIds();
+        if (!targetIds.length) {
             pushToast(randomFrom(EVEREST_LINES.error), tc('noManagedUser'), 'danger');
             return;
         }
-        removeUserFromRanking(state.controlManagedUserId);
-        pushToast(randomFrom(EVEREST_LINES.info), tc('userRemoved'), 'info');
+        targetIds.forEach((userId) => removeUserFromRanking(userId));
+        pushToast(randomFrom(EVEREST_LINES.info), targetIds.length > 1 ? tc('usersRemoved') : tc('userRemoved'), 'info');
         renderAll();
     });
 
     closeSessionButton?.addEventListener('click', () => {
-        if (!state.controlManagedUserId) {
+        const targetIds = getControlTargetUserIds();
+        if (!targetIds.length) {
             pushToast(randomFrom(EVEREST_LINES.error), tc('noManagedUser'), 'danger');
             return;
         }
-        const closedSelf = closeManagedSession(state.controlManagedUserId);
+        const selfId = getUserId(state.user);
+        const sortedIds = targetIds.slice().sort((a, b) => (a === selfId ? 1 : 0) - (b === selfId ? 1 : 0));
+        let closedSelf = false;
+        sortedIds.forEach((userId) => {
+            closedSelf = closeManagedSession(userId) || closedSelf;
+        });
         if (closedSelf) return;
-        pushToast(randomFrom(EVEREST_LINES.info), tc('sessionClosed'), 'info');
+        pushToast(randomFrom(EVEREST_LINES.info), targetIds.length > 1 ? tc('sessionsClosed') : tc('sessionClosed'), 'info');
         bootstrapUser();
         renderAll();
     });
 
     applyStatsButton?.addEventListener('click', () => {
-        if (!state.controlManagedUserId) {
+        const targetIds = getControlTargetUserIds();
+        if (!targetIds.length) {
             pushToast(randomFrom(EVEREST_LINES.error), tc('noManagedUser'), 'danger');
             return;
         }
-        applyControlStats(state.controlManagedUserId, {
+        targetIds.forEach((userId) => applyControlStats(userId, {
             points: document.getElementById('controlPointsInput')?.value,
             wins: document.getElementById('controlWinsInput')?.value,
             losses: document.getElementById('controlLossesInput')?.value,
             sessionMinutes: document.getElementById('controlSessionMinutesInput')?.value
-        });
-        pushToast(randomFrom(EVEREST_LINES.success), tc('statsApplied'), 'success');
+        }));
+        pushToast(randomFrom(EVEREST_LINES.success), targetIds.length > 1 ? tc('statsAppliedMany') : tc('statsApplied'), 'success');
         renderAll();
     });
 
@@ -3190,52 +3277,126 @@ function updateRecurringUi() {
     void cleanupExpiredSharedLeaderboard();
 }
 
+function setupManagedUserMultiSelect() {
+    const shell = document.getElementById('controlManagedUserShell');
+    const hiddenInput = document.getElementById('controlManagedUserSelect');
+    const trigger = document.getElementById('controlManagedUserTrigger');
+    const dropdown = document.getElementById('controlManagedUserDropdown');
+    const searchInput = document.getElementById('controlManagedUserSearch');
+    const optionsRoot = document.getElementById('controlManagedUserOptions');
+    const tagsRoot = document.getElementById('controlManagedUserTags');
+
+    if (!shell || !hiddenInput || !trigger || !dropdown || !optionsRoot || !tagsRoot) return;
+
+    trigger.addEventListener('click', () => {
+        const willOpen = dropdown.hidden;
+        setControlSelectDropdownState(shell, trigger, dropdown, willOpen, searchInput);
+    });
+
+    searchInput?.addEventListener('input', () => {
+        filterControlSelectOptions(optionsRoot, searchInput.value);
+    });
+
+    optionsRoot.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-value]');
+        if (!button) return;
+        const value = button.dataset.value || '';
+        persistControlModeChanges();
+        if (value === '__all__') {
+            setControlManagedSelection([], { selectAll: !state.controlManageAllUsers, touched: true });
+        } else if (state.controlManageAllUsers) {
+            setControlManagedSelection([value], { selectAll: false, touched: true });
+        } else {
+            toggleControlManagedUser(value);
+        }
+        refreshManagedUserPanel();
+    });
+
+    tagsRoot.addEventListener('click', (event) => {
+        const removeAllButton = event.target.closest('[data-control-remove-all]');
+        if (removeAllButton) {
+            event.preventDefault();
+            setControlManagedSelection([], { selectAll: false, touched: true });
+            refreshManagedUserPanel();
+            return;
+        }
+        const removeUserButton = event.target.closest('[data-control-remove-user]');
+        if (!removeUserButton) return;
+        event.preventDefault();
+        toggleControlManagedUser(removeUserButton.dataset.controlRemoveUser || '');
+        refreshManagedUserPanel();
+    });
+
+    shell.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            setControlSelectDropdownState(shell, trigger, dropdown, false, searchInput);
+            trigger.focus();
+        }
+    });
+
+    shell.addEventListener('focusout', (event) => {
+        if (!shell.contains(event.relatedTarget)) {
+            setControlSelectDropdownState(shell, trigger, dropdown, false, searchInput);
+        }
+    });
+}
+
 function refreshManagedUserPanel() {
     if (elements.optionsModal.hidden || !state.controlModeUnlocked) return;
 
-    const managedUsers = getManagedUsers();
+    const managedUsers = syncControlManagedSelectionState();
     const hiddenInput = document.getElementById('controlManagedUserSelect');
     const triggerLabel = document.getElementById('controlManagedUserTriggerLabel');
     const optionsRoot = document.getElementById('controlManagedUserOptions');
+    const tagsRoot = document.getElementById('controlManagedUserTags');
     const pointsInput = document.getElementById('controlPointsInput');
     const winsInput = document.getElementById('controlWinsInput');
     const lossesInput = document.getElementById('controlLossesInput');
     const sessionMinutesInput = document.getElementById('controlSessionMinutesInput');
 
-    if (!hiddenInput || !triggerLabel || !optionsRoot || !pointsInput || !winsInput || !lossesInput || !sessionMinutesInput) {
+    if (!hiddenInput || !triggerLabel || !optionsRoot || !tagsRoot || !pointsInput || !winsInput || !lossesInput || !sessionMinutesInput) {
         return;
     }
 
-    if (!state.controlManagedUserId || !managedUsers.some((user) => getUserId(user) === state.controlManagedUserId)) {
-        state.controlManagedUserId = managedUsers[0] ? getUserId(managedUsers[0]) : '';
-    }
-
-    const selectedUser = getManagedUserById(state.controlManagedUserId);
-    hiddenInput.value = state.controlManagedUserId || '';
-    triggerLabel.textContent = selectedUser ? `${selectedUser.profileEmoji || '\uD83E\uDDE0'} ${selectedUser.username}` : tc('userSelect');
+    const selectedUsers = getControlSelectedUsers();
+    const selectedIds = new Set(state.controlManagedUserIds || []);
+    const referenceUser = getControlManagedReferenceUser();
+    hiddenInput.value = state.controlManageAllUsers ? '__all__' : state.controlManagedUserIds.join(',');
+    triggerLabel.textContent = getControlManagedSelectionLabel();
 
     const searchInput = document.getElementById('controlManagedUserSearch');
     const normalizedQuery = (searchInput?.value || '').trim().toLowerCase();
-    optionsRoot.innerHTML = managedUsers.map((user) => {
-        const value = getUserId(user);
-        const search = `${user.username} ${user.course || t('routePending')}`.toLowerCase();
-        const hidden = normalizedQuery && !search.includes(normalizedQuery);
-        return `<button type="button" class="course-option control-select-option ${value === state.controlManagedUserId ? 'active' : ''} ${hidden ? 'hidden' : ''}" data-value="${value}" data-search="${search}"><span class="course-option-main">${user.profileEmoji || '\uD83E\uDDE0'} ${user.username}</span><span class="course-option-alt">${user.course || t('routePending')}</span></button>`;
+    const options = [
+        {
+            value: '__all__',
+            main: tc('allManagedUsers'),
+            alt: `${managedUsers.length} ${t('activeClimber').toLowerCase()}`,
+            search: `${tc('allManagedUsers')} ${managedUsers.map((user) => `${user.username} ${user.course || ''}`).join(' ')}`
+        },
+        ...managedUsers.map((user) => ({
+            value: getUserId(user),
+            main: `${user.profileEmoji || '\uD83E\uDDE0'} ${user.username}`,
+            alt: user.course || t('routePending'),
+            search: `${user.username} ${user.course || t('routePending')}`
+        }))
+    ];
+    optionsRoot.innerHTML = options.map((option) => {
+        const hidden = normalizedQuery && !option.search.toLowerCase().includes(normalizedQuery);
+        const active = option.value === '__all__' ? state.controlManageAllUsers : selectedIds.has(option.value);
+        return `<button type="button" class="course-option control-select-option ${active ? 'active' : ''} ${hidden ? 'hidden' : ''}" data-value="${option.value}" data-search="${option.search.toLowerCase()}"><span class="course-option-main">${option.main}</span><span class="course-option-alt">${option.alt}</span></button>`;
     }).join('');
 
-    optionsRoot.querySelectorAll('[data-value]').forEach((button) => {
-        button.addEventListener('click', () => {
-            persistControlModeChanges();
-            state.controlManagedUserId = button.dataset.value || '';
-            renderOptionsModal();
-        });
-    });
+    tagsRoot.innerHTML = state.controlManageAllUsers
+        ? `<button type="button" class="control-selection-tag control-selection-tag--all" data-control-remove-all="true">${tc('allManagedUsers')}</button>`
+        : (selectedUsers.length
+            ? selectedUsers.map((user) => `<button type="button" class="control-selection-tag" data-control-remove-user="${getUserId(user)}">${user.profileEmoji || '\uD83E\uDDE0'} ${user.username}</button>`).join('')
+            : `<span class="control-selection-empty">${tc('selectedUsersEmpty')}</span>`);
 
-    if (selectedUser) {
-        pointsInput.value = Number(selectedUser.points || 0);
-        winsInput.value = Number(selectedUser.wins || 0);
-        lossesInput.value = Number(selectedUser.losses || 0);
-        sessionMinutesInput.value = Math.max(1, Math.ceil(Math.max(0, (selectedUser.expiresAt || Date.now()) - Date.now()) / 60000));
+    if (referenceUser) {
+        pointsInput.value = Number(referenceUser.points || 0);
+        winsInput.value = Number(referenceUser.wins || 0);
+        lossesInput.value = Number(referenceUser.losses || 0);
+        sessionMinutesInput.value = Math.max(1, Math.ceil(Math.max(0, (referenceUser.expiresAt || Date.now()) - Date.now()) / 60000));
     }
 }
 
