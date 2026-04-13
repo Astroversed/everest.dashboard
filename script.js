@@ -2186,15 +2186,16 @@ function renderStageList() {
         { x: 41, y: 40 },
         { x: 59, y: 40 }
     ];
+    const lineSegments = [
+        { left: 50, top: 18, width: 49.12, angle: 118.61 },
+        { left: 50, top: 18, width: 49.12, angle: 61.39 },
+        { left: 26, top: 62, width: 48, angle: 0 }
+    ];
     elements.stageList.innerHTML = `
         <div class="stage-tree">
-            <svg class="stage-tree__lines" viewBox="0 0 100 84" preserveAspectRatio="none" aria-hidden="true">
-                <line x1="50" y1="18" x2="26" y2="62"></line>
-                <line x1="50" y1="18" x2="74" y2="62"></line>
-                <line x1="26" y1="62" x2="74" y2="62"></line>
-                <line x1="26" y1="62" x2="41" y2="40"></line>
-                <line x1="74" y1="62" x2="59" y2="40"></line>
-            </svg>
+            <div class="stage-tree__lines" aria-hidden="true">
+                ${lineSegments.map((segment) => `<span class="stage-tree__line" style="left:${segment.left}%;top:${segment.top}%;width:${segment.width}%;transform:translate(-50%, -50%) rotate(${segment.angle}deg);"></span>`).join('')}
+            </div>
             ${theme.stages.map((stage, index) => {
         const stageProgress = results[stage.id] || { attempts: 0, clears: 0, bestAccuracy: 0 };
         const unlocked = isStageUnlocked(theme.id, stage.id);
