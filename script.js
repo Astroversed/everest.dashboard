@@ -1796,6 +1796,23 @@ function buildAssessItems(stage = getStage()) {
     };
 }
 
+function isStageUnlocked(themeId, stageId) {
+    if (stageId <= 1) return true;
+    const results = state.progress.stageResults[themeId] || {};
+    const previous = results[stageId - 1];
+    return Boolean(previous && previous.clears > 0);
+}
+
+function getHighestUnlockedStageId(themeId = state.activeThemeId) {
+    const theme = getTheme(themeId);
+    if (!theme) return 1;
+    let highest = 1;
+    theme.stages.forEach((stage) => {
+        if (isStageUnlocked(theme.id, stage.id)) highest = stage.id;
+    });
+    return highest;
+}
+
 function startLearnPhase() {
     const stage = getStage();
     if (!stage) return;
@@ -2112,15 +2129,41 @@ function renderStageList() {
     const theme = localizeTheme(getTheme());
     if (!theme) return;
     const results = state.progress.stageResults[theme.id] || {};
+    const highestUnlocked = getHighestUnlockedStageId(theme.id);
+    if (!isStageUnlocked(theme.id, state.activeStageId)) {
+        state.activeStageId = highestUnlocked;
+    }
     elements.stageSectionTitle.textContent = t('themeStagesTitle', { theme: theme.title });
     elements.stageThemeFocus.textContent = theme.summary;
     elements.stageList.innerHTML = theme.stages.map((stage) => {
         const stageProgress = results[stage.id] || { attempts: 0, clears: 0, bestAccuracy: 0 };
+        const unlocked = isStageUnlocked(theme.id, stage.id);
         const active = stage.id === state.activeStageId;
-        return `<article class="stage-item ${active ? 'is-active' : ''}"><div class="stage-item__topline"><h4>${stage.name}</h4><span class="panel-badge stage-item__badge">${t('stageBadge', { stage: stage.id })}</span></div><p>${stage.focus}</p><div class="stage-item__badges"><span class="stage-badge">${t('pointsBadge', { points: stage.points })}</span><span class="stage-badge">${t('stageBest', { value: stageProgress.bestAccuracy || 0 })}</span><span class="stage-badge">${t('stageClears', { value: stageProgress.clears || 0 })}</span></div><div class="stage-item__footer"><button class="surface-button surface-button--ghost" data-select-stage="${stage.id}" type="button">${t('select')}</button><button class="surface-button surface-button--primary" data-play-stage="${stage.id}" type="button">${t('play')}</button></div></article>`;
+        return `
+            <article class="stage-orb stage-orb--${stage.id % 2 === 0 ? 'right' : 'left'} ${active ? 'is-active' : ''} ${unlocked ? 'is-unlocked' : 'is-locked'}">
+                <button class="stage-orb__button" data-stage-node="${stage.id}" type="button" ${unlocked ? '' : 'aria-disabled="true"'}>
+                    <span class="stage-orb__badge">${unlocked ? stage.id : '🔒'}</span>
+                    <span class="stage-orb__name">${stage.name}</span>
+                </button>
+                <div class="stage-orb__tooltip" role="presentation">
+                    <strong>${stage.name}</strong>
+                    <span>${t('pointsBadge', { points: stage.points })}</span>
+                    <span>${t('stageBest', { value: stageProgress.bestAccuracy || 0 })}</span>
+                    <span>${t('stageClears', { value: stageProgress.clears || 0 })}</span>
+                </div>
+            </article>
+        `;
     }).join('');
-    elements.stageList.querySelectorAll('[data-select-stage]').forEach((button) => button.addEventListener('click', () => { state.activeStageId = Number(button.dataset.selectStage); renderStageList(); renderGame(); }));
-    elements.stageList.querySelectorAll('[data-play-stage]').forEach((button) => button.addEventListener('click', () => { state.activeStageId = Number(button.dataset.playStage); startStage(); }));
+    elements.stageList.querySelectorAll('[data-stage-node]').forEach((button) => button.addEventListener('click', () => {
+        const stageId = Number(button.dataset.stageNode);
+        if (!isStageUnlocked(theme.id, stageId)) {
+            pushToast(randomFrom(EVEREST_LINES.info), `Complete stage ${stageId - 1} first to unlock this climb.`, 'info');
+            return;
+        }
+        state.activeStageId = stageId;
+        renderStageList();
+        renderGame();
+    }));
 }
 
 function renderHero() {
@@ -3068,7 +3111,7 @@ function bindEvents() {
     });
 
     elements.heroLearnButton?.addEventListener('click', startLearnPhase);
-    elements.heroStartButton?.addEventListener('click', startStage);
+    elements.heroStartButton?.addEventListener('click', startLearnPhase);
     elements.heroAssessButton?.addEventListener('click', startAssessPhase);
     elements.stageToggle?.addEventListener('click', () => togglePanel(elements.stageToggle, elements.stageBody));
     elements.explorerToggle?.addEventListener('click', () => togglePanel(elements.explorerToggle, elements.explorerBody));
@@ -3099,7 +3142,7 @@ function bindEvents() {
 
     elements.resultReplayButton?.addEventListener('click', () => {
         closeModal('resultModal');
-        startStage();
+        startLearnPhase();
     });
     elements.resultContinueButton?.addEventListener('click', () => {
         closeModal('resultModal');
