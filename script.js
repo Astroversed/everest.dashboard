@@ -1949,6 +1949,9 @@ function renderLearnPhase(theme, stage) {
     setFeedback('idle', t('learnTitle'), `${stage.name} · ${stage.focus}`);
     elements.nextQuestionButton.hidden = true;
     document.querySelector('.game-footer__stats')?.setAttribute('hidden', 'hidden');
+    elements.choiceGrid.classList.remove('choice-grid--match');
+    elements.choiceGrid.classList.remove('choice-grid--assess');
+    elements.choiceGrid.classList.add('choice-grid--learn');
 
     elements.choiceGrid.innerHTML = `
         <div class="learn-flow">
@@ -1989,6 +1992,9 @@ function renderAssessPhase(theme, stage) {
     setFeedback('idle', t('assessTitle'), t('assessPrompt'));
     elements.nextQuestionButton.hidden = true;
     document.querySelector('.game-footer__stats')?.removeAttribute('hidden');
+    elements.choiceGrid.classList.remove('choice-grid--match');
+    elements.choiceGrid.classList.remove('choice-grid--learn');
+    elements.choiceGrid.classList.add('choice-grid--assess');
 
     elements.choiceGrid.innerHTML = `
         <div class="assess-flow">
@@ -2163,22 +2169,18 @@ function renderStageList() {
     elements.stageSectionTitle.textContent = t('themeStagesTitle', { theme: theme.title });
     elements.stageThemeFocus.textContent = theme.summary;
     const stagePositions = [
-        { x: 50, y: 14 },
-        { x: 24, y: 39 },
-        { x: 76, y: 39 },
-        { x: 30, y: 72 },
-        { x: 70, y: 72 }
+        { x: 50, y: 16 },
+        { x: 39, y: 39 },
+        { x: 61, y: 39 },
+        { x: 28, y: 68 },
+        { x: 72, y: 68 }
     ];
-    const points = theme.stages.map((stage, index) => {
-        const fallbackX = 50;
-        const fallbackY = 10 + (index * 16);
-        const point = stagePositions[index] || { x: fallbackX, y: fallbackY };
-        return `${point.x},${point.y}`;
-    }).join(' ');
     elements.stageList.innerHTML = `
         <div class="stage-tree">
-            <svg class="stage-tree__lines" viewBox="0 0 100 90" preserveAspectRatio="none" aria-hidden="true">
-                <polyline points="${points}" />
+            <svg class="stage-tree__lines" viewBox="0 0 100 84" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="50" y1="16" x2="28" y2="68"></line>
+                <line x1="50" y1="16" x2="72" y2="68"></line>
+                <line x1="28" y1="68" x2="72" y2="68"></line>
             </svg>
             ${theme.stages.map((stage, index) => {
         const stageProgress = results[stage.id] || { attempts: 0, clears: 0, bestAccuracy: 0 };
@@ -2361,6 +2363,10 @@ function renderGame() {
     }
 
     if (!state.stageLive || !state.currentQuestion) {
+        if (gameLayout) gameLayout.style.display = 'none';
+        if (gameFeedback) gameFeedback.style.display = 'none';
+        gameFooterStats?.setAttribute('hidden', 'hidden');
+        elements.timerBadge.hidden = true;
         renderChallengeVisual(theme, null, false);
         elements.challengeTypeLabel.textContent = gameText('routeFocus');
         elements.challengePrompt.textContent = stage.focus;
@@ -2368,6 +2374,8 @@ function renderGame() {
         elements.challengeExample.textContent = `${theme.summary} ${randomFrom(EVEREST_LINES.info)}`;
         elements.choiceGrid.innerHTML = '';
         elements.choiceGrid.classList.remove('choice-grid--match');
+        elements.choiceGrid.classList.remove('choice-grid--learn');
+        elements.choiceGrid.classList.remove('choice-grid--assess');
         elements.nextQuestionButton.hidden = true;
         elements.questionCounter.textContent = '0 / 0';
         elements.timerBadge.textContent = '15s';
@@ -2380,6 +2388,10 @@ function renderGame() {
 
     const question = state.currentQuestion;
     renderChallengeVisual(theme, question, false);
+    if (gameLayout) gameLayout.style.display = '';
+    if (gameFeedback) gameFeedback.style.display = '';
+    gameFooterStats?.removeAttribute('hidden');
+    elements.timerBadge.hidden = false;
     const selectedEmojiOption = question.emojiChoices.find((option) => normalizeWord(option.en) === state.matchSelection.emoji) || null;
     elements.challengeTypeLabel.textContent = getGameModeLabel();
     elements.challengePrompt.textContent = gameText('matchPairPrompt', { word: question.term.en });
@@ -2393,6 +2405,8 @@ function renderGame() {
     toggleGameModeVisibility();
 
     elements.choiceGrid.classList.add('choice-grid--match');
+    elements.choiceGrid.classList.remove('choice-grid--learn');
+    elements.choiceGrid.classList.remove('choice-grid--assess');
     elements.choiceGrid.innerHTML = `
         <div class="match-summit">
             <div class="match-summit__intro">
