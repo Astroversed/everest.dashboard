@@ -295,6 +295,25 @@ const ui = {
         rankLine: 'Current ridge rank: #{rank}', rankUnknown: 'Rank will appear after the leaderboard settles.',
         topRoute: 'Current route', stageBadge: 'Stage {stage}', pointsBadge: '{points} clear bonus',
         clearBonus: 'Clear bonus',
+        learn: 'Learn',
+        assess: 'Assess',
+        startStageShort: 'Start stage',
+        learnTitle: 'Learn before the climb',
+        learnText: 'Review the route terms, swipe through each placeholder card, and take your notes before Word Match begins.',
+        learnNext: 'Next card',
+        learnPrevious: 'Previous',
+        learnStartPlay: 'Start Word Match',
+        learnProgress: '{current} / {total} cards',
+        learnPlaceholder: 'Image placeholder',
+        learnSwipeHint: 'Tap or swipe to move through the route cards.',
+        assessTitle: 'Assess the route',
+        assessText: 'Use the answer bank and write each English word beside its emoji.',
+        assessAnswers: 'Answer bank',
+        assessCheck: 'Check assessment',
+        assessRetry: 'Reset assessment',
+        assessPlaceholder: 'Write the English word',
+        assessScore: 'Assessment score',
+        assessPrompt: 'Complete the ten emoji routes with the correct English words.',
         modeBlockTitle: 'Game mode', modeBlockText: 'Keep the original Everest spirit, but choose how you want to answer.',
         animationBlockTitle: 'Dashboard motion', animationBlockText: 'Keep Everest fully animated, or reduce motion when a device needs a lighter experience.',
         themeBlockTitle: 'Summit look', themeBlockText: 'Switch between light and dark atmosphere without losing clarity.',
@@ -419,6 +438,25 @@ const ui = {
         rankLine: 'Posici\u00F3n actual: #{rank}', rankUnknown: 'La posici\u00F3n aparecer\u00E1 cuando la tabla se actualice.',
         topRoute: 'Ruta actual', stageBadge: 'Etapa {stage}', pointsBadge: '{points} puntos extra',
         clearBonus: 'Bono por completar',
+        learn: 'Aprender',
+        assess: 'Evaluar',
+        startStageShort: 'Iniciar etapa',
+        learnTitle: 'Aprende antes de escalar',
+        learnText: 'Revisa los t\u00E9rminos de la ruta, desliza cada tarjeta visual y toma tus apuntes antes de empezar Word Match.',
+        learnNext: 'Siguiente tarjeta',
+        learnPrevious: 'Anterior',
+        learnStartPlay: 'Empezar Word Match',
+        learnProgress: '{current} / {total} tarjetas',
+        learnPlaceholder: 'Espacio para imagen',
+        learnSwipeHint: 'Toca o desliza para recorrer las tarjetas de la ruta.',
+        assessTitle: 'Eval\u00FAa la ruta',
+        assessText: 'Usa el banco de respuestas y escribe cada palabra en ingl\u00E9s junto a su emoji.',
+        assessAnswers: 'Banco de respuestas',
+        assessCheck: 'Revisar evaluaci\u00F3n',
+        assessRetry: 'Reiniciar evaluaci\u00F3n',
+        assessPlaceholder: 'Escribe la palabra en ingl\u00E9s',
+        assessScore: 'Puntuaci\u00F3n de evaluaci\u00F3n',
+        assessPrompt: 'Completa las diez rutas de emoji con la palabra correcta en ingl\u00E9s.',
         modeBlockTitle: 'Modo de juego', modeBlockText: 'Conserva la esencia de Everest, pero te deja elegir c\u00F3mo quieres responder.',
         animationBlockTitle: 'Animaciones del panel', animationBlockText: 'Mant\u00E9n las animaciones normales de Everest o reduce el movimiento si el dispositivo necesita una experiencia m\u00E1s ligera.',
         themeBlockTitle: 'Apariencia', themeBlockText: 'Cambia entre el modo claro y el modo oscuro sin perder claridad.',
@@ -491,7 +529,10 @@ const state = {
     activeThemeId: null, activeStageId: 1, searchTerm: '', explorerSearch: '', explorerTheme: 'all',
     stageLive: false, questions: [], questionIndex: 0, currentQuestion: null, questionResolved: false,
     secondsLeft: 15, timerId: null, stageStartedAt: 0, stagePoints: 0, stageCorrect: 0, stageWrong: 0,
-    streak: 0, bestStreak: 0, latestAccuracy: 0, matchSelection: { signal: '', emoji: '' }, lastResolvedAnswer: '', controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlManagedUserIds: [], controlManageAllUsers: false, controlManagedSelectionTouched: false, controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
+    streak: 0, bestStreak: 0, latestAccuracy: 0, matchSelection: { signal: '', emoji: '' }, lastResolvedAnswer: '',
+    challengePhase: 'idle', learnDeck: [], learnIndex: 0, learnTouchStartX: 0,
+    assessItems: [], assessBank: [], assessAnswers: {}, assessChecked: false, pendingResultSummary: null,
+    controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlManagedUserIds: [], controlManageAllUsers: false, controlManagedSelectionTouched: false, controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
     sharedLeaderboard: [], firestore: null, firestoreReady: false, firestoreListener: null, firestoreCleanupBusy: false
 };
 
@@ -519,7 +560,8 @@ const elements = {
     explorerThemeTriggerLabel: document.getElementById('explorerThemeTriggerLabel'), explorerThemeDropdown: document.getElementById('explorerThemeDropdown'),
     explorerThemeSearch: document.getElementById('explorerThemeSearch'), explorerThemeOptions: document.getElementById('explorerThemeOptions'),
     quickOptions: document.getElementById('quickOptions'), optionsSections: document.getElementById('optionsSections'), toastStack: document.getElementById('toastStack'),
-    sidebarSupportTitle: document.getElementById('sidebarSupportTitle'), sidebarSupportText: document.getElementById('sidebarSupportText'), heroStartButton: document.getElementById('heroStartButton'),
+    sidebarSupportTitle: document.getElementById('sidebarSupportTitle'), sidebarSupportText: document.getElementById('sidebarSupportText'),
+    heroLearnButton: document.getElementById('heroLearnButton'), heroStartButton: document.getElementById('heroStartButton'), heroAssessButton: document.getElementById('heroAssessButton'),
     heroExploreButton: document.getElementById('heroExploreButton'), scrollThemeIntoViewButton: document.getElementById('scrollThemeIntoViewButton'),
     themeDeckToggle: document.getElementById('themeDeckToggle'), themeDeckBody: document.getElementById('themeDeckBody'),
     themeDeckToggleTitle: document.getElementById('themeDeckToggleTitle'), themeDeckToggleText: document.getElementById('themeDeckToggleText'),
@@ -831,17 +873,11 @@ function getStatusLabel(isActive) {
 }
 
 function getGameModeLabel(mode = state.settings?.gameMode) {
-    if (mode === 'typing') return t('summitTyping');
-    if (mode === 'match') return t('summitMatch');
-    if (mode === 'context') return t('summitContext');
-    return t('summitChoice');
+    return t('summitMatch');
 }
 
 function getGameModeLabelEnglish(mode = state.settings?.gameMode) {
-    if (mode === 'typing') return tg('summitTyping');
-    if (mode === 'match') return tg('summitMatch');
-    if (mode === 'context') return tg('summitContext');
-    return tg('summitChoice');
+    return tg('summitMatch');
 }
 
 function getThemeMatchSignalEmoji(themeId = state.activeThemeId) {
@@ -867,7 +903,7 @@ function formatSession(ms) {
 }
 
 function getUserId(user) { return user?.usernameNormalized || normalizeWord(user?.username || 'guest'); }
-function getDefaultSettings() { return { language: 'en', gameMode: 'multiple', soundOn: true, voiceOn: false, animationsOn: true, themeMode: 'light' }; }
+function getDefaultSettings() { return { language: 'en', gameMode: 'match', soundOn: true, voiceOn: false, animationsOn: true, themeMode: 'light' }; }
 function getDefaultProgress() { return { points: 0, wins: 0, losses: 0, totalPlayMs: 0, lastPlayedTheme: null, stageResults: {} }; }
 
 const THEME_MATCH_SIGNAL_EMOJIS = {
@@ -897,6 +933,7 @@ function pruneUsers() {
 
 function loadSettings() {
     state.settings = { ...getDefaultSettings(), ...readStorage(STORAGE_KEYS.settings, {}) };
+    state.settings.gameMode = 'match';
     document.body.dataset.themeMode = state.settings.themeMode;
     document.body.dataset.motionMode = state.settings.animationsOn ? 'full' : 'reduced';
 }
@@ -1716,15 +1753,235 @@ function buildContextQuestion(answerTerm, pool, themeId) {
 function buildQuestions(stage) {
     const theme = getTheme();
     const pool = theme.stages.flatMap((bucket) => bucket.terms.map(convertTerm));
-    return shuffle(stage.terms.map(convertTerm)).slice(0, 5).map((term) => {
-        if (state.settings.gameMode === 'match') {
-            return { term, ...buildMatchChoices(term, pool, theme.id) };
-        }
-        if (state.settings.gameMode === 'context') {
-            return { term, ...buildContextQuestion(term, pool, theme.id) };
-        }
-        return { term, options: buildChoices(term, pool) };
+    return shuffle(stage.terms.map(convertTerm)).slice(0, 5).map((term) => ({ term, ...buildMatchChoices(term, pool, theme.id) }));
+}
+
+function getStageTerms(stage = getStage()) {
+    const theme = getTheme();
+    if (!stage || !theme) return [];
+    const themePool = theme.stages.flatMap((bucket) => bucket.terms.map(convertTerm));
+    const stageTerms = shuffle(stage.terms.map(convertTerm));
+    const selected = [];
+    const seen = new Set();
+
+    const addTerm = (term) => {
+        const key = normalizeWord(term.en);
+        if (!key || seen.has(key)) return;
+        seen.add(key);
+        selected.push(term);
+    };
+
+    stageTerms.forEach(addTerm);
+    shuffle(themePool).forEach((term) => {
+        if (selected.length >= 10) return;
+        addTerm(term);
     });
+
+    return selected.slice(0, 10);
+}
+
+function buildLearnDeck(stage = getStage()) {
+    return getStageTerms(stage).map((term, index) => ({
+        ...term,
+        cardIndex: index + 1,
+        placeholderLabel: t('learnPlaceholder')
+    }));
+}
+
+function buildAssessItems(stage = getStage()) {
+    const items = getStageTerms(stage);
+    return {
+        items,
+        bank: shuffle(items.map((term) => term.en))
+    };
+}
+
+function startLearnPhase() {
+    const stage = getStage();
+    if (!stage) return;
+    resetActiveChallenge();
+    state.challengePhase = 'learn';
+    state.learnDeck = buildLearnDeck(stage);
+    state.learnIndex = 0;
+    state.assessChecked = false;
+    state.assessAnswers = {};
+    renderGame();
+    document.getElementById('gameCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function startAssessPhase() {
+    const stage = getStage();
+    if (!stage) return;
+    stopTimer();
+    state.stageLive = false;
+    state.challengePhase = 'assess';
+    const assess = buildAssessItems(stage);
+    state.assessItems = assess.items;
+    state.assessBank = assess.bank;
+    state.assessAnswers = {};
+    state.assessChecked = false;
+    state.currentQuestion = null;
+    renderGame();
+    document.getElementById('gameCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function stepLearnCard(direction) {
+    if (!state.learnDeck.length) return;
+    const nextIndex = state.learnIndex + direction;
+    if (nextIndex < 0) return;
+    if (nextIndex >= state.learnDeck.length) {
+        startStage();
+        return;
+    }
+    state.learnIndex = nextIndex;
+    renderGame();
+}
+
+function bindLearnInteractions() {
+    const learnDeck = elements.choiceGrid.querySelector('.learn-flow');
+    if (!learnDeck) return;
+
+    learnDeck.querySelector('[data-learn-action="prev"]')?.addEventListener('click', () => stepLearnCard(-1));
+    learnDeck.querySelector('[data-learn-action="next"]')?.addEventListener('click', () => stepLearnCard(1));
+    learnDeck.querySelector('.learn-card__media')?.addEventListener('click', () => stepLearnCard(1));
+
+    learnDeck.addEventListener('touchstart', (event) => {
+        state.learnTouchStartX = event.touches[0]?.clientX || 0;
+    }, { passive: true });
+
+    learnDeck.addEventListener('touchend', (event) => {
+        const endX = event.changedTouches[0]?.clientX || 0;
+        const delta = endX - state.learnTouchStartX;
+        if (Math.abs(delta) < 40) return;
+        stepLearnCard(delta < 0 ? 1 : -1);
+    }, { passive: true });
+}
+
+function submitAssessment() {
+    if (!state.assessItems.length) return;
+
+    const nextAnswers = {};
+    let correctCount = 0;
+
+    state.assessItems.forEach((item, index) => {
+        const input = document.getElementById(`assessInput${index}`);
+        const value = input?.value?.trim() || '';
+        const correct = normalizeWord(value) === normalizeWord(item.en);
+        nextAnswers[item.en] = value;
+        input?.classList.toggle('is-correct', correct);
+        input?.classList.toggle('is-wrong', !correct);
+        input?.setAttribute('aria-invalid', correct ? 'false' : 'true');
+        if (correct) correctCount += 1;
+    });
+
+    state.assessAnswers = nextAnswers;
+    state.assessChecked = true;
+
+    const score = `${correctCount}/${state.assessItems.length}`;
+    setFeedback(
+        correctCount === state.assessItems.length ? 'correct' : 'incorrect',
+        t('assessTitle'),
+        t('assessScore', { score })
+    );
+
+    const summary = state.pendingResultSummary;
+    if (summary) {
+        state.pendingResultSummary = null;
+        openResultModal(summary.win, summary.accuracy, summary.totalEarned, summary.clearBonus);
+    }
+}
+
+function renderLearnPhase(theme, stage) {
+    const card = state.learnDeck[state.learnIndex];
+    const total = state.learnDeck.length;
+    if (!card) return;
+
+    renderChallengeVisual(theme, { term: { emoji: card.emoji } }, false);
+    elements.challengeTypeLabel.textContent = t('learnTitle');
+    elements.challengePrompt.textContent = t('learnText');
+    elements.challengeHint.textContent = t('learnSwipeHint');
+    elements.challengeExample.textContent = t('learnProgress', { current: state.learnIndex + 1, total });
+    elements.questionCounter.textContent = `${state.learnIndex + 1} / ${total}`;
+    elements.timerBadge.textContent = '--';
+    elements.streakBadge.textContent = stage.name;
+    elements.progressBar.style.width = `${((state.learnIndex + 1) / total) * 100}%`;
+    setFeedback('idle', t('learnTitle'), `${stage.name} · ${stage.focus}`);
+    elements.nextQuestionButton.hidden = true;
+
+    elements.choiceGrid.innerHTML = `
+        <div class="learn-flow">
+            <article class="learn-card" aria-label="${card.en}">
+                <button class="learn-card__media" type="button" aria-label="${t('learnNext')}">
+                    <span class="learn-card__placeholder">${card.placeholderLabel}</span>
+                    <span class="learn-card__emoji" aria-hidden="true">${card.emoji}</span>
+                    <span class="learn-card__swipe">${t('learnSwipeHint')}</span>
+                </button>
+                <div class="learn-card__caption">
+                    <span class="learn-card__tag">${card.es}</span>
+                    <strong>${card.en}</strong>
+                    <span>${card.hint}</span>
+                </div>
+            </article>
+            <div class="learn-flow__controls">
+                <button class="surface-button surface-button--ghost" data-learn-action="prev" type="button" ${state.learnIndex === 0 ? 'disabled' : ''}>${t('learnPrevious')}</button>
+                <button class="surface-button surface-button--primary" data-learn-action="next" type="button">${state.learnIndex === total - 1 ? t('learnStartPlay') : t('learnNext')}</button>
+            </div>
+        </div>
+    `;
+
+    bindLearnInteractions();
+}
+
+function renderAssessPhase(theme, stage) {
+    const columns = [state.assessItems.slice(0, 5), state.assessItems.slice(5, 10)];
+    renderChallengeVisual(theme, { term: { emoji: getThemeMatchSignalEmoji(theme.id) } }, false);
+    elements.challengeTypeLabel.textContent = t('assessTitle');
+    elements.challengePrompt.textContent = t('assessText');
+    elements.challengeHint.textContent = t('assessPrompt');
+    elements.challengeExample.textContent = stage.focus;
+    elements.questionCounter.textContent = `${state.assessItems.length} / ${state.assessItems.length}`;
+    elements.timerBadge.textContent = '--';
+    elements.streakBadge.textContent = t('assessAnswers');
+    elements.progressBar.style.width = '100%';
+    setFeedback('idle', t('assessTitle'), t('assessPrompt'));
+    elements.nextQuestionButton.hidden = true;
+
+    elements.choiceGrid.innerHTML = `
+        <div class="assess-flow">
+            <section class="assess-bank" aria-label="${t('assessAnswers')}">
+                <span class="assess-bank__label">${t('assessAnswers')}</span>
+                <div class="assess-bank__chips">
+                    ${state.assessBank.map((word) => `<span class="assess-bank__chip">${word}</span>`).join('')}
+                </div>
+            </section>
+            <div class="assess-grid">
+                ${columns.map((column, columnIndex) => `
+                    <div class="assess-column" data-column="${columnIndex}">
+                        ${column.map((item, itemIndex) => {
+                            const absoluteIndex = columnIndex * 5 + itemIndex;
+                            return `
+                                <label class="assess-item" for="assessInput${absoluteIndex}">
+                                    <span class="assess-item__emoji">${item.emoji}</span>
+                                    <span class="assess-item__copy">
+                                        <strong>${item.es}</strong>
+                                        <span>${item.hint}</span>
+                                    </span>
+                                    <input class="assess-item__input" id="assessInput${absoluteIndex}" type="text" placeholder="${t('assessPlaceholder')}">
+                                </label>
+                            `;
+                        }).join('')}
+                    </div>
+                `).join('')}
+            </div>
+            <div class="assess-flow__actions">
+                <button class="surface-button surface-button--ghost" data-assess-action="retry" type="button">${t('assessRetry')}</button>
+                <button class="surface-button surface-button--primary" data-assess-action="check" type="button">${t('assessCheck')}</button>
+            </div>
+        </div>
+    `;
+
+    elements.choiceGrid.querySelector('[data-assess-action="retry"]')?.addEventListener('click', () => startAssessPhase());
+    elements.choiceGrid.querySelector('[data-assess-action="check"]')?.addEventListener('click', submitAssessment);
 }
 
 function updateSidebarSupport() {
@@ -1872,14 +2129,16 @@ function renderHero() {
     elements.welcomeSubtitle.textContent = t('subtitle');
     elements.activeThemeName.textContent = theme ? theme.title : 'Everest';
     elements.activeModeLabel.textContent = getGameModeLabel();
-    elements.heroStartButton.textContent = t('startStage');
-    elements.heroExploreButton.textContent = t('openLibrary');
-    elements.scrollThemeIntoViewButton.textContent = t('focusRoute');
-    const nextThemeLabel = state.settings.themeMode === 'light' ? t('darkMode') : t('lightMode');
-    const nextThemeSymbol = state.settings.themeMode === 'light' ? '\uD83C\uDF19' : '\u2600\uFE0F';
-    elements.themeModeQuickToggle.innerHTML = `<span class="mini-theme-toggle__symbol" aria-hidden="true">${nextThemeSymbol}</span>`;
-    elements.themeModeQuickToggle.setAttribute('aria-label', nextThemeLabel);
-    elements.themeModeQuickToggle.setAttribute('title', nextThemeLabel);
+    if (elements.heroLearnButton) elements.heroLearnButton.textContent = t('learn');
+    if (elements.heroStartButton) elements.heroStartButton.textContent = t('startStageShort');
+    if (elements.heroAssessButton) elements.heroAssessButton.textContent = t('assess');
+    if (elements.themeModeQuickToggle) {
+        const nextThemeLabel = state.settings.themeMode === 'light' ? t('darkMode') : t('lightMode');
+        const nextThemeSymbol = state.settings.themeMode === 'light' ? '\uD83C\uDF19' : '\u2600\uFE0F';
+        elements.themeModeQuickToggle.innerHTML = `<span class="mini-theme-toggle__symbol" aria-hidden="true">${nextThemeSymbol}</span>`;
+        elements.themeModeQuickToggle.setAttribute('aria-label', nextThemeLabel);
+        elements.themeModeQuickToggle.setAttribute('title', nextThemeLabel);
+    }
 }
 
 function renderProfile() {
@@ -1936,6 +2195,7 @@ function renderChallengeVisual(theme, question, matchMode) {
 function resetActiveChallenge() {
     stopTimer();
     state.stageLive = false;
+    state.challengePhase = 'idle';
     state.currentQuestion = null;
     state.questions = [];
     state.questionIndex = 0;
@@ -1948,11 +2208,16 @@ function resetActiveChallenge() {
     state.questionResolved = false;
     state.matchSelection = { signal: '', emoji: '' };
     state.lastResolvedAnswer = '';
+    state.learnDeck = [];
+    state.learnIndex = 0;
+    state.assessItems = [];
+    state.assessBank = [];
+    state.assessAnswers = {};
+    state.assessChecked = false;
+    state.pendingResultSummary = null;
 }
 
 function toggleGameModeVisibility() {
-    const typingMode = state.settings.gameMode === 'typing';
-    elements.typingForm.classList.toggle('is-hidden-for-mode', !typingMode);
     elements.choiceGrid.classList.toggle('is-hidden-for-mode', false);
 }
 
@@ -1960,22 +2225,27 @@ function renderGame() {
     const theme = localizeTheme(getTheme());
     const stage = localizeStage(state.activeThemeId, getStage());
     if (!theme || !stage) return;
-    const matchMode = state.settings.gameMode === 'match';
-    const contextMode = state.settings.gameMode === 'context';
-    const typingMode = state.settings.gameMode === 'typing';
     const gameText = t;
     state.progress.lastPlayedTheme = theme.id;
-    elements.gameCard?.classList.toggle('is-match-mode', matchMode);
-    elements.gameCard?.classList.toggle('is-context-mode', contextMode);
-    elements.challengeVisual.classList.toggle('is-hidden-for-mode', matchMode);
+    elements.gameCard?.classList.add('is-match-mode');
+    elements.gameCard?.classList.remove('is-context-mode');
+    elements.challengeVisual.classList.toggle('is-hidden-for-mode', false);
     elements.gameThemeTitle.textContent = `${theme.title} - ${stage.name}`;
     elements.gameThemeDescription.textContent = stage.focus;
     elements.stagePointsLabel.textContent = `${gameText('stagePoints')}: ${state.stagePoints}`;
     elements.stageAccuracyLabel.textContent = `${gameText('accuracy')}: ${state.latestAccuracy}%`;
-    elements.typingSubmitButton.textContent = gameText('checkAnswer');
-    elements.typingInput.placeholder = gameText('typePlaceholder');
     elements.nextQuestionButton.textContent = gameText('nextChallenge');
     elements.resetStageButton.textContent = gameText('replay');
+
+    if (state.challengePhase === 'learn') {
+        renderLearnPhase(theme, stage);
+        return;
+    }
+
+    if (state.challengePhase === 'assess') {
+        renderAssessPhase(theme, stage);
+        return;
+    }
 
     if (!state.stageLive || !state.currentQuestion) {
         renderChallengeVisual(theme, null, false);
@@ -1985,9 +2255,6 @@ function renderGame() {
         elements.challengeExample.textContent = `${theme.summary} ${randomFrom(EVEREST_LINES.info)}`;
         elements.choiceGrid.innerHTML = '';
         elements.choiceGrid.classList.remove('choice-grid--match');
-        elements.typingInput.value = '';
-        elements.typingInput.disabled = true;
-        elements.typingSubmitButton.disabled = true;
         elements.nextQuestionButton.hidden = true;
         elements.questionCounter.textContent = '0 / 0';
         elements.timerBadge.textContent = '15s';
@@ -1999,110 +2266,50 @@ function renderGame() {
     }
 
     const question = state.currentQuestion;
-    const resolvedNormalized = normalizeWord(state.lastResolvedAnswer || '');
-    const targetNormalized = normalizeWord(question.term.en);
-    const contextAnsweredCorrect = contextMode && state.questionResolved && resolvedNormalized === targetNormalized;
-    const contextAnsweredWrong = contextMode && state.questionResolved && resolvedNormalized !== targetNormalized;
-    const contextSentenceHtml = contextMode
-        ? question.sentence.replace(
-            '____',
-            contextAnsweredCorrect
-                ? `<span class="context-card__solved">${question.term.en}</span>`
-                : `<span class="context-card__blank ${contextAnsweredWrong ? 'is-wrong' : ''}">${gameText('contextBlank')}</span>`
-        )
-        : '';
-    if (!matchMode) {
-        renderChallengeVisual(theme, question, false);
-    }
-    const selectedEmojiOption = matchMode ? question.emojiChoices.find((option) => normalizeWord(option.en) === state.matchSelection.emoji) : null;
+    renderChallengeVisual(theme, question, false);
+    const selectedEmojiOption = question.emojiChoices.find((option) => normalizeWord(option.en) === state.matchSelection.emoji) || null;
     elements.challengeTypeLabel.textContent = getGameModeLabel();
-    elements.challengePrompt.textContent = matchMode
-        ? gameText('matchPairPrompt', { word: question.term.en })
-        : (contextMode ? gameText('contextPrompt') : (typingMode ? gameText('typeEnglish', { word: question.term.es }) : gameText('chooseEnglish', { word: question.term.es })));
-    elements.challengeHint.textContent = matchMode
-        ? `${gameText('hintPrefix')}: ${question.term.es} · ${question.term.hint}`
-        : (contextMode ? `${gameText('contextClueLabel')}: ${question.contextClue}` : `${gameText('hintPrefix')}: ${question.term.hint}`);
-    elements.challengeExample.textContent = matchMode
-        ? `${gameText('matchPairHelp')} ${selectedEmojiOption ? `${gameText('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : gameText('matchSelectionIdle')}`
-        : (contextMode ? gameText('contextHelp') : `${gameText('examplePrefix')}: ${theme.summary}`);
+    elements.challengePrompt.textContent = gameText('matchPairPrompt', { word: question.term.en });
+    elements.challengeHint.textContent = `${gameText('hintPrefix')}: ${question.term.hint}`;
+    elements.challengeExample.textContent = `${gameText('matchPairHelp')} ${selectedEmojiOption ? `${gameText('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : gameText('matchSelectionIdle')}`;
     elements.questionCounter.textContent = `${state.questionIndex + 1} / ${state.questions.length}`;
     elements.timerBadge.textContent = `${state.secondsLeft}s`;
     elements.streakBadge.textContent = `Streak ${state.streak}`;
     elements.progressBar.style.width = `${(state.questionIndex / state.questions.length) * 100}%`;
-    elements.typingInput.disabled = !typingMode || state.questionResolved;
-    elements.typingSubmitButton.disabled = !typingMode || state.questionResolved;
-    elements.typingInput.value = '';
     elements.nextQuestionButton.hidden = !state.questionResolved;
     toggleGameModeVisibility();
 
-    if (matchMode) {
-        elements.choiceGrid.classList.add('choice-grid--match');
-        elements.choiceGrid.innerHTML = `
-            <div class="match-summit">
-                <div class="match-summit__intro">
-                    <span class="match-summit__eyebrow">${gameText('summitMatch')}</span>
-                    <p class="match-summit__guide">${gameText('matchPairHelp')}</p>
-                </div>
-                <div class="match-board">
-                    <section class="match-center match-center--left" aria-label="${question.term.en}">
-                        <div class="match-center__pulse"></div>
-                        <span class="match-center__badge">${gameText('summitMatch')}</span>
-                        <span class="match-center__mini">${gameText('matchSelectionIdle')}</span>
-                        <div class="match-center__core">
-                            <span class="match-center__word-label">${gameText('challengeWord')}</span>
-                            <strong class="match-center__word">${question.term.en}</strong>
-                            <span class="match-center__meaning">${question.term.es}</span>
-                            <span class="match-center__hint-line">${question.term.hint}</span>
-                        </div>
-                        <div class="match-center__status">
-                            <span class="match-center__status-pill is-filled">${getThemeMatchSignalEmoji(question.themeId)} ${localizeTheme(getTheme(question.themeId))?.title || gameText('matchSignalLabel')}</span>
-                            <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : gameText('matchMeaningPending')}</span>
-                        </div>
-                    </section>
-                    <section class="match-lane match-lane--emoji" aria-label="${gameText('matchEmojiLabel')}">
-                        <span class="match-lane__label">${gameText('matchEmojiStep')}</span>
-                        <div class="match-column__list">
-                            ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button" style="display:grid !important;grid-template-columns:auto minmax(0,1fr) !important;align-items:center !important;column-gap:1.04rem !important;padding:.7rem .84rem !important;"><span class="choice-button__media" style="display:grid !important;justify-items:center !important;align-content:center !important;gap:.1rem !important;"><span class="choice-button__kicker" style="display:inline-flex !important;align-items:center !important;justify-content:center !important;min-width:2rem !important;min-height:1.18rem !important;padding:0 .35rem !important;">${option.laneLabel}</span><span class="choice-button__emoji" style="font-size:1.58rem !important;line-height:1 !important;">${option.emoji}</span></span><span class="choice-button__copy" style="display:flex !important;flex-direction:column !important;justify-content:center !important;align-items:flex-start !important;min-width:0 !important;"><span class="choice-button__title" style="display:block !important;font-size:1.3rem !important;line-height:1.14 !important;font-weight:800 !important;">${option.es}</span><span class="choice-button__detail" style="display:block !important;margin-top:.08rem !important;font-size:.82rem !important;line-height:1.16 !important;font-weight:700 !important;">${option.hint}</span></span></button>`).join('')}
-                        </div>
-                    </section>
-                </div>
+    elements.choiceGrid.classList.add('choice-grid--match');
+    elements.choiceGrid.innerHTML = `
+        <div class="match-summit">
+            <div class="match-summit__intro">
+                <span class="match-summit__eyebrow">${gameText('summitMatch')}</span>
+                <p class="match-summit__guide">${gameText('matchPairHelp')}</p>
             </div>
-        `;
-        elements.choiceGrid.querySelectorAll('[data-match-side]').forEach((button) => button.addEventListener('click', () => handleMatchChoice(button.dataset.matchSide, button.dataset.matchValue)));
-    } else if (contextMode) {
-        elements.choiceGrid.classList.remove('choice-grid--match');
-        elements.choiceGrid.classList.add('choice-grid--context');
-        elements.choiceGrid.innerHTML = `
-            <div class="context-trail">
-                <section class="context-card" aria-label="${gameText('summitContext')}">
-                    <span class="context-card__badge">${gameText('contextBadge')}</span>
-                    <div class="context-card__sentence">
-                        ${contextSentenceHtml}
+            <div class="match-board">
+                <section class="match-center match-center--left" aria-label="${question.term.en}">
+                    <div class="match-center__pulse"></div>
+                    <span class="match-center__badge">${gameText('summitMatch')}</span>
+                    <span class="match-center__mini">${gameText('matchSelectionIdle')}</span>
+                    <div class="match-center__core">
+                        <span class="match-center__word-label">${gameText('challengeWord')}</span>
+                        <strong class="match-center__word">${question.term.en}</strong>
                     </div>
-                    <div class="context-card__meta">
-                        <span class="context-card__hint">${question.contextClue}</span>
+                    <div class="match-center__status">
+                        <span class="match-center__status-pill is-filled">${getThemeMatchSignalEmoji(question.themeId)} ${localizeTheme(getTheme(question.themeId))?.title || gameText('matchSignalLabel')}</span>
+                        <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : gameText('matchMeaningPending')}</span>
                     </div>
                 </section>
-                <section class="context-options" aria-label="${gameText('contextChoiceStep')}">
-                    <span class="context-options__label">${gameText('contextChoiceStep')}</span>
-                    <div class="context-options__grid">
-                        ${question.options.map((option, index) => `<button class="choice-button choice-button--context" data-choice="${option.en}" type="button"><span class="choice-button__kicker">${index + 1}</span><span class="choice-button__copy"><span class="choice-button__title">${option.en}</span><span class="choice-button__detail">${option.es}</span></span></button>`).join('')}
+                <section class="match-lane match-lane--emoji" aria-label="${gameText('matchEmojiLabel')}">
+                    <span class="match-lane__label">${gameText('matchEmojiStep')}</span>
+                    <div class="match-column__list">
+                        ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button"><span class="choice-button__media"><span class="choice-button__kicker">${option.laneLabel}</span><span class="choice-button__emoji">${option.emoji}</span></span><span class="choice-button__copy"><span class="choice-button__title">${option.es}</span><span class="choice-button__detail">${option.hint}</span></span></button>`).join('')}
                     </div>
                 </section>
             </div>
-        `;
-        elements.choiceGrid.querySelectorAll('[data-choice]').forEach((button) => button.addEventListener('click', () => submitAnswer(button.dataset.choice)));
-    } else if (!typingMode) {
-        elements.choiceGrid.classList.remove('choice-grid--match');
-        elements.choiceGrid.classList.remove('choice-grid--context');
-        elements.choiceGrid.innerHTML = question.options.map((option) => `<button class="choice-button" data-choice="${option.en}" type="button">${option.en}</button>`).join('');
-        elements.choiceGrid.querySelectorAll('[data-choice]').forEach((button) => button.addEventListener('click', () => submitAnswer(button.dataset.choice)));
-    } else {
-        elements.choiceGrid.classList.remove('choice-grid--match');
-        elements.choiceGrid.classList.remove('choice-grid--context');
-        elements.choiceGrid.innerHTML = '';
-        setTimeout(() => elements.typingInput.focus(), 30);
-    }
+        </div>
+    `;
+    elements.choiceGrid.querySelectorAll('[data-match-side]').forEach((button) => button.addEventListener('click', () => handleMatchChoice(button.dataset.matchSide, button.dataset.matchValue)));
 }
 
 function startTimer() {
@@ -2157,6 +2364,7 @@ function playTone(type) {
 function startStage() {
     const stage = getStage();
     if (!stage) return;
+    state.challengePhase = 'play';
     state.stageLive = true;
     state.questions = buildQuestions(stage);
     state.questionIndex = 0;
@@ -2179,6 +2387,7 @@ function loadQuestion() {
     state.secondsLeft = 15;
     state.matchSelection = { signal: '', emoji: '' };
     state.lastResolvedAnswer = '';
+    state.challengePhase = 'play';
     renderGame();
     if (state.currentQuestion) {
         startTimer();
@@ -2187,7 +2396,7 @@ function loadQuestion() {
 }
 
 function handleMatchChoice(side, value) {
-    if (state.questionResolved || !state.currentQuestion || state.settings.gameMode !== 'match') return;
+    if (state.questionResolved || !state.currentQuestion || state.challengePhase !== 'play') return;
 
     if (side === 'emoji') {
         state.matchSelection.emoji = normalizeWord(value);
@@ -2280,53 +2489,19 @@ function resolveAnswer(answer, timedOut) {
     elements.stagePointsLabel.textContent = `${tg('stagePoints')}: ${state.stagePoints}`;
     elements.stageAccuracyLabel.textContent = `${tg('accuracy')}: ${state.latestAccuracy}%`;
     elements.nextQuestionButton.hidden = false;
-    elements.typingInput.disabled = true;
-    elements.typingSubmitButton.disabled = true;
+    elements.choiceGrid.querySelectorAll('[data-match-side]').forEach((button) => {
+        button.disabled = true;
+        const value = button.dataset.matchValue || '';
+        const normalizedValue = normalizeWord(value);
+        const targetValue = normalizeWord(state.currentQuestion.term.en);
+        const selectedValue = state.matchSelection.emoji;
 
-    if (state.settings.gameMode === 'multiple') {
-        elements.choiceGrid.querySelectorAll('[data-choice]').forEach((button) => {
-            button.disabled = true;
-            const value = button.dataset.choice;
-            if (normalizeWord(value) === normalizeWord(state.currentQuestion.term.en)) {
-                button.classList.add('is-correct');
-            } else if (!correct && normalizeWord(value) === normalizeWord(answer)) {
-                button.classList.add('is-wrong');
-            }
-        });
-    } else if (state.settings.gameMode === 'match') {
-        elements.choiceGrid.querySelectorAll('[data-match-side]').forEach((button) => {
-            button.disabled = true;
-            const side = button.dataset.matchSide;
-            const value = button.dataset.matchValue || '';
-            const normalizedValue = normalizeWord(value);
-            const targetValue = normalizeWord(state.currentQuestion.term.en);
-            const selectedValue = state.matchSelection.emoji;
-
-            if (side === 'emoji' && normalizedValue === targetValue) {
-                applyMatchResultState(button, 'correct');
-            } else if (side === 'emoji' && !correct && normalizedValue === selectedValue) {
-                applyMatchResultState(button, 'wrong');
-            }
-        });
-    } else if (state.settings.gameMode === 'context') {
-        const sentence = elements.choiceGrid.querySelector('.context-card__sentence');
-        const blankMarkup = correct
-            ? `<span class="context-card__solved">${state.currentQuestion.term.en}</span>`
-            : `<span class="context-card__blank is-wrong">${tg('contextBlank')}</span>`;
-        if (sentence) {
-            sentence.innerHTML = state.currentQuestion.sentence.replace('____', blankMarkup);
+        if (normalizedValue === targetValue) {
+            applyMatchResultState(button, 'correct');
+        } else if (!correct && normalizedValue === selectedValue) {
+            applyMatchResultState(button, 'wrong');
         }
-
-        elements.choiceGrid.querySelectorAll('[data-choice]').forEach((button) => {
-            button.disabled = true;
-            const value = button.dataset.choice;
-            if (normalizeWord(value) === normalizeWord(state.currentQuestion.term.en)) {
-                button.classList.add('is-correct');
-            } else if (!correct && normalizeWord(value) === normalizeWord(answer)) {
-                button.classList.add('is-wrong');
-            }
-        });
-    }
+    });
 }
 
 function advanceQuestion() {
@@ -2360,8 +2535,9 @@ function finishStage() {
         bestAccuracy: Math.max(existing.bestAccuracy, accuracy)
     };
     saveProgress();
+    state.pendingResultSummary = { win, accuracy, totalEarned, clearBonus };
     renderAll();
-    openResultModal(win, accuracy, totalEarned, clearBonus);
+    startAssessPhase();
 }
 
 function openResultModal(win, accuracy, totalEarned, clearBonus) {
@@ -2718,323 +2894,14 @@ function renderQuickOptions() {
 
 function renderOptionsModal() {
     const blocks = [
-        { title: t('modeBlockTitle'), text: t('modeBlockText'), buttons: [{ value: 'multiple', label: t('summitChoice'), active: state.settings.gameMode === 'multiple', action: 'mode' }, { value: 'typing', label: t('summitTyping'), active: state.settings.gameMode === 'typing', action: 'mode' }, { value: 'match', label: t('summitMatch'), active: state.settings.gameMode === 'match', action: 'mode' }, { value: 'context', label: t('summitContext'), active: state.settings.gameMode === 'context', action: 'mode' }] },
-        { title: t('language'), text: t('languageHelp'), buttons: [{ value: 'en', label: 'English', active: state.settings.language === 'en', action: 'language' }, { value: 'es', label: 'Espa\u00F1ol', active: state.settings.language === 'es', action: 'language' }] },
-        { title: t('animationBlockTitle'), text: t('animationBlockText'), buttons: [{ value: 'on', label: getOptionStatusMarkup(t('animations'), true), active: state.settings.animationsOn, action: 'motion' }, { value: 'off', label: getOptionStatusMarkup(t('animations'), false), active: !state.settings.animationsOn, action: 'motion' }] },
-        { title: t('themeBlockTitle'), text: t('themeBlockText'), buttons: [{ value: 'light', label: t('lightMode'), active: state.settings.themeMode === 'light', action: 'theme' }, { value: 'dark', label: t('darkMode'), active: state.settings.themeMode === 'dark', action: 'theme' }] },
         { title: t('audioBlockTitle'), text: t('audioBlockText'), buttons: [{ value: 'sound', label: getOptionStatusMarkup(t('sound'), state.settings.soundOn), active: state.settings.soundOn, action: 'sound' }, { value: 'voice', label: getOptionStatusMarkup(t('voice'), state.settings.voiceOn), active: state.settings.voiceOn, action: 'voice' }] }
     ];
-
-    const managedUsers = syncControlManagedSelectionState();
-    if (!state.controlManagedSelectionTouched && !state.controlManageAllUsers && !state.controlManagedUserIds.length && managedUsers[0]) {
-        setControlManagedSelection([getUserId(managedUsers[0])], { touched: false });
-    }
-
-    const managedUser = getControlManagedReferenceUser() || state.user;
-    const currentMinutes = Math.max(1, Math.ceil(Math.max(0, (managedUser.expiresAt || Date.now()) - Date.now()) / 60000));
-    const draft = getControlWordDraft();
-    const selectedUsers = getControlSelectedUsers();
-    const managedSelectionTags = state.controlManageAllUsers
-        ? `<button type="button" class="control-selection-tag control-selection-tag--all" data-control-remove-all="true">${tc('allManagedUsers')}</button>`
-        : (selectedUsers.length
-            ? selectedUsers.map((user) => `<button type="button" class="control-selection-tag" data-control-remove-user="${getUserId(user)}">${user.profileEmoji || '\uD83E\uDDE0'} ${user.username}</button>`).join('')
-            : `<span class="control-selection-empty">${tc('selectedUsersEmpty')}</span>`);
     const blockHtml = blocks.map((block) => `<article class="option-block"><h4>${block.title}</h4><p>${block.text}</p><div class="option-block__actions">${block.buttons.map((button) => {
         const pulseKey = `${button.action}:${button.value}`;
         return `<button class="toggle-pill ${button.active ? 'is-active' : ''} ${state.optionPulseKey === pulseKey ? 'is-pulsing' : ''}" type="button" data-option-action="${button.action}" data-option-value="${button.value}">${button.label}</button>`;
     }).join('')}</div></article>`).join('');
-
-    const managedUserSelect = createControlSelectMarkup({
-        inputId: 'controlManagedUserSelect',
-        shellId: 'controlManagedUserShell',
-        triggerId: 'controlManagedUserTrigger',
-        labelId: 'controlManagedUserTriggerLabel',
-        dropdownId: 'controlManagedUserDropdown',
-        searchId: 'controlManagedUserSearch',
-        optionsId: 'controlManagedUserOptions',
-        value: state.controlManageAllUsers ? '__all__' : (state.controlManagedUserIds[0] || ''),
-        placeholder: tc('userSelect'),
-        searchPlaceholder: tc('managedSearchPlaceholder'),
-        options: [
-            {
-                value: '__all__',
-                main: tc('allManagedUsers'),
-                alt: `${managedUsers.length} ${t('activeClimber').toLowerCase()}`,
-                search: `${tc('allManagedUsers')} ${managedUsers.map((user) => `${user.username} ${user.course || ''}`).join(' ')}`
-            },
-            ...managedUsers.map((user) => ({
-                value: getUserId(user),
-                main: `${user.profileEmoji || '\uD83E\uDDE0'} ${user.username}`,
-                alt: user.course || t('routePending'),
-                search: `${user.username} ${user.course || t('routePending')}`
-            }))
-        ]
-    });
-
-    const wordPickerSelect = createControlSelectMarkup({
-        inputId: 'controlWordPickerInput',
-        shellId: 'controlWordPickerShell',
-        triggerId: 'controlWordPickerTrigger',
-        labelId: 'controlWordPickerTriggerLabel',
-        dropdownId: 'controlWordPickerDropdown',
-        searchId: 'controlWordPickerSearch',
-        optionsId: 'controlWordPickerOptions',
-        value: draft.wordId,
-        placeholder: tc('wordPickerPlaceholder'),
-        searchPlaceholder: tc('wordPickerSearch'),
-        options: state.library.slice().sort((a, b) => a.term.localeCompare(b.term)).map((entry) => ({
-            value: getExplorerWordId(entry),
-            main: `${entry.emoji || '\uD83D\uDCD8'} ${entry.term}`,
-            alt: localizeTheme(getTheme(entry.theme))?.title || entry.theme,
-            search: `${entry.term} ${entry.meaning} ${entry.example} ${entry.tip} ${localizeTheme(getTheme(entry.theme))?.title || entry.theme}`
-        }))
-    });
-
-    const wordThemeSelect = createControlSelectMarkup({
-        inputId: 'controlWordThemeInput',
-        shellId: 'controlWordThemeShell',
-        triggerId: 'controlWordThemeTrigger',
-        labelId: 'controlWordThemeTriggerLabel',
-        dropdownId: 'controlWordThemeDropdown',
-        searchId: 'controlWordThemeSearch',
-        optionsId: 'controlWordThemeOptions',
-        value: draft.theme,
-        placeholder: tc('wordThemePlaceholder'),
-        searchPlaceholder: tc('themeSearchPlaceholder'),
-        options: state.themes.map((theme) => localizeTheme(theme)).map((theme) => ({
-            value: theme.id,
-            main: theme.title,
-            alt: theme.id === state.activeThemeId ? tc('currentStageTag') : '',
-            search: `${theme.title} ${theme.summary}`
-        }))
-    });
-
-    const emojiGrid = CONTROL_FORGE_EMOJI_CATEGORIES.map((category, index) => `<details class="control-emoji-category" ${index === 0 ? 'open' : ''}><summary class="control-emoji-category__summary"><span>${category.title}</span><strong>${category.emojis.length}</strong></summary><div class="control-emoji-grid">${category.emojis.map((emoji) => `<button class="control-emoji-choice ${emoji === draft.emoji ? 'is-selected' : ''}" type="button" data-control-emoji="${emoji}" aria-label="${emoji}">${emoji}</button>`).join('')}</div></details>`).join('');
-
-    const saveButtonLabel = draft.wordId ? tc('saveWord') : tc('addWord');
-    const deleteButtonDisabled = draft.wordId ? '' : ' disabled';
-    const buildControlStepperField = (id, label, min, value) => `<label class="custom-field"><span>${label}</span><div class="control-stepper"><input id="${id}" type="number" min="${min}" value="${value}"><div class="control-stepper__buttons"><button class="control-stepper__button control-stepper__button--up" type="button" data-stepper-target="${id}" data-stepper-direction="up" aria-label="Increase ${label}"><span aria-hidden="true"></span></button><button class="control-stepper__button control-stepper__button--down" type="button" data-stepper-target="${id}" data-stepper-direction="down" aria-label="Decrease ${label}"><span aria-hidden="true"></span></button></div></div></label>`;
-
-    const controlHtml = !state.controlModeUnlocked
-        ? `<article class="option-block option-block--control"><div class="control-heading"><div><h4>${tc('title')}</h4><p>${tc('subtitle')}</p></div><span class="control-note">${tc('lockedHint')}</span></div><div class="control-key-row"><label class="custom-field custom-field--full"><span>${tc('unlockLabel')}</span><input id="controlKeyInput" type="password" placeholder="${tc('unlockPlaceholder')}" autocomplete="off"></label><button class="surface-button surface-button--primary" id="controlUnlockButton" type="button">${tc('unlockButton')}</button></div></article>`
-        : `<article class="option-block option-block--control"><div class="control-heading"><div><h4>${tc('title')}</h4><p>${tc('subtitle')}</p></div><div class="control-heading__actions"><span class="control-badge">${tc('unlockedBadge')}</span><button class="surface-button surface-button--ghost control-lock-button control-button--danger" id="controlDeactivateButton" type="button">${tc('deactivateButton')}</button></div></div><div class="control-section"><button class="panel-toggle panel-toggle--soft is-open" id="controlUserToggle" type="button" aria-expanded="true"><span class="panel-toggle__copy"><strong>${tc('managedUser')}</strong><span>${tc('managedUserText')}</span></span><span class="panel-toggle__icon" aria-hidden="true"></span></button><div class="panel-collapsible" id="controlUserBody"><div class="control-grid"><label class="custom-field custom-field--full"><span>${tc('managedUser')}</span>${managedUserSelect}<div class="control-selection-summary"><span class="control-selection-summary__label">${tc('selectedUsersLabel')}</span><div class="control-selection-tags" id="controlManagedUserTags">${managedSelectionTags}</div></div></label>${buildControlStepperField('controlPointsInput', t('points'), 0, Number(managedUser.points || 0))}${buildControlStepperField('controlWinsInput', t('wins'), 0, Number(managedUser.wins || 0))}${buildControlStepperField('controlLossesInput', t('losses'), 0, Number(managedUser.losses || 0))}${buildControlStepperField('controlSessionMinutesInput', tc('sessionMinutes'), 1, currentMinutes)}</div><div class="control-actions"><button class="surface-button surface-button--ghost control-button--danger" id="controlRemoveRankingButton" type="button">${tc('removeRanking')}</button><button class="surface-button surface-button--ghost control-button--danger" id="controlCloseSessionButton" type="button">${tc('closeSession')}</button><button class="surface-button surface-button--primary" id="controlApplyStatsButton" type="button">${tc('applyStats')}</button></div></div></div><div class="control-section"><button class="panel-toggle panel-toggle--soft ${state.controlWordPanelOpen ? 'is-open' : ''}" id="controlWordToggle" type="button" aria-expanded="${state.controlWordPanelOpen ? 'true' : 'false'}"><span class="panel-toggle__copy"><strong>${tc('explorerTools')}</strong><span>${tc('explorerToolsText')}</span></span><span class="panel-toggle__icon" aria-hidden="true"></span></button><div class="panel-collapsible ${state.controlWordPanelOpen ? '' : 'panel-collapsible--collapsed'}" id="controlWordBody"><div class="control-grid"><label class="custom-field custom-field--full"><span>${tc('wordPicker')}</span>${wordPickerSelect}</label><div class="control-helper custom-field--full">${tc('wordPickerText')}</div><label class="custom-field custom-field--full"><span>${tc('wordTheme')}</span>${wordThemeSelect}</label><label class="custom-field custom-field--full"><span>${tc('wordEmoji')}</span><input id="controlWordEmojiInput" type="hidden" value="${draft.emoji}"><details class="control-emoji-master ${state.controlEmojiPanelOpen ? 'is-open' : ''}" id="controlEmojiMaster" ${state.controlEmojiPanelOpen ? 'open' : ''}><summary class="control-emoji-master__summary"><span class="control-emoji-master__copy"><strong>${tc('wordEmoji')}</strong><span>${tc('emojiGridHint')}</span></span><strong class="control-emoji-master__preview" id="controlWordEmojiPreview">${draft.emoji}</strong><span class="control-emoji-master__arrow" aria-hidden="true"></span></summary><div class="control-emoji-picker"><div class="control-emoji-groups">${emojiGrid}</div></div></details></label><label class="custom-field"><span>${tc('wordTerm')}</span><input id="controlWordTermInput" type="text" maxlength="80" placeholder="${t('wordTermPlaceholder')}" value="${draft.term || ''}"></label><label class="custom-field"><span>${tc('wordType')}</span><input id="controlWordTypeInput" type="text" maxlength="40" placeholder="${t('wordTypePlaceholder')}" value="${draft.type || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordMeaning')}</span><input id="controlWordMeaningInput" type="text" maxlength="140" placeholder="${t('wordMeaningPlaceholder')}" value="${draft.meaning || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordExample')}</span><input id="controlWordExampleInput" type="text" maxlength="180" placeholder="${t('wordExamplePlaceholder')}" value="${draft.example || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordTip')}</span><input id="controlWordTipInput" type="text" maxlength="120" placeholder="${t('wordTipPlaceholder')}" value="${draft.tip || ''}"></label></div><div class="control-actions"><button class="surface-button surface-button--ghost" id="controlClearWordButton" type="button">${tc('clearWord')}</button><button class="surface-button surface-button--ghost control-button--danger" id="controlDeleteWordButton" type="button"${deleteButtonDisabled}>${tc('deleteWord')}</button><button class="surface-button surface-button--primary" id="controlSaveWordButton" type="button">${saveButtonLabel}</button></div></div></div></article>`;
-
-    elements.optionsSections.innerHTML = `${blockHtml}${controlHtml}`;
+    elements.optionsSections.innerHTML = blockHtml;
     elements.optionsSections.querySelectorAll('[data-option-action]').forEach((button) => button.addEventListener('click', () => handleOptionChange(button.dataset.optionAction, button.dataset.optionValue)));
-
-    const unlockButton = document.getElementById('controlUnlockButton');
-    const keyInput = document.getElementById('controlKeyInput');
-    if (unlockButton && keyInput) {
-        unlockButton.addEventListener('click', async () => {
-            const unlocked = await unlockControlMode(keyInput.value);
-            if (!unlocked) {
-                pushToast(randomFrom(EVEREST_LINES.error), tc('unlockFail'), 'danger');
-                keyInput.focus();
-                keyInput.select();
-                return;
-            }
-            pushToast(randomFrom(EVEREST_LINES.success), tc('unlockSuccess'), 'success');
-            renderOptionsModal();
-        });
-        keyInput.addEventListener('keydown', async (event) => {
-            if (event.key !== 'Enter') return;
-            event.preventDefault();
-            unlockButton.click();
-        });
-    }
-
-    const removeRankingButton = document.getElementById('controlRemoveRankingButton');
-    const closeSessionButton = document.getElementById('controlCloseSessionButton');
-    const applyStatsButton = document.getElementById('controlApplyStatsButton');
-    const saveWordButton = document.getElementById('controlSaveWordButton');
-    const clearWordButton = document.getElementById('controlClearWordButton');
-    const deleteWordButton = document.getElementById('controlDeleteWordButton');
-    const deactivateButton = document.getElementById('controlDeactivateButton');
-    const emojiPreview = document.getElementById('controlWordEmojiPreview');
-
-    setupManagedUserMultiSelect();
-    refreshManagedUserPanel();
-
-    setupControlSelect({
-        shellId: 'controlWordPickerShell',
-        inputId: 'controlWordPickerInput',
-        triggerId: 'controlWordPickerTrigger',
-        labelId: 'controlWordPickerTriggerLabel',
-        dropdownId: 'controlWordPickerDropdown',
-        searchId: 'controlWordPickerSearch',
-        optionsId: 'controlWordPickerOptions',
-        onSelect: (value) => {
-            const entry = getExplorerWordById(value);
-            if (!entry) {
-                clearControlWordDraft();
-                state.controlWordPanelOpen = true;
-                renderOptionsModal();
-                return;
-            }
-            saveControlWordDraft({
-                wordId: getExplorerWordId(entry),
-                theme: entry.theme,
-                term: entry.term,
-                type: entry.type,
-                meaning: entry.meaning,
-                example: entry.example,
-                tip: entry.tip,
-                emoji: entry.emoji || '\uD83D\uDCD8'
-            });
-            state.controlWordPanelOpen = true;
-            pushToast(randomFrom(EVEREST_LINES.info), tc('wordLoaded'), 'info');
-            renderOptionsModal();
-        }
-    });
-
-    setupControlSelect({
-        shellId: 'controlWordThemeShell',
-        inputId: 'controlWordThemeInput',
-        triggerId: 'controlWordThemeTrigger',
-        labelId: 'controlWordThemeTriggerLabel',
-        dropdownId: 'controlWordThemeDropdown',
-        searchId: 'controlWordThemeSearch',
-        optionsId: 'controlWordThemeOptions',
-        onSelect: (value) => {
-            saveControlWordDraft({ ...getControlWordPayloadFromInputs(), theme: value });
-        }
-    });
-
-    document.querySelectorAll('[data-control-emoji]').forEach((button) => {
-        button.addEventListener('click', () => {
-            const emoji = button.dataset.controlEmoji || '\uD83D\uDCD8';
-            const input = document.getElementById('controlWordEmojiInput');
-            if (input) input.value = emoji;
-            if (emojiPreview) emojiPreview.textContent = emoji;
-            document.querySelectorAll('[data-control-emoji]').forEach((choice) => choice.classList.toggle('is-selected', choice === button));
-            saveControlWordDraft({ ...getControlWordPayloadFromInputs(), emoji });
-        });
-    });
-
-    document.querySelectorAll('[data-stepper-target]').forEach((button) => {
-        button.addEventListener('click', () => {
-            const target = document.getElementById(button.dataset.stepperTarget || '');
-            if (!target) return;
-            if (button.dataset.stepperDirection === 'down') {
-                target.stepDown();
-            } else {
-                target.stepUp();
-            }
-            target.dispatchEvent(new Event('input', { bubbles: true }));
-            target.dispatchEvent(new Event('change', { bubbles: true }));
-            target.focus();
-        });
-    });
-
-    ['controlWordTermInput', 'controlWordTypeInput', 'controlWordMeaningInput', 'controlWordExampleInput', 'controlWordTipInput'].forEach((id) => {
-        document.getElementById(id)?.addEventListener('input', () => {
-            saveControlWordDraft(getControlWordPayloadFromInputs());
-        });
-    });
-
-    removeRankingButton?.addEventListener('click', () => {
-        const targetIds = getControlTargetUserIds();
-        if (!targetIds.length) {
-            pushToast(randomFrom(EVEREST_LINES.error), tc('noManagedUser'), 'danger');
-            return;
-        }
-        targetIds.forEach((userId) => removeUserFromRanking(userId));
-        pushToast(randomFrom(EVEREST_LINES.info), targetIds.length > 1 ? tc('usersRemoved') : tc('userRemoved'), 'info');
-        renderAll();
-    });
-
-    closeSessionButton?.addEventListener('click', async () => {
-        const targetIds = getControlTargetUserIds();
-        if (!targetIds.length) {
-            pushToast(randomFrom(EVEREST_LINES.error), tc('noManagedUser'), 'danger');
-            return;
-        }
-        const selfId = getUserId(state.user);
-        const sortedIds = targetIds.slice().sort((a, b) => (a === selfId ? 1 : 0) - (b === selfId ? 1 : 0));
-        let closedSelf = false;
-        for (const userId of sortedIds) {
-            closedSelf = (await closeManagedSession(userId)) || closedSelf;
-        }
-        if (closedSelf) return;
-        pushToast(randomFrom(EVEREST_LINES.info), targetIds.length > 1 ? tc('sessionsClosed') : tc('sessionClosed'), 'info');
-        bootstrapUser();
-        renderAll();
-    });
-
-    applyStatsButton?.addEventListener('click', () => {
-        const targetIds = getControlTargetUserIds();
-        if (!targetIds.length) {
-            pushToast(randomFrom(EVEREST_LINES.error), tc('noManagedUser'), 'danger');
-            return;
-        }
-        targetIds.forEach((userId) => applyControlStats(userId, {
-            points: document.getElementById('controlPointsInput')?.value,
-            wins: document.getElementById('controlWinsInput')?.value,
-            losses: document.getElementById('controlLossesInput')?.value,
-            sessionMinutes: document.getElementById('controlSessionMinutesInput')?.value
-        }));
-        pushToast(randomFrom(EVEREST_LINES.success), targetIds.length > 1 ? tc('statsAppliedMany') : tc('statsApplied'), 'success');
-        renderAll();
-    });
-
-    document.getElementById('controlUserToggle')?.addEventListener('click', () => togglePanel(document.getElementById('controlUserToggle'), document.getElementById('controlUserBody')));
-    document.getElementById('controlWordToggle')?.addEventListener('click', () => {
-        state.controlWordPanelOpen = !state.controlWordPanelOpen;
-        togglePanel(document.getElementById('controlWordToggle'), document.getElementById('controlWordBody'));
-    });
-
-    saveWordButton?.addEventListener('click', () => {
-        const payload = getControlWordPayloadFromInputs();
-        if (!payload.theme || !payload.term || !payload.type || !payload.meaning || !payload.example || !payload.tip) {
-            pushToast(randomFrom(EVEREST_LINES.error), tc('wordIncomplete'), 'danger');
-            return;
-        }
-
-        if (payload.wordId) {
-            updateExplorerWord(payload);
-            pushToast(randomFrom(EVEREST_LINES.success), tc('wordUpdated'), 'success');
-        } else {
-            addExplorerWord(payload);
-            pushToast(randomFrom(EVEREST_LINES.success), tc('wordAdded'), 'success');
-        }
-
-        clearControlWordDraft();
-        renderAll();
-        document.getElementById('controlWordTermInput')?.focus();
-    });
-
-    clearWordButton?.addEventListener('click', () => {
-        clearControlWordDraft();
-        renderOptionsModal();
-        document.getElementById('controlWordTermInput')?.focus();
-    });
-
-    deleteWordButton?.addEventListener('click', () => {
-        const payload = getControlWordPayloadFromInputs();
-        if (!payload.wordId) {
-            pushToast(randomFrom(EVEREST_LINES.error), tc('wordNeedSelection'), 'danger');
-            return;
-        }
-        deleteExplorerWord(payload.wordId);
-        clearControlWordDraft();
-        pushToast(randomFrom(EVEREST_LINES.info), tc('wordDeleted'), 'info');
-        renderAll();
-    });
-
-    document.getElementById('controlEmojiMaster')?.addEventListener('toggle', (event) => {
-        state.controlEmojiPanelOpen = event.currentTarget.open;
-    });
-
-    deactivateButton?.addEventListener('click', () => {
-        const { wordAction } = persistControlModeChanges({ lockMode: true });
-        if (wordAction === 'added') {
-            pushToast(randomFrom(EVEREST_LINES.success), tc('wordAdded'), 'success');
-        } else if (wordAction === 'updated') {
-            pushToast(randomFrom(EVEREST_LINES.success), tc('wordUpdated'), 'success');
-        }
-        pushToast(randomFrom(EVEREST_LINES.info), tc('deactivateSuccess'), 'info');
-        renderAll();
-    });
 }
 
 function clearOptionPulse() {
@@ -3055,12 +2922,7 @@ function handleOptionChange
     if (state.optionPulseTimer) {
         window.clearTimeout(state.optionPulseTimer);
     }
-    if (action === 'mode') {
-        if (state.settings.gameMode !== value) {
-            state.settings.gameMode = value;
-            resetActiveChallenge();
-        }
-    }
+    if (action === 'mode') state.settings.gameMode = 'match';
     if (action === 'language') state.settings.language = value;
     if (action === 'motion') state.settings.animationsOn = value === 'on';
     if (action === 'theme') state.settings.themeMode = value;
@@ -3120,15 +2982,12 @@ function renderAll() {
     renderHero();
     renderProfile();
     renderSidebar();
-    renderThemeGrid();
     renderStageList();
     renderGame();
     renderLeaderboard();
     renderExplorerThemeSelect();
     renderExplorer();
-    renderQuickOptions();
     renderOptionsModal();
-    updateSidebarSupport();
 }
 
 function loadData() {
@@ -3202,17 +3061,9 @@ function bindEvents() {
         renderSidebar();
     });
 
-    elements.heroStartButton.addEventListener('click', startStage);
-    elements.heroExploreButton.addEventListener('click', () => openModal('explorerModal'));
-    elements.scrollThemeIntoViewButton.addEventListener('click', () => {
-        document.querySelector(`[data-theme-card="${state.activeThemeId}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-    elements.themeDeckToggle?.addEventListener('click', () => {
-        const deckCard = getThemeDeckCard();
-        if (!deckCard) return;
-        const isCollapsed = deckCard.classList.contains('compact-collapsed');
-        setThemeDeckCollapsed(!isCollapsed);
-    });
+    elements.heroLearnButton?.addEventListener('click', startLearnPhase);
+    elements.heroStartButton?.addEventListener('click', startStage);
+    elements.heroAssessButton?.addEventListener('click', startAssessPhase);
     elements.stageToggle?.addEventListener('click', () => togglePanel(elements.stageToggle, elements.stageBody));
     elements.explorerToggle?.addEventListener('click', () => togglePanel(elements.explorerToggle, elements.explorerBody));
     elements.optionsToggle?.addEventListener('click', () => togglePanel(elements.optionsToggle, elements.optionsBody));
@@ -3222,33 +3073,29 @@ function bindEvents() {
         renderAll();
     });
 
-    elements.openExplorerInlineButton.addEventListener('click', () => openModal('explorerModal'));
-    elements.explorerButton.addEventListener('click', () => openModal('explorerModal'));
-    elements.openLeaderboardInlineButton.addEventListener('click', () => openModal('leaderboardModal'));
-    elements.leaderboardButton.addEventListener('click', () => openModal('leaderboardModal'));
-    elements.optionsButton.addEventListener('click', () => openModal('optionsModal'));
-    elements.logoutButton.addEventListener('click', () => logoutUser(true));
+    elements.openExplorerInlineButton?.addEventListener('click', () => openModal('explorerModal'));
+    elements.explorerButton?.addEventListener('click', () => openModal('explorerModal'));
+    elements.openLeaderboardInlineButton?.addEventListener('click', () => openModal('leaderboardModal'));
+    elements.leaderboardButton?.addEventListener('click', () => openModal('leaderboardModal'));
+    elements.optionsButton?.addEventListener('click', () => openModal('optionsModal'));
+    elements.logoutButton?.addEventListener('click', () => logoutUser(true));
 
     elements.explorerSearchInput.addEventListener('input', (event) => {
         state.explorerSearch = event.target.value;
         renderExplorer();
     });
-    elements.typingForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        submitAnswer(elements.typingInput.value.trim());
-    });
 
-    elements.nextQuestionButton.addEventListener('click', advanceQuestion);
-    elements.resetStageButton.addEventListener('click', () => {
+    elements.nextQuestionButton?.addEventListener('click', advanceQuestion);
+    elements.resetStageButton?.addEventListener('click', () => {
         resetActiveChallenge();
         renderGame();
     });
 
-    elements.resultReplayButton.addEventListener('click', () => {
+    elements.resultReplayButton?.addEventListener('click', () => {
         closeModal('resultModal');
         startStage();
     });
-    elements.resultContinueButton.addEventListener('click', () => {
+    elements.resultContinueButton?.addEventListener('click', () => {
         closeModal('resultModal');
         const theme = getTheme();
         const nextStage = theme.stages.find((stage) => stage.id === state.activeStageId + 1);

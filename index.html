@@ -101,8 +101,9 @@
                             <h2 id="welcomeTitle">Welcome back to the ridge.</h2>
                             <p id="welcomeSubtitle">Build points, clear themed stages, and keep your route moving toward fluency.</p>
                             <div class="hero-card__actions">
-                                <button class="surface-button surface-button--primary" id="heroStartButton" type="button">Start current stage</button>
-                                <button class="surface-button" id="heroExploreButton" type="button">Open explorer</button>
+                                <button class="surface-button surface-button--ghost" id="heroLearnButton" type="button">Learn</button>
+                                <button class="surface-button surface-button--primary" id="heroStartButton" type="button">Start stage</button>
+                                <button class="surface-button surface-button--ghost" id="heroAssessButton" type="button">Assess</button>
                             </div>
                         </div>
 
@@ -231,16 +232,6 @@
                                 <span id="feedbackText">It is cold at the top, but your next answer can warm the route.</span>
                             </div>
 
-                            <form class="typing-shell" id="typingForm">
-                                <label class="typing-shell__field" for="typingInput">
-                                    <span>Type the English answer</span>
-                                    <div class="typing-shell__controls">
-                                        <input id="typingInput" type="text" autocomplete="off" placeholder="Type the answer in English">
-                                        <button class="surface-button surface-button--primary" id="typingSubmitButton" type="submit">Check answer</button>
-                                    </div>
-                                </label>
-                            </form>
-
                             <div class="choice-grid" id="choiceGrid"></div>
 
                             <div class="game-footer">
@@ -255,29 +246,6 @@
                             </div>
                         </article>
 
-                        <article class="panel theme-overview-card">
-                            <div class="section-head">
-                                <div>
-                                    <span class="panel-badge">Theme deck</span>
-                                    <h3>Choose the route you want to climb</h3>
-                                </div>
-                                <button class="surface-button surface-button--ghost" id="scrollThemeIntoViewButton" type="button">Focus current route</button>
-                            </div>
-                            <div class="section-guide section-guide--soft">
-                                <span class="section-guide__step">Use the sidebar for fast switching</span>
-                                <span class="section-guide__step">Open this deck only when you want the full route map</span>
-                            </div>
-                            <button class="deck-toggle" id="themeDeckToggle" type="button" aria-expanded="true" aria-controls="themeDeckBody">
-                                <span class="deck-toggle__copy">
-                                    <strong id="themeDeckToggleTitle">Open theme deck</strong>
-                                    <span id="themeDeckToggleText">Reveal every route and keep space free when you only want the game.</span>
-                                </span>
-                                <span class="deck-toggle__icon" aria-hidden="true"></span>
-                            </button>
-                            <div class="deck-collapsible" id="themeDeckBody">
-                                <div class="theme-grid" id="themeGrid"></div>
-                            </div>
-                        </article>
                     </div>
 
                     <aside class="content-side">
@@ -292,44 +260,6 @@
                             <div class="leaderboard-preview" id="leaderboardPreview"></div>
                         </article>
 
-                        <article class="panel explorer-card">
-                            <div class="section-head">
-                                <div>
-                                    <span class="panel-badge">Explore natively</span>
-                                    <h3>English explorer</h3>
-                                </div>
-                                <button class="surface-button surface-button--ghost" id="openExplorerInlineButton" type="button">Open library</button>
-                            </div>
-                            <button class="panel-toggle panel-toggle--soft" id="explorerToggle" type="button" aria-expanded="false" aria-controls="explorerBody">
-                                <span class="panel-toggle__copy">
-                                    <strong>Explorer preview</strong>
-                                    <span>Keep this folded and open the full library from the header when you need depth.</span>
-                                </span>
-                                <span class="panel-toggle__icon" aria-hidden="true"></span>
-                            </button>
-                            <div class="panel-collapsible panel-collapsible--collapsed" id="explorerBody">
-                                <div class="explorer-featured" id="explorerFeatured"></div>
-                            </div>
-                        </article>
-
-                        <article class="panel options-card">
-                            <div class="section-head">
-                                <div>
-                                    <span class="panel-badge">Climb controls</span>
-                                    <h3>Quick options</h3>
-                                </div>
-                            </div>
-                            <button class="panel-toggle panel-toggle--soft" id="optionsToggle" type="button" aria-expanded="false" aria-controls="optionsBody">
-                                <span class="panel-toggle__copy">
-                                    <strong>Controls preview</strong>
-                                    <span>Use the header button for the full options panel or unfold this quick control strip.</span>
-                                </span>
-                                <span class="panel-toggle__icon" aria-hidden="true"></span>
-                            </button>
-                            <div class="panel-collapsible panel-collapsible--collapsed" id="optionsBody">
-                                <div class="quick-options" id="quickOptions"></div>
-                            </div>
-                        </article>
                     </aside>
                 </section>
             </main>
@@ -444,6 +374,5 @@
     <script src="script.js"></script>
 </body>
 </html>
-
 
 
