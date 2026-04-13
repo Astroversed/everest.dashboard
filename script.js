@@ -2874,9 +2874,15 @@ function setupSearchClearButton(input, button) {
 function renderExplorer() {
     const theme = getTheme();
     const featured = state.library.filter((entry) => entry.theme === theme.id).slice(0, 3);
-    elements.explorerFeatured.innerHTML = featured.length ? featured.map((entry) => `<div class="explorer-featured__card"><span class="explorer-featured__emoji">${entry.emoji}</span><div><strong>${entry.term}</strong><p>${entry.meaning}</p></div></div>`).join('') : `<div class="explorer-featured__card"><div><strong>${t('noExplorer')}</strong></div></div>`;
+    if (elements.explorerFeatured) {
+        elements.explorerFeatured.innerHTML = featured.length
+            ? featured.map((entry) => `<div class="explorer-featured__card"><span class="explorer-featured__emoji">${entry.emoji}</span><div><strong>${entry.term}</strong><p>${entry.meaning}</p></div></div>`).join('')
+            : `<div class="explorer-featured__card"><div><strong>${t('noExplorer')}</strong></div></div>`;
+    }
     const filtered = state.library.filter((entry) => (state.explorerTheme === 'all' || entry.theme === state.explorerTheme) && (!state.explorerSearch || normalizeWord(`${entry.term} ${entry.meaning} ${entry.tip} ${entry.example}`).includes(normalizeWord(state.explorerSearch))));
-    elements.explorerGrid.innerHTML = filtered.map((entry) => `<article class="explorer-entry"><span class="explorer-entry__emoji">${entry.emoji}</span><div class="explorer-entry__copy"><strong>${entry.term}</strong><p>${entry.meaning}</p><p>${entry.example}</p><div class="explorer-entry__meta"><span class="explorer-entry__chip">${entry.type}</span><span class="explorer-entry__chip">${entry.theme.replace(/-/g, ' ')}</span><span class="explorer-entry__chip">${entry.tip}</span></div></div></article>`).join('');
+    if (elements.explorerGrid) {
+        elements.explorerGrid.innerHTML = filtered.map((entry) => `<article class="explorer-entry"><span class="explorer-entry__emoji">${entry.emoji}</span><div class="explorer-entry__copy"><strong>${entry.term}</strong><p>${entry.meaning}</p><p>${entry.example}</p><div class="explorer-entry__meta"><span class="explorer-entry__chip">${entry.type}</span><span class="explorer-entry__chip">${entry.theme.replace(/-/g, ' ')}</span><span class="explorer-entry__chip">${entry.tip}</span></div></div></article>`).join('');
+    }
 }
 
 function renderQuickOptions() {
