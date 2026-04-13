@@ -1815,6 +1815,28 @@ function getHighestUnlockedStageId(themeId = state.activeThemeId) {
     return highest;
 }
 
+function flashStageRequirement(lockedStageId) {
+    const requiredStageId = Math.max(1, lockedStageId - 1);
+    const neededOrb = elements.stageList?.querySelector(`[data-stage-orb="${requiredStageId}"]`);
+    const lockedOrb = elements.stageList?.querySelector(`[data-stage-orb="${lockedStageId}"]`);
+    if (!neededOrb || !lockedOrb) return;
+
+    neededOrb.classList.add('is-needed');
+    lockedOrb.classList.add('is-blocked-press');
+    const lockedTooltip = lockedOrb.querySelector('.stage-orb__tooltip');
+    if (lockedTooltip) {
+        lockedTooltip.dataset.forceOpen = 'true';
+    }
+
+    window.setTimeout(() => {
+        neededOrb.classList.remove('is-needed');
+        lockedOrb.classList.remove('is-blocked-press');
+        if (lockedTooltip) {
+            delete lockedTooltip.dataset.forceOpen;
+        }
+    }, 1400);
+}
+
 function startLearnPhase() {
     const stage = getStage();
     if (!stage) return;
@@ -2141,11 +2163,11 @@ function renderStageList() {
     elements.stageSectionTitle.textContent = t('themeStagesTitle', { theme: theme.title });
     elements.stageThemeFocus.textContent = theme.summary;
     const stagePositions = [
-        { x: 50, y: 10 },
-        { x: 24, y: 40 },
-        { x: 76, y: 40 },
-        { x: 16, y: 76 },
-        { x: 84, y: 76 }
+        { x: 50, y: 14 },
+        { x: 24, y: 39 },
+        { x: 76, y: 39 },
+        { x: 30, y: 72 },
+        { x: 70, y: 72 }
     ];
     const points = theme.stages.map((stage, index) => {
         const fallbackX = 50;
@@ -2164,7 +2186,7 @@ function renderStageList() {
         const active = stage.id === state.activeStageId;
         const point = stagePositions[index] || { x: 50, y: 10 + (index * 16) };
         return `
-            <article class="stage-orb ${active ? 'is-active' : ''} ${unlocked ? 'is-unlocked' : 'is-locked'}" style="left:${point.x}%;top:${point.y}%;">
+            <article class="stage-orb ${active ? 'is-active' : ''} ${unlocked ? 'is-unlocked' : 'is-locked'}" data-stage-orb="${stage.id}" style="left:${point.x}%;top:${point.y}%;">
                 <button class="stage-orb__button" data-stage-node="${stage.id}" type="button" ${unlocked ? '' : 'aria-disabled="true"'}>
                     <span class="stage-orb__badge">${unlocked ? stage.id : '🔒'}</span>
                     <span class="stage-orb__name">${stage.name}</span>
@@ -2174,6 +2196,7 @@ function renderStageList() {
                     <span>${t('pointsBadge', { points: stage.points })}</span>
                     <span>${t('stageBest', { value: stageProgress.bestAccuracy || 0 })}</span>
                     <span>${t('stageClears', { value: stageProgress.clears || 0 })}</span>
+                    ${unlocked ? '' : `<span>Clear Stage ${Math.max(1, stage.id - 1)} to unlock this route.</span>`}
                 </div>
             </article>
         `;
@@ -2183,6 +2206,7 @@ function renderStageList() {
     elements.stageList.querySelectorAll('[data-stage-node]').forEach((button) => button.addEventListener('click', () => {
         const stageId = Number(button.dataset.stageNode);
         if (!isStageUnlocked(theme.id, stageId)) {
+            flashStageRequirement(stageId);
             pushToast(randomFrom(EVEREST_LINES.info), `Complete stage ${stageId - 1} first to unlock this climb.`, 'info');
             return;
         }
