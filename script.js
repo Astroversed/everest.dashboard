@@ -532,6 +532,7 @@ const state = {
     streak: 0, bestStreak: 0, latestAccuracy: 0, matchSelection: { signal: '', emoji: '' }, lastResolvedAnswer: '',
     challengePhase: 'idle', learnDeck: [], learnIndex: 0, learnTouchStartX: 0,
     assessItems: [], assessBank: [], assessAnswers: {}, assessChecked: false, pendingResultSummary: null,
+    stageTapMeta: { id: 0, time: 0 },
     controlModeUnlocked: sessionStorage.getItem(CONTROL_SESSION_KEY) === '1', controlManagedUserId: '', controlManagedUserIds: [], controlManageAllUsers: false, controlManagedSelectionTouched: false, controlWordDraft: readStorage(STORAGE_KEYS.controlWordDraft, null), controlWordPanelOpen: false, controlEmojiPanelOpen: false, optionPulseKey: '', optionPulseTimer: null,
     sharedLeaderboard: [], firestore: null, firestoreReady: false, firestoreListener: null, firestoreCleanupBusy: false
 };
@@ -1920,25 +1921,26 @@ function renderLearnPhase(theme, stage) {
     elements.challengeHint.textContent = t('learnSwipeHint');
     elements.challengeExample.textContent = t('learnProgress', { current: state.learnIndex + 1, total });
     elements.questionCounter.textContent = `${state.learnIndex + 1} / ${total}`;
-    elements.timerBadge.textContent = '--';
+    elements.timerBadge.hidden = true;
     elements.streakBadge.textContent = stage.name;
     elements.progressBar.style.width = `${((state.learnIndex + 1) / total) * 100}%`;
     setFeedback('idle', t('learnTitle'), `${stage.name} · ${stage.focus}`);
     elements.nextQuestionButton.hidden = true;
+    document.querySelector('.game-footer__stats')?.setAttribute('hidden', 'hidden');
 
     elements.choiceGrid.innerHTML = `
         <div class="learn-flow">
             <article class="learn-card" aria-label="${card.en}">
+                <div class="learn-card__header">
+                    <span class="learn-card__tag">${card.es}</span>
+                    <strong>${card.en}</strong>
+                    <span>${card.hint}</span>
+                </div>
                 <button class="learn-card__media" type="button" aria-label="${t('learnNext')}">
                     <span class="learn-card__placeholder">${card.placeholderLabel}</span>
                     <span class="learn-card__emoji" aria-hidden="true">${card.emoji}</span>
                     <span class="learn-card__swipe">${t('learnSwipeHint')}</span>
                 </button>
-                <div class="learn-card__caption">
-                    <span class="learn-card__tag">${card.es}</span>
-                    <strong>${card.en}</strong>
-                    <span>${card.hint}</span>
-                </div>
             </article>
             <div class="learn-flow__controls">
                 <button class="surface-button surface-button--ghost" data-learn-action="prev" type="button" ${state.learnIndex === 0 ? 'disabled' : ''}>${t('learnPrevious')}</button>
@@ -1958,11 +1960,13 @@ function renderAssessPhase(theme, stage) {
     elements.challengeHint.textContent = t('assessPrompt');
     elements.challengeExample.textContent = stage.focus;
     elements.questionCounter.textContent = `${state.assessItems.length} / ${state.assessItems.length}`;
+    elements.timerBadge.hidden = true;
     elements.timerBadge.textContent = '--';
     elements.streakBadge.textContent = t('assessAnswers');
     elements.progressBar.style.width = '100%';
     setFeedback('idle', t('assessTitle'), t('assessPrompt'));
     elements.nextQuestionButton.hidden = true;
+    document.querySelector('.game-footer__stats')?.removeAttribute('hidden');
 
     elements.choiceGrid.innerHTML = `
         <div class="assess-flow">
@@ -2182,9 +2186,16 @@ function renderStageList() {
             pushToast(randomFrom(EVEREST_LINES.info), `Complete stage ${stageId - 1} first to unlock this climb.`, 'info');
             return;
         }
+        const now = Date.now();
         state.activeStageId = stageId;
         renderStageList();
         renderGame();
+        if (state.stageTapMeta.id === stageId && now - state.stageTapMeta.time < 360) {
+            state.stageTapMeta = { id: 0, time: 0 };
+            startLearnPhase();
+            return;
+        }
+        state.stageTapMeta = { id: stageId, time: now };
     }));
 }
 
@@ -2298,6 +2309,8 @@ function renderGame() {
     if (elements.stageJourney) {
         elements.stageJourney.hidden = state.challengePhase !== 'idle' || state.stageLive;
     }
+    elements.timerBadge.hidden = false;
+    document.querySelector('.game-footer__stats')?.removeAttribute('hidden');
     elements.gameThemeTitle.textContent = `${theme.title} - ${stage.name}`;
     elements.gameThemeDescription.textContent = stage.focus;
     elements.stagePointsLabel.textContent = `${gameText('stagePoints')}: ${state.stagePoints}`;
@@ -2968,6 +2981,10 @@ function renderQuickOptions() {
 
 function renderOptionsModal() {
     const blocks = [
+        { title: t('modeBlockTitle'), text: t('modeBlockText'), buttons: [{ value: 'match', label: t('summitMatch'), active: true, action: 'mode' }] },
+        { title: t('language'), text: t('languageHelp'), buttons: [{ value: 'en', label: 'English', active: state.settings.language === 'en', action: 'language' }, { value: 'es', label: 'Español', active: state.settings.language === 'es', action: 'language' }] },
+        { title: t('animationBlockTitle'), text: t('animationBlockText'), buttons: [{ value: 'on', label: getOptionStatusMarkup(t('animations'), true), active: state.settings.animationsOn, action: 'motion' }, { value: 'off', label: getOptionStatusMarkup(t('animations'), false), active: !state.settings.animationsOn, action: 'motion' }] },
+        { title: t('themeBlockTitle'), text: t('themeBlockText'), buttons: [{ value: 'light', label: t('lightMode'), active: state.settings.themeMode === 'light', action: 'theme' }, { value: 'dark', label: t('darkMode'), active: state.settings.themeMode === 'dark', action: 'theme' }] },
         { title: t('audioBlockTitle'), text: t('audioBlockText'), buttons: [{ value: 'sound', label: getOptionStatusMarkup(t('sound'), state.settings.soundOn), active: state.settings.soundOn, action: 'sound' }, { value: 'voice', label: getOptionStatusMarkup(t('voice'), state.settings.voiceOn), active: state.settings.voiceOn, action: 'voice' }] }
     ];
     const blockHtml = blocks.map((block) => `<article class="option-block"><h4>${block.title}</h4><p>${block.text}</p><div class="option-block__actions">${block.buttons.map((button) => {
