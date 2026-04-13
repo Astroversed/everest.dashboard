@@ -8432,7 +8432,7 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
 .stage-tree {
     position: relative !important;
     width: 100% !important;
-    max-width: 700px !important;
+    max-width: 760px !important;
     min-height: 460px !important;
     margin: 0 auto !important;
 }
@@ -8468,11 +8468,10 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
 }
 
 .stage-tree__lines line {
-    stroke: rgba(var(--theme-accent-rgb), 0.34) !important;
-    stroke-width: 1.7 !important;
+    stroke: rgba(var(--theme-accent-rgb), 0.28) !important;
+    stroke-width: 1.35 !important;
     stroke-linecap: round !important;
-    stroke-dasharray: 5 6;
-    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.35));
+    filter: drop-shadow(0 1px 0 rgba(var(--theme-soft-rgb), 0.12));
 }
 
 .stage-orb__tooltip {
@@ -8570,6 +8569,8 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
 .choice-grid--assess {
     width: 100%;
     max-width: none !important;
+    display: block !important;
+    grid-template-columns: 1fr !important;
 }
 
 .choice-grid--learn .learn-flow,

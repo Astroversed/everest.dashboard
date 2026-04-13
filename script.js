@@ -2169,18 +2169,20 @@ function renderStageList() {
     elements.stageSectionTitle.textContent = t('themeStagesTitle', { theme: theme.title });
     elements.stageThemeFocus.textContent = theme.summary;
     const stagePositions = [
+        { x: 24, y: 76 },
+        { x: 38, y: 46 },
         { x: 50, y: 16 },
-        { x: 39, y: 39 },
-        { x: 61, y: 39 },
-        { x: 28, y: 68 },
-        { x: 72, y: 68 }
+        { x: 62, y: 46 },
+        { x: 76, y: 76 }
     ];
     elements.stageList.innerHTML = `
         <div class="stage-tree">
             <svg class="stage-tree__lines" viewBox="0 0 100 84" preserveAspectRatio="none" aria-hidden="true">
-                <line x1="50" y1="16" x2="28" y2="68"></line>
-                <line x1="50" y1="16" x2="72" y2="68"></line>
-                <line x1="28" y1="68" x2="72" y2="68"></line>
+                <line x1="24" y1="76" x2="38" y2="46"></line>
+                <line x1="38" y1="46" x2="50" y2="16"></line>
+                <line x1="50" y1="16" x2="62" y2="46"></line>
+                <line x1="62" y1="46" x2="76" y2="76"></line>
+                <line x1="24" y1="76" x2="76" y2="76"></line>
             </svg>
             ${theme.stages.map((stage, index) => {
         const stageProgress = results[stage.id] || { attempts: 0, clears: 0, bestAccuracy: 0 };
