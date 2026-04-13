@@ -2302,15 +2302,21 @@ function renderGame() {
     const stage = localizeStage(state.activeThemeId, getStage());
     if (!theme || !stage) return;
     const gameText = t;
+    const gameLayout = document.querySelector('.game-layout');
+    const gameFeedback = document.getElementById('gameFeedback');
+    const gameFooterStats = document.querySelector('.game-footer__stats');
     state.progress.lastPlayedTheme = theme.id;
     elements.gameCard?.classList.add('is-match-mode');
     elements.gameCard?.classList.remove('is-context-mode');
     elements.challengeVisual.classList.toggle('is-hidden-for-mode', false);
     if (elements.stageJourney) {
         elements.stageJourney.hidden = state.challengePhase !== 'idle' || state.stageLive;
+        elements.stageJourney.style.display = state.challengePhase === 'idle' && !state.stageLive ? '' : 'none';
     }
     elements.timerBadge.hidden = false;
-    document.querySelector('.game-footer__stats')?.removeAttribute('hidden');
+    gameFooterStats?.removeAttribute('hidden');
+    if (gameLayout) gameLayout.style.display = '';
+    if (gameFeedback) gameFeedback.style.display = '';
     elements.gameThemeTitle.textContent = `${theme.title} - ${stage.name}`;
     elements.gameThemeDescription.textContent = stage.focus;
     elements.stagePointsLabel.textContent = `${gameText('stagePoints')}: ${state.stagePoints}`;
@@ -2319,6 +2325,8 @@ function renderGame() {
     elements.resetStageButton.textContent = gameText('replay');
 
     if (state.challengePhase === 'learn') {
+        if (gameLayout) gameLayout.style.display = 'none';
+        if (gameFeedback) gameFeedback.style.display = 'none';
         renderLearnPhase(theme, stage);
         return;
     }
@@ -2991,8 +2999,31 @@ function renderOptionsModal() {
         const pulseKey = `${button.action}:${button.value}`;
         return `<button class="toggle-pill ${button.active ? 'is-active' : ''} ${state.optionPulseKey === pulseKey ? 'is-pulsing' : ''}" type="button" data-option-action="${button.action}" data-option-value="${button.value}">${button.label}</button>`;
     }).join('')}</div></article>`).join('');
-    elements.optionsSections.innerHTML = blockHtml;
+    const controlHtml = !state.controlModeUnlocked
+        ? `<article class="option-block option-block--control"><h4>${tc('title')}</h4><p>${tc('subtitle')}</p><div class="control-key-row"><label class="custom-field custom-field--full"><span>${tc('unlockLabel')}</span><input id="controlKeyInput" type="password" placeholder="${tc('unlockPlaceholder')}" autocomplete="off"></label><button class="surface-button surface-button--primary" id="controlUnlockButton" type="button">${tc('unlockButton')}</button></div></article>`
+        : `<article class="option-block option-block--control"><div class="control-heading"><div><h4>${tc('title')}</h4><p>${tc('subtitle')}</p></div><div class="control-heading__actions"><span class="control-badge">${tc('unlockedBadge')}</span><button class="surface-button surface-button--ghost control-lock-button control-button--danger" id="controlDeactivateButton" type="button">${tc('deactivateButton')}</button></div></div><div class="control-helper custom-field--full">${tc('managedUserText')}</div></article>`;
+    elements.optionsSections.innerHTML = `${blockHtml}${controlHtml}`;
     elements.optionsSections.querySelectorAll('[data-option-action]').forEach((button) => button.addEventListener('click', () => handleOptionChange(button.dataset.optionAction, button.dataset.optionValue)));
+    const unlockButton = document.getElementById('controlUnlockButton');
+    const keyInput = document.getElementById('controlKeyInput');
+    if (unlockButton && keyInput) {
+        unlockButton.addEventListener('click', async () => {
+            const unlocked = await unlockControlMode(keyInput.value);
+            if (!unlocked) {
+                pushToast(randomFrom(EVEREST_LINES.error), tc('unlockFail'), 'danger');
+                keyInput.focus();
+                keyInput.select();
+                return;
+            }
+            pushToast(randomFrom(EVEREST_LINES.success), tc('unlockSuccess'), 'success');
+            renderOptionsModal();
+        });
+    }
+    document.getElementById('controlDeactivateButton')?.addEventListener('click', () => {
+        persistControlModeChanges({ lockMode: true });
+        pushToast(randomFrom(EVEREST_LINES.info), tc('deactivateSuccess'), 'info');
+        renderOptionsModal();
+    });
 }
 
 function clearOptionPulse() {

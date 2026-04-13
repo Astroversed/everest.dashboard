@@ -8420,6 +8420,74 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     min-height: 380px;
 }
 
+.stage-journey {
+    overflow: hidden;
+}
+
+.stage-list {
+    display: block !important;
+    padding: .4rem 0 0 !important;
+}
+
+.stage-tree {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 620px !important;
+    min-height: 500px !important;
+    margin: 0 auto !important;
+}
+
+.stage-orb {
+    position: absolute !important;
+    transform: translate(-50%, -50%) !important;
+    width: 132px !important;
+    z-index: 2;
+}
+
+.stage-orb__button {
+    display: grid !important;
+    justify-items: center !important;
+    gap: .72rem !important;
+    width: 132px !important;
+}
+
+.stage-orb__badge {
+    width: 90px !important;
+    height: 90px !important;
+    border-radius: 999px !important;
+    display: grid !important;
+    place-items: center !important;
+}
+
+.stage-orb__tooltip {
+    opacity: 0;
+    pointer-events: none;
+    padding: .9rem 1rem !important;
+}
+
+.learn-flow {
+    min-height: 560px;
+    align-content: start;
+}
+
+.learn-card {
+    min-height: 480px;
+}
+
+.learn-card__header {
+    padding: .2rem 0 .1rem;
+}
+
+.learn-card__header strong {
+    font-size: 1.28rem;
+}
+
+.learn-card__media {
+    width: 100%;
+    min-height: 430px !important;
+    border-radius: 1.7rem;
+}
+
 .assess-column {
     gap: 1.05rem;
 }
