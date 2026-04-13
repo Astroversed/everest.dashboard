@@ -1882,9 +1882,20 @@ function bindLearnInteractions() {
     const learnDeck = elements.choiceGrid.querySelector('.learn-flow');
     if (!learnDeck) return;
 
-    learnDeck.querySelector('[data-learn-action="prev"]')?.addEventListener('click', () => stepLearnCard(-1));
-    learnDeck.querySelector('[data-learn-action="next"]')?.addEventListener('click', () => stepLearnCard(1));
+    learnDeck.querySelector('[data-learn-action="prev"]')?.addEventListener('click', (event) => {
+        event.stopPropagation();
+        stepLearnCard(-1);
+    });
+    learnDeck.querySelector('[data-learn-action="next"]')?.addEventListener('click', (event) => {
+        event.stopPropagation();
+        stepLearnCard(1);
+    });
     learnDeck.querySelector('.learn-card__media')?.addEventListener('click', () => stepLearnCard(1));
+    learnDeck.querySelector('.learn-card__media')?.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        stepLearnCard(1);
+    });
 
     learnDeck.addEventListener('touchstart', (event) => {
         state.learnTouchStartX = event.touches[0]?.clientX || 0;
@@ -1961,16 +1972,16 @@ function renderLearnPhase(theme, stage) {
                     <strong>${card.en}</strong>
                     <span>${card.hint}</span>
                 </div>
-                <button class="learn-card__media" type="button" aria-label="${t('learnNext')}">
+                <div class="learn-card__media" tabindex="0" role="button" aria-label="${t('learnNext')}">
+                    <span class="learn-card__nav">
+                        <button class="learn-card__arrow learn-card__arrow--prev" data-learn-action="prev" type="button" ${state.learnIndex === 0 ? 'disabled' : ''} aria-label="${t('learnPrevious')}">&#x2039;</button>
+                        <button class="learn-card__arrow learn-card__arrow--next" data-learn-action="next" type="button" aria-label="${state.learnIndex === total - 1 ? t('learnStartPlay') : t('learnNext')}">&#x203A;</button>
+                    </span>
                     <span class="learn-card__placeholder">${card.placeholderLabel}</span>
                     <span class="learn-card__emoji" aria-hidden="true">${card.emoji}</span>
                     <span class="learn-card__swipe">${t('learnSwipeHint')}</span>
-                </button>
+                </div>
             </article>
-            <div class="learn-flow__controls">
-                <button class="surface-button surface-button--ghost" data-learn-action="prev" type="button" ${state.learnIndex === 0 ? 'disabled' : ''}>${t('learnPrevious')}</button>
-                <button class="surface-button surface-button--primary" data-learn-action="next" type="button">${state.learnIndex === total - 1 ? t('learnStartPlay') : t('learnNext')}</button>
-            </div>
         </div>
     `;
 
@@ -2169,20 +2180,20 @@ function renderStageList() {
     elements.stageSectionTitle.textContent = t('themeStagesTitle', { theme: theme.title });
     elements.stageThemeFocus.textContent = theme.summary;
     const stagePositions = [
-        { x: 24, y: 76 },
-        { x: 38, y: 46 },
+        { x: 28, y: 74 },
+        { x: 39, y: 45 },
         { x: 50, y: 16 },
-        { x: 62, y: 46 },
-        { x: 76, y: 76 }
+        { x: 61, y: 45 },
+        { x: 72, y: 74 }
     ];
     elements.stageList.innerHTML = `
         <div class="stage-tree">
             <svg class="stage-tree__lines" viewBox="0 0 100 84" preserveAspectRatio="none" aria-hidden="true">
-                <line x1="24" y1="76" x2="38" y2="46"></line>
-                <line x1="38" y1="46" x2="50" y2="16"></line>
-                <line x1="50" y1="16" x2="62" y2="46"></line>
-                <line x1="62" y1="46" x2="76" y2="76"></line>
-                <line x1="24" y1="76" x2="76" y2="76"></line>
+                <line x1="28" y1="74" x2="39" y2="45"></line>
+                <line x1="39" y1="45" x2="50" y2="16"></line>
+                <line x1="50" y1="16" x2="61" y2="45"></line>
+                <line x1="61" y1="45" x2="72" y2="74"></line>
+                <line x1="32" y1="74" x2="68" y2="74"></line>
             </svg>
             ${theme.stages.map((stage, index) => {
         const stageProgress = results[stage.id] || { attempts: 0, clears: 0, bestAccuracy: 0 };

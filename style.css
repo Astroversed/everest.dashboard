@@ -8471,7 +8471,7 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     stroke: rgba(var(--theme-accent-rgb), 0.28) !important;
     stroke-width: 1.35 !important;
     stroke-linecap: round !important;
-    filter: drop-shadow(0 1px 0 rgba(var(--theme-soft-rgb), 0.12));
+    opacity: .88;
 }
 
 .stage-orb__tooltip {
@@ -8592,6 +8592,39 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     width: 100%;
     min-height: 430px !important;
     border-radius: 1.7rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.learn-card__nav {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    pointer-events: none;
+}
+
+.learn-card__arrow {
+    width: 46px;
+    height: 46px;
+    border: 0;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--theme-strong);
+    font-size: 2rem;
+    line-height: 1;
+    box-shadow: 0 12px 22px rgba(var(--theme-strong-rgb), 0.12);
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.learn-card__arrow:disabled {
+    opacity: .42;
+    cursor: default;
 }
 
 .assess-column {
