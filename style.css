@@ -8432,8 +8432,8 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
 .stage-tree {
     position: relative !important;
     width: 100% !important;
-    max-width: 760px !important;
-    min-height: 460px !important;
+    max-width: 640px !important;
+    min-height: 420px !important;
     margin: 0 auto !important;
 }
 
@@ -8441,6 +8441,7 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     position: absolute !important;
     transform: translate(-50%, -50%) !important;
     width: 166px !important;
+    height: 120px !important;
     z-index: 2;
 }
 
@@ -8449,6 +8450,7 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     justify-items: center !important;
     gap: .72rem !important;
     width: 166px !important;
+    height: 120px !important;
     transition: transform .18s ease, filter .18s ease !important;
 }
 
@@ -8468,10 +8470,10 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
 }
 
 .stage-tree__lines line {
-    stroke: rgba(var(--theme-accent-rgb), 0.28) !important;
-    stroke-width: 1.35 !important;
+    stroke: rgba(var(--theme-accent-rgb), 0.4) !important;
+    stroke-width: 2.2 !important;
     stroke-linecap: round !important;
-    opacity: .88;
+    opacity: 1;
 }
 
 .stage-orb__tooltip {
@@ -8486,6 +8488,12 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
 .stage-orb__name {
     max-width: 154px !important;
     font-size: .96rem !important;
+    position: absolute;
+    top: 128px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    text-align: center;
 }
 
 .stage-orb__button:hover,
