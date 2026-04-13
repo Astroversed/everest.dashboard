@@ -547,6 +547,7 @@ const elements = {
     profileRankline: document.getElementById('profileRankline'), metaPoints: document.getElementById('metaPoints'), metaWins: document.getElementById('metaWins'),
     metaLosses: document.getElementById('metaLosses'), metaTime: document.getElementById('metaTime'),
     stageSectionTitle: document.getElementById('stageSectionTitle'), stageThemeFocus: document.getElementById('stageThemeFocus'), gameCard: document.getElementById('gameCard'), gameThemeTitle: document.getElementById('gameThemeTitle'),
+    stageJourney: document.getElementById('stageJourney'),
     gameThemeDescription: document.getElementById('gameThemeDescription'), questionCounter: document.getElementById('questionCounter'), timerBadge: document.getElementById('timerBadge'),
     streakBadge: document.getElementById('streakBadge'), progressBar: document.getElementById('progressBar'), challengeVisual: document.getElementById('challengeVisual'), challengeEmoji: document.getElementById('challengeEmoji'),
     challengeTypeLabel: document.getElementById('challengeTypeLabel'), challengePrompt: document.getElementById('challengePrompt'), challengeHint: document.getElementById('challengeHint'),
@@ -2135,12 +2136,31 @@ function renderStageList() {
     }
     elements.stageSectionTitle.textContent = t('themeStagesTitle', { theme: theme.title });
     elements.stageThemeFocus.textContent = theme.summary;
-    elements.stageList.innerHTML = theme.stages.map((stage) => {
+    const stagePositions = [
+        { x: 50, y: 10 },
+        { x: 24, y: 40 },
+        { x: 76, y: 40 },
+        { x: 16, y: 76 },
+        { x: 84, y: 76 }
+    ];
+    const points = theme.stages.map((stage, index) => {
+        const fallbackX = 50;
+        const fallbackY = 10 + (index * 16);
+        const point = stagePositions[index] || { x: fallbackX, y: fallbackY };
+        return `${point.x},${point.y}`;
+    }).join(' ');
+    elements.stageList.innerHTML = `
+        <div class="stage-tree">
+            <svg class="stage-tree__lines" viewBox="0 0 100 90" preserveAspectRatio="none" aria-hidden="true">
+                <polyline points="${points}" />
+            </svg>
+            ${theme.stages.map((stage, index) => {
         const stageProgress = results[stage.id] || { attempts: 0, clears: 0, bestAccuracy: 0 };
         const unlocked = isStageUnlocked(theme.id, stage.id);
         const active = stage.id === state.activeStageId;
+        const point = stagePositions[index] || { x: 50, y: 10 + (index * 16) };
         return `
-            <article class="stage-orb stage-orb--${stage.id % 2 === 0 ? 'right' : 'left'} ${active ? 'is-active' : ''} ${unlocked ? 'is-unlocked' : 'is-locked'}">
+            <article class="stage-orb ${active ? 'is-active' : ''} ${unlocked ? 'is-unlocked' : 'is-locked'}" style="left:${point.x}%;top:${point.y}%;">
                 <button class="stage-orb__button" data-stage-node="${stage.id}" type="button" ${unlocked ? '' : 'aria-disabled="true"'}>
                     <span class="stage-orb__badge">${unlocked ? stage.id : '🔒'}</span>
                     <span class="stage-orb__name">${stage.name}</span>
@@ -2153,7 +2173,9 @@ function renderStageList() {
                 </div>
             </article>
         `;
-    }).join('');
+    }).join('')}
+        </div>
+    `;
     elements.stageList.querySelectorAll('[data-stage-node]').forEach((button) => button.addEventListener('click', () => {
         const stageId = Number(button.dataset.stageNode);
         if (!isStageUnlocked(theme.id, stageId)) {
@@ -2273,6 +2295,9 @@ function renderGame() {
     elements.gameCard?.classList.add('is-match-mode');
     elements.gameCard?.classList.remove('is-context-mode');
     elements.challengeVisual.classList.toggle('is-hidden-for-mode', false);
+    if (elements.stageJourney) {
+        elements.stageJourney.hidden = state.challengePhase !== 'idle' || state.stageLive;
+    }
     elements.gameThemeTitle.textContent = `${theme.title} - ${stage.name}`;
     elements.gameThemeDescription.textContent = stage.focus;
     elements.stagePointsLabel.textContent = `${gameText('stagePoints')}: ${state.stagePoints}`;

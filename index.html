@@ -167,33 +167,6 @@
 
                 <section class="content-grid">
                     <div class="content-main">
-                        <article class="panel stage-card">
-                            <div class="section-head">
-                                <div>
-                                    <span class="panel-badge">Stage routes</span>
-                                    <h3 id="stageSectionTitle">Basic Communication stages</h3>
-                                </div>
-                                <div class="section-head__meta">
-                                    <span id="stageThemeFocus">Vocabulary ridge</span>
-                                </div>
-                            </div>
-                            <button class="panel-toggle" id="stageToggle" type="button" aria-expanded="true" aria-controls="stageBody">
-                                <span class="panel-toggle__copy">
-                                    <strong>Stage route board</strong>
-                                    <span>Open the route list, choose one stage, then jump into the challenge.</span>
-                                </span>
-                                <span class="panel-toggle__icon" aria-hidden="true"></span>
-                            </button>
-                            <div class="panel-collapsible" id="stageBody">
-                            <div class="section-guide">
-                                <span class="section-guide__step">1. Select a stage</span>
-                                <span class="section-guide__step">2. Press play</span>
-                                <span class="section-guide__step">3. Climb for points</span>
-                            </div>
-                            <div class="stage-list" id="stageList"></div>
-                            </div>
-                        </article>
-
                         <article class="panel game-card" id="gameCard">
                             <div class="game-card__head">
                                 <div class="game-card__intro">
@@ -202,6 +175,24 @@
                                     <p id="gameThemeDescription">Pick a stage, sharpen your English, and push your score upward.</p>
                                 </div>
                             </div>
+
+                            <section class="stage-journey" id="stageJourney">
+                                <div class="stage-journey__head">
+                                    <div>
+                                        <span class="panel-badge">Stage routes</span>
+                                        <h3 id="stageSectionTitle">Basic Communication stages</h3>
+                                    </div>
+                                    <div class="section-head__meta">
+                                        <span id="stageThemeFocus">Vocabulary ridge</span>
+                                    </div>
+                                </div>
+                                <div class="section-guide stage-journey__guide">
+                                    <span class="section-guide__step">1. Select a stage</span>
+                                    <span class="section-guide__step">2. Start with Learn</span>
+                                    <span class="section-guide__step">3. Complete Play and Assess</span>
+                                </div>
+                                <div class="stage-list" id="stageList"></div>
+                            </section>
 
                             <div class="progress-line">
                                 <span id="progressBar"></span>
@@ -374,5 +365,4 @@
     <script src="script.js"></script>
 </body>
 </html>
-
 
