@@ -8474,10 +8474,10 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
 
 .stage-tree__line {
     position: absolute !important;
-    height: 2px !important;
+    height: 4px !important;
     border-radius: 999px !important;
     transform-origin: left center !important;
-    background: rgba(var(--theme-accent-rgb), 0.38) !important;
+    background: rgba(var(--theme-accent-rgb), 0.52) !important;
 }
 
 .stage-orb__tooltip {
@@ -8757,7 +8757,7 @@ body[data-theme-mode="dark"] .stage-journey__guide .section-guide__step {
 }
 
 body[data-theme-mode="dark"] .stage-tree__line {
-    background: rgba(var(--theme-soft-rgb), 0.28) !important;
+    background: rgba(var(--theme-soft-rgb), 0.44) !important;
 }
 
 body[data-theme-mode="dark"] .stage-orb__badge {

@@ -2187,8 +2187,7 @@ function renderStageList() {
         { x: 59, y: 40 }
     ];
     const lineSegments = [
-        { left: 50, top: 18, width: 49.12, angle: 118.61 },
-        { left: 50, top: 18, width: 49.12, angle: 61.39 },
+        { left: 50, top: 18, width: 50.12, angle: 118.61 },
         { left: 26, top: 62, width: 48, angle: 0 }
     ];
     elements.stageList.innerHTML = `
