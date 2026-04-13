@@ -2186,9 +2186,19 @@ function renderStageList() {
         { x: 41, y: 40 },
         { x: 59, y: 40 }
     ];
+    const buildLineSegment = (from, to) => {
+        const dx = to.x - from.x;
+        const dy = to.y - from.y;
+        return {
+            left: from.x,
+            top: from.y,
+            width: Math.sqrt((dx * dx) + (dy * dy)),
+            angle: Math.atan2(dy, dx) * (180 / Math.PI)
+        };
+    };
     const lineSegments = [
-        { left: 50, top: 18, width: 50.12, angle: 118.61 },
-        { left: 26, top: 62, width: 48, angle: 0 }
+        buildLineSegment(stagePositions[0], stagePositions[1]),
+        buildLineSegment(stagePositions[1], stagePositions[2])
     ];
     elements.stageList.innerHTML = `
         <div class="stage-tree">

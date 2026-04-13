@@ -8794,6 +8794,21 @@ body[data-theme-mode="dark"] .stage-orb__tooltip::after {
     border-bottom-color: rgba(var(--theme-soft-rgb), 0.16) !important;
 }
 
+body[data-theme-mode="dark"] .stage-journey,
+body[data-theme-mode="dark"] .stage-journey__head,
+body[data-theme-mode="dark"] .stage-journey__guide,
+body[data-theme-mode="dark"] .stage-list,
+body[data-theme-mode="dark"] .stage-tree {
+    background-color: transparent !important;
+}
+
+body[data-theme-mode="dark"] .stage-journey__guide .section-guide__step,
+body[data-theme-mode="dark"] #stageThemeFocus {
+    background: rgba(var(--theme-soft-rgb), 0.12) !important;
+    border-color: rgba(var(--theme-soft-rgb), 0.14) !important;
+    color: rgba(212, 224, 245, 0.9) !important;
+}
+
 .assess-column {
     gap: 1.05rem;
 }
