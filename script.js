@@ -3043,6 +3043,88 @@ function persistControlModeChanges({ lockMode = false } = {}) {
     return { wordAction };
 }
 
+async function removeControlUsersFromRanking() {
+    const targetIds = getControlTargetUserIds();
+    if (!targetIds.length) {
+        pushToast(randomFrom(EVEREST_LINES.error), tc('noManagedUser'), 'danger');
+        return;
+    }
+
+    targetIds.forEach((userId) => removeUserFromRanking(userId));
+    pushToast(randomFrom(EVEREST_LINES.info), targetIds.length > 1 ? tc('usersRemoved') : tc('userRemoved'), 'info');
+    renderAll();
+}
+
+async function closeControlUserSessions() {
+    const targetIds = getControlTargetUserIds();
+    if (!targetIds.length) {
+        pushToast(randomFrom(EVEREST_LINES.error), tc('noManagedUser'), 'danger');
+        return;
+    }
+
+    const selfId = getUserId(state.user);
+    const sortedIds = targetIds.slice().sort((a, b) => (a === selfId ? 1 : 0) - (b === selfId ? 1 : 0));
+    let closedSelf = false;
+    for (const userId of sortedIds) {
+        closedSelf = (await closeManagedSession(userId)) || closedSelf;
+    }
+    if (closedSelf) return;
+
+    pushToast(randomFrom(EVEREST_LINES.info), targetIds.length > 1 ? tc('sessionsClosed') : tc('sessionClosed'), 'info');
+    bootstrapUser();
+    renderAll();
+}
+
+async function applyControlStatsChanges() {
+    const targetIds = getControlTargetUserIds();
+    if (!targetIds.length) {
+        pushToast(randomFrom(EVEREST_LINES.error), tc('noManagedUser'), 'danger');
+        return;
+    }
+
+    targetIds.forEach((userId) => applyControlStats(userId, {
+        points: document.getElementById('controlPointsInput')?.value,
+        wins: document.getElementById('controlWinsInput')?.value,
+        losses: document.getElementById('controlLossesInput')?.value,
+        sessionMinutes: document.getElementById('controlSessionMinutesInput')?.value
+    }));
+    pushToast(randomFrom(EVEREST_LINES.success), targetIds.length > 1 ? tc('statsAppliedMany') : tc('statsApplied'), 'success');
+    renderAll();
+}
+
+async function saveControlWord() {
+    const payload = getControlWordPayloadFromInputs();
+    if (!payload.theme || !payload.term || !payload.type || !payload.meaning || !payload.example || !payload.tip) {
+        pushToast(randomFrom(EVEREST_LINES.error), tc('wordIncomplete'), 'danger');
+        return;
+    }
+
+    if (payload.wordId) {
+        updateExplorerWord(payload);
+        pushToast(randomFrom(EVEREST_LINES.success), tc('wordUpdated'), 'success');
+    } else {
+        addExplorerWord(payload);
+        pushToast(randomFrom(EVEREST_LINES.success), tc('wordAdded'), 'success');
+    }
+
+    clearControlWordDraft();
+    renderAll();
+    document.getElementById('controlWordTermInput')?.focus();
+}
+
+async function deleteControlWord() {
+    const payload = getControlWordPayloadFromInputs();
+    if (!payload.wordId) {
+        pushToast(randomFrom(EVEREST_LINES.error), tc('wordNeedSelection'), 'danger');
+        return;
+    }
+
+    deleteExplorerWord(payload.wordId);
+    clearControlWordDraft();
+    pushToast(randomFrom(EVEREST_LINES.info), tc('wordDeleted'), 'info');
+    renderAll();
+}
+
 function createControlSelectMarkup({ inputId, shellId, triggerId, labelId, dropdownId, searchId, optionsId, value, placeholder, searchPlaceholder, options }) {
     const selected = options.find((option) => option.value === value);
     const selectedLabel = selected ? selected.main : placeholder;
@@ -3860,7 +3942,6 @@ function init() {
 }
 
 init();
-
 
 
 
