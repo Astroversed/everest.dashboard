@@ -1958,6 +1958,7 @@ function renderLearnPhase(theme, stage) {
     const card = state.learnDeck[state.learnIndex];
     const total = state.learnDeck.length;
     if (!card) return;
+    const gameBadges = document.querySelector('.game-badges');
 
     renderChallengeVisual(theme, { term: { emoji: card.emoji } }, false);
     elements.challengeTypeLabel.textContent = t('learnTitle');
@@ -1971,6 +1972,7 @@ function renderLearnPhase(theme, stage) {
     elements.timerBadge.style.display = 'none';
     elements.streakBadge.hidden = false;
     elements.streakBadge.style.display = '';
+    if (gameBadges) gameBadges.style.display = '';
     elements.streakBadge.textContent = stage.name;
     elements.progressBar.style.width = `${((state.learnIndex + 1) / total) * 100}%`;
     setFeedback('idle', t('learnTitle'), `${stage.name} · ${stage.focus}`);
@@ -2006,6 +2008,7 @@ function renderLearnPhase(theme, stage) {
 
 function renderAssessPhase(theme, stage) {
     const columns = [state.assessItems.slice(0, 5), state.assessItems.slice(5, 10)];
+    const gameBadges = document.querySelector('.game-badges');
     renderChallengeVisual(theme, { term: { emoji: getThemeMatchSignalEmoji(theme.id) } }, false);
     elements.challengeTypeLabel.textContent = t('assessTitle');
     elements.challengePrompt.textContent = t('assessText');
@@ -2017,6 +2020,7 @@ function renderAssessPhase(theme, stage) {
     elements.timerBadge.style.display = 'none';
     elements.streakBadge.hidden = true;
     elements.streakBadge.style.display = 'none';
+    if (gameBadges) gameBadges.style.display = 'none';
     elements.progressBar.style.width = '100%';
     setFeedback('idle', t('assessTitle'), t('assessPrompt'));
     elements.nextQuestionButton.hidden = true;
@@ -2376,6 +2380,7 @@ function renderGame() {
     const gameLayout = document.querySelector('.game-layout');
     const gameFeedback = document.getElementById('gameFeedback');
     const gameFooterStats = document.querySelector('.game-footer__stats');
+    const gameBadges = document.querySelector('.game-badges');
     state.progress.lastPlayedTheme = theme.id;
     elements.gameCard?.classList.add('is-match-mode');
     elements.gameCard?.classList.remove('is-context-mode');
@@ -2385,6 +2390,7 @@ function renderGame() {
         elements.stageJourney.style.display = state.challengePhase === 'idle' && !state.stageLive ? '' : 'none';
     }
     elements.timerBadge.hidden = false;
+    if (gameBadges) gameBadges.style.display = '';
     gameFooterStats?.removeAttribute('hidden');
     if (gameLayout) gameLayout.style.display = '';
     if (gameFeedback) gameFeedback.style.display = '';

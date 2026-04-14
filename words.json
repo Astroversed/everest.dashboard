@@ -7,7 +7,7 @@
                         "meaning":  "say hello or welcome someone",
                         "example":  "Greet your partner before the round begins.",
                         "tip":  "Strong openings make conversations easier.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🤝"
                     },
                     {
                         "theme":  "basic-communication",
@@ -16,7 +16,7 @@
                         "meaning":  "answer after someone speaks",
                         "example":  "Reply with a short clear sentence.",
                         "tip":  "Quick replies build confidence.",
-                        "emoji":  "�Y\u0027�"
+                        "emoji":  "💬"
                     },
                     {
                         "theme":  "basic-communication",
@@ -25,7 +25,7 @@
                         "meaning":  "tell someone your name or present a person",
                         "example":  "Introduce yourself before the activity starts.",
                         "tip":  "Useful in first meetings.",
-                        "emoji":  "�Y\u0027\u003c"
+                        "emoji":  "👋"
                     },
                     {
                         "theme":  "basic-communication",
@@ -34,7 +34,7 @@
                         "meaning":  "a talk between two or more people",
                         "example":  "A good conversation starts with a simple hello.",
                         "tip":  "Think of turns, questions and replies.",
-                        "emoji":  "�Y-�️"
+                        "emoji":  "🗣️"
                     },
                     {
                         "theme":  "grammar-language",
@@ -43,7 +43,7 @@
                         "meaning":  "look at two things and notice differences",
                         "example":  "Compare the two words before you choose.",
                         "tip":  "Useful for adjectives and logic.",
-                        "emoji":  "�s-️"
+                        "emoji":  "⚖️"
                     },
                     {
                         "theme":  "grammar-language",
@@ -52,7 +52,7 @@
                         "meaning":  "an order of steps",
                         "example":  "First, listen. Then, answer.",
                         "tip":  "Words like before and after show sequence.",
-                        "emoji":  "�Y�o"
+                        "emoji":  "🪜"
                     },
                     {
                         "theme":  "grammar-language",
@@ -61,7 +61,7 @@
                         "meaning":  "a word that links ideas together",
                         "example":  "Because is a connector that gives a reason.",
                         "tip":  "Connectors make speaking smoother.",
-                        "emoji":  "�Y\"-"
+                        "emoji":  "🔗"
                     },
                     {
                         "theme":  "grammar-language",
@@ -70,7 +70,7 @@
                         "meaning":  "a repeated form or structure",
                         "example":  "This sentence pattern uses subject plus verb.",
                         "tip":  "Grammar becomes easier when you notice patterns.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🧩"
                     },
                     {
                         "theme":  "human-body-identity",
@@ -79,7 +79,7 @@
                         "meaning":  "who a person is",
                         "example":  "Your identity card shows your name and age.",
                         "tip":  "Useful when speaking about yourself.",
-                        "emoji":  "�Y��"
+                        "emoji":  "✨"
                     },
                     {
                         "theme":  "human-body-identity",
@@ -88,7 +88,7 @@
                         "meaning":  "a feeling like joy or anger",
                         "example":  "Happy is a positive emotion.",
                         "tip":  "Link emotions to facial expressions.",
-                        "emoji":  "�Y~S"
+                        "emoji":  "😊"
                     },
                     {
                         "theme":  "human-body-identity",
@@ -97,7 +97,7 @@
                         "meaning":  "the condition of your body and mind",
                         "example":  "Sleep and water are important for good health.",
                         "tip":  "Use it often with body and habits.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🩺"
                     },
                     {
                         "theme":  "human-body-identity",
@@ -106,7 +106,7 @@
                         "meaning":  "the way someone usually thinks and acts",
                         "example":  "Her personality is calm and kind.",
                         "tip":  "Useful for describing people.",
-                        "emoji":  "�o�"
+                        "emoji":  "✨"
                     },
                     {
                         "theme":  "personal-social-life",
@@ -115,7 +115,7 @@
                         "meaning":  "the usual things you do every day",
                         "example":  "Breakfast is part of my morning routine.",
                         "tip":  "Daily life words sound better in sequences.",
-                        "emoji":  "�Y-\"️"
+                        "emoji":  "🗓️"
                     },
                     {
                         "theme":  "personal-social-life",
@@ -124,7 +124,7 @@
                         "meaning":  "do something special for an event",
                         "example":  "We celebrate birthdays with cake.",
                         "tip":  "Use it with events and achievements.",
-                        "emoji":  "�YZ?"
+                        "emoji":  "🎉"
                     },
                     {
                         "theme":  "personal-social-life",
@@ -133,7 +133,7 @@
                         "meaning":  "a person who lives near you",
                         "example":  "My neighbor always says good morning.",
                         "tip":  "Useful for home and community topics.",
-                        "emoji":  "�Y�~️"
+                        "emoji":  "🏘️"
                     },
                     {
                         "theme":  "personal-social-life",
@@ -142,7 +142,7 @@
                         "meaning":  "ask someone to join you",
                         "example":  "Invite your friend to the weekend party.",
                         "tip":  "Common in social English.",
-                        "emoji":  "�Y\"�"
+                        "emoji":  "📩"
                     },
                     {
                         "theme":  "education-work",
@@ -151,7 +151,7 @@
                         "meaning":  "a unit of teaching",
                         "example":  "Today\u0027s lesson is about food words.",
                         "tip":  "A lesson can be short but focused.",
-                        "emoji":  "�Y\"~"
+                        "emoji":  "📘"
                     },
                     {
                         "theme":  "education-work",
@@ -160,7 +160,7 @@
                         "meaning":  "the professional path of a person",
                         "example":  "A doctor may choose a medical career.",
                         "tip":  "Use it when speaking about the future.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🧭"
                     },
                     {
                         "theme":  "education-work",
@@ -169,7 +169,7 @@
                         "meaning":  "a task given by a teacher or manager",
                         "example":  "Finish the assignment before tomorrow.",
                         "tip":  "Useful at school and work.",
-                        "emoji":  "�Y\"\""
+                        "emoji":  "📄"
                     },
                     {
                         "theme":  "education-work",
@@ -178,7 +178,7 @@
                         "meaning":  "practice that improves skill for a job or task",
                         "example":  "Training helps new workers feel confident.",
                         "tip":  "Connect it with growth and improvement.",
-                        "emoji":  "�Y\u003e�️"
+                        "emoji":  "🛠️"
                     },
                     {
                         "theme":  "places-environment",
@@ -187,7 +187,7 @@
                         "meaning":  "the visible features of an area",
                         "example":  "The mountain landscape looks cold and high.",
                         "tip":  "Useful for nature descriptions.",
-                        "emoji":  "�Y�\"️"
+                        "emoji":  "🏔️"
                     },
                     {
                         "theme":  "places-environment",
@@ -196,7 +196,7 @@
                         "meaning":  "the area where people live near each other",
                         "example":  "My neighborhood has a park and a market.",
                         "tip":  "Good for talking about home and routes.",
-                        "emoji":  "�Y�~️"
+                        "emoji":  "🏘️"
                     },
                     {
                         "theme":  "places-environment",
@@ -205,7 +205,7 @@
                         "meaning":  "a structure that goes over water or a road",
                         "example":  "The bridge connects the two sides of the town.",
                         "tip":  "Common in city and travel topics.",
-                        "emoji":  "�YO?"
+                        "emoji":  "🌉"
                     },
                     {
                         "theme":  "places-environment",
@@ -214,7 +214,7 @@
                         "meaning":  "low land between hills or mountains",
                         "example":  "Clouds covered the valley this morning.",
                         "tip":  "Pairs well with mountain vocabulary.",
-                        "emoji":  "�Y�z️"
+                        "emoji":  "🏞️"
                     },
                     {
                         "theme":  "movement-navigation",
@@ -223,7 +223,7 @@
                         "meaning":  "the path from one place to another",
                         "example":  "This route takes us to the station.",
                         "tip":  "Maps and routes often appear together.",
-                        "emoji":  "�Y-�️"
+                        "emoji":  "🗺️"
                     },
                     {
                         "theme":  "movement-navigation",
@@ -232,7 +232,7 @@
                         "meaning":  "reach a place",
                         "example":  "We arrive at school at eight.",
                         "tip":  "The opposite idea is depart or leave.",
-                        "emoji":  "�Y\"�"
+                        "emoji":  "📍"
                     },
                     {
                         "theme":  "movement-navigation",
@@ -241,7 +241,7 @@
                         "meaning":  "the way you should go",
                         "example":  "Ask for directions before you walk alone.",
                         "tip":  "Essential for navigation English.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🧭"
                     },
                     {
                         "theme":  "movement-navigation",
@@ -250,7 +250,7 @@
                         "meaning":  "a sign or light that gives information",
                         "example":  "The traffic signal changed to green.",
                         "tip":  "Useful in transport vocabulary.",
-                        "emoji":  "�Ys�"
+                        "emoji":  "🚦"
                     },
                     {
                         "theme":  "shopping-daily-life",
@@ -259,7 +259,7 @@
                         "meaning":  "a paper that proves a purchase",
                         "example":  "Keep the receipt after you buy the book.",
                         "tip":  "Great word for real-life shopping English.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🧾"
                     },
                     {
                         "theme":  "shopping-daily-life",
@@ -268,7 +268,7 @@
                         "meaning":  "bringing a product to someone",
                         "example":  "The delivery arrives in the afternoon.",
                         "tip":  "Modern daily English uses this a lot.",
-                        "emoji":  "�Y\"�"
+                        "emoji":  "📦"
                     },
                     {
                         "theme":  "shopping-daily-life",
@@ -277,7 +277,7 @@
                         "meaning":  "a lower price than usual",
                         "example":  "This shirt has a twenty percent discount.",
                         "tip":  "Very useful for shopping English.",
-                        "emoji":  "�Y��️"
+                        "emoji":  "🏷️"
                     },
                     {
                         "theme":  "shopping-daily-life",
@@ -286,7 +286,7 @@
                         "meaning":  "a person who buys something",
                         "example":  "The customer asked about the price.",
                         "tip":  "Important in market conversations.",
-                        "emoji":  "�Y\u003e�️"
+                        "emoji":  "🛍️"
                     },
                     {
                         "theme":  "clothing-style",
@@ -295,7 +295,7 @@
                         "meaning":  "a full combination of clothes",
                         "example":  "Her outfit is casual and bright.",
                         "tip":  "Useful when combining colors and style.",
-                        "emoji":  "�o�"
+                        "emoji":  "✨"
                     },
                     {
                         "theme":  "clothing-style",
@@ -304,7 +304,7 @@
                         "meaning":  "how a material feels",
                         "example":  "The scarf has a soft texture.",
                         "tip":  "Helpful for more advanced description.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🧶"
                     },
                     {
                         "theme":  "clothing-style",
@@ -313,7 +313,7 @@
                         "meaning":  "cloth material used to make clothes",
                         "example":  "Cotton is a light fabric for hot days.",
                         "tip":  "Useful when describing clothing quality.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🪡"
                     },
                     {
                         "theme":  "clothing-style",
@@ -322,7 +322,7 @@
                         "meaning":  "a small extra item worn with clothes",
                         "example":  "A watch is a useful accessory.",
                         "tip":  "Adds detail to style descriptions.",
-                        "emoji":  "�Y\u0027�"
+                        "emoji":  "💍"
                     },
                     {
                         "theme":  "food-drinks",
@@ -331,7 +331,7 @@
                         "meaning":  "one item used to make a dish",
                         "example":  "Milk is an ingredient in the recipe.",
                         "tip":  "Recipes always depend on ingredients.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🥣"
                     },
                     {
                         "theme":  "food-drinks",
@@ -340,7 +340,7 @@
                         "meaning":  "the taste of something",
                         "example":  "This tea has a sweet flavor.",
                         "tip":  "Use flavor for food and drinks opinions.",
-                        "emoji":  "�Y~\u003c"
+                        "emoji":  "😋"
                     },
                     {
                         "theme":  "food-drinks",
@@ -349,7 +349,7 @@
                         "meaning":  "a list of food and drinks available",
                         "example":  "Look at the menu before you order.",
                         "tip":  "Very practical restaurant English.",
-                        "emoji":  "�Y\"o"
+                        "emoji":  "📋"
                     },
                     {
                         "theme":  "food-drinks",
@@ -358,7 +358,7 @@
                         "meaning":  "an amount of food for one person",
                         "example":  "That portion is large enough to share.",
                         "tip":  "Good for talking about quantity.",
-                        "emoji":  "�Y�\u003e"
+                        "emoji":  "🍽️"
                     },
                     {
                         "theme":  "nature-weather",
@@ -367,7 +367,7 @@
                         "meaning":  "a report about future weather",
                         "example":  "The forecast says rain tomorrow.",
                         "tip":  "Very useful with weather vocabulary.",
-                        "emoji":  "�YO�️"
+                        "emoji":  "🌦️"
                     },
                     {
                         "theme":  "nature-weather",
@@ -376,7 +376,7 @@
                         "meaning":  "the natural home of an animal",
                         "example":  "The ocean is the dolphin\u0027s habitat.",
                         "tip":  "Link animals with where they live.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🐾"
                     },
                     {
                         "theme":  "nature-weather",
@@ -385,7 +385,7 @@
                         "meaning":  "bad weather with strong wind or rain",
                         "example":  "The storm made the sky very dark.",
                         "tip":  "Strong weather word for speaking practice.",
-                        "emoji":  "�\u003e^️"
+                        "emoji":  "⛈️"
                     },
                     {
                         "theme":  "nature-weather",
@@ -394,7 +394,7 @@
                         "meaning":  "how hot or cold something is",
                         "example":  "The temperature dropped at night.",
                         "tip":  "Essential for weather descriptions.",
-                        "emoji":  "�YO�️"
+                        "emoji":  "🌡️"
                     },
                     {
                         "theme":  "culture-leisure",
@@ -403,7 +403,7 @@
                         "meaning":  "a large cultural celebration",
                         "example":  "The city hosts a music festival every year.",
                         "tip":  "Excellent word for culture topics.",
-                        "emoji":  "�YZ�"
+                        "emoji":  "🎪"
                     },
                     {
                         "theme":  "culture-leisure",
@@ -412,7 +412,7 @@
                         "meaning":  "the people watching a performance",
                         "example":  "The audience clapped after the song.",
                         "tip":  "Pairs well with performance.",
-                        "emoji":  "�Y\u0027�"
+                        "emoji":  "👏"
                     },
                     {
                         "theme":  "culture-leisure",
@@ -421,7 +421,7 @@
                         "meaning":  "a tool used to make music",
                         "example":  "The guitar is a popular instrument.",
                         "tip":  "Useful in music and arts topics.",
-                        "emoji":  "�YZ�"
+                        "emoji":  "🎻"
                     },
                     {
                         "theme":  "culture-leisure",
@@ -430,7 +430,7 @@
                         "meaning":  "play music, act or present for people",
                         "example":  "They perform on stage every weekend.",
                         "tip":  "Connect it with audience and festival.",
-                        "emoji":  "�YZ�"
+                        "emoji":  "🎤"
                     },
                     {
                         "theme":  "tools-objects",
@@ -439,7 +439,7 @@
                         "meaning":  "what an object is made of",
                         "example":  "Glass is the material of the bottle.",
                         "tip":  "Use it to describe objects clearly.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🧱"
                     },
                     {
                         "theme":  "tools-objects",
@@ -448,7 +448,7 @@
                         "meaning":  "the job something is meant to do",
                         "example":  "The function of a lamp is to give light.",
                         "tip":  "Useful in technical descriptions.",
-                        "emoji":  "�sT️"
+                        "emoji":  "⚙️"
                     },
                     {
                         "theme":  "tools-objects",
@@ -457,7 +457,7 @@
                         "meaning":  "an object made for a special purpose",
                         "example":  "This device helps measure temperature.",
                         "tip":  "Common in object descriptions.",
-                        "emoji":  "�Y\"�"
+                        "emoji":  "🔧"
                     },
                     {
                         "theme":  "tools-objects",
@@ -466,7 +466,7 @@
                         "meaning":  "fix something that is broken",
                         "example":  "We repair the lamp before using it again.",
                         "tip":  "Useful in practical English.",
-                        "emoji":  "�Y\u003e�️"
+                        "emoji":  "🛠️"
                     },
                     {
                         "theme":  "technology",
@@ -475,7 +475,7 @@
                         "meaning":  "a group of connected systems",
                         "example":  "The school network is offline.",
                         "tip":  "Works in internet and system topics.",
-                        "emoji":  "�Y.�️"
+                        "emoji":  "🖧"
                     },
                     {
                         "theme":  "technology",
@@ -484,7 +484,7 @@
                         "meaning":  "a new useful idea or invention",
                         "example":  "Robots are a sign of innovation.",
                         "tip":  "Great word for future-facing English.",
-                        "emoji":  "�Ys?"
+                        "emoji":  "🚀"
                     },
                     {
                         "theme":  "technology",
@@ -493,7 +493,7 @@
                         "meaning":  "bring software or information to a newer version",
                         "example":  "Update the app before class.",
                         "tip":  "Very common in digital life.",
-                        "emoji":  "�?️"
+                        "emoji":  "⬆️"
                     },
                     {
                         "theme":  "technology",
@@ -502,7 +502,7 @@
                         "meaning":  "space where digital files are kept",
                         "example":  "The phone storage is almost full.",
                         "tip":  "Useful with devices and apps.",
-                        "emoji":  "�Y\u0027�"
+                        "emoji":  "💾"
                     },
                     {
                         "theme":  "concepts-academic",
@@ -511,7 +511,7 @@
                         "meaning":  "the cause that explains something",
                         "example":  "What is the reason for your answer?",
                         "tip":  "Good for academic speaking.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🧠"
                     },
                     {
                         "theme":  "concepts-academic",
@@ -520,7 +520,7 @@
                         "meaning":  "what happens after an action",
                         "example":  "Practice leads to a better result.",
                         "tip":  "Reason and result work well together.",
-                        "emoji":  "�Y��"
+                        "emoji":  "🏁"
                     },
                     {
                         "theme":  "concepts-academic",
@@ -529,7 +529,7 @@
                         "meaning":  "facts or details that support an idea",
                         "example":  "Use evidence to explain your opinion.",
                         "tip":  "Excellent for academic responses.",
-                        "emoji":  "�Y\"s"
+                        "emoji":  "📚"
                     },
                     {
                         "theme":  "concepts-academic",
@@ -538,7 +538,7 @@
                         "meaning":  "the final idea reached after thinking",
                         "example":  "Your conclusion should match the evidence.",
                         "tip":  "Important in formal speaking and writing.",
-                        "emoji":  "�YZ�"
+                        "emoji":  "🎯"
                     }
                 ]
 }

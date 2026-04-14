@@ -14,31 +14,31 @@
                                                         [
                                                             "hello",
                                                             "hola",
-                                                            "�Y\u0027\u003c",
+                                                            "👋",
                                                             "A friendly greeting"
                                                         ],
                                                         [
                                                             "goodbye",
                                                             "adios",
-                                                            "�YO�️",
+                                                            "🌤️",
                                                             "Used when leaving"
                                                         ],
                                                         [
                                                             "please",
                                                             "por favor",
-                                                            "�YT�",
+                                                            "🙏",
                                                             "Polite request word"
                                                         ],
                                                         [
                                                             "thanks",
                                                             "gracias",
-                                                            "�o�",
+                                                            "✨",
                                                             "Used after help"
                                                         ],
                                                         [
                                                             "sorry",
                                                             "lo siento",
-                                                            "�Y\u0027�",
+                                                            "💬",
                                                             "Used to apologize"
                                                         ]
                                                     ],
@@ -84,31 +84,31 @@
                                                         [
                                                             "yes",
                                                             "si",
-                                                            "�Y\u0027�",
+                                                            "👍",
                                                             "Positive answer"
                                                         ],
                                                         [
                                                             "no",
                                                             "no",
-                                                            "�Y\u0027Z",
+                                                            "👎",
                                                             "Negative answer"
                                                         ],
                                                         [
                                                             "question",
                                                             "pregunta",
-                                                            "�\"",
+                                                            "❓",
                                                             "Something you ask"
                                                         ],
                                                         [
                                                             "answer",
                                                             "respuesta",
-                                                            "�Y\u0027�",
+                                                            "💡",
                                                             "Something you give back"
                                                         ],
                                                         [
                                                             "help",
                                                             "ayuda",
-                                                            "�Y\u003eY",
+                                                            "🛟",
                                                             "Support for someone"
                                                         ]
                                                     ],
@@ -154,31 +154,31 @@
                                                         [
                                                             "friend",
                                                             "amigo",
-                                                            "�Y��",
+                                                            "🤝",
                                                             "A person close to you"
                                                         ],
                                                         [
                                                             "invite",
                                                             "invitar",
-                                                            "�Y\"�",
+                                                            "📩",
                                                             "Ask someone to join"
                                                         ],
                                                         [
                                                             "listen",
                                                             "escuchar",
-                                                            "�Y\u0027,",
+                                                            "👂",
                                                             "Pay attention with your ears"
                                                         ],
                                                         [
                                                             "speak",
                                                             "hablar",
-                                                            "�Y-�️",
+                                                            "🗣️",
                                                             "Use your voice"
                                                         ],
                                                         [
                                                             "repeat",
                                                             "repetir",
-                                                            "�Y\"�",
+                                                            "🔁",
                                                             "Say it again"
                                                         ]
                                                     ],
@@ -231,31 +231,31 @@
                                                         [
                                                             "run",
                                                             "correr",
-                                                            "�Y�f",
+                                                            "🏃",
                                                             "Move quickly"
                                                         ],
                                                         [
                                                             "walk",
                                                             "caminar",
-                                                            "�Ys�",
+                                                            "🚶",
                                                             "Move step by step"
                                                         ],
                                                         [
                                                             "eat",
                                                             "comer",
-                                                            "�Y��️",
+                                                            "🍽️",
                                                             "Have food"
                                                         ],
                                                         [
                                                             "read",
                                                             "leer",
-                                                            "�Y\"-",
+                                                            "📖",
                                                             "Look at words"
                                                         ],
                                                         [
                                                             "write",
                                                             "escribir",
-                                                            "�o�️",
+                                                            "✍️",
                                                             "Make words on paper"
                                                         ]
                                                     ],
@@ -301,31 +301,31 @@
                                                         [
                                                             "big",
                                                             "grande",
-                                                            "�Y\"�",
+                                                            "📦",
                                                             "Large in size"
                                                         ],
                                                         [
                                                             "small",
                                                             "pequeño",
-                                                            "�Y\"�",
+                                                            "🔹",
                                                             "Little in size"
                                                         ],
                                                         [
                                                             "fast",
                                                             "rápido",
-                                                            "�s�",
+                                                            "⚡",
                                                             "High speed"
                                                         ],
                                                         [
                                                             "slow",
                                                             "lento",
-                                                            "�Y�O",
+                                                            "🐌",
                                                             "Low speed"
                                                         ],
                                                         [
                                                             "happy",
                                                             "feliz",
-                                                            "�Y~\"",
+                                                            "😄",
                                                             "Feeling good"
                                                         ]
                                                     ],
@@ -383,19 +383,19 @@
                                                         [
                                                             "more",
                                                             "mas",
-                                                            "�z.",
+                                                            "➕",
                                                             "A greater amount"
                                                         ],
                                                         [
                                                             "less",
                                                             "menos",
-                                                            "�z-",
+                                                            "➖",
                                                             "A smaller amount"
                                                         ],
                                                         [
                                                             "same",
                                                             "igual",
-                                                            "�Y�z",
+                                                            "🪞",
                                                             "Not different"
                                                         ]
                                                     ],
@@ -448,31 +448,31 @@
                                                         [
                                                             "hand",
                                                             "mano",
-                                                            "�o\u003c",
+                                                            "✋",
                                                             "Used to hold things"
                                                         ],
                                                         [
                                                             "eye",
                                                             "ojo",
-                                                            "�Y\u0027�️",
+                                                            "👁️",
                                                             "Used to see"
                                                         ],
                                                         [
                                                             "face",
                                                             "cara",
-                                                            "�YT,",
+                                                            "🙂",
                                                             "Front part of the head"
                                                         ],
                                                         [
                                                             "mouth",
                                                             "boca",
-                                                            "�Y\u0027\"",
+                                                            "👄",
                                                             "Used to speak and eat"
                                                         ],
                                                         [
                                                             "hair",
                                                             "cabello",
-                                                            "�Y\u0027?",
+                                                            "💇",
                                                             "It grows on your head"
                                                         ]
                                                     ],
@@ -518,31 +518,31 @@
                                                         [
                                                             "happy",
                                                             "feliz",
-                                                            "�Y~S",
+                                                            "😄",
                                                             "Full of joy"
                                                         ],
                                                         [
                                                             "sad",
                                                             "triste",
-                                                            "�Y~�",
+                                                            "😢",
                                                             "Feeling low"
                                                         ],
                                                         [
                                                             "angry",
                                                             "enojado",
-                                                            "�Y~�",
+                                                            "😠",
                                                             "Feeling mad"
                                                         ],
                                                         [
                                                             "tired",
                                                             "cansado",
-                                                            "�Y~�",
+                                                            "😴",
                                                             "Without energy"
                                                         ],
                                                         [
                                                             "hungry",
                                                             "hambriento",
-                                                            "�Y��️",
+                                                            "🍽️",
                                                             "You need food"
                                                         ]
                                                     ],
@@ -626,7 +626,7 @@
                                                              [
                                                                  "identity",
                                                                  "identidad",
-                                                                 "🪪",
+                                                                 "✨",
                                                                  "Who someone is"
                                                              ],
                                                              [
@@ -638,7 +638,7 @@
                                                              [
                                                                  "birthday",
                                                                  "cumpleaños",
-                                                                 "🎂",
+                                                                 "🎉",
                                                                  "The day you were born"
                                                              ],
                                                              [
@@ -665,31 +665,31 @@
                                                         [
                                                             "bed",
                                                             "cama",
-                                                            "�Y\u003e�️",
+                                                            "🛏️",
                                                             "You sleep here"
                                                         ],
                                                         [
                                                             "house",
                                                             "casa",
-                                                            "�Y��",
+                                                            "🏠",
                                                             "Place where you live"
                                                         ],
                                                         [
                                                             "door",
                                                             "puerta",
-                                                            "�Ys�",
+                                                            "🚪",
                                                             "Entry to a room"
                                                         ],
                                                         [
                                                             "chair",
                                                             "silla",
-                                                            "�Y�\u0027",
+                                                            "🪑",
                                                             "You sit on it"
                                                         ],
                                                         [
                                                             "table",
                                                             "mesa",
-                                                            "�Y�\u0027",
+                                                            "🪑",
                                                             "You place things on it"
                                                         ]
                                                     ],
@@ -735,31 +735,31 @@
                                                         [
                                                             "birthday",
                                                             "cumpleaños",
-                                                            "�YZ?",
+                                                            "🎉",
                                                             "Celebration for age"
                                                         ],
                                                         [
                                                             "party",
                                                             "fiesta",
-                                                            "�Y��",
+                                                            "🥳",
                                                             "A social event"
                                                         ],
                                                         [
                                                             "laugh",
                                                             "reír",
-                                                            "�Y~,",
+                                                            "😂",
                                                             "Sound of joy"
                                                         ],
                                                         [
                                                             "share",
                                                             "compartir",
-                                                            "�Y��",
+                                                            "🤲",
                                                             "Give part to others"
                                                         ],
                                                         [
                                                             "weekend",
                                                             "fin de semana",
-                                                            "�Y-\"️",
+                                                            "🗓️",
                                                             "Saturday and Sunday"
                                                         ]
                                                     ],
@@ -791,7 +791,7 @@
                                                              [
                                                                  "celebrate",
                                                                  "celebrar",
-                                                                 "🎊",
+                                                                 "🎉",
                                                                  "Do something special for an event"
                                                              ]
                                                          ]
@@ -805,31 +805,31 @@
                                                         [
                                                             "breakfast",
                                                             "desayuno",
-                                                            "�Y��",
+                                                            "🍳",
                                                             "Morning meal"
                                                         ],
                                                         [
                                                             "dinner",
                                                             "cena",
-                                                            "�Y��",
+                                                            "🍲",
                                                             "Evening meal"
                                                         ],
                                                         [
                                                             "visit",
                                                             "visitar",
-                                                            "�Y��",
+                                                            "🏡",
                                                             "Go to see someone"
                                                         ],
                                                         [
                                                             "hobby",
                                                             "pasatiempo",
-                                                            "�YZ�",
+                                                            "🎨",
                                                             "Fun activity"
                                                         ],
                                                         [
                                                             "neighbor",
                                                             "vecino",
-                                                            "�Y�~️",
+                                                            "🏘️",
                                                             "Person living nearby"
                                                         ]
                                                     ],
@@ -855,7 +855,7 @@
                                                              [
                                                                  "park",
                                                                  "parque",
-                                                                 "🌳",
+                                                                 "🏞️",
                                                                  "Green public place"
                                                              ],
                                                              [
@@ -882,31 +882,31 @@
                                                         [
                                                             "book",
                                                             "libro",
-                                                            "�Y\"s",
+                                                            "📚",
                                                             "You read it"
                                                         ],
                                                         [
                                                             "pencil",
                                                             "lapiz",
-                                                            "�o�️",
+                                                            "✏️",
                                                             "Used to write"
                                                         ],
                                                         [
                                                             "ruler",
                                                             "regla",
-                                                            "�Y\"�",
+                                                            "📏",
                                                             "Used to measure"
                                                         ],
                                                         [
                                                             "school",
                                                             "escuela",
-                                                            "�Y��",
+                                                            "🏫",
                                                             "Place to learn"
                                                         ],
                                                         [
                                                             "student",
                                                             "estudiante",
-                                                            "�Y�\u0027�?��YZ\"",
+                                                            "🧑‍🎓",
                                                             "Person who studies"
                                                         ]
                                                     ],
@@ -952,31 +952,31 @@
                                                         [
                                                             "teacher",
                                                             "maestro",
-                                                            "�Y\u0027��?��Y��",
+                                                            "👩‍🏫",
                                                             "Teaches students"
                                                         ],
                                                         [
                                                             "doctor",
                                                             "doctor",
-                                                            "�Y��",
+                                                            "🩺",
                                                             "Treats people"
                                                         ],
                                                         [
                                                             "nurse",
                                                             "enfermera",
-                                                            "�Y\u0027?",
+                                                            "💉",
                                                             "Cares for patients"
                                                         ],
                                                         [
                                                             "chef",
                                                             "chef",
-                                                            "�Y\u0027��?��Y��",
+                                                            "👨‍🍳",
                                                             "Cooks professionally"
                                                         ],
                                                         [
                                                             "pilot",
                                                             "piloto",
-                                                            "�o^️",
+                                                            "✈️",
                                                             "Flies planes"
                                                         ]
                                                     ],
@@ -1002,7 +1002,7 @@
                                                              [
                                                                  "driver",
                                                                  "conductor",
-                                                                 "🚗",
+                                                                 "🧑‍✈️",
                                                                  "Operates a vehicle"
                                                              ],
                                                              [
@@ -1022,31 +1022,31 @@
                                                         [
                                                             "project",
                                                             "proyecto",
-                                                            "�Y\",",
+                                                            "📁",
                                                             "A planned task"
                                                         ],
                                                         [
                                                             "office",
                                                             "oficina",
-                                                            "�Y��",
+                                                            "🏢",
                                                             "Place for work"
                                                         ],
                                                         [
                                                             "leader",
                                                             "lider",
-                                                            "�Y��",
+                                                            "🧑‍💼",
                                                             "Guides a team"
                                                         ],
                                                         [
                                                             "report",
                                                             "reporte",
-                                                            "�Y\"�",
+                                                            "📄",
                                                             "Formal information text"
                                                         ],
                                                         [
                                                             "skill",
                                                             "habilidad",
-                                                            "�Y\u003e�️",
+                                                            "🛠️",
                                                             "Ability you develop"
                                                         ]
                                                     ],
@@ -1066,7 +1066,7 @@
                                                              [
                                                                  "skill",
                                                                  "habilidad",
-                                                                 "⭐",
+                                                                 "🛠️",
                                                                  "Ability developed over time"
                                                              ],
                                                              [
@@ -1099,31 +1099,31 @@
                                                         [
                                                             "house",
                                                             "casa",
-                                                            "�Y��",
+                                                            "🏠",
                                                             "Your living place"
                                                         ],
                                                         [
                                                             "school",
                                                             "escuela",
-                                                            "�Y��",
+                                                            "🏫",
                                                             "Learning place"
                                                         ],
                                                         [
                                                             "hospital",
                                                             "hospital",
-                                                            "�Y��",
+                                                            "🏥",
                                                             "Medical building"
                                                         ],
                                                         [
                                                             "park",
                                                             "parque",
-                                                            "�YO�",
+                                                            "🏞️",
                                                             "Open green place"
                                                         ],
                                                         [
                                                             "store",
                                                             "tienda",
-                                                            "�Y��",
+                                                            "🏪",
                                                             "Place to buy things"
                                                         ]
                                                     ],
@@ -1169,31 +1169,31 @@
                                                         [
                                                             "river",
                                                             "río",
-                                                            "�Y�z️",
+                                                            "🏞️",
                                                             "Long moving water"
                                                         ],
                                                         [
                                                             "beach",
                                                             "playa",
-                                                            "�Y�-️",
+                                                            "🏖️",
                                                             "Sand by the sea"
                                                         ],
                                                         [
                                                             "mountain",
                                                             "montaña",
-                                                            "�\u003e�️",
+                                                            "⛰️",
                                                             "Very high land"
                                                         ],
                                                         [
                                                             "forest",
                                                             "bosque",
-                                                            "�YO�",
+                                                            "🌳",
                                                             "Many trees together"
                                                         ],
                                                         [
                                                             "lake",
                                                             "lago",
-                                                            "�YOS",
+                                                            "🏞️",
                                                             "Large still water"
                                                         ]
                                                     ],
@@ -1207,7 +1207,7 @@
                                                              [
                                                                  "river",
                                                                  "rio",
-                                                                 "🌊",
+                                                                 "🏞️",
                                                                  "Natural flowing water"
                                                              ],
                                                              [
@@ -1219,7 +1219,7 @@
                                                              [
                                                                  "forest",
                                                                  "bosque",
-                                                                 "🌲",
+                                                                 "🌳",
                                                                  "Large area full of trees"
                                                              ],
                                                              [
@@ -1239,31 +1239,31 @@
                                                         [
                                                             "country",
                                                             "pais",
-                                                            "�YO�",
+                                                            "🌍",
                                                             "A nation"
                                                         ],
                                                         [
                                                             "city",
                                                             "ciudad",
-                                                            "�Y�T️",
+                                                            "🏙️",
                                                             "Large urban place"
                                                         ],
                                                         [
                                                             "village",
                                                             "pueblo",
-                                                            "�Y�~️",
+                                                            "🏘️",
                                                             "Small community"
                                                         ],
                                                         [
                                                             "market",
                                                             "mercado",
-                                                            "�Y\u003e\u0027",
+                                                            "🛒",
                                                             "Place to trade goods"
                                                         ],
                                                         [
                                                             "station",
                                                             "estacion",
-                                                            "�Ys?",
+                                                            "🚉",
                                                             "Transport stop"
                                                         ]
                                                     ],
@@ -1316,31 +1316,31 @@
                                                         [
                                                             "run",
                                                             "correr",
-                                                            "�Y�f",
+                                                            "🏃",
                                                             "Move fast"
                                                         ],
                                                         [
                                                             "climb",
                                                             "subir",
-                                                            "�Y�-",
+                                                            "🧗",
                                                             "Go upward"
                                                         ],
                                                         [
                                                             "jump",
                                                             "saltar",
-                                                            "�Y�~",
+                                                            "🦘",
                                                             "Push off the ground"
                                                         ],
                                                         [
                                                             "turn",
                                                             "girar",
-                                                            "�???�️",
+                                                            "↩️",
                                                             "Change direction"
                                                         ],
                                                         [
                                                             "stop",
                                                             "parar",
-                                                            "�Y\u003e\u0027",
+                                                            "🛑",
                                                             "Do not continue"
                                                         ]
                                                     ],
@@ -1386,31 +1386,31 @@
                                                         [
                                                             "car",
                                                             "carro",
-                                                            "�Ys-",
+                                                            "🚗",
                                                             "Road vehicle"
                                                         ],
                                                         [
                                                             "bus",
                                                             "autobus",
-                                                            "�YsO",
+                                                            "🚌",
                                                             "Carries many people"
                                                         ],
                                                         [
                                                             "train",
                                                             "tren",
-                                                            "�Ys?",
+                                                            "🚆",
                                                             "Runs on rails"
                                                         ],
                                                         [
                                                             "bicycle",
                                                             "bicicleta",
-                                                            "�Ys�",
+                                                            "🚲",
                                                             "Two wheels"
                                                         ],
                                                         [
                                                             "airplane",
                                                             "avion",
-                                                            "�o^️",
+                                                            "✈️",
                                                             "Flies in the sky"
                                                         ]
                                                     ],
@@ -1456,31 +1456,31 @@
                                                         [
                                                             "map",
                                                             "mapa",
-                                                            "�Y-�️",
+                                                            "🗺️",
                                                             "Shows a route"
                                                         ],
                                                         [
                                                             "ticket",
                                                             "boleto",
-                                                            "�YZ�",
+                                                            "🎫",
                                                             "Needed to travel"
                                                         ],
                                                         [
                                                             "driver",
                                                             "conductor",
-                                                            "�Y�\u0027�?��o^️",
+                                                            "🧑‍✈️",
                                                             "Controls a vehicle"
                                                         ],
                                                         [
                                                             "travel",
                                                             "viajar",
-                                                            "�Y��",
+                                                            "🧳",
                                                             "Go to another place"
                                                         ],
                                                         [
                                                             "destination",
                                                             "destino",
-                                                            "�Y\"�",
+                                                            "📍",
                                                             "Where you are going"
                                                         ]
                                                     ],
@@ -1533,31 +1533,31 @@
                                                         [
                                                             "bag",
                                                             "bolso",
-                                                            "�Y\u0027o",
+                                                            "👜",
                                                             "Carries things"
                                                         ],
                                                         [
                                                             "key",
                                                             "llave",
-                                                            "�Y\"\u0027",
+                                                            "🔑",
                                                             "Opens a lock"
                                                         ],
                                                         [
                                                             "bottle",
                                                             "botella",
-                                                            "�Y�T",
+                                                            "🫙",
                                                             "Holds liquids"
                                                         ],
                                                         [
                                                             "basket",
                                                             "canasta",
-                                                            "�Y��",
+                                                            "🧺",
                                                             "Open container"
                                                         ],
                                                         [
                                                             "soap",
                                                             "jabon",
-                                                            "�Y��",
+                                                            "🧼",
                                                             "Used to wash"
                                                         ]
                                                     ],
@@ -1603,31 +1603,31 @@
                                                         [
                                                             "money",
                                                             "dinero",
-                                                            "�Y\u0027�",
+                                                            "💵",
                                                             "Used to pay"
                                                         ],
                                                         [
                                                             "price",
                                                             "precio",
-                                                            "�Y��️",
+                                                            "💵",
                                                             "Cost of something"
                                                         ],
                                                         [
                                                             "buy",
                                                             "comprar",
-                                                            "�Y\u003e�️",
+                                                            "🛒",
                                                             "Get by paying"
                                                         ],
                                                         [
                                                             "sell",
                                                             "vender",
-                                                            "�Y\u0027�",
+                                                            "🤝",
                                                             "Offer for money"
                                                         ],
                                                         [
                                                             "receipt",
                                                             "recibo",
-                                                            "�Y��",
+                                                            "🧾",
                                                             "Paper after payment"
                                                         ]
                                                     ],
@@ -1635,7 +1635,7 @@
                                                              [
                                                                  "price",
                                                                  "precio",
-                                                                 "🏷️",
+                                                                 "💵",
                                                                  "How much something costs"
                                                              ],
                                                              [
@@ -1673,31 +1673,31 @@
                                                         [
                                                             "towel",
                                                             "toalla",
-                                                            "�Y��",
+                                                            "🧻",
                                                             "Used to dry"
                                                         ],
                                                         [
                                                             "clock",
                                                             "reloj",
-                                                            "�Y.\u0027",
+                                                            "⏰",
                                                             "Shows time"
                                                         ],
                                                         [
                                                             "package",
                                                             "paquete",
-                                                            "�Y\"�",
+                                                            "📦",
                                                             "Wrapped item"
                                                         ],
                                                         [
                                                             "breakfast",
                                                             "desayuno",
-                                                            "�Y��",
+                                                            "🍳",
                                                             "Morning meal"
                                                         ],
                                                         [
                                                             "snack",
                                                             "merienda",
-                                                            "�Y��",
+                                                            "🥐",
                                                             "Small food between meals"
                                                         ]
                                                     ],
@@ -1750,31 +1750,31 @@
                                                         [
                                                             "shirt",
                                                             "camisa",
-                                                            "�Y\u0027.",
+                                                            "👕",
                                                             "Upper body clothing"
                                                         ],
                                                         [
                                                             "pants",
                                                             "pantalones",
-                                                            "�Y\u0027-",
+                                                            "👖",
                                                             "Clothing for legs"
                                                         ],
                                                         [
                                                             "hat",
                                                             "sombrero",
-                                                            "�YZ�",
+                                                            "👒",
                                                             "Worn on the head"
                                                         ],
                                                         [
                                                             "shoes",
                                                             "zapatos",
-                                                            "�Y\u0027Y",
+                                                            "👟",
                                                             "Worn on feet"
                                                         ],
                                                         [
                                                             "dress",
                                                             "vestido",
-                                                            "�Y\u0027-",
+                                                            "👗",
                                                             "One-piece clothing"
                                                         ]
                                                     ],
@@ -1820,31 +1820,31 @@
                                                         [
                                                             "color",
                                                             "color",
-                                                            "�YZ�",
+                                                            "🎨",
                                                             "Visual tone"
                                                         ],
                                                         [
                                                             "pattern",
                                                             "patron",
-                                                            "�YO?",
+                                                            "🧩",
                                                             "Repeated design"
                                                         ],
                                                         [
                                                             "soft",
                                                             "suave",
-                                                            "�Y��",
+                                                            "🧸",
                                                             "Not rough"
                                                         ],
                                                         [
                                                             "elegant",
                                                             "elegante",
-                                                            "�Y\u0027Z",
+                                                            "💎",
                                                             "Stylish and refined"
                                                         ],
                                                         [
                                                             "casual",
                                                             "casual",
-                                                            "�Y��",
+                                                            "🧢",
                                                             "Relaxed style"
                                                         ]
                                                     ],
@@ -1890,25 +1890,25 @@
                                                         [
                                                             "jacket",
                                                             "chaqueta",
-                                                            "�Y��",
+                                                            "🧥",
                                                             "Outer clothing layer"
                                                         ],
                                                         [
                                                             "scarf",
                                                             "bufanda",
-                                                            "�Y��",
+                                                            "🧣",
                                                             "Worn around the neck"
                                                         ],
                                                         [
                                                             "belt",
                                                             "cinturon",
-                                                            "�Y��",
+                                                            "🪢",
                                                             "Holds clothes in place"
                                                         ],
                                                         [
                                                             "outfit",
                                                             "atuendo",
-                                                            "�o�",
+                                                            "✨",
                                                             "Complete set of clothes"
                                                         ],
                                                         [
@@ -1946,7 +1946,7 @@
                                                              [
                                                                  "style",
                                                                  "estilo",
-                                                                 "✨",
+                                                                 "🌟",
                                                                  "The overall fashion look"
                                                              ]
                                                          ]
@@ -1967,31 +1967,31 @@
                                                         [
                                                             "apple",
                                                             "manzana",
-                                                            "�Y�Z",
+                                                            "🍎",
                                                             "Red or green fruit"
                                                         ],
                                                         [
                                                             "bread",
                                                             "pan",
-                                                            "�Y�z",
+                                                            "🍞",
                                                             "Baked food"
                                                         ],
                                                         [
                                                             "milk",
                                                             "leche",
-                                                            "�Y�\u003e",
+                                                            "🥛",
                                                             "White drink"
                                                         ],
                                                         [
                                                             "water",
                                                             "agua",
-                                                            "�Y\u0027�",
+                                                            "💧",
                                                             "Basic drink"
                                                         ],
                                                         [
                                                             "egg",
                                                             "huevo",
-                                                            "�Y�s",
+                                                            "🥚",
                                                             "Comes from a chicken"
                                                         ]
                                                     ],
@@ -2037,31 +2037,31 @@
                                                         [
                                                             "pizza",
                                                             "pizza",
-                                                            "�Y�.",
+                                                            "🍕",
                                                             "Round baked meal"
                                                         ],
                                                         [
                                                             "soup",
                                                             "sopa",
-                                                            "�Y��",
+                                                            "🥣",
                                                             "Liquid food"
                                                         ],
                                                         [
                                                             "salad",
                                                             "ensalada",
-                                                            "�Y�-",
+                                                            "🥗",
                                                             "Mixed vegetables"
                                                         ],
                                                         [
                                                             "sandwich",
                                                             "sandwich",
-                                                            "�Y��",
+                                                            "🥪",
                                                             "Food between bread"
                                                         ],
                                                         [
                                                             "tea",
                                                             "te",
-                                                            "�Y��",
+                                                            "🍵",
                                                             "Warm drink"
                                                         ]
                                                     ],
@@ -2107,31 +2107,31 @@
                                                         [
                                                             "dessert",
                                                             "postre",
-                                                            "�Y��",
+                                                            "🍰",
                                                             "Sweet final dish"
                                                         ],
                                                         [
                                                             "recipe",
                                                             "receta",
-                                                            "�Y\"o",
+                                                            "📜",
                                                             "Instructions for cooking"
                                                         ],
                                                         [
                                                             "cook",
                                                             "cocinar",
-                                                            "�Y\u0027��?��Y��",
+                                                            "👨‍🍳",
                                                             "Prepare food"
                                                         ],
                                                         [
                                                             "delicious",
                                                             "delicioso",
-                                                            "�Y~\u003c",
+                                                            "😋",
                                                             "Very tasty"
                                                         ],
                                                         [
                                                             "breakfast",
                                                             "desayuno",
-                                                            "�Y��",
+                                                            "🍳",
                                                             "First meal of the day"
                                                         ]
                                                     ],
@@ -2184,31 +2184,31 @@
                                                         [
                                                             "sun",
                                                             "sol",
-                                                            "�~?️",
+                                                            "☀️",
                                                             "Daylight star"
                                                         ],
                                                         [
                                                             "moon",
                                                             "luna",
-                                                            "�YOT",
+                                                            "🌙",
                                                             "Seen at night"
                                                         ],
                                                         [
                                                             "cloud",
                                                             "nube",
-                                                            "�~�️",
+                                                            "☁️",
                                                             "Floating in the sky"
                                                         ],
                                                         [
                                                             "rain",
                                                             "lluvia",
-                                                            "�YO�️",
+                                                            "🌧️",
                                                             "Water from the sky"
                                                         ],
                                                         [
                                                             "wind",
                                                             "viento",
-                                                            "�Y\u0027�",
+                                                            "💨",
                                                             "Moving air"
                                                         ]
                                                     ],
@@ -2254,31 +2254,31 @@
                                                         [
                                                             "lion",
                                                             "leon",
-                                                            "�Y��",
+                                                            "🦁",
                                                             "King of the jungle"
                                                         ],
                                                         [
                                                             "turtle",
                                                             "tortuga",
-                                                            "�Y��",
+                                                            "🐢",
                                                             "Animal with a shell"
                                                         ],
                                                         [
                                                             "bee",
                                                             "abeja",
-                                                            "�Y��",
+                                                            "🐝",
                                                             "Makes honey"
                                                         ],
                                                         [
                                                             "fox",
                                                             "zorro",
-                                                            "�Y�S",
+                                                            "🦊",
                                                             "Orange wild animal"
                                                         ],
                                                         [
                                                             "dolphin",
                                                             "delfin",
-                                                            "�Y��",
+                                                            "🐬",
                                                             "Smart sea animal"
                                                         ]
                                                     ],
@@ -2324,31 +2324,31 @@
                                                         [
                                                             "season",
                                                             "estacion",
-                                                            "�Y�,",
+                                                            "🍂",
                                                             "Part of the year"
                                                         ],
                                                         [
                                                             "flower",
                                                             "flor",
-                                                            "�YO�",
+                                                            "🌸",
                                                             "Colorful plant"
                                                         ],
                                                         [
                                                             "tree",
                                                             "arbol",
-                                                            "�YO�",
+                                                            "🌳",
                                                             "Tall plant with trunk"
                                                         ],
                                                         [
                                                             "ocean",
                                                             "oceano",
-                                                            "�YOS",
+                                                            "🌊",
                                                             "Huge salt water"
                                                         ],
                                                         [
                                                             "volcano",
                                                             "volcan",
-                                                            "�YO\u003c",
+                                                            "🌋",
                                                             "Mountain with fire inside"
                                                         ]
                                                     ],
@@ -2401,31 +2401,31 @@
                                                         [
                                                             "game",
                                                             "juego",
-                                                            "�YZ�",
+                                                            "🎮",
                                                             "Activity with rules"
                                                         ],
                                                         [
                                                             "music",
                                                             "musica",
-                                                            "�YZ�",
+                                                            "🎵",
                                                             "Organized sound"
                                                         ],
                                                         [
                                                             "dance",
                                                             "bailar",
-                                                            "�Y\u0027f",
+                                                            "💃",
                                                             "Move to music"
                                                         ],
                                                         [
                                                             "movie",
                                                             "pelicula",
-                                                            "�YZ�",
+                                                            "🎬",
                                                             "Story on screen"
                                                         ],
                                                         [
                                                             "art",
                                                             "arte",
-                                                            "�Y-�️",
+                                                            "🎨",
                                                             "Creative expression"
                                                         ]
                                                     ],
@@ -2471,31 +2471,31 @@
                                                         [
                                                             "soccer",
                                                             "futbol",
-                                                            "�s�",
+                                                            "⚽",
                                                             "Popular field sport"
                                                         ],
                                                         [
                                                             "basketball",
                                                             "baloncesto",
-                                                            "�Y�?",
+                                                            "🏀",
                                                             "Sport with hoops"
                                                         ],
                                                         [
                                                             "tennis",
                                                             "tenis",
-                                                            "�YZ�",
+                                                            "🎾",
                                                             "Sport with rackets"
                                                         ],
                                                         [
                                                             "team",
                                                             "equipo",
-                                                            "�Y�o�Y�\u003e",
+                                                            "🧑‍🤝‍🧑",
                                                             "People working together"
                                                         ],
                                                         [
                                                             "score",
                                                             "marcador",
-                                                            "�Y\"S",
+                                                            "🏆",
                                                             "Points in a game"
                                                         ]
                                                     ],
@@ -2509,7 +2509,7 @@
                                                              [
                                                                  "goal",
                                                                  "gol",
-                                                                 "🥅",
+                                                                 "🎯",
                                                                  "Point scored in a sport"
                                                              ],
                                                              [
@@ -2541,31 +2541,31 @@
                                                         [
                                                             "guitar",
                                                             "guitarra",
-                                                            "�YZ�",
+                                                            "🎸",
                                                             "String instrument"
                                                         ],
                                                         [
                                                             "camera",
                                                             "camara",
-                                                            "�Y\"�",
+                                                            "📷",
                                                             "Takes pictures"
                                                         ],
                                                         [
                                                             "story",
                                                             "historia",
-                                                            "�Y\"s",
+                                                            "📖",
                                                             "Tells events"
                                                         ],
                                                         [
                                                             "festival",
                                                             "festival",
-                                                            "�YZ�",
+                                                            "🎪",
                                                             "Big cultural event"
                                                         ],
                                                         [
                                                             "performance",
                                                             "presentacion",
-                                                            "�YZ�",
+                                                            "🎭",
                                                             "Live artistic act"
                                                         ]
                                                     ],
@@ -2618,19 +2618,19 @@
                                                         [
                                                             "cup",
                                                             "taza",
-                                                            "�~.",
+                                                            "☕",
                                                             "Used for drinking"
                                                         ],
                                                         [
                                                             "plate",
                                                             "plato",
-                                                            "�Y��️",
+                                                            "🍽️",
                                                             "Used for food"
                                                         ],
                                                         [
                                                             "map",
                                                             "mapa",
-                                                            "�Y-�️",
+                                                            "🗺️",
                                                             "Shows places"
                                                         ],
                                                         [
@@ -2642,7 +2642,7 @@
                                                         [
                                                             "lamp",
                                                             "lampara",
-                                                            "�Y\u0027�",
+                                                            "💡",
                                                             "Gives light"
                                                         ]
                                                     ],
@@ -2688,31 +2688,31 @@
                                                         [
                                                             "hammer",
                                                             "martillo",
-                                                            "�Y\"�",
+                                                            "🔨",
                                                             "Hits nails"
                                                         ],
                                                         [
                                                             "rope",
                                                             "cuerda",
-                                                            "�Y��",
+                                                            "🪢",
                                                             "Long thick string"
                                                         ],
                                                         [
                                                             "ladder",
                                                             "escalera",
-                                                            "�Y�o",
+                                                            "🪜",
                                                             "Used to go up"
                                                         ],
                                                         [
                                                             "shovel",
                                                             "pala",
-                                                            "�\u003e�️",
+                                                            "🪏",
                                                             "Used to dig"
                                                         ],
                                                         [
                                                             "brush",
                                                             "cepillo",
-                                                            "�Y-O️",
+                                                            "🖌️",
                                                             "Used to paint or clean"
                                                         ]
                                                     ],
@@ -2758,31 +2758,31 @@
                                                         [
                                                             "metal",
                                                             "metal",
-                                                            "�sT️",
+                                                            "⚙️",
                                                             "Hard shiny material"
                                                         ],
                                                         [
                                                             "wood",
                                                             "madera",
-                                                            "�Y��",
+                                                            "🪵",
                                                             "Material from trees"
                                                         ],
                                                         [
                                                             "glass",
                                                             "vidrio",
-                                                            "�Y�\u003e",
+                                                            "🪟",
                                                             "Transparent material"
                                                         ],
                                                         [
                                                             "button",
                                                             "botón",
-                                                            "�Y\"~",
+                                                            "🔘",
                                                             "Small press control"
                                                         ],
                                                         [
                                                             "machine",
                                                             "máquina",
-                                                            "�Y\u003e�️",
+                                                            "⚙️",
                                                             "Mechanical device"
                                                         ]
                                                     ],
@@ -2835,31 +2835,31 @@
                                                         [
                                                             "phone",
                                                             "telefono",
-                                                            "�Y\"�",
+                                                            "📱",
                                                             "Portable communication device"
                                                         ],
                                                         [
                                                             "laptop",
                                                             "portatil",
-                                                            "�Y\u0027�",
+                                                            "💻",
                                                             "Foldable computer"
                                                         ],
                                                         [
                                                             "screen",
                                                             "pantalla",
-                                                            "�Y-�️",
+                                                            "🖥️",
                                                             "Visual display"
                                                         ],
                                                         [
                                                             "speaker",
                                                             "altavoz",
-                                                            "�Y\"S",
+                                                            "🔊",
                                                             "Makes sound"
                                                         ],
                                                         [
                                                             "keyboard",
                                                             "teclado",
-                                                            "�O�️",
+                                                            "⌨️",
                                                             "Type on it"
                                                         ]
                                                     ],
@@ -2905,31 +2905,31 @@
                                                         [
                                                             "internet",
                                                             "internet",
-                                                            "�YO�",
+                                                            "🌐",
                                                             "Global digital network"
                                                         ],
                                                         [
                                                             "message",
                                                             "mensaje",
-                                                            "�Y\u0027�",
+                                                            "💬",
                                                             "Digital text or note"
                                                         ],
                                                         [
                                                             "video",
                                                             "video",
-                                                            "�YZ�",
+                                                            "🎥",
                                                             "Moving images"
                                                         ],
                                                         [
                                                             "battery",
                                                             "bateria",
-                                                            "�Y\"\u003c",
+                                                            "🔋",
                                                             "Stores energy"
                                                         ],
                                                         [
                                                             "charger",
                                                             "cargador",
-                                                            "�Y\"O",
+                                                            "🔌",
                                                             "Gives power to devices"
                                                         ]
                                                     ],
@@ -2975,31 +2975,31 @@
                                                         [
                                                             "robot",
                                                             "robot",
-                                                            "�Y�-",
+                                                            "🤖",
                                                             "Programmable machine"
                                                         ],
                                                         [
                                                             "data",
                                                             "datos",
-                                                            "�Y\"�",
+                                                            "📊",
                                                             "Digital information"
                                                         ],
                                                         [
                                                             "network",
                                                             "red",
-                                                            "�Y.�️",
+                                                            "🖧",
                                                             "Connected system"
                                                         ],
                                                         [
                                                             "digital",
                                                             "digital",
-                                                            "�Y��",
+                                                            "💻",
                                                             "Based on electronics"
                                                         ],
                                                         [
                                                             "innovation",
                                                             "innovacion",
-                                                            "�Ys?",
+                                                            "🚀",
                                                             "New useful idea"
                                                         ]
                                                     ],
@@ -3052,31 +3052,31 @@
                                                         [
                                                             "big",
                                                             "grande",
-                                                            "�Y\"�",
+                                                            "📦",
                                                             "Large size"
                                                         ],
                                                         [
                                                             "small",
                                                             "pequeño",
-                                                            "�Y\"�",
+                                                            "🔹",
                                                             "Little size"
                                                         ],
                                                         [
                                                             "long",
                                                             "largo",
-                                                            "�Y\"�",
+                                                            "📏",
                                                             "Great length"
                                                         ],
                                                         [
                                                             "short",
                                                             "corto",
-                                                            "�Y\"Z",
+                                                            "📐",
                                                             "Small length"
                                                         ],
                                                         [
                                                             "early",
                                                             "temprano",
-                                                            "�YO.",
+                                                            "⏰",
                                                             "Before expected time"
                                                         ]
                                                     ],
@@ -3122,31 +3122,31 @@
                                                         [
                                                             "clean",
                                                             "limpio",
-                                                            "�Y��",
+                                                            "🧼",
                                                             "Not dirty"
                                                         ],
                                                         [
                                                             "dirty",
                                                             "sucio",
-                                                            "�Y��",
+                                                            "🧽",
                                                             "Not clean"
                                                         ],
                                                         [
                                                             "bright",
                                                             "brillante",
-                                                            "�Y\u0027�",
+                                                            "✨",
                                                             "Full of light"
                                                         ],
                                                         [
                                                             "dark",
                                                             "oscuro",
-                                                            "�YO\u0027",
+                                                            "🌑",
                                                             "Without much light"
                                                         ],
                                                         [
                                                             "quiet",
                                                             "silencioso",
-                                                            "�Y��",
+                                                            "🤫",
                                                             "Low sound"
                                                         ]
                                                     ],
@@ -3192,31 +3192,31 @@
                                                         [
                                                             "compare",
                                                             "comparar",
-                                                            "�s-️",
+                                                            "⚖️",
                                                             "Look at differences and similarities"
                                                         ],
                                                         [
                                                             "reason",
                                                             "razón",
-                                                            "�Y��",
+                                                            "🧠",
                                                             "Cause or explanation"
                                                         ],
                                                         [
                                                             "result",
                                                             "resultado",
-                                                            "�Y��",
+                                                            "🏁",
                                                             "What comes after an action"
                                                         ],
                                                         [
                                                             "inside",
                                                             "dentro",
-                                                            "�Y\"�",
+                                                            "📥",
                                                             "In the interior"
                                                         ],
                                                         [
                                                             "outside",
                                                             "fuera",
-                                                            "�Y\"�",
+                                                            "📤",
                                                             "In the exterior"
                                                         ]
                                                     ],
