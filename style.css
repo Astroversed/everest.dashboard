@@ -8577,7 +8577,7 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     transform: scale(1.05) !important;
     box-shadow:
         0 24px 38px rgba(var(--theme-accent-rgb), 0.24),
-        inset 0 -10px 18px rgba(var(--theme-strong-rgb), 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
         0 0 0 1px rgba(var(--theme-accent-rgb), 0.16) !important;
 }
 
@@ -8597,7 +8597,7 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     outline-offset: 8px !important;
     box-shadow:
         0 26px 42px rgba(var(--theme-accent-rgb), 0.28),
-        inset 0 -10px 18px rgba(var(--theme-strong-rgb), 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
         0 0 0 1px rgba(var(--theme-accent-rgb), 0.16) !important;
 }
 
@@ -9083,10 +9083,16 @@ body[data-theme-mode="dark"] #stageThemeFocus {
 
 .hero-card__actions #heroLearnButton,
 .hero-card__actions #heroAssessButton {
-    border: 1px solid rgba(75, 116, 240, 0.16) !important;
-    background: rgba(75, 116, 240, 0.08) !important;
-    color: var(--color-primary) !important;
-    box-shadow: var(--shadow-sm) !important;
+    min-height: 46px !important;
+    padding: 10px 12px !important;
+    border-radius: 14px !important;
+    border: 1px solid var(--border-color) !important;
+    background: var(--surface-color) !important;
+    color: var(--text-title-color) !important;
+    box-shadow: none !important;
+    display: grid !important;
+    align-content: center !important;
+    gap: 3px !important;
 }
 
 .hero-card__actions #heroLearnButton:hover,
@@ -9109,8 +9115,8 @@ body[data-theme-mode="dark"] #stageThemeFocus {
 
 body[data-theme-mode="dark"] .hero-card__actions #heroLearnButton,
 body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
-    background: rgba(var(--theme-soft-rgb), 0.12) !important;
-    border-color: rgba(var(--theme-soft-rgb), 0.2) !important;
+    background: rgba(12, 20, 35, 0.78) !important;
+    border-color: rgba(var(--theme-soft-rgb), 0.18) !important;
     color: #d6eeff !important;
-    box-shadow: 0 10px 20px rgba(var(--theme-strong-rgb), 0.18) !important;
+    box-shadow: none !important;
 }
