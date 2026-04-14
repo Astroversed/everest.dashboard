@@ -9070,7 +9070,11 @@ body[data-theme-mode="dark"] #stageThemeFocus {
     border-radius: 12px !important;
     font-size: 1rem !important;
     font-weight: 700 !important;
-    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition), color var(--transition) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    justify-content: center !important;
+    text-align: center !important;
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 220ms cubic-bezier(0.22, 1, 0.36, 1), background 220ms cubic-bezier(0.22, 1, 0.36, 1), color 220ms cubic-bezier(0.22, 1, 0.36, 1), filter 220ms cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 .hero-card__actions #heroStartButton {
@@ -9094,12 +9098,33 @@ body[data-theme-mode="dark"] #stageThemeFocus {
     gap: 3px !important;
 }
 
+.hero-card__actions #heroLearnButton::after,
+.hero-card__actions #heroStartButton::after,
+.hero-card__actions #heroAssessButton::after {
+    content: "";
+    position: absolute;
+    inset: -24%;
+    background: linear-gradient(120deg, transparent 18%, rgba(255, 255, 255, 0.24) 50%, transparent 82%);
+    opacity: 0;
+    transform: translateX(-34%) scale(0.92);
+    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), opacity 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+}
+
 .hero-card__actions #heroLearnButton:hover,
 .hero-card__actions #heroAssessButton:hover,
 .hero-card__actions #heroStartButton:hover {
-    transform: translateY(-1px) !important;
+    transform: translateY(-2px) scale(1.015) !important;
     border-color: rgba(75, 116, 240, 0.24) !important;
     box-shadow: 0 12px 22px rgba(75, 116, 240, 0.12) !important;
+    filter: saturate(1.05) !important;
+}
+
+.hero-card__actions #heroLearnButton:hover::after,
+.hero-card__actions #heroStartButton:hover::after,
+.hero-card__actions #heroAssessButton:hover::after {
+    opacity: 1;
+    transform: translateX(0) scale(1);
 }
 
 .hero-card__actions #heroStartButton:hover {
@@ -9109,7 +9134,15 @@ body[data-theme-mode="dark"] #stageThemeFocus {
 .hero-card__actions #heroLearnButton:active,
 .hero-card__actions #heroAssessButton:active,
 .hero-card__actions #heroStartButton:active {
-    transform: scale(0.96) !important;
+    transform: translateY(1px) scale(0.975) !important;
+    filter: saturate(0.98) !important;
+}
+
+.hero-card__actions #heroLearnButton:active::after,
+.hero-card__actions #heroStartButton:active::after,
+.hero-card__actions #heroAssessButton:active::after {
+    opacity: 0.82;
+    transform: translateX(8%) scale(0.98);
 }
 
 body[data-theme-mode="dark"] .hero-card__actions #heroLearnButton,
@@ -9179,10 +9212,14 @@ body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
 .hero-card__actions {
     gap: 12px !important;
     margin-top: 18px !important;
+    justify-content: center !important;
+    align-items: stretch !important;
 }
 
 .hero-card__actions .surface-button {
-    min-width: 126px;
+    min-width: 172px;
+    max-width: 236px;
+    flex: 1 1 0;
 }
 
 .hero-card__status {
