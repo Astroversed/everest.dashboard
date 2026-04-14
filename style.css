@@ -9123,17 +9123,44 @@ body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
 .hero-card {
     gap: 18px !important;
     padding: 26px !important;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-card__copy {
     display: grid;
     align-content: start;
     gap: 8px;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-card .panel-badge {
     width: fit-content;
     padding-inline: 14px;
+}
+
+.hero-card::after {
+    content: "";
+    position: absolute;
+    right: -38px;
+    bottom: -40px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(var(--theme-soft-rgb), 0.18) 0%, rgba(var(--theme-soft-rgb), 0.08) 34%, transparent 70%);
+    pointer-events: none;
+    filter: blur(2px);
+}
+
+.hero-card__copy::after {
+    content: "";
+    width: 82px;
+    height: 10px;
+    margin-top: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(var(--theme-accent-rgb), 0.92), rgba(var(--theme-soft-rgb), 0.65));
+    box-shadow: 0 8px 18px rgba(var(--theme-accent-rgb), 0.12);
 }
 
 .hero-card h2 {
@@ -9161,6 +9188,23 @@ body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
 .hero-card__status {
     width: min(336px, 100%) !important;
     gap: 10px !important;
+    padding: 12px;
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.54), rgba(247, 250, 255, 0.42));
+    border: 1px solid rgba(var(--theme-accent-rgb), 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58), 0 14px 26px rgba(var(--theme-strong-rgb), 0.06);
+    position: relative;
+}
+
+.hero-card__status::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    border-radius: 22px 0 0 22px;
+    background: linear-gradient(180deg, rgba(var(--theme-soft-rgb), 0.78), rgba(var(--theme-accent-rgb), 0.92));
+    opacity: 0.88;
+    pointer-events: none;
 }
 
 .status-pill {
@@ -9229,4 +9273,18 @@ body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
     .status-pill {
         min-height: 62px !important;
     }
+}
+
+body[data-theme-mode="dark"] .hero-card::after {
+    background: radial-gradient(circle, rgba(var(--theme-soft-rgb), 0.14) 0%, rgba(var(--theme-accent-rgb), 0.08) 38%, transparent 72%);
+}
+
+body[data-theme-mode="dark"] .hero-card__copy::after {
+    box-shadow: 0 10px 20px rgba(var(--theme-accent-rgb), 0.16);
+}
+
+body[data-theme-mode="dark"] .hero-card__status {
+    background: linear-gradient(180deg, rgba(12, 20, 35, 0.78), rgba(15, 23, 40, 0.66));
+    border-color: rgba(var(--theme-soft-rgb), 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 16px 28px rgba(var(--theme-strong-rgb), 0.2);
 }
