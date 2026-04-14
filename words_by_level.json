@@ -14,31 +14,31 @@
                                                         [
                                                             "hello",
                                                             "hola",
-                                                            "ðŸ‘‹",
+                                                            "�Y\u0027\u003c",
                                                             "A friendly greeting"
                                                         ],
                                                         [
                                                             "goodbye",
                                                             "adios",
-                                                            "ðŸŒ¤ï¸",
+                                                            "�YO�️",
                                                             "Used when leaving"
                                                         ],
                                                         [
                                                             "please",
                                                             "por favor",
-                                                            "ðŸ™",
+                                                            "�YT�",
                                                             "Polite request word"
                                                         ],
                                                         [
                                                             "thanks",
                                                             "gracias",
-                                                            "âœ¨",
+                                                            "�o�",
                                                             "Used after help"
                                                         ],
                                                         [
                                                             "sorry",
                                                             "lo siento",
-                                                            "ðŸ’¬",
+                                                            "�Y\u0027�",
                                                             "Used to apologize"
                                                         ]
                                                     ],
@@ -84,31 +84,31 @@
                                                         [
                                                             "yes",
                                                             "si",
-                                                            "ðŸ‘",
+                                                            "�Y\u0027�",
                                                             "Positive answer"
                                                         ],
                                                         [
                                                             "no",
                                                             "no",
-                                                            "ðŸ‘Ž",
+                                                            "�Y\u0027Z",
                                                             "Negative answer"
                                                         ],
                                                         [
                                                             "question",
                                                             "pregunta",
-                                                            "â“",
+                                                            "�\"",
                                                             "Something you ask"
                                                         ],
                                                         [
                                                             "answer",
                                                             "respuesta",
-                                                            "ðŸ’¡",
+                                                            "�Y\u0027�",
                                                             "Something you give back"
                                                         ],
                                                         [
                                                             "help",
                                                             "ayuda",
-                                                            "ðŸ›Ÿ",
+                                                            "�Y\u003eY",
                                                             "Support for someone"
                                                         ]
                                                     ],
@@ -154,31 +154,31 @@
                                                         [
                                                             "friend",
                                                             "amigo",
-                                                            "ðŸ¤",
+                                                            "�Y��",
                                                             "A person close to you"
                                                         ],
                                                         [
                                                             "invite",
                                                             "invitar",
-                                                            "ðŸ“©",
+                                                            "�Y\"�",
                                                             "Ask someone to join"
                                                         ],
                                                         [
                                                             "listen",
                                                             "escuchar",
-                                                            "ðŸ‘‚",
+                                                            "�Y\u0027,",
                                                             "Pay attention with your ears"
                                                         ],
                                                         [
                                                             "speak",
                                                             "hablar",
-                                                            "ðŸ—£ï¸",
+                                                            "�Y-�️",
                                                             "Use your voice"
                                                         ],
                                                         [
                                                             "repeat",
                                                             "repetir",
-                                                            "ðŸ”",
+                                                            "�Y\"�",
                                                             "Say it again"
                                                         ]
                                                     ],
@@ -231,31 +231,31 @@
                                                         [
                                                             "run",
                                                             "correr",
-                                                            "ðŸƒ",
+                                                            "�Y�f",
                                                             "Move quickly"
                                                         ],
                                                         [
                                                             "walk",
                                                             "caminar",
-                                                            "ðŸš¶",
+                                                            "�Ys�",
                                                             "Move step by step"
                                                         ],
                                                         [
                                                             "eat",
                                                             "comer",
-                                                            "ðŸ½ï¸",
+                                                            "�Y��️",
                                                             "Have food"
                                                         ],
                                                         [
                                                             "read",
                                                             "leer",
-                                                            "ðŸ“–",
+                                                            "�Y\"-",
                                                             "Look at words"
                                                         ],
                                                         [
                                                             "write",
                                                             "escribir",
-                                                            "âœï¸",
+                                                            "�o�️",
                                                             "Make words on paper"
                                                         ]
                                                     ],
@@ -301,31 +301,31 @@
                                                         [
                                                             "big",
                                                             "grande",
-                                                            "ðŸ“¦",
+                                                            "�Y\"�",
                                                             "Large in size"
                                                         ],
                                                         [
                                                             "small",
-                                                            "pequeÃ±o",
-                                                            "ðŸ”¹",
+                                                            "pequeño",
+                                                            "�Y\"�",
                                                             "Little in size"
                                                         ],
                                                         [
                                                             "fast",
-                                                            "rÃ¡pido",
-                                                            "âš¡",
+                                                            "rápido",
+                                                            "�s�",
                                                             "High speed"
                                                         ],
                                                         [
                                                             "slow",
                                                             "lento",
-                                                            "ðŸŒ",
+                                                            "�Y�O",
                                                             "Low speed"
                                                         ],
                                                         [
                                                             "happy",
                                                             "feliz",
-                                                            "ðŸ˜„",
+                                                            "�Y~\"",
                                                             "Feeling good"
                                                         ]
                                                     ],
@@ -371,31 +371,31 @@
                                                         [
                                                             "before",
                                                             "antes",
-                                                            "Ã¢ÂÂ®Ã¯Â¸Â",
+                                                            "⏮️",
                                                             "Earlier in time"
                                                         ],
                                                         [
                                                             "after",
                                                             "despues",
-                                                            "Ã¢ÂÂ­Ã¯Â¸Â",
+                                                            "⏭️",
                                                             "Later in time"
                                                         ],
                                                         [
                                                             "more",
                                                             "mas",
-                                                            "âž•",
+                                                            "�z.",
                                                             "A greater amount"
                                                         ],
                                                         [
                                                             "less",
                                                             "menos",
-                                                            "âž–",
+                                                            "�z-",
                                                             "A smaller amount"
                                                         ],
                                                         [
                                                             "same",
                                                             "igual",
-                                                            "ðŸªž",
+                                                            "�Y�z",
                                                             "Not different"
                                                         ]
                                                     ],
@@ -448,31 +448,31 @@
                                                         [
                                                             "hand",
                                                             "mano",
-                                                            "âœ‹",
+                                                            "�o\u003c",
                                                             "Used to hold things"
                                                         ],
                                                         [
                                                             "eye",
                                                             "ojo",
-                                                            "ðŸ‘ï¸",
+                                                            "�Y\u0027�️",
                                                             "Used to see"
                                                         ],
                                                         [
                                                             "face",
                                                             "cara",
-                                                            "ðŸ™‚",
+                                                            "�YT,",
                                                             "Front part of the head"
                                                         ],
                                                         [
                                                             "mouth",
                                                             "boca",
-                                                            "ðŸ‘„",
+                                                            "�Y\u0027\"",
                                                             "Used to speak and eat"
                                                         ],
                                                         [
                                                             "hair",
                                                             "cabello",
-                                                            "ðŸ’‡",
+                                                            "�Y\u0027?",
                                                             "It grows on your head"
                                                         ]
                                                     ],
@@ -518,31 +518,31 @@
                                                         [
                                                             "happy",
                                                             "feliz",
-                                                            "ðŸ˜Š",
+                                                            "�Y~S",
                                                             "Full of joy"
                                                         ],
                                                         [
                                                             "sad",
                                                             "triste",
-                                                            "ðŸ˜¢",
+                                                            "�Y~�",
                                                             "Feeling low"
                                                         ],
                                                         [
                                                             "angry",
                                                             "enojado",
-                                                            "ðŸ˜ ",
+                                                            "�Y~�",
                                                             "Feeling mad"
                                                         ],
                                                         [
                                                             "tired",
                                                             "cansado",
-                                                            "ðŸ˜´",
+                                                            "�Y~�",
                                                             "Without energy"
                                                         ],
                                                         [
                                                             "hungry",
                                                             "hambriento",
-                                                            "ðŸ½ï¸",
+                                                            "�Y��️",
                                                             "You need food"
                                                         ]
                                                     ],
@@ -665,31 +665,31 @@
                                                         [
                                                             "bed",
                                                             "cama",
-                                                            "ðŸ›ï¸",
+                                                            "�Y\u003e�️",
                                                             "You sleep here"
                                                         ],
                                                         [
                                                             "house",
                                                             "casa",
-                                                            "ðŸ ",
+                                                            "�Y��",
                                                             "Place where you live"
                                                         ],
                                                         [
                                                             "door",
                                                             "puerta",
-                                                            "ðŸšª",
+                                                            "�Ys�",
                                                             "Entry to a room"
                                                         ],
                                                         [
                                                             "chair",
                                                             "silla",
-                                                            "ðŸª‘",
+                                                            "�Y�\u0027",
                                                             "You sit on it"
                                                         ],
                                                         [
                                                             "table",
                                                             "mesa",
-                                                            "ðŸª‘",
+                                                            "�Y�\u0027",
                                                             "You place things on it"
                                                         ]
                                                     ],
@@ -734,32 +734,32 @@
                                           "terms":  [
                                                         [
                                                             "birthday",
-                                                            "cumpleaÃ±os",
-                                                            "ðŸŽ‰",
+                                                            "cumpleaños",
+                                                            "�YZ?",
                                                             "Celebration for age"
                                                         ],
                                                         [
                                                             "party",
                                                             "fiesta",
-                                                            "ðŸ¥³",
+                                                            "�Y��",
                                                             "A social event"
                                                         ],
                                                         [
                                                             "laugh",
-                                                            "reÃ­r",
-                                                            "ðŸ˜‚",
+                                                            "reír",
+                                                            "�Y~,",
                                                             "Sound of joy"
                                                         ],
                                                         [
                                                             "share",
                                                             "compartir",
-                                                            "ðŸ¤²",
+                                                            "�Y��",
                                                             "Give part to others"
                                                         ],
                                                         [
                                                             "weekend",
                                                             "fin de semana",
-                                                            "ðŸ—“ï¸",
+                                                            "�Y-\"️",
                                                             "Saturday and Sunday"
                                                         ]
                                                     ],
@@ -805,31 +805,31 @@
                                                         [
                                                             "breakfast",
                                                             "desayuno",
-                                                            "ðŸ³",
+                                                            "�Y��",
                                                             "Morning meal"
                                                         ],
                                                         [
                                                             "dinner",
                                                             "cena",
-                                                            "ðŸ²",
+                                                            "�Y��",
                                                             "Evening meal"
                                                         ],
                                                         [
                                                             "visit",
                                                             "visitar",
-                                                            "ðŸ¡",
+                                                            "�Y��",
                                                             "Go to see someone"
                                                         ],
                                                         [
                                                             "hobby",
                                                             "pasatiempo",
-                                                            "ðŸŽ¨",
+                                                            "�YZ�",
                                                             "Fun activity"
                                                         ],
                                                         [
                                                             "neighbor",
                                                             "vecino",
-                                                            "ðŸ˜ï¸",
+                                                            "�Y�~️",
                                                             "Person living nearby"
                                                         ]
                                                     ],
@@ -882,31 +882,31 @@
                                                         [
                                                             "book",
                                                             "libro",
-                                                            "ðŸ“š",
+                                                            "�Y\"s",
                                                             "You read it"
                                                         ],
                                                         [
                                                             "pencil",
                                                             "lapiz",
-                                                            "âœï¸",
+                                                            "�o�️",
                                                             "Used to write"
                                                         ],
                                                         [
                                                             "ruler",
                                                             "regla",
-                                                            "ðŸ“",
+                                                            "�Y\"�",
                                                             "Used to measure"
                                                         ],
                                                         [
                                                             "school",
                                                             "escuela",
-                                                            "ðŸ«",
+                                                            "�Y��",
                                                             "Place to learn"
                                                         ],
                                                         [
                                                             "student",
                                                             "estudiante",
-                                                            "ðŸ§‘â€ðŸŽ“",
+                                                            "�Y�\u0027�?��YZ\"",
                                                             "Person who studies"
                                                         ]
                                                     ],
@@ -952,31 +952,31 @@
                                                         [
                                                             "teacher",
                                                             "maestro",
-                                                            "ðŸ‘©â€ðŸ«",
+                                                            "�Y\u0027��?��Y��",
                                                             "Teaches students"
                                                         ],
                                                         [
                                                             "doctor",
                                                             "doctor",
-                                                            "ðŸ©º",
+                                                            "�Y��",
                                                             "Treats people"
                                                         ],
                                                         [
                                                             "nurse",
                                                             "enfermera",
-                                                            "ðŸ’‰",
+                                                            "�Y\u0027?",
                                                             "Cares for patients"
                                                         ],
                                                         [
                                                             "chef",
                                                             "chef",
-                                                            "ðŸ‘¨â€ðŸ³",
+                                                            "�Y\u0027��?��Y��",
                                                             "Cooks professionally"
                                                         ],
                                                         [
                                                             "pilot",
                                                             "piloto",
-                                                            "âœˆï¸",
+                                                            "�o^️",
                                                             "Flies planes"
                                                         ]
                                                     ],
@@ -1022,31 +1022,31 @@
                                                         [
                                                             "project",
                                                             "proyecto",
-                                                            "ðŸ“‚",
+                                                            "�Y\",",
                                                             "A planned task"
                                                         ],
                                                         [
                                                             "office",
                                                             "oficina",
-                                                            "ðŸ¢",
+                                                            "�Y��",
                                                             "Place for work"
                                                         ],
                                                         [
                                                             "leader",
                                                             "lider",
-                                                            "ðŸ§­",
+                                                            "�Y��",
                                                             "Guides a team"
                                                         ],
                                                         [
                                                             "report",
                                                             "reporte",
-                                                            "ðŸ“",
+                                                            "�Y\"�",
                                                             "Formal information text"
                                                         ],
                                                         [
                                                             "skill",
                                                             "habilidad",
-                                                            "ðŸ› ï¸",
+                                                            "�Y\u003e�️",
                                                             "Ability you develop"
                                                         ]
                                                     ],
@@ -1099,31 +1099,31 @@
                                                         [
                                                             "house",
                                                             "casa",
-                                                            "ðŸ ",
+                                                            "�Y��",
                                                             "Your living place"
                                                         ],
                                                         [
                                                             "school",
                                                             "escuela",
-                                                            "ðŸ«",
+                                                            "�Y��",
                                                             "Learning place"
                                                         ],
                                                         [
                                                             "hospital",
                                                             "hospital",
-                                                            "ðŸ¥",
+                                                            "�Y��",
                                                             "Medical building"
                                                         ],
                                                         [
                                                             "park",
                                                             "parque",
-                                                            "ðŸŒ³",
+                                                            "�YO�",
                                                             "Open green place"
                                                         ],
                                                         [
                                                             "store",
                                                             "tienda",
-                                                            "ðŸª",
+                                                            "�Y��",
                                                             "Place to buy things"
                                                         ]
                                                     ],
@@ -1168,32 +1168,32 @@
                                           "terms":  [
                                                         [
                                                             "river",
-                                                            "rÃ­o",
-                                                            "ðŸžï¸",
+                                                            "río",
+                                                            "�Y�z️",
                                                             "Long moving water"
                                                         ],
                                                         [
                                                             "beach",
                                                             "playa",
-                                                            "ðŸ–ï¸",
+                                                            "�Y�-️",
                                                             "Sand by the sea"
                                                         ],
                                                         [
                                                             "mountain",
-                                                            "montaÃ±a",
-                                                            "â›°ï¸",
+                                                            "montaña",
+                                                            "�\u003e�️",
                                                             "Very high land"
                                                         ],
                                                         [
                                                             "forest",
                                                             "bosque",
-                                                            "ðŸŒ²",
+                                                            "�YO�",
                                                             "Many trees together"
                                                         ],
                                                         [
                                                             "lake",
                                                             "lago",
-                                                            "ðŸŒŠ",
+                                                            "�YOS",
                                                             "Large still water"
                                                         ]
                                                     ],
@@ -1239,31 +1239,31 @@
                                                         [
                                                             "country",
                                                             "pais",
-                                                            "ðŸŒ",
+                                                            "�YO�",
                                                             "A nation"
                                                         ],
                                                         [
                                                             "city",
                                                             "ciudad",
-                                                            "ðŸ™ï¸",
+                                                            "�Y�T️",
                                                             "Large urban place"
                                                         ],
                                                         [
                                                             "village",
                                                             "pueblo",
-                                                            "ðŸ˜ï¸",
+                                                            "�Y�~️",
                                                             "Small community"
                                                         ],
                                                         [
                                                             "market",
                                                             "mercado",
-                                                            "ðŸ›’",
+                                                            "�Y\u003e\u0027",
                                                             "Place to trade goods"
                                                         ],
                                                         [
                                                             "station",
                                                             "estacion",
-                                                            "ðŸš‰",
+                                                            "�Ys?",
                                                             "Transport stop"
                                                         ]
                                                     ],
@@ -1316,31 +1316,31 @@
                                                         [
                                                             "run",
                                                             "correr",
-                                                            "ðŸƒ",
+                                                            "�Y�f",
                                                             "Move fast"
                                                         ],
                                                         [
                                                             "climb",
                                                             "subir",
-                                                            "ðŸ§—",
+                                                            "�Y�-",
                                                             "Go upward"
                                                         ],
                                                         [
                                                             "jump",
                                                             "saltar",
-                                                            "ðŸ¦˜",
+                                                            "�Y�~",
                                                             "Push off the ground"
                                                         ],
                                                         [
                                                             "turn",
                                                             "girar",
-                                                            "Ã¢â€ Â©Ã¯Â¸Â",
+                                                            "�???�️",
                                                             "Change direction"
                                                         ],
                                                         [
                                                             "stop",
                                                             "parar",
-                                                            "ðŸ›‘",
+                                                            "�Y\u003e\u0027",
                                                             "Do not continue"
                                                         ]
                                                     ],
@@ -1386,31 +1386,31 @@
                                                         [
                                                             "car",
                                                             "carro",
-                                                            "ðŸš—",
+                                                            "�Ys-",
                                                             "Road vehicle"
                                                         ],
                                                         [
                                                             "bus",
                                                             "autobus",
-                                                            "ðŸšŒ",
+                                                            "�YsO",
                                                             "Carries many people"
                                                         ],
                                                         [
                                                             "train",
                                                             "tren",
-                                                            "ðŸš†",
+                                                            "�Ys?",
                                                             "Runs on rails"
                                                         ],
                                                         [
                                                             "bicycle",
                                                             "bicicleta",
-                                                            "ðŸš²",
+                                                            "�Ys�",
                                                             "Two wheels"
                                                         ],
                                                         [
                                                             "airplane",
                                                             "avion",
-                                                            "âœˆï¸",
+                                                            "�o^️",
                                                             "Flies in the sky"
                                                         ]
                                                     ],
@@ -1456,31 +1456,31 @@
                                                         [
                                                             "map",
                                                             "mapa",
-                                                            "ðŸ—ºï¸",
+                                                            "�Y-�️",
                                                             "Shows a route"
                                                         ],
                                                         [
                                                             "ticket",
                                                             "boleto",
-                                                            "ðŸŽ«",
+                                                            "�YZ�",
                                                             "Needed to travel"
                                                         ],
                                                         [
                                                             "driver",
                                                             "conductor",
-                                                            "ðŸ§‘â€âœˆï¸",
+                                                            "�Y�\u0027�?��o^️",
                                                             "Controls a vehicle"
                                                         ],
                                                         [
                                                             "travel",
                                                             "viajar",
-                                                            "ðŸ§³",
+                                                            "�Y��",
                                                             "Go to another place"
                                                         ],
                                                         [
                                                             "destination",
                                                             "destino",
-                                                            "ðŸ“",
+                                                            "�Y\"�",
                                                             "Where you are going"
                                                         ]
                                                     ],
@@ -1533,31 +1533,31 @@
                                                         [
                                                             "bag",
                                                             "bolso",
-                                                            "ðŸ‘œ",
+                                                            "�Y\u0027o",
                                                             "Carries things"
                                                         ],
                                                         [
                                                             "key",
                                                             "llave",
-                                                            "ðŸ”‘",
+                                                            "�Y\"\u0027",
                                                             "Opens a lock"
                                                         ],
                                                         [
                                                             "bottle",
                                                             "botella",
-                                                            "ðŸ«™",
+                                                            "�Y�T",
                                                             "Holds liquids"
                                                         ],
                                                         [
                                                             "basket",
                                                             "canasta",
-                                                            "ðŸ§º",
+                                                            "�Y��",
                                                             "Open container"
                                                         ],
                                                         [
                                                             "soap",
                                                             "jabon",
-                                                            "ðŸ§¼",
+                                                            "�Y��",
                                                             "Used to wash"
                                                         ]
                                                     ],
@@ -1603,31 +1603,31 @@
                                                         [
                                                             "money",
                                                             "dinero",
-                                                            "ðŸ’µ",
+                                                            "�Y\u0027�",
                                                             "Used to pay"
                                                         ],
                                                         [
                                                             "price",
                                                             "precio",
-                                                            "ðŸ·ï¸",
+                                                            "�Y��️",
                                                             "Cost of something"
                                                         ],
                                                         [
                                                             "buy",
                                                             "comprar",
-                                                            "ðŸ›ï¸",
+                                                            "�Y\u003e�️",
                                                             "Get by paying"
                                                         ],
                                                         [
                                                             "sell",
                                                             "vender",
-                                                            "ðŸ’¼",
+                                                            "�Y\u0027�",
                                                             "Offer for money"
                                                         ],
                                                         [
                                                             "receipt",
                                                             "recibo",
-                                                            "ðŸ§¾",
+                                                            "�Y��",
                                                             "Paper after payment"
                                                         ]
                                                     ],
@@ -1673,31 +1673,31 @@
                                                         [
                                                             "towel",
                                                             "toalla",
-                                                            "ðŸ§»",
+                                                            "�Y��",
                                                             "Used to dry"
                                                         ],
                                                         [
                                                             "clock",
                                                             "reloj",
-                                                            "ðŸ•’",
+                                                            "�Y.\u0027",
                                                             "Shows time"
                                                         ],
                                                         [
                                                             "package",
                                                             "paquete",
-                                                            "ðŸ“¦",
+                                                            "�Y\"�",
                                                             "Wrapped item"
                                                         ],
                                                         [
                                                             "breakfast",
                                                             "desayuno",
-                                                            "ðŸ¥",
+                                                            "�Y��",
                                                             "Morning meal"
                                                         ],
                                                         [
                                                             "snack",
                                                             "merienda",
-                                                            "ðŸª",
+                                                            "�Y��",
                                                             "Small food between meals"
                                                         ]
                                                     ],
@@ -1750,31 +1750,31 @@
                                                         [
                                                             "shirt",
                                                             "camisa",
-                                                            "ðŸ‘•",
+                                                            "�Y\u0027.",
                                                             "Upper body clothing"
                                                         ],
                                                         [
                                                             "pants",
                                                             "pantalones",
-                                                            "ðŸ‘–",
+                                                            "�Y\u0027-",
                                                             "Clothing for legs"
                                                         ],
                                                         [
                                                             "hat",
                                                             "sombrero",
-                                                            "ðŸŽ©",
+                                                            "�YZ�",
                                                             "Worn on the head"
                                                         ],
                                                         [
                                                             "shoes",
                                                             "zapatos",
-                                                            "ðŸ‘Ÿ",
+                                                            "�Y\u0027Y",
                                                             "Worn on feet"
                                                         ],
                                                         [
                                                             "dress",
                                                             "vestido",
-                                                            "ðŸ‘—",
+                                                            "�Y\u0027-",
                                                             "One-piece clothing"
                                                         ]
                                                     ],
@@ -1820,31 +1820,31 @@
                                                         [
                                                             "color",
                                                             "color",
-                                                            "ðŸŽ¨",
+                                                            "�YZ�",
                                                             "Visual tone"
                                                         ],
                                                         [
                                                             "pattern",
                                                             "patron",
-                                                            "ðŸŒ€",
+                                                            "�YO?",
                                                             "Repeated design"
                                                         ],
                                                         [
                                                             "soft",
                                                             "suave",
-                                                            "ðŸ§¶",
+                                                            "�Y��",
                                                             "Not rough"
                                                         ],
                                                         [
                                                             "elegant",
                                                             "elegante",
-                                                            "ðŸ’Ž",
+                                                            "�Y\u0027Z",
                                                             "Stylish and refined"
                                                         ],
                                                         [
                                                             "casual",
                                                             "casual",
-                                                            "ðŸ§¢",
+                                                            "�Y��",
                                                             "Relaxed style"
                                                         ]
                                                     ],
@@ -1890,31 +1890,31 @@
                                                         [
                                                             "jacket",
                                                             "chaqueta",
-                                                            "ðŸ§¥",
+                                                            "�Y��",
                                                             "Outer clothing layer"
                                                         ],
                                                         [
                                                             "scarf",
                                                             "bufanda",
-                                                            "ðŸ§£",
+                                                            "�Y��",
                                                             "Worn around the neck"
                                                         ],
                                                         [
                                                             "belt",
                                                             "cinturon",
-                                                            "ðŸª¢",
+                                                            "�Y��",
                                                             "Holds clothes in place"
                                                         ],
                                                         [
                                                             "outfit",
                                                             "atuendo",
-                                                            "âœ¨",
+                                                            "�o�",
                                                             "Complete set of clothes"
                                                         ],
                                                         [
                                                             "favorite",
                                                             "favorito",
-                                                            "Ã¢Â­Â",
+                                                            "⭐",
                                                             "The one you like most"
                                                         ]
                                                     ],
@@ -1967,31 +1967,31 @@
                                                         [
                                                             "apple",
                                                             "manzana",
-                                                            "ðŸŽ",
+                                                            "�Y�Z",
                                                             "Red or green fruit"
                                                         ],
                                                         [
                                                             "bread",
                                                             "pan",
-                                                            "ðŸž",
+                                                            "�Y�z",
                                                             "Baked food"
                                                         ],
                                                         [
                                                             "milk",
                                                             "leche",
-                                                            "ðŸ¥›",
+                                                            "�Y�\u003e",
                                                             "White drink"
                                                         ],
                                                         [
                                                             "water",
                                                             "agua",
-                                                            "ðŸ’§",
+                                                            "�Y\u0027�",
                                                             "Basic drink"
                                                         ],
                                                         [
                                                             "egg",
                                                             "huevo",
-                                                            "ðŸ¥š",
+                                                            "�Y�s",
                                                             "Comes from a chicken"
                                                         ]
                                                     ],
@@ -2037,31 +2037,31 @@
                                                         [
                                                             "pizza",
                                                             "pizza",
-                                                            "ðŸ•",
+                                                            "�Y�.",
                                                             "Round baked meal"
                                                         ],
                                                         [
                                                             "soup",
                                                             "sopa",
-                                                            "ðŸ¥£",
+                                                            "�Y��",
                                                             "Liquid food"
                                                         ],
                                                         [
                                                             "salad",
                                                             "ensalada",
-                                                            "ðŸ¥—",
+                                                            "�Y�-",
                                                             "Mixed vegetables"
                                                         ],
                                                         [
                                                             "sandwich",
                                                             "sandwich",
-                                                            "ðŸ¥ª",
+                                                            "�Y��",
                                                             "Food between bread"
                                                         ],
                                                         [
                                                             "tea",
                                                             "te",
-                                                            "ðŸµ",
+                                                            "�Y��",
                                                             "Warm drink"
                                                         ]
                                                     ],
@@ -2107,31 +2107,31 @@
                                                         [
                                                             "dessert",
                                                             "postre",
-                                                            "ðŸ°",
+                                                            "�Y��",
                                                             "Sweet final dish"
                                                         ],
                                                         [
                                                             "recipe",
                                                             "receta",
-                                                            "ðŸ“œ",
+                                                            "�Y\"o",
                                                             "Instructions for cooking"
                                                         ],
                                                         [
                                                             "cook",
                                                             "cocinar",
-                                                            "ðŸ‘¨â€ðŸ³",
+                                                            "�Y\u0027��?��Y��",
                                                             "Prepare food"
                                                         ],
                                                         [
                                                             "delicious",
                                                             "delicioso",
-                                                            "ðŸ˜‹",
+                                                            "�Y~\u003c",
                                                             "Very tasty"
                                                         ],
                                                         [
                                                             "breakfast",
                                                             "desayuno",
-                                                            "ðŸ³",
+                                                            "�Y��",
                                                             "First meal of the day"
                                                         ]
                                                     ],
@@ -2184,31 +2184,31 @@
                                                         [
                                                             "sun",
                                                             "sol",
-                                                            "â˜€ï¸",
+                                                            "�~?️",
                                                             "Daylight star"
                                                         ],
                                                         [
                                                             "moon",
                                                             "luna",
-                                                            "ðŸŒ™",
+                                                            "�YOT",
                                                             "Seen at night"
                                                         ],
                                                         [
                                                             "cloud",
                                                             "nube",
-                                                            "â˜ï¸",
+                                                            "�~�️",
                                                             "Floating in the sky"
                                                         ],
                                                         [
                                                             "rain",
                                                             "lluvia",
-                                                            "ðŸŒ§ï¸",
+                                                            "�YO�️",
                                                             "Water from the sky"
                                                         ],
                                                         [
                                                             "wind",
                                                             "viento",
-                                                            "ðŸ’¨",
+                                                            "�Y\u0027�",
                                                             "Moving air"
                                                         ]
                                                     ],
@@ -2254,31 +2254,31 @@
                                                         [
                                                             "lion",
                                                             "leon",
-                                                            "ðŸ¦",
+                                                            "�Y��",
                                                             "King of the jungle"
                                                         ],
                                                         [
                                                             "turtle",
                                                             "tortuga",
-                                                            "ðŸ¢",
+                                                            "�Y��",
                                                             "Animal with a shell"
                                                         ],
                                                         [
                                                             "bee",
                                                             "abeja",
-                                                            "ðŸ",
+                                                            "�Y��",
                                                             "Makes honey"
                                                         ],
                                                         [
                                                             "fox",
                                                             "zorro",
-                                                            "ðŸ¦Š",
+                                                            "�Y�S",
                                                             "Orange wild animal"
                                                         ],
                                                         [
                                                             "dolphin",
                                                             "delfin",
-                                                            "ðŸ¬",
+                                                            "�Y��",
                                                             "Smart sea animal"
                                                         ]
                                                     ],
@@ -2324,31 +2324,31 @@
                                                         [
                                                             "season",
                                                             "estacion",
-                                                            "ðŸ‚",
+                                                            "�Y�,",
                                                             "Part of the year"
                                                         ],
                                                         [
                                                             "flower",
                                                             "flor",
-                                                            "ðŸŒ¸",
+                                                            "�YO�",
                                                             "Colorful plant"
                                                         ],
                                                         [
                                                             "tree",
                                                             "arbol",
-                                                            "ðŸŒ³",
+                                                            "�YO�",
                                                             "Tall plant with trunk"
                                                         ],
                                                         [
                                                             "ocean",
                                                             "oceano",
-                                                            "ðŸŒŠ",
+                                                            "�YOS",
                                                             "Huge salt water"
                                                         ],
                                                         [
                                                             "volcano",
                                                             "volcan",
-                                                            "ðŸŒ‹",
+                                                            "�YO\u003c",
                                                             "Mountain with fire inside"
                                                         ]
                                                     ],
@@ -2401,31 +2401,31 @@
                                                         [
                                                             "game",
                                                             "juego",
-                                                            "ðŸŽ®",
+                                                            "�YZ�",
                                                             "Activity with rules"
                                                         ],
                                                         [
                                                             "music",
                                                             "musica",
-                                                            "ðŸŽµ",
+                                                            "�YZ�",
                                                             "Organized sound"
                                                         ],
                                                         [
                                                             "dance",
                                                             "bailar",
-                                                            "ðŸ’ƒ",
+                                                            "�Y\u0027f",
                                                             "Move to music"
                                                         ],
                                                         [
                                                             "movie",
                                                             "pelicula",
-                                                            "ðŸŽ¬",
+                                                            "�YZ�",
                                                             "Story on screen"
                                                         ],
                                                         [
                                                             "art",
                                                             "arte",
-                                                            "ðŸ–¼ï¸",
+                                                            "�Y-�️",
                                                             "Creative expression"
                                                         ]
                                                     ],
@@ -2471,31 +2471,31 @@
                                                         [
                                                             "soccer",
                                                             "futbol",
-                                                            "âš½",
+                                                            "�s�",
                                                             "Popular field sport"
                                                         ],
                                                         [
                                                             "basketball",
                                                             "baloncesto",
-                                                            "ðŸ€",
+                                                            "�Y�?",
                                                             "Sport with hoops"
                                                         ],
                                                         [
                                                             "tennis",
                                                             "tenis",
-                                                            "ðŸŽ¾",
+                                                            "�YZ�",
                                                             "Sport with rackets"
                                                         ],
                                                         [
                                                             "team",
                                                             "equipo",
-                                                            "ðŸ¤œðŸ¤›",
+                                                            "�Y�o�Y�\u003e",
                                                             "People working together"
                                                         ],
                                                         [
                                                             "score",
                                                             "marcador",
-                                                            "ðŸ“Š",
+                                                            "�Y\"S",
                                                             "Points in a game"
                                                         ]
                                                     ],
@@ -2541,31 +2541,31 @@
                                                         [
                                                             "guitar",
                                                             "guitarra",
-                                                            "ðŸŽ¸",
+                                                            "�YZ�",
                                                             "String instrument"
                                                         ],
                                                         [
                                                             "camera",
                                                             "camara",
-                                                            "ðŸ“·",
+                                                            "�Y\"�",
                                                             "Takes pictures"
                                                         ],
                                                         [
                                                             "story",
                                                             "historia",
-                                                            "ðŸ“š",
+                                                            "�Y\"s",
                                                             "Tells events"
                                                         ],
                                                         [
                                                             "festival",
                                                             "festival",
-                                                            "ðŸŽª",
+                                                            "�YZ�",
                                                             "Big cultural event"
                                                         ],
                                                         [
                                                             "performance",
                                                             "presentacion",
-                                                            "ðŸŽ¤",
+                                                            "�YZ�",
                                                             "Live artistic act"
                                                         ]
                                                     ],
@@ -2618,31 +2618,31 @@
                                                         [
                                                             "cup",
                                                             "taza",
-                                                            "â˜•",
+                                                            "�~.",
                                                             "Used for drinking"
                                                         ],
                                                         [
                                                             "plate",
                                                             "plato",
-                                                            "ðŸ½ï¸",
+                                                            "�Y��️",
                                                             "Used for food"
                                                         ],
                                                         [
                                                             "map",
                                                             "mapa",
-                                                            "ðŸ—ºï¸",
+                                                            "�Y-�️",
                                                             "Shows places"
                                                         ],
                                                         [
                                                             "clock",
                                                             "reloj",
-                                                            "Ã¢ÂÂ°",
+                                                            "⏰",
                                                             "Shows time"
                                                         ],
                                                         [
                                                             "lamp",
                                                             "lampara",
-                                                            "ðŸ’¡",
+                                                            "�Y\u0027�",
                                                             "Gives light"
                                                         ]
                                                     ],
@@ -2688,31 +2688,31 @@
                                                         [
                                                             "hammer",
                                                             "martillo",
-                                                            "ðŸ”¨",
+                                                            "�Y\"�",
                                                             "Hits nails"
                                                         ],
                                                         [
                                                             "rope",
                                                             "cuerda",
-                                                            "ðŸª¢",
+                                                            "�Y��",
                                                             "Long thick string"
                                                         ],
                                                         [
                                                             "ladder",
                                                             "escalera",
-                                                            "ðŸªœ",
+                                                            "�Y�o",
                                                             "Used to go up"
                                                         ],
                                                         [
                                                             "shovel",
                                                             "pala",
-                                                            "â›ï¸",
+                                                            "�\u003e�️",
                                                             "Used to dig"
                                                         ],
                                                         [
                                                             "brush",
                                                             "cepillo",
-                                                            "ðŸ–Œï¸",
+                                                            "�Y-O️",
                                                             "Used to paint or clean"
                                                         ]
                                                     ],
@@ -2758,31 +2758,31 @@
                                                         [
                                                             "metal",
                                                             "metal",
-                                                            "âš™ï¸",
+                                                            "�sT️",
                                                             "Hard shiny material"
                                                         ],
                                                         [
                                                             "wood",
                                                             "madera",
-                                                            "ðŸªµ",
+                                                            "�Y��",
                                                             "Material from trees"
                                                         ],
                                                         [
                                                             "glass",
                                                             "vidrio",
-                                                            "ðŸ¥›",
+                                                            "�Y�\u003e",
                                                             "Transparent material"
                                                         ],
                                                         [
                                                             "button",
-                                                            "botÃ³n",
-                                                            "ðŸ”˜",
+                                                            "botón",
+                                                            "�Y\"~",
                                                             "Small press control"
                                                         ],
                                                         [
                                                             "machine",
-                                                            "mÃ¡quina",
-                                                            "ðŸ› ï¸",
+                                                            "máquina",
+                                                            "�Y\u003e�️",
                                                             "Mechanical device"
                                                         ]
                                                     ],
@@ -2835,31 +2835,31 @@
                                                         [
                                                             "phone",
                                                             "telefono",
-                                                            "ðŸ“±",
+                                                            "�Y\"�",
                                                             "Portable communication device"
                                                         ],
                                                         [
                                                             "laptop",
                                                             "portatil",
-                                                            "ðŸ’»",
+                                                            "�Y\u0027�",
                                                             "Foldable computer"
                                                         ],
                                                         [
                                                             "screen",
                                                             "pantalla",
-                                                            "ðŸ–¥ï¸",
+                                                            "�Y-�️",
                                                             "Visual display"
                                                         ],
                                                         [
                                                             "speaker",
                                                             "altavoz",
-                                                            "ðŸ”Š",
+                                                            "�Y\"S",
                                                             "Makes sound"
                                                         ],
                                                         [
                                                             "keyboard",
                                                             "teclado",
-                                                            "âŒ¨ï¸",
+                                                            "�O�️",
                                                             "Type on it"
                                                         ]
                                                     ],
@@ -2905,31 +2905,31 @@
                                                         [
                                                             "internet",
                                                             "internet",
-                                                            "ðŸŒ",
+                                                            "�YO�",
                                                             "Global digital network"
                                                         ],
                                                         [
                                                             "message",
                                                             "mensaje",
-                                                            "ðŸ’¬",
+                                                            "�Y\u0027�",
                                                             "Digital text or note"
                                                         ],
                                                         [
                                                             "video",
                                                             "video",
-                                                            "ðŸŽ¥",
+                                                            "�YZ�",
                                                             "Moving images"
                                                         ],
                                                         [
                                                             "battery",
                                                             "bateria",
-                                                            "ðŸ”‹",
+                                                            "�Y\"\u003c",
                                                             "Stores energy"
                                                         ],
                                                         [
                                                             "charger",
                                                             "cargador",
-                                                            "ðŸ”Œ",
+                                                            "�Y\"O",
                                                             "Gives power to devices"
                                                         ]
                                                     ],
@@ -2975,31 +2975,31 @@
                                                         [
                                                             "robot",
                                                             "robot",
-                                                            "ðŸ¤–",
+                                                            "�Y�-",
                                                             "Programmable machine"
                                                         ],
                                                         [
                                                             "data",
                                                             "datos",
-                                                            "ðŸ“¡",
+                                                            "�Y\"�",
                                                             "Digital information"
                                                         ],
                                                         [
                                                             "network",
                                                             "red",
-                                                            "ðŸ•¸ï¸",
+                                                            "�Y.�️",
                                                             "Connected system"
                                                         ],
                                                         [
                                                             "digital",
                                                             "digital",
-                                                            "ðŸ§ ",
+                                                            "�Y��",
                                                             "Based on electronics"
                                                         ],
                                                         [
                                                             "innovation",
                                                             "innovacion",
-                                                            "ðŸš€",
+                                                            "�Ys?",
                                                             "New useful idea"
                                                         ]
                                                     ],
@@ -3052,31 +3052,31 @@
                                                         [
                                                             "big",
                                                             "grande",
-                                                            "ðŸ“¦",
+                                                            "�Y\"�",
                                                             "Large size"
                                                         ],
                                                         [
                                                             "small",
-                                                            "pequeÃ±o",
-                                                            "ðŸ”¹",
+                                                            "pequeño",
+                                                            "�Y\"�",
                                                             "Little size"
                                                         ],
                                                         [
                                                             "long",
                                                             "largo",
-                                                            "ðŸ“",
+                                                            "�Y\"�",
                                                             "Great length"
                                                         ],
                                                         [
                                                             "short",
                                                             "corto",
-                                                            "ðŸ“Ž",
+                                                            "�Y\"Z",
                                                             "Small length"
                                                         ],
                                                         [
                                                             "early",
                                                             "temprano",
-                                                            "ðŸŒ…",
+                                                            "�YO.",
                                                             "Before expected time"
                                                         ]
                                                     ],
@@ -3122,31 +3122,31 @@
                                                         [
                                                             "clean",
                                                             "limpio",
-                                                            "ðŸ§¼",
+                                                            "�Y��",
                                                             "Not dirty"
                                                         ],
                                                         [
                                                             "dirty",
                                                             "sucio",
-                                                            "ðŸ«§",
+                                                            "�Y��",
                                                             "Not clean"
                                                         ],
                                                         [
                                                             "bright",
                                                             "brillante",
-                                                            "ðŸ’¡",
+                                                            "�Y\u0027�",
                                                             "Full of light"
                                                         ],
                                                         [
                                                             "dark",
                                                             "oscuro",
-                                                            "ðŸŒ‘",
+                                                            "�YO\u0027",
                                                             "Without much light"
                                                         ],
                                                         [
                                                             "quiet",
                                                             "silencioso",
-                                                            "ðŸ¤«",
+                                                            "�Y��",
                                                             "Low sound"
                                                         ]
                                                     ],
@@ -3192,31 +3192,31 @@
                                                         [
                                                             "compare",
                                                             "comparar",
-                                                            "âš–ï¸",
+                                                            "�s-️",
                                                             "Look at differences and similarities"
                                                         ],
                                                         [
                                                             "reason",
-                                                            "razÃ³n",
-                                                            "ðŸ§ ",
+                                                            "razón",
+                                                            "�Y��",
                                                             "Cause or explanation"
                                                         ],
                                                         [
                                                             "result",
                                                             "resultado",
-                                                            "ðŸ",
+                                                            "�Y��",
                                                             "What comes after an action"
                                                         ],
                                                         [
                                                             "inside",
                                                             "dentro",
-                                                            "ðŸ“¥",
+                                                            "�Y\"�",
                                                             "In the interior"
                                                         ],
                                                         [
                                                             "outside",
                                                             "fuera",
-                                                            "ðŸ“¤",
+                                                            "�Y\"�",
                                                             "In the exterior"
                                                         ]
                                                     ],

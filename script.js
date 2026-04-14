@@ -1966,8 +1966,11 @@ function renderLearnPhase(theme, stage) {
     elements.challengeExample.textContent = t('learnProgress', { current: state.learnIndex + 1, total });
     elements.questionCounter.textContent = `${state.learnIndex + 1} / ${total}`;
     elements.questionCounter.hidden = false;
+    elements.questionCounter.style.display = '';
     elements.timerBadge.hidden = true;
+    elements.timerBadge.style.display = 'none';
     elements.streakBadge.hidden = false;
+    elements.streakBadge.style.display = '';
     elements.streakBadge.textContent = stage.name;
     elements.progressBar.style.width = `${((state.learnIndex + 1) / total) * 100}%`;
     setFeedback('idle', t('learnTitle'), `${stage.name} · ${stage.focus}`);
@@ -2009,8 +2012,11 @@ function renderAssessPhase(theme, stage) {
     elements.challengeHint.textContent = t('assessPrompt');
     elements.challengeExample.textContent = stage.focus;
     elements.questionCounter.hidden = true;
+    elements.questionCounter.style.display = 'none';
     elements.timerBadge.hidden = true;
+    elements.timerBadge.style.display = 'none';
     elements.streakBadge.hidden = true;
+    elements.streakBadge.style.display = 'none';
     elements.progressBar.style.width = '100%';
     setFeedback('idle', t('assessTitle'), t('assessPrompt'));
     elements.nextQuestionButton.hidden = true;
@@ -2417,9 +2423,12 @@ function renderGame() {
         elements.choiceGrid.classList.remove('choice-grid--assess');
         elements.nextQuestionButton.hidden = true;
         elements.questionCounter.hidden = false;
+        elements.questionCounter.style.display = '';
         elements.streakBadge.hidden = false;
+        elements.streakBadge.style.display = '';
         elements.questionCounter.textContent = '0 / 0';
         elements.timerBadge.textContent = '15s';
+        elements.timerBadge.style.display = 'none';
         elements.streakBadge.textContent = 'Streak 0';
         elements.progressBar.style.width = '0%';
         setFeedback('idle', gameText('idleTitle'), gameText('idleText'));
@@ -2433,8 +2442,11 @@ function renderGame() {
     if (gameFeedback) gameFeedback.style.display = '';
     gameFooterStats?.removeAttribute('hidden');
     elements.timerBadge.hidden = false;
+    elements.timerBadge.style.display = '';
     elements.questionCounter.hidden = false;
+    elements.questionCounter.style.display = '';
     elements.streakBadge.hidden = false;
+    elements.streakBadge.style.display = '';
     const selectedEmojiOption = question.emojiChoices.find((option) => normalizeWord(option.en) === state.matchSelection.emoji) || null;
     elements.challengeTypeLabel.textContent = getGameModeLabel();
     elements.challengePrompt.textContent = gameText('matchPairPrompt', { word: question.term.en });
