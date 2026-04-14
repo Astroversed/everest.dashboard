@@ -8943,16 +8943,26 @@ body[data-theme-mode="dark"] #stageThemeFocus {
     }
 
     .content-grid {
-        margin-top: 0;
+        margin-top: 0 !important;
         row-gap: 24px;
+        align-items: start;
     }
 
     .content-side {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 
     .profile-card {
         margin-bottom: 10px;
+    }
+
+    .content-main {
+        margin-top: 0 !important;
+        align-self: start;
+    }
+
+    .game-card {
+        margin-top: 0 !important;
     }
 }
 
@@ -8960,6 +8970,20 @@ body[data-theme-mode="dark"] #stageThemeFocus {
     .options-card::before,
     .options-card::after {
         display: none !important;
+    }
+
+    .options-sections {
+        gap: 14px;
+    }
+
+    .option-block {
+        overflow: hidden;
+        box-shadow: none;
+    }
+
+    .toggle-pill,
+    .panel-toggle {
+        box-shadow: none;
     }
 }
 
