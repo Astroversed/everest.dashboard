@@ -2180,31 +2180,14 @@ function renderStageList() {
     elements.stageSectionTitle.textContent = t('themeStagesTitle', { theme: theme.title });
     elements.stageThemeFocus.textContent = theme.summary;
     const stagePositions = [
-        { x: 50, y: 18 },
-        { x: 26, y: 62 },
-        { x: 74, y: 62 },
-        { x: 41, y: 40 },
-        { x: 59, y: 40 }
-    ];
-    const buildLineSegment = (from, to) => {
-        const dx = to.x - from.x;
-        const dy = to.y - from.y;
-        return {
-            left: from.x,
-            top: from.y,
-            width: Math.sqrt((dx * dx) + (dy * dy)),
-            angle: Math.atan2(dy, dx) * (180 / Math.PI)
-        };
-    };
-    const lineSegments = [
-        buildLineSegment(stagePositions[0], stagePositions[1]),
-        buildLineSegment(stagePositions[1], stagePositions[2])
+        { x: 50, y: 16 },
+        { x: 22, y: 64 },
+        { x: 78, y: 64 },
+        { x: 37, y: 88 },
+        { x: 63, y: 88 }
     ];
     elements.stageList.innerHTML = `
         <div class="stage-tree">
-            <div class="stage-tree__lines" aria-hidden="true">
-                ${lineSegments.map((segment) => `<span class="stage-tree__line" style="left:${segment.left}%;top:${segment.top}%;width:${segment.width}%;transform:translate(-50%, -50%) rotate(${segment.angle}deg);"></span>`).join('')}
-            </div>
             ${theme.stages.map((stage, index) => {
         const stageProgress = results[stage.id] || { attempts: 0, clears: 0, bestAccuracy: 0 };
         const unlocked = isStageUnlocked(theme.id, stage.id);
@@ -3056,13 +3039,98 @@ function renderOptionsModal() {
         { title: t('themeBlockTitle'), text: t('themeBlockText'), buttons: [{ value: 'light', label: t('lightMode'), active: state.settings.themeMode === 'light', action: 'theme' }, { value: 'dark', label: t('darkMode'), active: state.settings.themeMode === 'dark', action: 'theme' }] },
         { title: t('audioBlockTitle'), text: t('audioBlockText'), buttons: [{ value: 'sound', label: getOptionStatusMarkup(t('sound'), state.settings.soundOn), active: state.settings.soundOn, action: 'sound' }, { value: 'voice', label: getOptionStatusMarkup(t('voice'), state.settings.voiceOn), active: state.settings.voiceOn, action: 'voice' }] }
     ];
+    const managedUsers = syncControlManagedSelectionState();
+    if (!state.controlManagedSelectionTouched && !state.controlManageAllUsers && !state.controlManagedUserIds.length && managedUsers[0]) {
+        setControlManagedSelection([getUserId(managedUsers[0])], { touched: false });
+    }
+
+    const managedUser = getControlManagedReferenceUser() || state.user;
+    const currentMinutes = Math.max(1, Math.ceil(Math.max(0, (managedUser.expiresAt || Date.now()) - Date.now()) / 60000));
+    const draft = getControlWordDraft();
+    const selectedUsers = getControlSelectedUsers();
+    const managedSelectionTags = state.controlManageAllUsers
+        ? `<button type="button" class="control-selection-tag control-selection-tag--all" data-control-remove-all="true">${tc('allManagedUsers')}</button>`
+        : (selectedUsers.length
+            ? selectedUsers.map((user) => `<button type="button" class="control-selection-tag" data-control-remove-user="${getUserId(user)}">${user.profileEmoji || '🧠'} ${user.username}</button>`).join('')
+            : `<span class="control-selection-empty">${tc('selectedUsersEmpty')}</span>`);
     const blockHtml = blocks.map((block) => `<article class="option-block"><h4>${block.title}</h4><p>${block.text}</p><div class="option-block__actions">${block.buttons.map((button) => {
         const pulseKey = `${button.action}:${button.value}`;
         return `<button class="toggle-pill ${button.active ? 'is-active' : ''} ${state.optionPulseKey === pulseKey ? 'is-pulsing' : ''}" type="button" data-option-action="${button.action}" data-option-value="${button.value}">${button.label}</button>`;
     }).join('')}</div></article>`).join('');
+
+    const managedUserSelect = createControlSelectMarkup({
+        inputId: 'controlManagedUserSelect',
+        shellId: 'controlManagedUserShell',
+        triggerId: 'controlManagedUserTrigger',
+        labelId: 'controlManagedUserTriggerLabel',
+        dropdownId: 'controlManagedUserDropdown',
+        searchId: 'controlManagedUserSearch',
+        optionsId: 'controlManagedUserOptions',
+        value: state.controlManageAllUsers ? '__all__' : (state.controlManagedUserIds[0] || ''),
+        placeholder: tc('userSelect'),
+        searchPlaceholder: tc('managedSearchPlaceholder'),
+        options: [
+            {
+                value: '__all__',
+                main: tc('allManagedUsers'),
+                alt: `${managedUsers.length} ${t('activeClimber').toLowerCase()}`,
+                search: `${tc('allManagedUsers')} ${managedUsers.map((user) => `${user.username} ${user.course || ''}`).join(' ')}`
+            },
+            ...managedUsers.map((user) => ({
+                value: getUserId(user),
+                main: `${user.profileEmoji || '🧠'} ${user.username}`,
+                alt: user.course || t('routePending'),
+                search: `${user.username} ${user.course || t('routePending')}`
+            }))
+        ]
+    });
+
+    const wordPickerSelect = createControlSelectMarkup({
+        inputId: 'controlWordPickerInput',
+        shellId: 'controlWordPickerShell',
+        triggerId: 'controlWordPickerTrigger',
+        labelId: 'controlWordPickerTriggerLabel',
+        dropdownId: 'controlWordPickerDropdown',
+        searchId: 'controlWordPickerSearch',
+        optionsId: 'controlWordPickerOptions',
+        value: draft.wordId,
+        placeholder: tc('wordPickerPlaceholder'),
+        searchPlaceholder: tc('wordPickerSearch'),
+        options: state.library.slice().sort((a, b) => a.term.localeCompare(b.term)).map((entry) => ({
+            value: getExplorerWordId(entry),
+            main: `${entry.emoji || '📘'} ${entry.term}`,
+            alt: localizeTheme(getTheme(entry.theme))?.title || entry.theme,
+            search: `${entry.term} ${entry.meaning} ${entry.example} ${entry.tip} ${localizeTheme(getTheme(entry.theme))?.title || entry.theme}`
+        }))
+    });
+
+    const wordThemeSelect = createControlSelectMarkup({
+        inputId: 'controlWordThemeInput',
+        shellId: 'controlWordThemeShell',
+        triggerId: 'controlWordThemeTrigger',
+        labelId: 'controlWordThemeTriggerLabel',
+        dropdownId: 'controlWordThemeDropdown',
+        searchId: 'controlWordThemeSearch',
+        optionsId: 'controlWordThemeOptions',
+        value: draft.theme,
+        placeholder: tc('wordThemePlaceholder'),
+        searchPlaceholder: tc('themeSearchPlaceholder'),
+        options: state.themes.map((theme) => localizeTheme(theme)).map((theme) => ({
+            value: theme.id,
+            main: theme.title,
+            alt: theme.id === state.activeThemeId ? tc('currentStageTag') : '',
+            search: `${theme.title} ${theme.summary}`
+        }))
+    });
+
+    const emojiGrid = CONTROL_FORGE_EMOJI_CATEGORIES.map((category, index) => `<details class="control-emoji-category" ${index === 0 ? 'open' : ''}><summary class="control-emoji-category__summary"><span>${category.title}</span><strong>${category.emojis.length}</strong></summary><div class="control-emoji-grid">${category.emojis.map((emoji) => `<button class="control-emoji-choice ${emoji === draft.emoji ? 'is-selected' : ''}" type="button" data-control-emoji="${emoji}" aria-label="${emoji}">${emoji}</button>`).join('')}</div></details>`).join('');
+    const saveButtonLabel = draft.wordId ? tc('saveWord') : tc('addWord');
+    const deleteButtonDisabled = draft.wordId ? '' : ' disabled';
+    const buildControlStepperField = (id, label, min, value) => `<label class="custom-field"><span>${label}</span><div class="control-stepper"><input id="${id}" type="number" min="${min}" value="${value}"><div class="control-stepper__buttons"><button class="control-stepper__button control-stepper__button--up" type="button" data-stepper-target="${id}" data-stepper-direction="up" aria-label="Increase ${label}"><span aria-hidden="true"></span></button><button class="control-stepper__button control-stepper__button--down" type="button" data-stepper-target="${id}" data-stepper-direction="down" aria-label="Decrease ${label}"><span aria-hidden="true"></span></button></div></div></label>`;
+
     const controlHtml = !state.controlModeUnlocked
-        ? `<article class="option-block option-block--control"><h4>${tc('title')}</h4><p>${tc('subtitle')}</p><div class="control-key-row"><label class="custom-field custom-field--full"><span>${tc('unlockLabel')}</span><input id="controlKeyInput" type="password" placeholder="${tc('unlockPlaceholder')}" autocomplete="off"></label><button class="surface-button surface-button--primary" id="controlUnlockButton" type="button">${tc('unlockButton')}</button></div></article>`
-        : `<article class="option-block option-block--control"><div class="control-heading"><div><h4>${tc('title')}</h4><p>${tc('subtitle')}</p></div><div class="control-heading__actions"><span class="control-badge">${tc('unlockedBadge')}</span><button class="surface-button surface-button--ghost control-lock-button control-button--danger" id="controlDeactivateButton" type="button">${tc('deactivateButton')}</button></div></div><div class="control-helper custom-field--full">${tc('managedUserText')}</div></article>`;
+        ? `<article class="option-block option-block--control"><div class="control-heading"><div><h4>${tc('title')}</h4><p>${tc('subtitle')}</p></div><span class="control-note">${tc('lockedHint')}</span></div><div class="control-key-row"><label class="custom-field custom-field--full"><span>${tc('unlockLabel')}</span><input id="controlKeyInput" type="password" placeholder="${tc('unlockPlaceholder')}" autocomplete="off"></label><button class="surface-button surface-button--primary" id="controlUnlockButton" type="button">${tc('unlockButton')}</button></div></article>`
+        : `<article class="option-block option-block--control"><div class="control-heading"><div><h4>${tc('title')}</h4><p>${tc('subtitle')}</p></div><div class="control-heading__actions"><span class="control-badge">${tc('unlockedBadge')}</span><button class="surface-button surface-button--ghost control-lock-button control-button--danger" id="controlDeactivateButton" type="button">${tc('deactivateButton')}</button></div></div><div class="control-section"><button class="panel-toggle panel-toggle--soft is-open" id="controlUserToggle" type="button" aria-expanded="true"><span class="panel-toggle__copy"><strong>${tc('managedUser')}</strong><span>${tc('managedUserText')}</span></span><span class="panel-toggle__icon" aria-hidden="true"></span></button><div class="panel-collapsible" id="controlUserBody"><div class="control-grid"><label class="custom-field custom-field--full"><span>${tc('managedUser')}</span>${managedUserSelect}<div class="control-selection-summary"><span class="control-selection-summary__label">${tc('selectedUsersLabel')}</span><div class="control-selection-tags" id="controlManagedUserTags">${managedSelectionTags}</div></div></label>${buildControlStepperField('controlPointsInput', t('points'), 0, Number(managedUser.points || 0))}${buildControlStepperField('controlWinsInput', t('wins'), 0, Number(managedUser.wins || 0))}${buildControlStepperField('controlLossesInput', t('losses'), 0, Number(managedUser.losses || 0))}${buildControlStepperField('controlSessionMinutesInput', tc('sessionMinutes'), 1, currentMinutes)}</div><div class="control-actions"><button class="surface-button surface-button--ghost control-button--danger" id="controlRemoveRankingButton" type="button">${tc('removeRanking')}</button><button class="surface-button surface-button--ghost control-button--danger" id="controlCloseSessionButton" type="button">${tc('closeSession')}</button><button class="surface-button surface-button--primary" id="controlApplyStatsButton" type="button">${tc('applyStats')}</button></div></div></div><div class="control-section"><button class="panel-toggle panel-toggle--soft ${state.controlWordPanelOpen ? 'is-open' : ''}" id="controlWordToggle" type="button" aria-expanded="${state.controlWordPanelOpen ? 'true' : 'false'}"><span class="panel-toggle__copy"><strong>${tc('explorerTools')}</strong><span>${tc('explorerToolsText')}</span></span><span class="panel-toggle__icon" aria-hidden="true"></span></button><div class="panel-collapsible ${state.controlWordPanelOpen ? '' : 'panel-collapsible--collapsed'}" id="controlWordBody"><div class="control-grid"><label class="custom-field custom-field--full"><span>${tc('wordPicker')}</span>${wordPickerSelect}</label><div class="control-helper custom-field--full">${tc('wordPickerText')}</div><label class="custom-field custom-field--full"><span>${tc('wordTheme')}</span>${wordThemeSelect}</label><label class="custom-field custom-field--full"><span>${tc('wordEmoji')}</span><input id="controlWordEmojiInput" type="hidden" value="${draft.emoji}"><details class="control-emoji-master ${state.controlEmojiPanelOpen ? 'is-open' : ''}" id="controlEmojiMaster" ${state.controlEmojiPanelOpen ? 'open' : ''}><summary class="control-emoji-master__summary"><span class="control-emoji-master__copy"><strong>${tc('wordEmoji')}</strong><span>${tc('emojiGridHint')}</span></span><strong class="control-emoji-master__preview" id="controlWordEmojiPreview">${draft.emoji}</strong><span class="control-emoji-master__arrow" aria-hidden="true"></span></summary><div class="control-emoji-picker"><div class="control-emoji-groups">${emojiGrid}</div></div></details></label><label class="custom-field"><span>${tc('wordTerm')}</span><input id="controlWordTermInput" type="text" maxlength="80" placeholder="${t('wordTermPlaceholder')}" value="${draft.term || ''}"></label><label class="custom-field"><span>${tc('wordType')}</span><input id="controlWordTypeInput" type="text" maxlength="40" placeholder="${t('wordTypePlaceholder')}" value="${draft.type || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordMeaning')}</span><input id="controlWordMeaningInput" type="text" maxlength="140" placeholder="${t('wordMeaningPlaceholder')}" value="${draft.meaning || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordExample')}</span><input id="controlWordExampleInput" type="text" maxlength="180" placeholder="${t('wordExamplePlaceholder')}" value="${draft.example || ''}"></label><label class="custom-field custom-field--full"><span>${tc('wordTip')}</span><input id="controlWordTipInput" type="text" maxlength="120" placeholder="${t('wordTipPlaceholder')}" value="${draft.tip || ''}"></label></div><div class="control-actions"><button class="surface-button surface-button--ghost" id="controlClearWordButton" type="button">${tc('clearWord')}</button><button class="surface-button surface-button--ghost control-button--danger" id="controlDeleteWordButton" type="button"${deleteButtonDisabled}>${tc('deleteWord')}</button><button class="surface-button surface-button--primary" id="controlSaveWordButton" type="button">${saveButtonLabel}</button></div></div></div></article>`;
     elements.optionsSections.innerHTML = `${blockHtml}${controlHtml}`;
     elements.optionsSections.querySelectorAll('[data-option-action]').forEach((button) => button.addEventListener('click', () => handleOptionChange(button.dataset.optionAction, button.dataset.optionValue)));
     const unlockButton = document.getElementById('controlUnlockButton');
@@ -3079,11 +3147,131 @@ function renderOptionsModal() {
             pushToast(randomFrom(EVEREST_LINES.success), tc('unlockSuccess'), 'success');
             renderOptionsModal();
         });
+        keyInput.addEventListener('keydown', async (event) => {
+            if (event.key !== 'Enter') return;
+            event.preventDefault();
+            unlockButton.click();
+        });
     }
+    const removeRankingButton = document.getElementById('controlRemoveRankingButton');
+    const closeSessionButton = document.getElementById('controlCloseSessionButton');
+    const applyStatsButton = document.getElementById('controlApplyStatsButton');
+    const saveWordButton = document.getElementById('controlSaveWordButton');
+    const clearWordButton = document.getElementById('controlClearWordButton');
+    const deleteWordButton = document.getElementById('controlDeleteWordButton');
     document.getElementById('controlDeactivateButton')?.addEventListener('click', () => {
         persistControlModeChanges({ lockMode: true });
         pushToast(randomFrom(EVEREST_LINES.info), tc('deactivateSuccess'), 'info');
         renderOptionsModal();
+    });
+    const emojiPreview = document.getElementById('controlWordEmojiPreview');
+
+    setupManagedUserMultiSelect();
+    refreshManagedUserPanel();
+
+    setupControlSelect({
+        shellId: 'controlWordPickerShell',
+        inputId: 'controlWordPickerInput',
+        triggerId: 'controlWordPickerTrigger',
+        labelId: 'controlWordPickerTriggerLabel',
+        dropdownId: 'controlWordPickerDropdown',
+        searchId: 'controlWordPickerSearch',
+        optionsId: 'controlWordPickerOptions',
+        onSelect: (value) => {
+            const entry = getExplorerWordById(value);
+            if (!entry) {
+                clearControlWordDraft();
+                state.controlWordPanelOpen = true;
+                renderOptionsModal();
+                return;
+            }
+            saveControlWordDraft({
+                wordId: getExplorerWordId(entry),
+                theme: entry.theme,
+                term: entry.term,
+                type: entry.type,
+                meaning: entry.meaning,
+                example: entry.example,
+                tip: entry.tip,
+                emoji: entry.emoji || '📘'
+            });
+            state.controlWordPanelOpen = true;
+            pushToast(randomFrom(EVEREST_LINES.info), tc('wordLoaded'), 'info');
+            renderOptionsModal();
+        }
+    });
+
+    setupControlSelect({
+        shellId: 'controlWordThemeShell',
+        inputId: 'controlWordThemeInput',
+        triggerId: 'controlWordThemeTrigger',
+        labelId: 'controlWordThemeTriggerLabel',
+        dropdownId: 'controlWordThemeDropdown',
+        searchId: 'controlWordThemeSearch',
+        optionsId: 'controlWordThemeOptions',
+        onSelect: (value) => {
+            saveControlWordDraft({ ...getControlWordPayloadFromInputs(), theme: value });
+        }
+    });
+
+    document.querySelectorAll('[data-control-emoji]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const emoji = button.dataset.controlEmoji || '📘';
+            const input = document.getElementById('controlWordEmojiInput');
+            if (input) input.value = emoji;
+            if (emojiPreview) emojiPreview.textContent = emoji;
+            document.querySelectorAll('[data-control-emoji]').forEach((choice) => choice.classList.toggle('is-selected', choice === button));
+            saveControlWordDraft({ ...getControlWordPayloadFromInputs(), emoji });
+        });
+    });
+
+    document.querySelectorAll('[data-stepper-target]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const target = document.getElementById(button.dataset.stepperTarget || '');
+            if (!target) return;
+            if (button.dataset.stepperDirection === 'down') {
+                target.stepDown();
+            } else {
+                target.stepUp();
+            }
+            target.dispatchEvent(new Event('input', { bubbles: true }));
+            target.dispatchEvent(new Event('change', { bubbles: true }));
+            target.focus();
+        });
+    });
+
+    ['controlWordTermInput', 'controlWordTypeInput', 'controlWordMeaningInput', 'controlWordExampleInput', 'controlWordTipInput'].forEach((id) => {
+        document.getElementById(id)?.addEventListener('input', () => {
+            saveControlWordDraft(getControlWordPayloadFromInputs());
+        });
+    });
+
+    removeRankingButton?.addEventListener('click', () => {
+        void removeControlUsersFromRanking();
+    });
+    closeSessionButton?.addEventListener('click', () => {
+        void closeControlUserSessions();
+    });
+    applyStatsButton?.addEventListener('click', () => {
+        void applyControlStatsChanges();
+    });
+    clearWordButton?.addEventListener('click', () => {
+        clearControlWordDraft();
+        state.controlWordPanelOpen = true;
+        renderOptionsModal();
+    });
+    deleteWordButton?.addEventListener('click', () => {
+        void deleteControlWord();
+    });
+    saveWordButton?.addEventListener('click', () => {
+        void saveControlWord();
+    });
+    document.getElementById('controlWordToggle')?.addEventListener('click', () => {
+        state.controlWordPanelOpen = !state.controlWordPanelOpen;
+        renderOptionsModal();
+    });
+    document.getElementById('controlEmojiMaster')?.addEventListener('toggle', (event) => {
+        state.controlEmojiPanelOpen = event.currentTarget?.open ?? false;
     });
 }
 
