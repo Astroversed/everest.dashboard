@@ -8505,6 +8505,7 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     display: grid !important;
     place-items: center !important;
     font-size: 1.62rem !important;
+    overflow: hidden !important;
     transition: transform .18s ease, box-shadow .18s ease, outline-offset .18s ease !important;
 }
 
@@ -8891,8 +8892,7 @@ body[data-theme-mode="dark"] .stage-orb__badge {
         linear-gradient(180deg, rgba(127, 217, 247, 0.94), rgba(75, 116, 240, 0.98)) !important;
     color: rgba(245, 249, 255, 0.98) !important;
     box-shadow:
-        0 18px 34px rgba(var(--theme-accent-rgb), 0.22),
-        inset 0 -10px 18px rgba(var(--theme-strong-rgb), 0.12),
+        0 18px 34px rgba(var(--theme-accent-rgb), 0.18),
         inset 0 1px 0 rgba(255, 255, 255, 0.2),
         0 0 0 1px rgba(var(--theme-soft-rgb), 0.14) !important;
 }
