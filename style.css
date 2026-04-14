@@ -9119,3 +9119,73 @@ body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
     color: #d6eeff !important;
     box-shadow: var(--shadow-sm) !important;
 }
+
+.hero-card {
+    gap: 18px !important;
+    padding: 26px !important;
+}
+
+.hero-card__copy {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+}
+
+.hero-card .panel-badge {
+    width: fit-content;
+    padding-inline: 14px;
+}
+
+.hero-card h2 {
+    margin-top: 10px !important;
+    font-size: clamp(2rem, 2.7vw, 2.75rem) !important;
+    line-height: 1.04 !important;
+    max-width: 12ch;
+}
+
+.hero-card p {
+    max-width: 58ch;
+    font-size: 0.98rem;
+    line-height: 1.75;
+}
+
+.hero-card__actions {
+    gap: 12px !important;
+    margin-top: 18px !important;
+}
+
+.hero-card__actions .surface-button {
+    min-width: 126px;
+}
+
+.hero-card__status {
+    width: min(336px, 100%) !important;
+    gap: 10px !important;
+}
+
+.status-pill {
+    min-height: 62px;
+}
+
+.status-pill span {
+    font-size: 0.72rem;
+}
+
+.status-pill strong {
+    font-size: 1rem;
+}
+
+@media (max-width: 1280px) {
+    .hero-card {
+        padding: 24px !important;
+        gap: 16px !important;
+    }
+
+    .hero-card h2 {
+        max-width: none;
+    }
+
+    .hero-card__status {
+        width: 100% !important;
+    }
+}
