@@ -2234,9 +2234,28 @@ function renderStageList() {
             return;
         }
         const now = Date.now();
+        const touchLikeDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
         state.activeStageId = stageId;
         renderStageList();
         renderGame();
+        if (touchLikeDevice) {
+            const orb = elements.stageList?.querySelector(`[data-stage-orb="${stageId}"]`);
+            const tooltip = orb?.querySelector('.stage-orb__tooltip');
+            elements.stageList?.querySelectorAll('.stage-orb__tooltip[data-force-open]').forEach((node) => {
+                if (node !== tooltip) delete node.dataset.forceOpen;
+            });
+            if (state.stageTapMeta.id === stageId && now - state.stageTapMeta.time < 420) {
+                state.stageTapMeta = { id: 0, time: 0 };
+                if (tooltip) delete tooltip.dataset.forceOpen;
+                startLearnPhase();
+                return;
+            }
+            if (tooltip) {
+                tooltip.dataset.forceOpen = 'true';
+            }
+            state.stageTapMeta = { id: stageId, time: now };
+            return;
+        }
         if (state.stageTapMeta.id === stageId && now - state.stageTapMeta.time < 360) {
             state.stageTapMeta = { id: 0, time: 0 };
             startLearnPhase();
