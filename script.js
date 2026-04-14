@@ -486,7 +486,7 @@ const ui = {
         stageRouteBoard: 'Panel de etapas',
         stageRouteBoardText: 'Abre la lista, elige una etapa y entra directo al desaf\u00EDo.',
         stageStep1: '1. Selecciona una etapa',
-        stageStep2: '2. Empieza a Aprender',
+        stageStep2: '2. Empieza a aprender',
         stageStep3: '3. Completa el juego y la evaluación',
         themeDeck: 'Panel de temas',
         chooseRouteDeck: 'Elige la ruta que quieres escalar',
