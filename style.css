@@ -9189,3 +9189,46 @@ body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
         width: 100% !important;
     }
 }
+
+@media (min-width: 1101px) {
+    .content-grid {
+        margin-top: 0 !important;
+    }
+
+    .content-main {
+        margin-top: 0 !important;
+    }
+
+    .hero-card {
+        display: flex !important;
+        align-items: stretch !important;
+        justify-content: space-between !important;
+        grid-template-columns: none !important;
+        gap: 22px !important;
+    }
+
+    .hero-card__copy {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+    }
+
+    .hero-card h2 {
+        max-width: none !important;
+    }
+
+    .hero-card p {
+        max-width: none !important;
+    }
+
+    .hero-card__status {
+        width: min(420px, 100%) !important;
+        max-width: 420px !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        align-self: stretch !important;
+    }
+
+    .status-pill {
+        min-height: 62px !important;
+    }
+}
