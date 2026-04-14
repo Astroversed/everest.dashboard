@@ -9190,7 +9190,7 @@ body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
     }
 }
 
-@media (min-width: 1101px) {
+@media (min-width: 781px) {
     .content-grid {
         margin-top: 0 !important;
     }
@@ -9200,16 +9200,14 @@ body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
     }
 
     .hero-card {
-        display: flex !important;
-        align-items: stretch !important;
-        justify-content: space-between !important;
-        grid-template-columns: none !important;
-        gap: 22px !important;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        align-items: start !important;
+        gap: 18px !important;
     }
 
     .hero-card__copy {
-        flex: 1 1 auto !important;
-        min-width: 0 !important;
+        width: 100% !important;
         max-width: none !important;
     }
 
@@ -9222,10 +9220,10 @@ body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
     }
 
     .hero-card__status {
-        width: min(420px, 100%) !important;
-        max-width: 420px !important;
+        width: 100% !important;
+        max-width: none !important;
         grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-        align-self: stretch !important;
+        align-self: start !important;
     }
 
     .status-pill {
