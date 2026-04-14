@@ -1821,6 +1821,7 @@ function flashStageRequirement(lockedStageId) {
     const lockedOrb = elements.stageList?.querySelector(`[data-stage-orb="${lockedStageId}"]`);
     if (!neededOrb || !lockedOrb) return;
 
+    neededOrb.classList.remove('is-fading-needed');
     neededOrb.classList.add('is-needed');
     lockedOrb.classList.add('is-blocked-press');
     const lockedTooltip = lockedOrb.querySelector('.stage-orb__tooltip');
@@ -1829,7 +1830,12 @@ function flashStageRequirement(lockedStageId) {
     }
 
     window.setTimeout(() => {
+        neededOrb.classList.add('is-fading-needed');
+    }, 980);
+
+    window.setTimeout(() => {
         neededOrb.classList.remove('is-needed');
+        neededOrb.classList.remove('is-fading-needed');
         lockedOrb.classList.remove('is-blocked-press');
         if (lockedTooltip) {
             delete lockedTooltip.dataset.forceOpen;
@@ -1928,6 +1934,7 @@ function submitAssessment() {
 
     state.assessAnswers = nextAnswers;
     state.assessChecked = true;
+    const assessPoints = correctCount;
 
     const score = `${correctCount}/${state.assessItems.length}`;
     setFeedback(
@@ -1939,7 +1946,12 @@ function submitAssessment() {
     const summary = state.pendingResultSummary;
     if (summary) {
         state.pendingResultSummary = null;
-        openResultModal(summary.win, summary.accuracy, summary.totalEarned, summary.clearBonus);
+        const totalEarned = summary.totalEarned + assessPoints;
+        state.progress.points += totalEarned;
+        saveProgress();
+        renderProfile();
+        renderLeaderboard();
+        openResultModal(summary.win, summary.accuracy, totalEarned, assessPoints);
     }
 }
 
@@ -2193,6 +2205,7 @@ function renderStageList() {
         const unlocked = isStageUnlocked(theme.id, stage.id);
         const active = stage.id === state.activeStageId;
         const point = stagePositions[index] || { x: 50, y: 10 + (index * 16) };
+        const stagePointLabel = state.settings.language === 'es' ? '15 puntos máx.' : '15 max points';
         return `
             <article class="stage-orb ${active ? 'is-active' : ''} ${unlocked ? 'is-unlocked' : 'is-locked'}" data-stage-orb="${stage.id}" style="left:${point.x}%;top:${point.y}%;">
                 <button class="stage-orb__button" data-stage-node="${stage.id}" type="button" ${unlocked ? '' : 'aria-disabled="true"'}>
@@ -2201,10 +2214,12 @@ function renderStageList() {
                 </button>
                 <div class="stage-orb__tooltip" role="presentation">
                     <strong>${stage.name}</strong>
-                    <span>${t('pointsBadge', { points: stage.points })}</span>
-                    <span>${t('stageBest', { value: stageProgress.bestAccuracy || 0 })}</span>
-                    <span>${t('stageClears', { value: stageProgress.clears || 0 })}</span>
-                    ${unlocked ? '' : `<span>Clear Stage ${Math.max(1, stage.id - 1)} to unlock this route.</span>`}
+                    <div class="stage-orb__stats">
+                        <span class="stage-orb__stat">${stagePointLabel}</span>
+                        <span class="stage-orb__stat">${t('stageBest', { value: stageProgress.bestAccuracy || 0 })}</span>
+                        <span class="stage-orb__stat">${t('stageClears', { value: stageProgress.clears || 0 })}</span>
+                    </div>
+                    ${unlocked ? '' : `<span class="stage-orb__lock-note">Clear Stage ${Math.max(1, stage.id - 1)} to unlock this route.</span>`}
                 </div>
             </article>
         `;
@@ -2602,14 +2617,14 @@ function resolveAnswer(answer, timedOut) {
     const correct = !timedOut && normalizeWord(answer) === normalizeWord(state.currentQuestion.term.en);
 
     if (correct) {
-        const earned = 90 + Math.min((state.streak + 1) * 10, 50);
+        const earned = 1;
         state.stageCorrect += 1;
         state.streak += 1;
         state.bestStreak = Math.max(state.bestStreak, state.streak);
         state.stagePoints += earned;
         playTone('success');
         setFeedback('correct', t('correctTitle'), randomFrom(EVEREST_LINES.success));
-        pushToast(randomFrom(EVEREST_LINES.success), `${state.currentQuestion.term.en} +${earned} pts`, 'success');
+        pushToast(randomFrom(EVEREST_LINES.success), `${state.currentQuestion.term.en} +${earned} pt`, 'success');
     } else {
         state.stageWrong += 1;
         state.streak = 0;
@@ -2654,9 +2669,6 @@ function finishStage() {
     const theme = getTheme();
     const accuracy = Math.round((state.stageCorrect / state.questions.length) * 100);
     const win = accuracy >= 80;
-    const clearBonus = win ? stage.points : 0;
-    const totalEarned = state.stagePoints + clearBonus;
-    state.progress.points += totalEarned;
     state.progress.totalPlayMs += Date.now() - state.stageStartedAt;
     state.progress[win ? 'wins' : 'losses'] += 1;
     state.progress.lastPlayedTheme = theme.id;
@@ -2668,17 +2680,17 @@ function finishStage() {
         bestAccuracy: Math.max(existing.bestAccuracy, accuracy)
     };
     saveProgress();
-    state.pendingResultSummary = { win, accuracy, totalEarned, clearBonus };
+    state.pendingResultSummary = { win, accuracy, totalEarned: state.stagePoints };
     renderAll();
     startAssessPhase();
 }
 
-function openResultModal(win, accuracy, totalEarned, clearBonus) {
+function openResultModal(win, accuracy, totalEarned, assessPoints) {
     elements.resultIcon.textContent = win ? '\u26F0\uFE0F' : '\uD83E\uDDD7';
     elements.resultBadge.textContent = win ? t('stageClear') : t('stageRetry');
     elements.resultTitle.textContent = win ? getStage().name : `${getStage().name} again`;
     elements.resultSubtitle.textContent = win ? t('resultWinText') : t('resultLoseText');
-    elements.resultStats.innerHTML = `<div class="result-stat"><span>${t('accuracy')}</span><strong>${accuracy}%</strong></div><div class="result-stat"><span>${t('points')}</span><strong>${totalEarned}</strong></div><div class="result-stat"><span>${t('wins')}</span><strong>${state.stageCorrect}/${state.questions.length}</strong></div><div class="result-stat"><span>${t('clearBonus')}</span><strong>${clearBonus}</strong></div>`;
+    elements.resultStats.innerHTML = `<div class="result-stat"><span>${t('accuracy')}</span><strong>${accuracy}%</strong></div><div class="result-stat"><span>${t('points')}</span><strong>${totalEarned}</strong></div><div class="result-stat"><span>${t('wins')}</span><strong>${state.stageCorrect}/${state.questions.length}</strong></div><div class="result-stat"><span>${t('assessTitle')}</span><strong>${assessPoints}/10</strong></div>`;
     openModal('resultModal');
 }
 
