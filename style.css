@@ -9338,7 +9338,7 @@ body[data-theme-mode="dark"] .hero-card__actions #heroAssessButton {
     position: absolute;
     inset: 0 auto 0 0;
     width: 4px;
-    border-radius: 0;
+    border-radius: 18px 0 0 18px;
     background: linear-gradient(180deg, rgba(var(--theme-soft-rgb), 0.78), rgba(var(--theme-accent-rgb), 0.92));
     opacity: 0.88;
     pointer-events: none;
