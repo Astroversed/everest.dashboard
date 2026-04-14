@@ -1,0 +1,558 @@
+﻿Everest Learn Image Manifest
+Pattern: assets/images/<theme folder>/<stage folder>/<term-slug>.(png|jpg|jpeg|webp|avif)
+
+Basic Communication [basic-communication]
+  Stage 1: Trail Talk
+    - assets/images/1. Basic Communication/1. Trail Talk/hello.png
+    - assets/images/1. Basic Communication/1. Trail Talk/goodbye.png
+    - assets/images/1. Basic Communication/1. Trail Talk/please.png
+    - assets/images/1. Basic Communication/1. Trail Talk/thanks.png
+    - assets/images/1. Basic Communication/1. Trail Talk/sorry.png
+    - assets/images/1. Basic Communication/1. Trail Talk/hi.png
+    - assets/images/1. Basic Communication/1. Trail Talk/welcome.png
+    - assets/images/1. Basic Communication/1. Trail Talk/excuse-me.png
+    - assets/images/1. Basic Communication/1. Trail Talk/good-morning.png
+    - assets/images/1. Basic Communication/1. Trail Talk/good-night.png
+
+  Stage 2: Quick Replies
+    - assets/images/1. Basic Communication/2. Quick Replies/yes.png
+    - assets/images/1. Basic Communication/2. Quick Replies/no.png
+    - assets/images/1. Basic Communication/2. Quick Replies/question.png
+    - assets/images/1. Basic Communication/2. Quick Replies/answer.png
+    - assets/images/1. Basic Communication/2. Quick Replies/help.png
+    - assets/images/1. Basic Communication/2. Quick Replies/okay.png
+    - assets/images/1. Basic Communication/2. Quick Replies/sure.png
+    - assets/images/1. Basic Communication/2. Quick Replies/maybe.png
+    - assets/images/1. Basic Communication/2. Quick Replies/wait.png
+    - assets/images/1. Basic Communication/2. Quick Replies/understand.png
+
+  Stage 3: Social Spark
+    - assets/images/1. Basic Communication/3. Social Spark/friend.png
+    - assets/images/1. Basic Communication/3. Social Spark/invite.png
+    - assets/images/1. Basic Communication/3. Social Spark/listen.png
+    - assets/images/1. Basic Communication/3. Social Spark/speak.png
+    - assets/images/1. Basic Communication/3. Social Spark/repeat.png
+    - assets/images/1. Basic Communication/3. Social Spark/talk.png
+    - assets/images/1. Basic Communication/3. Social Spark/ask.png
+    - assets/images/1. Basic Communication/3. Social Spark/call.png
+    - assets/images/1. Basic Communication/3. Social Spark/message.png
+    - assets/images/1. Basic Communication/3. Social Spark/meet.png
+
+Grammar & Language [grammar-language]
+  Stage 1: Action Ridge
+    - assets/images/2. Grammar & Language/1. Action Ridge/run.png
+    - assets/images/2. Grammar & Language/1. Action Ridge/walk.png
+    - assets/images/2. Grammar & Language/1. Action Ridge/eat.png
+    - assets/images/2. Grammar & Language/1. Action Ridge/read.png
+    - assets/images/2. Grammar & Language/1. Action Ridge/write.png
+    - assets/images/2. Grammar & Language/1. Action Ridge/open.png
+    - assets/images/2. Grammar & Language/1. Action Ridge/close.png
+    - assets/images/2. Grammar & Language/1. Action Ridge/make.png
+    - assets/images/2. Grammar & Language/1. Action Ridge/study.png
+    - assets/images/2. Grammar & Language/1. Action Ridge/use.png
+
+  Stage 2: Describe the View
+    - assets/images/2. Grammar & Language/2. Describe the view/big.png
+    - assets/images/2. Grammar & Language/2. Describe the view/small.png
+    - assets/images/2. Grammar & Language/2. Describe the view/fast.png
+    - assets/images/2. Grammar & Language/2. Describe the view/slow.png
+    - assets/images/2. Grammar & Language/2. Describe the view/happy.png
+    - assets/images/2. Grammar & Language/2. Describe the view/soft.png
+    - assets/images/2. Grammar & Language/2. Describe the view/hard.png
+    - assets/images/2. Grammar & Language/2. Describe the view/clean.png
+    - assets/images/2. Grammar & Language/2. Describe the view/warm.png
+    - assets/images/2. Grammar & Language/2. Describe the view/cold.png
+
+  Stage 3: Logic Steps
+    - assets/images/2. Grammar & Language/3. Logic Steps/before.png
+    - assets/images/2. Grammar & Language/3. Logic Steps/after.png
+    - assets/images/2. Grammar & Language/3. Logic Steps/more.png
+    - assets/images/2. Grammar & Language/3. Logic Steps/less.png
+    - assets/images/2. Grammar & Language/3. Logic Steps/same.png
+    - assets/images/2. Grammar & Language/3. Logic Steps/because.png
+    - assets/images/2. Grammar & Language/3. Logic Steps/between.png
+    - assets/images/2. Grammar & Language/3. Logic Steps/different.png
+    - assets/images/2. Grammar & Language/3. Logic Steps/together.png
+    - assets/images/2. Grammar & Language/3. Logic Steps/enough.png
+
+Human Body & Identity [human-body-identity]
+  Stage 1: Body Basics
+    - assets/images/3. Human Body & Identity/1. Body Basics/hand.png
+    - assets/images/3. Human Body & Identity/1. Body Basics/eye.png
+    - assets/images/3. Human Body & Identity/1. Body Basics/face.png
+    - assets/images/3. Human Body & Identity/1. Body Basics/mouth.png
+    - assets/images/3. Human Body & Identity/1. Body Basics/hair.png
+    - assets/images/3. Human Body & Identity/1. Body Basics/head.png
+    - assets/images/3. Human Body & Identity/1. Body Basics/nose.png
+    - assets/images/3. Human Body & Identity/1. Body Basics/ear.png
+    - assets/images/3. Human Body & Identity/1. Body Basics/arm.png
+    - assets/images/3. Human Body & Identity/1. Body Basics/leg.png
+
+  Stage 2: Feeling Weather
+    - assets/images/3. Human Body & Identity/2. Feeling Weather/happy.png
+    - assets/images/3. Human Body & Identity/2. Feeling Weather/sad.png
+    - assets/images/3. Human Body & Identity/2. Feeling Weather/angry.png
+    - assets/images/3. Human Body & Identity/2. Feeling Weather/tired.png
+    - assets/images/3. Human Body & Identity/2. Feeling Weather/hungry.png
+    - assets/images/3. Human Body & Identity/2. Feeling Weather/scared.png
+    - assets/images/3. Human Body & Identity/2. Feeling Weather/calm.png
+    - assets/images/3. Human Body & Identity/2. Feeling Weather/sick.png
+    - assets/images/3. Human Body & Identity/2. Feeling Weather/sleepy.png
+    - assets/images/3. Human Body & Identity/2. Feeling Weather/excited.png
+
+  Stage 3: Who You Are
+    - assets/images/3. Human Body & Identity/3. Who you are/name.png
+    - assets/images/3. Human Body & Identity/3. Who you are/age.png
+    - assets/images/3. Human Body & Identity/3. Who you are/family.png
+    - assets/images/3. Human Body & Identity/3. Who you are/dream.png
+    - assets/images/3. Human Body & Identity/3. Who you are/identity.png
+    - assets/images/3. Human Body & Identity/3. Who you are/person.png
+    - assets/images/3. Human Body & Identity/3. Who you are/nickname.png
+    - assets/images/3. Human Body & Identity/3. Who you are/birthday.png
+    - assets/images/3. Human Body & Identity/3. Who you are/future.png
+    - assets/images/3. Human Body & Identity/3. Who you are/surname.png
+
+Personal & Social Life [personal-social-life]
+  Stage 1: Home Rhythm
+    - assets/images/4. Personal & Social Life/1. Home Rythm/bed.png
+    - assets/images/4. Personal & Social Life/1. Home Rythm/house.png
+    - assets/images/4. Personal & Social Life/1. Home Rythm/door.png
+    - assets/images/4. Personal & Social Life/1. Home Rythm/chair.png
+    - assets/images/4. Personal & Social Life/1. Home Rythm/table.png
+    - assets/images/4. Personal & Social Life/1. Home Rythm/window.png
+    - assets/images/4. Personal & Social Life/1. Home Rythm/lamp.png
+    - assets/images/4. Personal & Social Life/1. Home Rythm/sofa.png
+    - assets/images/4. Personal & Social Life/1. Home Rythm/room.png
+    - assets/images/4. Personal & Social Life/1. Home Rythm/kitchen.png
+
+  Stage 2: Social Moments
+    - assets/images/4. Personal & Social Life/2. Social Moments/birthday.png
+    - assets/images/4. Personal & Social Life/2. Social Moments/party.png
+    - assets/images/4. Personal & Social Life/2. Social Moments/laugh.png
+    - assets/images/4. Personal & Social Life/2. Social Moments/share.png
+    - assets/images/4. Personal & Social Life/2. Social Moments/weekend.png
+    - assets/images/4. Personal & Social Life/2. Social Moments/guest.png
+    - assets/images/4. Personal & Social Life/2. Social Moments/gift.png
+    - assets/images/4. Personal & Social Life/2. Social Moments/music.png
+    - assets/images/4. Personal & Social Life/2. Social Moments/dance.png
+    - assets/images/4. Personal & Social Life/2. Social Moments/celebrate.png
+
+  Stage 3: Daily Loop
+    - assets/images/4. Personal & Social Life/3. Daily Loop/breakfast.png
+    - assets/images/4. Personal & Social Life/3. Daily Loop/dinner.png
+    - assets/images/4. Personal & Social Life/3. Daily Loop/visit.png
+    - assets/images/4. Personal & Social Life/3. Daily Loop/hobby.png
+    - assets/images/4. Personal & Social Life/3. Daily Loop/neighbor.png
+    - assets/images/4. Personal & Social Life/3. Daily Loop/morning.png
+    - assets/images/4. Personal & Social Life/3. Daily Loop/evening.png
+    - assets/images/4. Personal & Social Life/3. Daily Loop/street.png
+    - assets/images/4. Personal & Social Life/3. Daily Loop/park.png
+    - assets/images/4. Personal & Social Life/3. Daily Loop/store.png
+
+Education & Work [education-work]
+  Stage 1: Classroom Camp
+    - assets/images/5. Education & Work/1. Classroom Camp/book.png
+    - assets/images/5. Education & Work/1. Classroom Camp/pencil.png
+    - assets/images/5. Education & Work/1. Classroom Camp/ruler.png
+    - assets/images/5. Education & Work/1. Classroom Camp/school.png
+    - assets/images/5. Education & Work/1. Classroom Camp/student.png
+    - assets/images/5. Education & Work/1. Classroom Camp/notebook.png
+    - assets/images/5. Education & Work/1. Classroom Camp/eraser.png
+    - assets/images/5. Education & Work/1. Classroom Camp/classroom.png
+    - assets/images/5. Education & Work/1. Classroom Camp/lesson.png
+    - assets/images/5. Education & Work/1. Classroom Camp/homework.png
+
+  Stage 2: Career Ridge
+    - assets/images/5. Education & Work/2. Career Ridge/teacher.png
+    - assets/images/5. Education & Work/2. Career Ridge/doctor.png
+    - assets/images/5. Education & Work/2. Career Ridge/nurse.png
+    - assets/images/5. Education & Work/2. Career Ridge/chef.png
+    - assets/images/5. Education & Work/2. Career Ridge/pilot.png
+    - assets/images/5. Education & Work/2. Career Ridge/farmer.png
+    - assets/images/5. Education & Work/2. Career Ridge/artist.png
+    - assets/images/5. Education & Work/2. Career Ridge/driver.png
+    - assets/images/5. Education & Work/2. Career Ridge/worker.png
+    - assets/images/5. Education & Work/2. Career Ridge/engineer.png
+
+  Stage 3: Skill Summit
+    - assets/images/5. Education & Work/3. Skill Summit/project.png
+    - assets/images/5. Education & Work/3. Skill Summit/office.png
+    - assets/images/5. Education & Work/3. Skill Summit/leader.png
+    - assets/images/5. Education & Work/3. Skill Summit/report.png
+    - assets/images/5. Education & Work/3. Skill Summit/skill.png
+    - assets/images/5. Education & Work/3. Skill Summit/practice.png
+    - assets/images/5. Education & Work/3. Skill Summit/training.png
+    - assets/images/5. Education & Work/3. Skill Summit/meeting.png
+    - assets/images/5. Education & Work/3. Skill Summit/schedule.png
+    - assets/images/5. Education & Work/3. Skill Summit/goal.png
+
+Places & Environment [places-environment]
+  Stage 1: Nearby Places
+    - assets/images/6. Places & Environment/1. Nearby Places/house.png
+    - assets/images/6. Places & Environment/1. Nearby Places/school.png
+    - assets/images/6. Places & Environment/1. Nearby Places/hospital.png
+    - assets/images/6. Places & Environment/1. Nearby Places/park.png
+    - assets/images/6. Places & Environment/1. Nearby Places/store.png
+    - assets/images/6. Places & Environment/1. Nearby Places/market.png
+    - assets/images/6. Places & Environment/1. Nearby Places/bank.png
+    - assets/images/6. Places & Environment/1. Nearby Places/library.png
+    - assets/images/6. Places & Environment/1. Nearby Places/restaurant.png
+    - assets/images/6. Places & Environment/1. Nearby Places/pharmacy.png
+
+  Stage 2: Landscape Trail
+    - assets/images/6. Places & Environment/2. Landscape Trail/river.png
+    - assets/images/6. Places & Environment/2. Landscape Trail/beach.png
+    - assets/images/6. Places & Environment/2. Landscape Trail/mountain.png
+    - assets/images/6. Places & Environment/2. Landscape Trail/forest.png
+    - assets/images/6. Places & Environment/2. Landscape Trail/lake.png
+    - assets/images/6. Places & Environment/2. Landscape Trail/tree.png
+    - assets/images/6. Places & Environment/2. Landscape Trail/flower.png
+    - assets/images/6. Places & Environment/2. Landscape Trail/hill.png
+    - assets/images/6. Places & Environment/2. Landscape Trail/valley.png
+    - assets/images/6. Places & Environment/2. Landscape Trail/waterfall.png
+
+  Stage 3: World View
+    - assets/images/6. Places & Environment/3. World View/country.png
+    - assets/images/6. Places & Environment/3. World View/city.png
+    - assets/images/6. Places & Environment/3. World View/village.png
+    - assets/images/6. Places & Environment/3. World View/market.png
+    - assets/images/6. Places & Environment/3. World View/station.png
+    - assets/images/6. Places & Environment/3. World View/road.png
+    - assets/images/6. Places & Environment/3. World View/bridge.png
+    - assets/images/6. Places & Environment/3. World View/capital.png
+    - assets/images/6. Places & Environment/3. World View/airport.png
+    - assets/images/6. Places & Environment/3. World View/harbor.png
+
+Movement & Navigation [movement-navigation]
+  Stage 1: Move Now
+    - assets/images/7. Movement & Navegation/1. Move Now/run.png
+    - assets/images/7. Movement & Navegation/1. Move Now/climb.png
+    - assets/images/7. Movement & Navegation/1. Move Now/jump.png
+    - assets/images/7. Movement & Navegation/1. Move Now/turn.png
+    - assets/images/7. Movement & Navegation/1. Move Now/stop.png
+    - assets/images/7. Movement & Navegation/1. Move Now/walk.png
+    - assets/images/7. Movement & Navegation/1. Move Now/move.png
+    - assets/images/7. Movement & Navegation/1. Move Now/step.png
+    - assets/images/7. Movement & Navegation/1. Move Now/return.png
+    - assets/images/7. Movement & Navegation/1. Move Now/go.png
+
+  Stage 2: Transport Line
+    - assets/images/7. Movement & Navegation/2. Transport Line/car.png
+    - assets/images/7. Movement & Navegation/2. Transport Line/bus.png
+    - assets/images/7. Movement & Navegation/2. Transport Line/train.png
+    - assets/images/7. Movement & Navegation/2. Transport Line/bicycle.png
+    - assets/images/7. Movement & Navegation/2. Transport Line/airplane.png
+    - assets/images/7. Movement & Navegation/2. Transport Line/taxi.png
+    - assets/images/7. Movement & Navegation/2. Transport Line/motorcycle.png
+    - assets/images/7. Movement & Navegation/2. Transport Line/boat.png
+    - assets/images/7. Movement & Navegation/2. Transport Line/subway.png
+    - assets/images/7. Movement & Navegation/2. Transport Line/truck.png
+
+  Stage 3: Route Sense
+    - assets/images/7. Movement & Navegation/3. Route Sense/map.png
+    - assets/images/7. Movement & Navegation/3. Route Sense/ticket.png
+    - assets/images/7. Movement & Navegation/3. Route Sense/driver.png
+    - assets/images/7. Movement & Navegation/3. Route Sense/travel.png
+    - assets/images/7. Movement & Navegation/3. Route Sense/destination.png
+    - assets/images/7. Movement & Navegation/3. Route Sense/left.png
+    - assets/images/7. Movement & Navegation/3. Route Sense/right.png
+    - assets/images/7. Movement & Navegation/3. Route Sense/north.png
+    - assets/images/7. Movement & Navegation/3. Route Sense/compass.png
+    - assets/images/7. Movement & Navegation/3. Route Sense/guide.png
+
+Shopping & Daily Life [shopping-daily-life]
+  Stage 1: Handy Pack
+    - assets/images/8. Shopping & Daily Life/1. Handy Pack/bag.png
+    - assets/images/8. Shopping & Daily Life/1. Handy Pack/key.png
+    - assets/images/8. Shopping & Daily Life/1. Handy Pack/bottle.png
+    - assets/images/8. Shopping & Daily Life/1. Handy Pack/basket.png
+    - assets/images/8. Shopping & Daily Life/1. Handy Pack/soap.png
+    - assets/images/8. Shopping & Daily Life/1. Handy Pack/wallet.png
+    - assets/images/8. Shopping & Daily Life/1. Handy Pack/coin.png
+    - assets/images/8. Shopping & Daily Life/1. Handy Pack/phone.png
+    - assets/images/8. Shopping & Daily Life/1. Handy Pack/notebook.png
+    - assets/images/8. Shopping & Daily Life/1. Handy Pack/umbrella.png
+
+  Stage 2: Market Words
+    - assets/images/8. Shopping & Daily Life/2. Market Works/money.png
+    - assets/images/8. Shopping & Daily Life/2. Market Works/price.png
+    - assets/images/8. Shopping & Daily Life/2. Market Works/buy.png
+    - assets/images/8. Shopping & Daily Life/2. Market Works/sell.png
+    - assets/images/8. Shopping & Daily Life/2. Market Works/receipt.png
+    - assets/images/8. Shopping & Daily Life/2. Market Works/change.png
+    - assets/images/8. Shopping & Daily Life/2. Market Works/customer.png
+    - assets/images/8. Shopping & Daily Life/2. Market Works/cashier.png
+    - assets/images/8. Shopping & Daily Life/2. Market Works/discount.png
+    - assets/images/8. Shopping & Daily Life/2. Market Works/cart.png
+
+  Stage 3: Routine Shelf
+    - assets/images/8. Shopping & Daily Life/3. Routine Shelf/towel.png
+    - assets/images/8. Shopping & Daily Life/3. Routine Shelf/clock.png
+    - assets/images/8. Shopping & Daily Life/3. Routine Shelf/package.png
+    - assets/images/8. Shopping & Daily Life/3. Routine Shelf/breakfast.png
+    - assets/images/8. Shopping & Daily Life/3. Routine Shelf/snack.png
+    - assets/images/8. Shopping & Daily Life/3. Routine Shelf/soap.png
+    - assets/images/8. Shopping & Daily Life/3. Routine Shelf/toothbrush.png
+    - assets/images/8. Shopping & Daily Life/3. Routine Shelf/mirror.png
+    - assets/images/8. Shopping & Daily Life/3. Routine Shelf/toothpaste.png
+    - assets/images/8. Shopping & Daily Life/3. Routine Shelf/shampoo.png
+
+Clothing & Style [clothing-style]
+  Stage 1: Closet Base
+    - assets/images/9. Clothing & Style/1. Closet Base/shirt.png
+    - assets/images/9. Clothing & Style/1. Closet Base/pants.png
+    - assets/images/9. Clothing & Style/1. Closet Base/hat.png
+    - assets/images/9. Clothing & Style/1. Closet Base/shoes.png
+    - assets/images/9. Clothing & Style/1. Closet Base/dress.png
+    - assets/images/9. Clothing & Style/1. Closet Base/socks.png
+    - assets/images/9. Clothing & Style/1. Closet Base/skirt.png
+    - assets/images/9. Clothing & Style/1. Closet Base/sweater.png
+    - assets/images/9. Clothing & Style/1. Closet Base/coat.png
+    - assets/images/9. Clothing & Style/1. Closet Base/shorts.png
+
+  Stage 2: Style Notes
+    - assets/images/9. Clothing & Style/2. Style Notes/color.png
+    - assets/images/9. Clothing & Style/2. Style Notes/pattern.png
+    - assets/images/9. Clothing & Style/2. Style Notes/soft.png
+    - assets/images/9. Clothing & Style/2. Style Notes/elegant.png
+    - assets/images/9. Clothing & Style/2. Style Notes/casual.png
+    - assets/images/9. Clothing & Style/2. Style Notes/formal.png
+    - assets/images/9. Clothing & Style/2. Style Notes/modern.png
+    - assets/images/9. Clothing & Style/2. Style Notes/loose.png
+    - assets/images/9. Clothing & Style/2. Style Notes/warm.png
+    - assets/images/9. Clothing & Style/2. Style Notes/clean.png
+
+  Stage 3: Outfit Finish
+    - assets/images/9. Clothing & Style/3. Outfit Finish/jacket.png
+    - assets/images/9. Clothing & Style/3. Outfit Finish/scarf.png
+    - assets/images/9. Clothing & Style/3. Outfit Finish/belt.png
+    - assets/images/9. Clothing & Style/3. Outfit Finish/outfit.png
+    - assets/images/9. Clothing & Style/3. Outfit Finish/favorite.png
+    - assets/images/9. Clothing & Style/3. Outfit Finish/watch.png
+    - assets/images/9. Clothing & Style/3. Outfit Finish/ring.png
+    - assets/images/9. Clothing & Style/3. Outfit Finish/necklace.png
+    - assets/images/9. Clothing & Style/3. Outfit Finish/gloves.png
+    - assets/images/9. Clothing & Style/3. Outfit Finish/style.png
+
+Food & Drinks [food-drinks]
+  Stage 1: Kitchen Base
+    - assets/images/10. Food & Drinks/1. Kitchen Base/apple.png
+    - assets/images/10. Food & Drinks/1. Kitchen Base/bread.png
+    - assets/images/10. Food & Drinks/1. Kitchen Base/milk.png
+    - assets/images/10. Food & Drinks/1. Kitchen Base/water.png
+    - assets/images/10. Food & Drinks/1. Kitchen Base/egg.png
+    - assets/images/10. Food & Drinks/1. Kitchen Base/banana.png
+    - assets/images/10. Food & Drinks/1. Kitchen Base/rice.png
+    - assets/images/10. Food & Drinks/1. Kitchen Base/cheese.png
+    - assets/images/10. Food & Drinks/1. Kitchen Base/juice.png
+    - assets/images/10. Food & Drinks/1. Kitchen Base/chicken.png
+
+  Stage 2: Favorite Meals
+    - assets/images/10. Food & Drinks/2. Favorite Meals/pizza.png
+    - assets/images/10. Food & Drinks/2. Favorite Meals/soup.png
+    - assets/images/10. Food & Drinks/2. Favorite Meals/salad.png
+    - assets/images/10. Food & Drinks/2. Favorite Meals/sandwich.png
+    - assets/images/10. Food & Drinks/2. Favorite Meals/tea.png
+    - assets/images/10. Food & Drinks/2. Favorite Meals/burger.png
+    - assets/images/10. Food & Drinks/2. Favorite Meals/pasta.png
+    - assets/images/10. Food & Drinks/2. Favorite Meals/cake.png
+    - assets/images/10. Food & Drinks/2. Favorite Meals/coffee.png
+    - assets/images/10. Food & Drinks/2. Favorite Meals/rice-dish.png
+
+  Stage 3: Menu Peak
+    - assets/images/10. Food & Drinks/3. Menu Peak/dessert.png
+    - assets/images/10. Food & Drinks/3. Menu Peak/recipe.png
+    - assets/images/10. Food & Drinks/3. Menu Peak/cook.png
+    - assets/images/10. Food & Drinks/3. Menu Peak/delicious.png
+    - assets/images/10. Food & Drinks/3. Menu Peak/breakfast.png
+    - assets/images/10. Food & Drinks/3. Menu Peak/ingredient.png
+    - assets/images/10. Food & Drinks/3. Menu Peak/menu.png
+    - assets/images/10. Food & Drinks/3. Menu Peak/flavor.png
+    - assets/images/10. Food & Drinks/3. Menu Peak/portion.png
+    - assets/images/10. Food & Drinks/3. Menu Peak/plate.png
+
+Nature & Weather [nature-weather]
+  Stage 1: Sky Signals
+    - assets/images/11. Nature & Weather/1. Sky Signals/sun.png
+    - assets/images/11. Nature & Weather/1. Sky Signals/moon.png
+    - assets/images/11. Nature & Weather/1. Sky Signals/cloud.png
+    - assets/images/11. Nature & Weather/1. Sky Signals/rain.png
+    - assets/images/11. Nature & Weather/1. Sky Signals/wind.png
+    - assets/images/11. Nature & Weather/1. Sky Signals/snow.png
+    - assets/images/11. Nature & Weather/1. Sky Signals/storm.png
+    - assets/images/11. Nature & Weather/1. Sky Signals/rainbow.png
+    - assets/images/11. Nature & Weather/1. Sky Signals/thunder.png
+    - assets/images/11. Nature & Weather/1. Sky Signals/fog.png
+
+  Stage 2: Wild Friends
+    - assets/images/11. Nature & Weather/2. Wild Friends/lion.png
+    - assets/images/11. Nature & Weather/2. Wild Friends/turtle.png
+    - assets/images/11. Nature & Weather/2. Wild Friends/bee.png
+    - assets/images/11. Nature & Weather/2. Wild Friends/fox.png
+    - assets/images/11. Nature & Weather/2. Wild Friends/dolphin.png
+    - assets/images/11. Nature & Weather/2. Wild Friends/bird.png
+    - assets/images/11. Nature & Weather/2. Wild Friends/dog.png
+    - assets/images/11. Nature & Weather/2. Wild Friends/cat.png
+    - assets/images/11. Nature & Weather/2. Wild Friends/fish.png
+    - assets/images/11. Nature & Weather/2. Wild Friends/horse.png
+
+  Stage 3: Earth Scale
+    - assets/images/11. Nature & Weather/3. Earth Scale/season.png
+    - assets/images/11. Nature & Weather/3. Earth Scale/flower.png
+    - assets/images/11. Nature & Weather/3. Earth Scale/tree.png
+    - assets/images/11. Nature & Weather/3. Earth Scale/ocean.png
+    - assets/images/11. Nature & Weather/3. Earth Scale/volcano.png
+    - assets/images/11. Nature & Weather/3. Earth Scale/beach.png
+    - assets/images/11. Nature & Weather/3. Earth Scale/desert.png
+    - assets/images/11. Nature & Weather/3. Earth Scale/island.png
+    - assets/images/11. Nature & Weather/3. Earth Scale/spring.png
+    - assets/images/11. Nature & Weather/3. Earth Scale/autumn.png
+
+Culture & Leisure [culture-leisure]
+  Stage 1: Free Time
+    - assets/images/12. Culture & Leisure/1. Free Time/game.png
+    - assets/images/12. Culture & Leisure/1. Free Time/music.png
+    - assets/images/12. Culture & Leisure/1. Free Time/dance.png
+    - assets/images/12. Culture & Leisure/1. Free Time/movie.png
+    - assets/images/12. Culture & Leisure/1. Free Time/art.png
+    - assets/images/12. Culture & Leisure/1. Free Time/book.png
+    - assets/images/12. Culture & Leisure/1. Free Time/theater.png
+    - assets/images/12. Culture & Leisure/1. Free Time/museum.png
+    - assets/images/12. Culture & Leisure/1. Free Time/drawing.png
+    - assets/images/12. Culture & Leisure/1. Free Time/singing.png
+
+  Stage 2: Sport Pulse
+    - assets/images/12. Culture & Leisure/2. Sport Pulse/soccer.png
+    - assets/images/12. Culture & Leisure/2. Sport Pulse/basketball.png
+    - assets/images/12. Culture & Leisure/2. Sport Pulse/tennis.png
+    - assets/images/12. Culture & Leisure/2. Sport Pulse/team.png
+    - assets/images/12. Culture & Leisure/2. Sport Pulse/score.png
+    - assets/images/12. Culture & Leisure/2. Sport Pulse/goal.png
+    - assets/images/12. Culture & Leisure/2. Sport Pulse/ball.png
+    - assets/images/12. Culture & Leisure/2. Sport Pulse/player.png
+    - assets/images/12. Culture & Leisure/2. Sport Pulse/referee.png
+    - assets/images/12. Culture & Leisure/2. Sport Pulse/stadium.png
+
+  Stage 3: Creative Peak
+    - assets/images/12. Culture & Leisure/3. Creative Peak/guitar.png
+    - assets/images/12. Culture & Leisure/3. Creative Peak/camera.png
+    - assets/images/12. Culture & Leisure/3. Creative Peak/story.png
+    - assets/images/12. Culture & Leisure/3. Creative Peak/festival.png
+    - assets/images/12. Culture & Leisure/3. Creative Peak/performance.png
+    - assets/images/12. Culture & Leisure/3. Creative Peak/stage.png
+    - assets/images/12. Culture & Leisure/3. Creative Peak/audience.png
+    - assets/images/12. Culture & Leisure/3. Creative Peak/art.png
+    - assets/images/12. Culture & Leisure/3. Creative Peak/song.png
+    - assets/images/12. Culture & Leisure/3. Creative Peak/painting.png
+
+Tools & Objects [tools-objects]
+  Stage 1: Useful Basics
+    - assets/images/13. Tools & Objects/1. Useful Basics/cup.png
+    - assets/images/13. Tools & Objects/1. Useful Basics/plate.png
+    - assets/images/13. Tools & Objects/1. Useful Basics/map.png
+    - assets/images/13. Tools & Objects/1. Useful Basics/clock.png
+    - assets/images/13. Tools & Objects/1. Useful Basics/lamp.png
+    - assets/images/13. Tools & Objects/1. Useful Basics/box.png
+    - assets/images/13. Tools & Objects/1. Useful Basics/mirror.png
+    - assets/images/13. Tools & Objects/1. Useful Basics/spoon.png
+    - assets/images/13. Tools & Objects/1. Useful Basics/fork.png
+    - assets/images/13. Tools & Objects/1. Useful Basics/key.png
+
+  Stage 2: Tool Bench
+    - assets/images/13. Tools & Objects/2. Tool Bench/hammer.png
+    - assets/images/13. Tools & Objects/2. Tool Bench/rope.png
+    - assets/images/13. Tools & Objects/2. Tool Bench/ladder.png
+    - assets/images/13. Tools & Objects/2. Tool Bench/shovel.png
+    - assets/images/13. Tools & Objects/2. Tool Bench/brush.png
+    - assets/images/13. Tools & Objects/2. Tool Bench/scissors.png
+    - assets/images/13. Tools & Objects/2. Tool Bench/screwdriver.png
+    - assets/images/13. Tools & Objects/2. Tool Bench/wrench.png
+    - assets/images/13. Tools & Objects/2. Tool Bench/drill.png
+    - assets/images/13. Tools & Objects/2. Tool Bench/tape-measure.png
+
+  Stage 3: Material Lab
+    - assets/images/13. Tools & Objects/3. Material Lab/metal.png
+    - assets/images/13. Tools & Objects/3. Material Lab/wood.png
+    - assets/images/13. Tools & Objects/3. Material Lab/glass.png
+    - assets/images/13. Tools & Objects/3. Material Lab/button.png
+    - assets/images/13. Tools & Objects/3. Material Lab/machine.png
+    - assets/images/13. Tools & Objects/3. Material Lab/plastic.png
+    - assets/images/13. Tools & Objects/3. Material Lab/paper.png
+    - assets/images/13. Tools & Objects/3. Material Lab/stone.png
+    - assets/images/13. Tools & Objects/3. Material Lab/fabric.png
+    - assets/images/13. Tools & Objects/3. Material Lab/clay.png
+
+Technology [technology]
+  Stage 1: Device Deck
+    - assets/images/14. Technology/1. Device Deck/phone.png
+    - assets/images/14. Technology/1. Device Deck/laptop.png
+    - assets/images/14. Technology/1. Device Deck/screen.png
+    - assets/images/14. Technology/1. Device Deck/speaker.png
+    - assets/images/14. Technology/1. Device Deck/keyboard.png
+    - assets/images/14. Technology/1. Device Deck/charger.png
+    - assets/images/14. Technology/1. Device Deck/camera.png
+    - assets/images/14. Technology/1. Device Deck/mouse.png
+    - assets/images/14. Technology/1. Device Deck/tablet.png
+    - assets/images/14. Technology/1. Device Deck/smartwatch.png
+
+  Stage 2: Digital Trail
+    - assets/images/14. Technology/2. Digital Trail/internet.png
+    - assets/images/14. Technology/2. Digital Trail/message.png
+    - assets/images/14. Technology/2. Digital Trail/video.png
+    - assets/images/14. Technology/2. Digital Trail/battery.png
+    - assets/images/14. Technology/2. Digital Trail/charger.png
+    - assets/images/14. Technology/2. Digital Trail/app.png
+    - assets/images/14. Technology/2. Digital Trail/email.png
+    - assets/images/14. Technology/2. Digital Trail/password.png
+    - assets/images/14. Technology/2. Digital Trail/website.png
+    - assets/images/14. Technology/2. Digital Trail/file.png
+
+  Stage 3: Future Lab
+    - assets/images/14. Technology/3. Future Lab/robot.png
+    - assets/images/14. Technology/3. Future Lab/data.png
+    - assets/images/14. Technology/3. Future Lab/network.png
+    - assets/images/14. Technology/3. Future Lab/digital.png
+    - assets/images/14. Technology/3. Future Lab/innovation.png
+    - assets/images/14. Technology/3. Future Lab/storage.png
+    - assets/images/14. Technology/3. Future Lab/update.png
+    - assets/images/14. Technology/3. Future Lab/code.png
+    - assets/images/14. Technology/3. Future Lab/cloud.png
+    - assets/images/14. Technology/3. Future Lab/chip.png
+
+Concepts & Academic [concepts-academic]
+  Stage 1: Size and Time
+    - assets/images/15. Concepts & Academic/1. Size and Time/big.png
+    - assets/images/15. Concepts & Academic/1. Size and Time/small.png
+    - assets/images/15. Concepts & Academic/1. Size and Time/long.png
+    - assets/images/15. Concepts & Academic/1. Size and Time/short.png
+    - assets/images/15. Concepts & Academic/1. Size and Time/early.png
+    - assets/images/15. Concepts & Academic/1. Size and Time/late.png
+    - assets/images/15. Concepts & Academic/1. Size and Time/near.png
+    - assets/images/15. Concepts & Academic/1. Size and Time/far.png
+    - assets/images/15. Concepts & Academic/1. Size and Time/equal.png
+    - assets/images/15. Concepts & Academic/1. Size and Time/minute.png
+
+  Stage 2: Quality Markers
+    - assets/images/15. Concepts & Academic/2. Quality Markers/clean.png
+    - assets/images/15. Concepts & Academic/2. Quality Markers/dirty.png
+    - assets/images/15. Concepts & Academic/2. Quality Markers/bright.png
+    - assets/images/15. Concepts & Academic/2. Quality Markers/dark.png
+    - assets/images/15. Concepts & Academic/2. Quality Markers/quiet.png
+    - assets/images/15. Concepts & Academic/2. Quality Markers/simple.png
+    - assets/images/15. Concepts & Academic/2. Quality Markers/complex.png
+    - assets/images/15. Concepts & Academic/2. Quality Markers/heavy.png
+    - assets/images/15. Concepts & Academic/2. Quality Markers/light.png
+    - assets/images/15. Concepts & Academic/2. Quality Markers/sharp.png
+
+  Stage 3: Reason Path
+    - assets/images/15. Concepts & Academic/3. Reason Path/compare.png
+    - assets/images/15. Concepts & Academic/3. Reason Path/reason.png
+    - assets/images/15. Concepts & Academic/3. Reason Path/result.png
+    - assets/images/15. Concepts & Academic/3. Reason Path/inside.png
+    - assets/images/15. Concepts & Academic/3. Reason Path/outside.png
+    - assets/images/15. Concepts & Academic/3. Reason Path/cause.png
+    - assets/images/15. Concepts & Academic/3. Reason Path/effect.png
+    - assets/images/15. Concepts & Academic/3. Reason Path/proof.png
+    - assets/images/15. Concepts & Academic/3. Reason Path/relation.png
+    - assets/images/15. Concepts & Academic/3. Reason Path/idea.png
+

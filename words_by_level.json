@@ -646,6 +646,12 @@
                                                                  "futuro",
                                                                  "🌟",
                                                                  "Time that comes later in life"
+                                                             ],
+                                                             [
+                                                                 "surname",
+                                                                 "apellido",
+                                                                 "🪪",
+                                                                 "Your family name"
                                                              ]
                                                          ]
                                       }
@@ -1010,6 +1016,12 @@
                                                                  "trabajador",
                                                                  "🧰",
                                                                  "Person doing a job"
+                                                             ],
+                                                             [
+                                                                 "engineer",
+                                                                 "ingeniero",
+                                                                 "🧰",
+                                                                 "Builds and solves technical problems"
                                                              ]
                                                          ]
                                       },
@@ -1080,6 +1092,24 @@
                                                                  "entrenamiento",
                                                                  "🛠️",
                                                                  "Practice for better performance"
+                                                             ],
+                                                             [
+                                                                 "meeting",
+                                                                 "reunion",
+                                                                 "🤝",
+                                                                 "People gather to discuss work"
+                                                             ],
+                                                             [
+                                                                 "schedule",
+                                                                 "horario",
+                                                                 "🗓️",
+                                                                 "Plan for tasks and time"
+                                                             ],
+                                                             [
+                                                                 "goal",
+                                                                 "meta",
+                                                                 "🎯",
+                                                                 "Target you want to achieve"
                                                              ]
                                                          ]
                                       }
@@ -1157,6 +1187,12 @@
                                                                  "restaurante",
                                                                  "🍽️",
                                                                  "Place where meals are served"
+                                                             ],
+                                                             [
+                                                                 "pharmacy",
+                                                                 "farmacia",
+                                                                 "💊",
+                                                                 "Place for medicine"
                                                              ]
                                                          ]
                                       },
@@ -1227,6 +1263,24 @@
                                                                  "flor",
                                                                  "🌸",
                                                                  "Colorful part of a plant"
+                                                             ],
+                                                             [
+                                                                 "hill",
+                                                                 "colina",
+                                                                 "⛰️",
+                                                                 "Small raised landform"
+                                                             ],
+                                                             [
+                                                                 "valley",
+                                                                 "valle",
+                                                                 "🏞️",
+                                                                 "Land between mountains"
+                                                             ],
+                                                             [
+                                                                 "waterfall",
+                                                                 "cascada",
+                                                                 "🌊",
+                                                                 "Water falling from high rocks"
                                                              ]
                                                          ]
                                       },
@@ -1297,6 +1351,24 @@
                                                                  "estacion",
                                                                  "🚉",
                                                                  "Stop for transport"
+                                                             ],
+                                                             [
+                                                                 "capital",
+                                                                 "capital",
+                                                                 "🏛️",
+                                                                 "Main city of a country"
+                                                             ],
+                                                             [
+                                                                 "airport",
+                                                                 "aeropuerto",
+                                                                 "🛫",
+                                                                 "Place for planes and flights"
+                                                             ],
+                                                             [
+                                                                 "harbor",
+                                                                 "puerto",
+                                                                 "⚓",
+                                                                 "Place where boats arrive"
                                                              ]
                                                          ]
                                       }
@@ -1661,6 +1733,30 @@
                                                                  "cambio",
                                                                  "💱",
                                                                  "Money returned after paying"
+                                                             ],
+                                                             [
+                                                                 "customer",
+                                                                 "cliente",
+                                                                 "🧍",
+                                                                 "Person who buys things"
+                                                             ],
+                                                             [
+                                                                 "cashier",
+                                                                 "cajero",
+                                                                 "💵",
+                                                                 "Person who receives payment"
+                                                             ],
+                                                             [
+                                                                 "discount",
+                                                                 "descuento",
+                                                                 "🏷️",
+                                                                 "Lower special price"
+                                                             ],
+                                                             [
+                                                                 "cart",
+                                                                 "carrito",
+                                                                 "🛒",
+                                                                 "Used to carry products in a store"
                                                              ]
                                                          ]
                                       },
@@ -1731,6 +1827,12 @@
                                                                  "pasta dental",
                                                                  "🦷",
                                                                  "Cream used with a toothbrush"
+                                                             ],
+                                                             [
+                                                                 "shampoo",
+                                                                 "champu",
+                                                                 "🧴",
+                                                                 "Liquid used to wash hair"
                                                              ]
                                                          ]
                                       }
@@ -1808,6 +1910,36 @@
                                                                  "sombrero",
                                                                  "👒",
                                                                  "Worn on the head"
+                                                             ],
+                                                             [
+                                                                 "socks",
+                                                                 "calcetines",
+                                                                 "🧦",
+                                                                 "Clothing for your feet"
+                                                             ],
+                                                             [
+                                                                 "skirt",
+                                                                 "falda",
+                                                                 "👗",
+                                                                 "Clothing worn around the waist"
+                                                             ],
+                                                             [
+                                                                 "sweater",
+                                                                 "sueter",
+                                                                 "🧥",
+                                                                 "Warm clothing for the upper body"
+                                                             ],
+                                                             [
+                                                                 "coat",
+                                                                 "abrigo",
+                                                                 "🧥",
+                                                                 "Outer clothing for cold weather"
+                                                             ],
+                                                             [
+                                                                 "shorts",
+                                                                 "pantalones cortos",
+                                                                 "🩳",
+                                                                 "Short pants for warm days"
                                                              ]
                                                          ]
                                       },
@@ -2242,6 +2374,30 @@
                                                                  "nieve",
                                                                  "❄️",
                                                                  "Frozen white weather"
+                                                             ],
+                                                             [
+                                                                 "storm",
+                                                                 "tormenta",
+                                                                 "⛈️",
+                                                                 "Strong weather with rain and wind"
+                                                             ],
+                                                             [
+                                                                 "rainbow",
+                                                                 "arcoiris",
+                                                                 "🌈",
+                                                                 "Colors in the sky after rain"
+                                                             ],
+                                                             [
+                                                                 "thunder",
+                                                                 "trueno",
+                                                                 "⚡",
+                                                                 "Loud sound during a storm"
+                                                             ],
+                                                             [
+                                                                 "fog",
+                                                                 "niebla",
+                                                                 "🌫️",
+                                                                 "Cloud close to the ground"
                                                              ]
                                                          ]
                                       },
@@ -2382,6 +2538,12 @@
                                                                  "primavera",
                                                                  "🌱",
                                                                  "Season of new plant growth"
+                                                             ],
+                                                             [
+                                                                 "autumn",
+                                                                 "otoño",
+                                                                 "🍂",
+                                                                 "Season after summer"
                                                              ]
                                                          ]
                                       }
@@ -2459,6 +2621,30 @@
                                                                  "danza",
                                                                  "💃",
                                                                  "Movement performed to music"
+                                                             ],
+                                                             [
+                                                                 "theater",
+                                                                 "teatro",
+                                                                 "🎭",
+                                                                 "Place for plays and performances"
+                                                             ],
+                                                             [
+                                                                 "museum",
+                                                                 "museo",
+                                                                 "🏛️",
+                                                                 "Place with art and history"
+                                                             ],
+                                                             [
+                                                                 "drawing",
+                                                                 "dibujo",
+                                                                 "✏️",
+                                                                 "Making pictures with a pencil"
+                                                             ],
+                                                             [
+                                                                 "singing",
+                                                                 "cantar",
+                                                                 "🎤",
+                                                                 "Making music with your voice"
                                                              ]
                                                          ]
                                       },
@@ -2529,6 +2715,18 @@
                                                                  "marcador",
                                                                  "🏆",
                                                                  "Result of a match"
+                                                             ],
+                                                             [
+                                                                 "referee",
+                                                                 "arbitro",
+                                                                 "🧑‍⚖️",
+                                                                 "Person who controls the rules"
+                                                             ],
+                                                             [
+                                                                 "stadium",
+                                                                 "estadio",
+                                                                 "🏟️",
+                                                                 "Large place for sports events"
                                                              ]
                                                          ]
                                       },
@@ -2599,6 +2797,12 @@
                                                                  "cancion",
                                                                  "🎤",
                                                                  "Piece of music you sing"
+                                                             ],
+                                                             [
+                                                                 "painting",
+                                                                 "pintura",
+                                                                 "🖼️",
+                                                                 "Art made with color on a surface"
                                                              ]
                                                          ]
                                       }
@@ -2676,6 +2880,24 @@
                                                                  "espejo",
                                                                  "🪞",
                                                                  "Reflects what is in front of it"
+                                                             ],
+                                                             [
+                                                                 "spoon",
+                                                                 "cuchara",
+                                                                 "🥄",
+                                                                 "Tool used to eat or serve food"
+                                                             ],
+                                                             [
+                                                                 "fork",
+                                                                 "tenedor",
+                                                                 "🍴",
+                                                                 "Tool with points for eating"
+                                                             ],
+                                                             [
+                                                                 "key",
+                                                                 "llave",
+                                                                 "🗝️",
+                                                                 "Used to open a lock"
                                                              ]
                                                          ]
                                       },
@@ -2746,6 +2968,24 @@
                                                                  "pala",
                                                                  "🪏",
                                                                  "Tool used to dig"
+                                                             ],
+                                                             [
+                                                                 "wrench",
+                                                                 "llave inglesa",
+                                                                 "🔧",
+                                                                 "Tool for turning bolts"
+                                                             ],
+                                                             [
+                                                                 "drill",
+                                                                 "taladro",
+                                                                 "🛠️",
+                                                                 "Tool used to make holes"
+                                                             ],
+                                                             [
+                                                                 "tape measure",
+                                                                 "cinta metrica",
+                                                                 "📏",
+                                                                 "Tool used to measure length"
                                                              ]
                                                          ]
                                       },
@@ -2816,6 +3056,24 @@
                                                                  "papel",
                                                                  "📄",
                                                                  "Thin material for writing"
+                                                             ],
+                                                             [
+                                                                 "stone",
+                                                                 "piedra",
+                                                                 "🪨",
+                                                                 "Hard natural material"
+                                                             ],
+                                                             [
+                                                                 "fabric",
+                                                                 "tela",
+                                                                 "🧵",
+                                                                 "Soft material used for clothes"
+                                                             ],
+                                                             [
+                                                                 "clay",
+                                                                 "arcilla",
+                                                                 "🟤",
+                                                                 "Soft earth used to shape objects"
                                                              ]
                                                          ]
                                       }
@@ -2893,6 +3151,18 @@
                                                                  "raton",
                                                                  "🖱️",
                                                                  "Small device to control a computer"
+                                                             ],
+                                                             [
+                                                                 "tablet",
+                                                                 "tableta",
+                                                                 "📱",
+                                                                 "Flat touchscreen device"
+                                                             ],
+                                                             [
+                                                                 "smartwatch",
+                                                                 "reloj inteligente",
+                                                                 "⌚",
+                                                                 "Watch with digital functions"
                                                              ]
                                                          ]
                                       },
@@ -2963,6 +3233,12 @@
                                                                  "sitio web",
                                                                  "🖥️",
                                                                  "Page or place on the internet"
+                                                             ],
+                                                             [
+                                                                 "file",
+                                                                 "archivo",
+                                                                 "📄",
+                                                                 "Digital document stored on a device"
                                                              ]
                                                          ]
                                       },
@@ -3033,6 +3309,24 @@
                                                                  "innovacion",
                                                                  "🚀",
                                                                  "New useful technological idea"
+                                                             ],
+                                                             [
+                                                                 "code",
+                                                                 "codigo",
+                                                                 "💻",
+                                                                 "Instructions written for computers"
+                                                             ],
+                                                             [
+                                                                 "cloud",
+                                                                 "nube digital",
+                                                                 "☁️",
+                                                                 "Online storage and services"
+                                                             ],
+                                                             [
+                                                                 "chip",
+                                                                 "chip",
+                                                                 "🔌",
+                                                                 "Small component inside devices"
                                                              ]
                                                          ]
                                       }
@@ -3110,6 +3404,12 @@
                                                                  "igual",
                                                                  "⚖️",
                                                                  "Exactly the same in value"
+                                                             ],
+                                                             [
+                                                                 "minute",
+                                                                 "minuto",
+                                                                 "⏱️",
+                                                                 "A short unit of time"
                                                              ]
                                                          ]
                                       },
@@ -3180,6 +3480,24 @@
                                                                  "silencioso",
                                                                  "🤫",
                                                                  "Without much sound"
+                                                             ],
+                                                             [
+                                                                 "heavy",
+                                                                 "pesado",
+                                                                 "🏋️",
+                                                                 "Has a lot of weight"
+                                                             ],
+                                                             [
+                                                                 "light",
+                                                                 "ligero",
+                                                                 "🪶",
+                                                                 "Has little weight"
+                                                             ],
+                                                             [
+                                                                 "sharp",
+                                                                 "afilado",
+                                                                 "🔺",
+                                                                 "Has a fine cutting edge"
                                                              ]
                                                          ]
                                       },

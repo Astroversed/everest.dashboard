@@ -827,6 +827,10 @@ function normalizeWord(value) {
     return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
 }
 
+function slugifyAssetName(value) {
+    return normalizeWord(value).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
 function repairPotentialMojibake(value) {
     const text = String(value || '');
     if (!text || !/[ÃÂâð]/.test(text)) return text;
@@ -924,6 +928,42 @@ const THEME_MATCH_SIGNAL_EMOJIS = {
     'tools-objects': '\uD83E\uDDF0',
     technology: '\uD83D\uDCBB',
     'concepts-academic': '\uD83D\uDCD8'
+};
+
+const LEARN_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
+const LEARN_IMAGE_THEME_FOLDERS = {
+    'basic-communication': '1. Basic Communication',
+    'grammar-language': '2. Grammar & Language',
+    'human-body-identity': '3. Human Body & Identity',
+    'personal-social-life': '4. Personal & Social Life',
+    'education-work': '5. Education & Work',
+    'places-environment': '6. Places & Environment',
+    'movement-navigation': '7. Movement & Navegation',
+    'shopping-daily-life': '8. Shopping & Daily Life',
+    'clothing-style': '9. Clothing & Style',
+    'food-drinks': '10. Food & Drinks',
+    'nature-weather': '11. Nature & Weather',
+    'culture-leisure': '12. Culture & Leisure',
+    'tools-objects': '13. Tools & Objects',
+    technology: '14. Technology',
+    'concepts-academic': '15. Concepts & Academic'
+};
+const LEARN_IMAGE_STAGE_FOLDERS = {
+    'basic-communication': { 1: '1. Trail Talk', 2: '2. Quick Replies', 3: '3. Social Spark' },
+    'grammar-language': { 1: '1. Action Ridge', 2: '2. Describe the view', 3: '3. Logic Steps' },
+    'human-body-identity': { 1: '1. Body Basics', 2: '2. Feeling Weather', 3: '3. Who you are' },
+    'personal-social-life': { 1: '1. Home Rythm', 2: '2. Social Moments', 3: '3. Daily Loop' },
+    'education-work': { 1: '1. Classroom Camp', 2: '2. Career Ridge', 3: '3. Skill Summit' },
+    'places-environment': { 1: '1. Nearby Places', 2: '2. Landscape Trail', 3: '3. World View' },
+    'movement-navigation': { 1: '1. Move Now', 2: '2. Transport Line', 3: '3. Route Sense' },
+    'shopping-daily-life': { 1: '1. Handy Pack', 2: '2. Market Works', 3: '3. Routine Shelf' },
+    'clothing-style': { 1: '1. Closet Base', 2: '2. Style Notes', 3: '3. Outfit Finish' },
+    'food-drinks': { 1: '1. Kitchen Base', 2: '2. Favorite Meals', 3: '3. Menu Peak' },
+    'nature-weather': { 1: '1. Sky Signals', 2: '2. Wild Friends', 3: '3. Earth Scale' },
+    'culture-leisure': { 1: '1. Free Time', 2: '2. Sport Pulse', 3: '3. Creative Peak' },
+    'tools-objects': { 1: '1. Useful Basics', 2: '2. Tool Bench', 3: '3. Material Lab' },
+    technology: { 1: '1. Device Deck', 2: '2. Digital Trail', 3: '3. Future Lab' },
+    'concepts-academic': { 1: '1. Size and Time', 2: '2. Quality Markers', 3: '3. Reason Path' }
 };
 
 function pruneUsers() {
@@ -1568,6 +1608,58 @@ function convertTerm(raw) {
     return { en: repairPotentialMojibake(raw[0]), es: repairPotentialMojibake(raw[1]), emoji: repairPotentialMojibake(raw[2]), hint: repairPotentialMojibake(raw[3]) };
 }
 
+function getLearnImageCandidates(themeId, stageId, termEn) {
+    const themeFolder = LEARN_IMAGE_THEME_FOLDERS[themeId];
+    const stageFolder = LEARN_IMAGE_STAGE_FOLDERS[themeId]?.[stageId];
+    const assetSlug = slugifyAssetName(termEn);
+    if (!themeFolder || !stageFolder || !assetSlug) return [];
+    const basePath = `assets/images/${themeFolder}/${stageFolder}/${assetSlug}`;
+    return LEARN_IMAGE_EXTENSIONS.map((extension) => `${basePath}.${extension}`);
+}
+
+function hydrateLearnMedia(card) {
+    const media = document.querySelector('.learn-card__media');
+    const image = media?.querySelector('.learn-card__image');
+    const fallback = media?.querySelector('.learn-card__fallback');
+    if (!media || !image || !fallback) return;
+
+    const sources = Array.isArray(card?.imageCandidates) ? card.imageCandidates.filter(Boolean) : [];
+    if (!sources.length) {
+        media.classList.remove('learn-card__media--loaded');
+        image.hidden = true;
+        fallback.hidden = false;
+        return;
+    }
+
+    let index = 0;
+    const tryNext = () => {
+        if (index >= sources.length) {
+            media.classList.remove('learn-card__media--loaded');
+            image.hidden = true;
+            fallback.hidden = false;
+            image.removeAttribute('src');
+            return;
+        }
+
+        const candidate = sources[index];
+        const probe = new Image();
+        probe.onload = () => {
+            image.src = candidate;
+            image.alt = card.imageAlt || card.en;
+            image.hidden = false;
+            fallback.hidden = true;
+            media.classList.add('learn-card__media--loaded');
+        };
+        probe.onerror = () => {
+            index += 1;
+            tryNext();
+        };
+        probe.src = candidate;
+    };
+
+    tryNext();
+}
+
 function buildChoices(answerTerm, pool) {
     const distractors = shuffle(pool.filter((term) => normalizeWord(term.en) !== normalizeWord(answerTerm.en))).slice(0, 3);
     return shuffle([answerTerm, ...distractors]);
@@ -1785,7 +1877,9 @@ function buildLearnDeck(stage = getStage()) {
     return getStageTerms(stage).map((term, index) => ({
         ...term,
         cardIndex: index + 1,
-        placeholderLabel: t('learnPlaceholder')
+        placeholderLabel: t('learnPlaceholder'),
+        imageCandidates: getLearnImageCandidates(state.activeThemeId, stage.id, term.en),
+        imageAlt: `${term.en} - ${term.es}`
     }));
 }
 
@@ -1995,14 +2089,18 @@ function renderLearnPhase(theme, stage) {
                         <button class="learn-card__arrow learn-card__arrow--prev" data-learn-action="prev" type="button" ${state.learnIndex === 0 ? 'disabled' : ''} aria-label="${t('learnPrevious')}">&#x2039;</button>
                         <button class="learn-card__arrow learn-card__arrow--next" data-learn-action="next" type="button" aria-label="${state.learnIndex === total - 1 ? t('learnStartPlay') : t('learnNext')}">&#x203A;</button>
                     </span>
-                    <span class="learn-card__placeholder">${card.placeholderLabel}</span>
-                    <span class="learn-card__emoji" aria-hidden="true">${card.emoji}</span>
-                    <span class="learn-card__swipe">${t('learnSwipeHint')}</span>
+                    <img class="learn-card__image" hidden alt="${card.imageAlt}">
+                    <span class="learn-card__fallback">
+                        <span class="learn-card__placeholder">${card.placeholderLabel}</span>
+                        <span class="learn-card__emoji" aria-hidden="true">${card.emoji}</span>
+                        <span class="learn-card__swipe">${t('learnSwipeHint')}</span>
+                    </span>
                 </div>
             </article>
         </div>
     `;
 
+    hydrateLearnMedia(card);
     bindLearnInteractions();
 }
 
