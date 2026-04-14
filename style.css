@@ -9068,7 +9068,7 @@ body[data-theme-mode="dark"] #stageThemeFocus {
     min-height: 40px !important;
     padding-inline: 13px !important;
     border-radius: 12px !important;
-    font-size: 0.78rem !important;
+    font-size: 1rem !important;
     font-weight: 700 !important;
     transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition), color var(--transition) !important;
 }
