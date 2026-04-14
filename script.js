@@ -486,8 +486,8 @@ const ui = {
         stageRouteBoard: 'Panel de etapas',
         stageRouteBoardText: 'Abre la lista, elige una etapa y entra directo al desaf\u00EDo.',
         stageStep1: '1. Selecciona una etapa',
-        stageStep2: '2. Empieza con Learn',
-        stageStep3: '3. Completa Play y Assess',
+        stageStep2: '2. Empieza a Aprender',
+        stageStep3: '3. Completa el juego y la evaluación',
         themeDeck: 'Panel de temas',
         chooseRouteDeck: 'Elige la ruta que quieres escalar',
         deckGuide1: 'Usa la barra lateral para cambiar r\u00E1pido',
@@ -2200,11 +2200,11 @@ function applyStaticTranslations() {
     document.querySelector('.profile-meta .meta-chip:nth-child(2) span')?.replaceChildren(t('wins'));
     document.querySelector('.profile-meta .meta-chip:nth-child(3) span')?.replaceChildren(t('losses'));
     document.querySelector('.profile-meta .meta-chip:nth-child(4) span')?.replaceChildren(t('time'));
-    document.querySelector('.stage-card .panel-badge')?.replaceChildren(t('stageRoutes'));
+    document.querySelector('.stage-journey .panel-badge')?.replaceChildren(t('stageRoutes'));
     document.querySelector('.game-card .panel-badge')?.replaceChildren(t('themeChallenge'));
     document.querySelector('#stageToggle strong')?.replaceChildren(t('stageRouteBoard'));
     document.querySelector('#stageToggle .panel-toggle__copy span')?.replaceChildren(t('stageRouteBoardText'));
-    const stageGuideSteps = document.querySelectorAll('.stage-card .section-guide .section-guide__step');
+    const stageGuideSteps = document.querySelectorAll('.stage-journey .section-guide .section-guide__step');
     if (stageGuideSteps[0]) stageGuideSteps[0].textContent = t('stageStep1');
     if (stageGuideSteps[1]) stageGuideSteps[1].textContent = t('stageStep2');
     if (stageGuideSteps[2]) stageGuideSteps[2].textContent = t('stageStep3');
