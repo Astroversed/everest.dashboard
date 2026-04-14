@@ -1761,8 +1761,11 @@ function buildQuestions(stage) {
 function getStageTerms(stage = getStage()) {
     const theme = getTheme();
     if (!stage || !theme) return [];
-    const themePool = theme.stages.flatMap((bucket) => bucket.terms.map(convertTerm));
-    const stageTerms = shuffle(stage.terms.map(convertTerm));
+    const stagePool = [
+        ...(stage.terms || []),
+        ...(stage.extraTerms || [])
+    ].map(convertTerm);
+    const stageTerms = shuffle(stagePool);
     const selected = [];
     const seen = new Set();
 
@@ -1774,10 +1777,6 @@ function getStageTerms(stage = getStage()) {
     };
 
     stageTerms.forEach(addTerm);
-    shuffle(themePool).forEach((term) => {
-        if (selected.length >= 10) return;
-        addTerm(term);
-    });
 
     return selected.slice(0, 10);
 }
@@ -1966,7 +1965,9 @@ function renderLearnPhase(theme, stage) {
     elements.challengeHint.textContent = t('learnSwipeHint');
     elements.challengeExample.textContent = t('learnProgress', { current: state.learnIndex + 1, total });
     elements.questionCounter.textContent = `${state.learnIndex + 1} / ${total}`;
+    elements.questionCounter.hidden = false;
     elements.timerBadge.hidden = true;
+    elements.streakBadge.hidden = false;
     elements.streakBadge.textContent = stage.name;
     elements.progressBar.style.width = `${((state.learnIndex + 1) / total) * 100}%`;
     setFeedback('idle', t('learnTitle'), `${stage.name} · ${stage.focus}`);
@@ -2007,10 +2008,9 @@ function renderAssessPhase(theme, stage) {
     elements.challengePrompt.textContent = t('assessText');
     elements.challengeHint.textContent = t('assessPrompt');
     elements.challengeExample.textContent = stage.focus;
-    elements.questionCounter.textContent = `${state.assessItems.length} / ${state.assessItems.length}`;
+    elements.questionCounter.hidden = true;
     elements.timerBadge.hidden = true;
-    elements.timerBadge.textContent = '--';
-    elements.streakBadge.textContent = t('assessAnswers');
+    elements.streakBadge.hidden = true;
     elements.progressBar.style.width = '100%';
     setFeedback('idle', t('assessTitle'), t('assessPrompt'));
     elements.nextQuestionButton.hidden = true;
@@ -2022,7 +2022,6 @@ function renderAssessPhase(theme, stage) {
     elements.choiceGrid.innerHTML = `
         <div class="assess-flow">
             <section class="assess-bank" aria-label="${t('assessAnswers')}">
-                <span class="assess-bank__label">${t('assessAnswers')}</span>
                 <div class="assess-bank__chips">
                     ${state.assessBank.map((word) => `<span class="assess-bank__chip">${word}</span>`).join('')}
                 </div>
@@ -2417,6 +2416,8 @@ function renderGame() {
         elements.choiceGrid.classList.remove('choice-grid--learn');
         elements.choiceGrid.classList.remove('choice-grid--assess');
         elements.nextQuestionButton.hidden = true;
+        elements.questionCounter.hidden = false;
+        elements.streakBadge.hidden = false;
         elements.questionCounter.textContent = '0 / 0';
         elements.timerBadge.textContent = '15s';
         elements.streakBadge.textContent = 'Streak 0';
@@ -2432,6 +2433,8 @@ function renderGame() {
     if (gameFeedback) gameFeedback.style.display = '';
     gameFooterStats?.removeAttribute('hidden');
     elements.timerBadge.hidden = false;
+    elements.questionCounter.hidden = false;
+    elements.streakBadge.hidden = false;
     const selectedEmojiOption = question.emojiChoices.find((option) => normalizeWord(option.en) === state.matchSelection.emoji) || null;
     elements.challengeTypeLabel.textContent = getGameModeLabel();
     elements.challengePrompt.textContent = gameText('matchPairPrompt', { word: question.term.en });
