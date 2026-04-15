@@ -8021,6 +8021,12 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     background: linear-gradient(180deg, rgba(239, 244, 255, 0.4), rgba(231, 239, 252, 0.32));
 }
 
+.learn-card__media--loaded .learn-card__fallback {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
 .learn-card__image {
     position: absolute;
     inset: 0;
@@ -8029,6 +8035,7 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     object-fit: cover;
     object-position: center;
     display: block;
+    z-index: 0;
 }
 
 .learn-card__fallback {
