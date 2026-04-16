@@ -1665,17 +1665,23 @@ function hydrateLearnMedia(card) {
             tryNext();
             return;
         }
-        const probe = new Image();
-        probe.onload = () => {
+        image.onload = () => {
             LEARN_IMAGE_CACHE.set(candidate, 'loaded');
-            applyLoadedMedia(candidate);
+            image.alt = card.imageAlt || card.en;
+            image.hidden = false;
+            fallback.hidden = true;
+            media.classList.add('learn-card__media--loaded');
         };
-        probe.onerror = () => {
+        image.onerror = () => {
             LEARN_IMAGE_CACHE.set(candidate, 'missing');
+            image.hidden = true;
+            image.removeAttribute('src');
             index += 1;
             tryNext();
         };
-        probe.src = candidate;
+        image.hidden = false;
+        fallback.hidden = true;
+        image.src = candidate;
     };
 
     tryNext();
@@ -2111,7 +2117,7 @@ function renderLearnPhase(theme, stage) {
                         <button class="learn-card__arrow learn-card__arrow--next" data-learn-action="next" type="button" aria-label="${state.learnIndex === total - 1 ? t('learnStartPlay') : t('learnNext')}">&#x203A;</button>
                     </span>
                     <img class="learn-card__image" hidden alt="${card.imageAlt}">
-                    <span class="learn-card__fallback">
+                    <span class="learn-card__fallback"${card.imageCandidates?.length ? ' hidden' : ''}>
                         <span class="learn-card__placeholder">${card.placeholderLabel}</span>
                         <span class="learn-card__emoji" aria-hidden="true">${card.emoji}</span>
                         <span class="learn-card__swipe">${t('learnSwipeHint')}</span>
