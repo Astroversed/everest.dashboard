@@ -8038,6 +8038,11 @@ body[data-theme-mode="dark"] .choice-button--context.is-wrong .choice-button__de
     z-index: 0;
 }
 
+.learn-card__image[hidden],
+.learn-card__fallback[hidden] {
+    display: none !important;
+}
+
 .learn-card__fallback {
     display: grid;
     justify-items: center;
