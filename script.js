@@ -931,6 +931,7 @@ const THEME_MATCH_SIGNAL_EMOJIS = {
 };
 
 const LEARN_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'webp', 'avif'];
+const LEARN_IMAGE_CACHE = new Map();
 const LEARN_IMAGE_THEME_FOLDERS = {
     'basic-communication': '1. Basic Communication',
     'grammar-language': '2. Grammar & Language',
@@ -1631,6 +1632,18 @@ function hydrateLearnMedia(card) {
         return;
     }
 
+    const applyLoadedMedia = (candidate) => {
+        image.src = candidate;
+        image.alt = card.imageAlt || card.en;
+        image.hidden = false;
+        fallback.hidden = true;
+        media.classList.add('learn-card__media--loaded');
+    };
+
+    media.classList.remove('learn-card__media--loaded');
+    image.hidden = true;
+    fallback.hidden = true;
+
     let index = 0;
     const tryNext = () => {
         if (index >= sources.length) {
@@ -1642,15 +1655,23 @@ function hydrateLearnMedia(card) {
         }
 
         const candidate = sources[index];
+        const cachedState = LEARN_IMAGE_CACHE.get(candidate);
+        if (cachedState === 'loaded') {
+            applyLoadedMedia(candidate);
+            return;
+        }
+        if (cachedState === 'missing') {
+            index += 1;
+            tryNext();
+            return;
+        }
         const probe = new Image();
         probe.onload = () => {
-            image.src = candidate;
-            image.alt = card.imageAlt || card.en;
-            image.hidden = false;
-            fallback.hidden = true;
-            media.classList.add('learn-card__media--loaded');
+            LEARN_IMAGE_CACHE.set(candidate, 'loaded');
+            applyLoadedMedia(candidate);
         };
         probe.onerror = () => {
+            LEARN_IMAGE_CACHE.set(candidate, 'missing');
             index += 1;
             tryNext();
         };
@@ -3942,7 +3963,6 @@ function init() {
 }
 
 init();
-
 
 
 
