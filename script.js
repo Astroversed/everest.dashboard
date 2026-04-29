@@ -1,4 +1,4 @@
-﻿const STORAGE_KEYS = {
+const STORAGE_KEYS = {
     activeUser: 'everest_active_user',
     users: 'everest_temp_users',
     progress: 'everest_dashboard_progress',
@@ -1906,7 +1906,7 @@ function buildLearnDeck(stage = getStage()) {
         cardIndex: index + 1,
         placeholderLabel: t('learnPlaceholder'),
         imageCandidates: getLearnImageCandidates(state.activeThemeId, stage.id, term.en),
-        imageAlt: `${term.en} - ${term.es}`
+        imageAlt: `${formatLearningWord(term.en)} - ${formatLearningWord(term.es)}`
     }));
 }
 
@@ -1914,7 +1914,7 @@ function buildAssessItems(stage = getStage()) {
     const items = getStageTerms(stage);
     return {
         items,
-        bank: shuffle(items.map((term) => term.en))
+        bank: shuffle(items.map((term) => formatLearningWord(term.en)))
     };
 }
 
@@ -2105,10 +2105,10 @@ function renderLearnPhase(theme, stage) {
 
     elements.choiceGrid.innerHTML = `
         <div class="learn-flow">
-            <article class="learn-card" aria-label="${card.en}">
+            <article class="learn-card" aria-label="${formatLearningWord(card.en)}">
                 <div class="learn-card__header">
-                    <span class="learn-card__tag">${card.es}</span>
-                    <strong>${card.en}</strong>
+                    <span class="learn-card__tag">${formatLearningWord(card.es)}</span>
+                    <strong>${formatLearningWord(card.en)}</strong>
                     <span>${card.hint}</span>
                 </div>
                 <div class="learn-card__media" tabindex="0" role="button" aria-label="${t('learnNext')}">
@@ -2158,7 +2158,7 @@ function renderAssessPhase(theme, stage) {
         <div class="assess-flow">
             <section class="assess-bank" aria-label="${t('assessAnswers')}">
                 <div class="assess-bank__chips">
-                    ${state.assessBank.map((word) => `<span class="assess-bank__chip">${word}</span>`).join('')}
+                    ${state.assessBank.map((word) => `<span class="assess-bank__chip">${formatLearningWord(word)}</span>`).join('')}
                 </div>
             </section>
             <div class="assess-grid">
@@ -2170,7 +2170,7 @@ function renderAssessPhase(theme, stage) {
                                 <label class="assess-item" for="assessInput${absoluteIndex}">
                                     <span class="assess-item__emoji">${item.emoji}</span>
                                     <span class="assess-item__copy">
-                                        <strong>${item.es}</strong>
+                                        <strong>${formatLearningWord(item.es)}</strong>
                                         <span>${item.hint}</span>
                                     </span>
                                     <input class="assess-item__input" id="assessInput${absoluteIndex}" type="text" placeholder="${t('assessPlaceholder')}">
@@ -2580,9 +2580,9 @@ function renderGame() {
     elements.streakBadge.style.display = '';
     const selectedEmojiOption = question.emojiChoices.find((option) => normalizeWord(option.en) === state.matchSelection.emoji) || null;
     elements.challengeTypeLabel.textContent = getGameModeLabel();
-    elements.challengePrompt.textContent = gameText('matchPairPrompt', { word: question.term.en });
+    elements.challengePrompt.textContent = gameText('matchPairPrompt', { word: formatLearningWord(question.term.en) });
     elements.challengeHint.textContent = `${gameText('hintPrefix')}: ${question.term.hint}`;
-    elements.challengeExample.textContent = `${gameText('matchPairHelp')} ${selectedEmojiOption ? `${gameText('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : gameText('matchSelectionIdle')}`;
+    elements.challengeExample.textContent = `${gameText('matchPairHelp')} ${selectedEmojiOption ? `${gameText('matchSelectionEmoji')}: ${selectedEmojiOption.emoji} ${formatLearningWord(selectedEmojiOption.es)}` : gameText('matchSelectionIdle')}`;
     elements.questionCounter.textContent = `${state.questionIndex + 1} / ${state.questions.length}`;
     elements.timerBadge.textContent = `${state.secondsLeft}s`;
     elements.streakBadge.textContent = `Streak ${state.streak}`;
@@ -2600,23 +2600,23 @@ function renderGame() {
                 <p class="match-summit__guide">${gameText('matchPairHelp')}</p>
             </div>
             <div class="match-board">
-                <section class="match-center match-center--left" aria-label="${question.term.en}">
+                <section class="match-center match-center--left" aria-label="${formatLearningWord(question.term.en)}">
                     <div class="match-center__pulse"></div>
                     <span class="match-center__badge">${gameText('summitMatch')}</span>
                     <span class="match-center__mini">${gameText('matchSelectionIdle')}</span>
                     <div class="match-center__core">
                         <span class="match-center__word-label">${gameText('challengeWord')}</span>
-                        <strong class="match-center__word">${question.term.en}</strong>
+                        <strong class="match-center__word">${formatLearningWord(question.term.en)}</strong>
                     </div>
                     <div class="match-center__status">
                         <span class="match-center__status-pill is-filled">${getThemeMatchSignalEmoji(question.themeId)} ${localizeTheme(getTheme(question.themeId))?.title || gameText('matchSignalLabel')}</span>
-                        <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${selectedEmojiOption.es}` : gameText('matchMeaningPending')}</span>
+                        <span class="match-center__status-pill ${selectedEmojiOption ? 'is-filled' : ''}">${selectedEmojiOption ? `${selectedEmojiOption.emoji} ${formatLearningWord(selectedEmojiOption.es)}` : gameText('matchMeaningPending')}</span>
                     </div>
                 </section>
                 <section class="match-lane match-lane--emoji" aria-label="${gameText('matchEmojiLabel')}">
                     <span class="match-lane__label">${gameText('matchEmojiStep')}</span>
                     <div class="match-column__list">
-                        ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button"><span class="choice-button__media"><span class="choice-button__kicker">${option.laneLabel}</span><span class="choice-button__emoji">${option.emoji}</span></span><span class="choice-button__copy"><span class="choice-button__title">${option.es}</span><span class="choice-button__detail">${option.hint}</span></span></button>`).join('')}
+                        ${question.emojiChoices.map((option) => `<button class="choice-button choice-button--match ${normalizeWord(option.en) === state.matchSelection.emoji ? 'is-selected' : ''}" data-match-side="emoji" data-match-value="${option.en}" type="button"><span class="choice-button__media"><span class="choice-button__kicker">${option.laneLabel}</span><span class="choice-button__emoji">${option.emoji}</span></span><span class="choice-button__copy"><span class="choice-button__title">${formatLearningWord(option.es)}</span><span class="choice-button__detail">${option.hint}</span></span></button>`).join('')}
                     </div>
                 </section>
             </div>
@@ -2789,13 +2789,13 @@ function resolveAnswer(answer, timedOut) {
         state.stagePoints += earned;
         playTone('success');
         setFeedback('correct', t('correctTitle'), randomFrom(EVEREST_LINES.success));
-        pushToast(randomFrom(EVEREST_LINES.success), `${state.currentQuestion.term.en} +${earned} pt`, 'success');
+        pushToast(randomFrom(EVEREST_LINES.success), `${formatLearningWord(state.currentQuestion.term.en)} +${earned} pt`, 'success');
     } else {
         state.stageWrong += 1;
         state.streak = 0;
         playTone('error');
-        setFeedback('incorrect', timedOut ? t('timeoutTitle') : t('wrongTitle'), timedOut ? t('timeoutText') : `${randomFrom(EVEREST_LINES.error)} ${state.currentQuestion.term.en}.`);
-        pushToast(randomFrom(EVEREST_LINES.error), timedOut ? t('timeoutText') : `${state.currentQuestion.term.en} was the safe step.`, 'danger');
+        setFeedback('incorrect', timedOut ? t('timeoutTitle') : t('wrongTitle'), timedOut ? t('timeoutText') : `${randomFrom(EVEREST_LINES.error)} ${formatLearningWord(state.currentQuestion.term.en)}.`);
+        pushToast(randomFrom(EVEREST_LINES.error), timedOut ? t('timeoutText') : `${formatLearningWord(state.currentQuestion.term.en)} was the safe step.`, 'danger');
     }
 
     state.latestAccuracy = Math.round((state.stageCorrect / (state.stageCorrect + state.stageWrong)) * 100);
@@ -3268,12 +3268,12 @@ function renderExplorer() {
     const featured = state.library.filter((entry) => entry.theme === theme.id).slice(0, 3);
     if (elements.explorerFeatured) {
         elements.explorerFeatured.innerHTML = featured.length
-            ? featured.map((entry) => `<div class="explorer-featured__card"><span class="explorer-featured__emoji">${entry.emoji}</span><div><strong>${entry.term}</strong><p>${entry.meaning}</p></div></div>`).join('')
+            ? featured.map((entry) => `<div class="explorer-featured__card"><span class="explorer-featured__emoji">${entry.emoji}</span><div><strong>${formatLearningWord(entry.term)}</strong><p>${formatLearningWord(entry.meaning)}</p></div></div>`).join('')
             : `<div class="explorer-featured__card"><div><strong>${t('noExplorer')}</strong></div></div>`;
     }
     const filtered = state.library.filter((entry) => (state.explorerTheme === 'all' || entry.theme === state.explorerTheme) && (!state.explorerSearch || normalizeWord(`${entry.term} ${entry.meaning} ${entry.tip} ${entry.example}`).includes(normalizeWord(state.explorerSearch))));
     if (elements.explorerGrid) {
-        elements.explorerGrid.innerHTML = filtered.map((entry) => `<article class="explorer-entry"><span class="explorer-entry__emoji">${entry.emoji}</span><div class="explorer-entry__copy"><strong>${entry.term}</strong><p>${entry.meaning}</p><p>${entry.example}</p><div class="explorer-entry__meta"><span class="explorer-entry__chip">${entry.type}</span><span class="explorer-entry__chip">${entry.theme.replace(/-/g, ' ')}</span><span class="explorer-entry__chip">${entry.tip}</span></div></div></article>`).join('');
+        elements.explorerGrid.innerHTML = filtered.map((entry) => `<article class="explorer-entry"><span class="explorer-entry__emoji">${entry.emoji}</span><div class="explorer-entry__copy"><strong>${formatLearningWord(entry.term)}</strong><p>${formatLearningWord(entry.meaning)}</p><p>${formatLearningWord(entry.example)}</p><div class="explorer-entry__meta"><span class="explorer-entry__chip">${formatLearningWord(entry.type)}</span><span class="explorer-entry__chip">${entry.theme.replace(/-/g, ' ')}</span><span class="explorer-entry__chip">${formatLearningWord(entry.tip)}</span></div></div></article>`).join('');
     }
 }
 
@@ -3969,7 +3969,6 @@ function init() {
 }
 
 init();
-
 
 
 
