@@ -827,6 +827,11 @@ function normalizeWord(value) {
     return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
 }
 
+function formatLearningWord(value) {
+    const text = String(value || '').trim();
+    return text ? text.charAt(0).toLocaleUpperCase() + text.slice(1) : '';
+}
+
 function slugifyAssetName(value) {
     return normalizeWord(value).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
